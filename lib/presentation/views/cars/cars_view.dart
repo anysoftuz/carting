@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/cars/car_add_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,12 @@ class _CarsViewState extends State<CarsView> {
               textAlign: TextAlign.center,
             ),
             WButton(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(
+                  builder: (context) => const CarAddView(),
+                ));
+              },
               text: "Transport qo’shish",
               width: MediaQuery.sizeOf(context).width / 2,
               margin: const EdgeInsets.symmetric(vertical: 32),

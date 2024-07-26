@@ -39,6 +39,26 @@ class Formatters {
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy,
   );
+  static final carNum2 = MaskTextInputFormatter(
+    mask: '##',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+  static final seriya = MaskTextInputFormatter(
+    mask: "AA",
+    filter: {"A": RegExp(r'[A-Z]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+  static final texseriya = MaskTextInputFormatter(
+    mask: "#######",
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+  static final carNum = MaskTextInputFormatter(
+    mask: 'A ### AA',
+    filter: {"#": RegExp(r'[0-9]'), "A": RegExp(r'[A-Z]')},
+    type: MaskAutoCompletionType.lazy,
+  );
   static final lotinFormat = FilteringTextInputFormatter.allow(
     RegExp(r'[a-zA-Z0-9]'),
   );

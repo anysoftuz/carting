@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
   static const calendar = "assets/icons/calendar.svg";
+  static const checkboxActiv = "assets/icons/checkbox_activ.svg";
+  static const checkbox = "assets/icons/checkbox.svg";
   static const check = "assets/icons/check.svg";
   static const chevronRight = "assets/icons/chevron-right.svg";
   static const contact = "assets/icons/contact.svg";
@@ -28,6 +30,7 @@ class AppIcons {
   static const sun = "assets/icons/sun.svg";
   static const mobile = "assets/icons/mobile.svg";
   static const moon = "assets/icons/moon.svg";
+  static const checkVerified = "assets/icons/check-verified.svg";
   static const checkboxRadio = "assets/icons/checkbox-radio.svg";
   static const checkboxRadioDis = "assets/icons/checkbox_radio_dis.svg";
 }

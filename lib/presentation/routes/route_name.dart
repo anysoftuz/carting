@@ -8,6 +8,7 @@ abstract class AppRouteName {
   static const profileInfo = '/profileInfo';
   static const delivery = '/delivery';
   static const orders = '/orders';
+  static const ordersHistory = '/ordersHistory';
   static const cars = '/cars';
   static const auth = '/auth';
   static const notification = '/notification';

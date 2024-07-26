@@ -15,6 +15,8 @@ class AppImages {
   static const theme = 'assets/images/theme.png';
   static const main = 'assets/images/main.png';
   static const map = 'assets/images/map.png';
+  static const rating = 'assets/images/rating.png';
+  static const orderHistor = 'assets/images/order_histor.png';
   static const uzbekistan = 'assets/images/uzbekistan.png';
   static const russia = 'assets/images/russia.png';
   static const trucks2 = 'assets/images/trucks-02.png';

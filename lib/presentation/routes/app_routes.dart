@@ -2,10 +2,13 @@ import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/auth/auth_view.dart';
 import 'package:carting/presentation/views/cars/cars_view.dart';
 import 'package:carting/presentation/views/error_view.dart';
+import 'package:carting/presentation/views/home/home_deliver_view.dart';
 import 'package:carting/presentation/views/home/home_view.dart';
 import 'package:carting/presentation/views/home/main_view.dart';
 import 'package:carting/presentation/views/home/main_view_deliver.dart';
 import 'package:carting/presentation/views/home/notification_view.dart';
+import 'package:carting/presentation/views/orders/order_deliver_view.dart';
+import 'package:carting/presentation/views/orders/order_history_view.dart';
 import 'package:carting/presentation/views/orders/order_view.dart';
 import 'package:carting/presentation/views/profile/profile_info_view.dart';
 import 'package:carting/presentation/views/profile/profile_view.dart';
@@ -88,7 +91,7 @@ sealed class AppRouts {
         routes: [
           GoRoute(
             path: AppRouteName.homeDeliver,
-            builder: (context, state) => const HomeView(),
+            builder: (context, state) => const HomeDeliverView(),
           ),
         ],
       ),
@@ -96,7 +99,7 @@ sealed class AppRouts {
         routes: [
           GoRoute(
             path: AppRouteName.orders,
-            builder: (context, state) => const OrderView(),
+            builder: (context, state) => const OrderDeliverView(),
           ),
         ],
       ),
@@ -113,6 +116,10 @@ sealed class AppRouts {
           GoRoute(
             path: AppRouteName.profileDeliver,
             builder: (context, state) => const ProfileDeliverView(),
+          ),
+          GoRoute(
+            path: AppRouteName.ordersHistory,
+            builder: (context, state) => const OrderHistoryView(),
           ),
         ],
       ),

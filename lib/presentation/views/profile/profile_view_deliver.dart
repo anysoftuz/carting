@@ -108,9 +108,33 @@ class _ProfileDeliverViewState extends State<ProfileDeliverView> {
                     ));
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: AppImages.theme.imgAsset(height: 32, width: 32),
+                  leading: AppImages.rating.imgAsset(height: 32, width: 32),
                   title: const Text(
-                    "Mavzu",
+                    "Sizning reyting",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  trailing: AppIcons.chevronRight.svg(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                color: whiteSmoke,
+                child: ListTile(
+                  onTap: () {
+                    context.push(AppRouteName.ordersHistory);
+                  },
+                  contentPadding: EdgeInsets.zero,
+                  leading:
+                      AppImages.orderHistor.imgAsset(height: 32, width: 32),
+                  title: const Text(
+                    "Buyurtmalar tarixi",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

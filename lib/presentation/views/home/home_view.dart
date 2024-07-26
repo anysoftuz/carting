@@ -6,6 +6,7 @@ import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
 import 'package:carting/utils/formatters.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +21,7 @@ class _HomeViewState extends State<HomeView> {
   ValueNotifier<int> value = ValueNotifier(0);
   TextEditingController fromController = TextEditingController();
   TextEditingController toController = TextEditingController();
+  TextEditingController datetime = TextEditingController();
 
   void swapAddresses() {
     String temp = fromController.text;
@@ -208,9 +210,24 @@ class _HomeViewState extends State<HomeView> {
               title: "Yuborish vaqti",
               hintText: "Kun va soatni tanlang",
               fillColor: whiteSmoke,
+              controller: datetime,
               formatter: [Formatters.dateFormatter],
               keyboardType: TextInputType.datetime,
               suffixIcon: AppIcons.calendar.svg(),
+              onsuffixIconPressed: () {
+                showDatePicker(
+                  context: context,
+                  firstDate: DateTime(2024),
+                  lastDate: DateTime(2025),
+                ).then(
+                  (value) {
+                    if (value != null) {
+                      datetime.text =
+                          DateFormat('dd/MM/yyyy').format(value.toLocal());
+                    }
+                  },
+                );
+              },
             ),
             const SizedBox(height: 16),
             WButton(

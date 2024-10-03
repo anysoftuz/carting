@@ -1,7 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/routes/route_name.dart';
-import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,7 +40,6 @@ class _HomeDeliverViewState extends State<HomeDeliverView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            
             Container(
               decoration: BoxDecoration(
                 color: whiteSmoke,
@@ -108,14 +106,9 @@ class _HomeDeliverViewState extends State<HomeDeliverView> {
               ),
             ),
             const SizedBox(height: 16),
-            WButton(
-              onTap: () {},
-              text: "Davom etish",
-            )
           ],
         ),
       ),
     );
   }
 }
-

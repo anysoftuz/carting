@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'CARTING',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
-        scaffoldBackgroundColor: white,
+        scaffoldBackgroundColor: scaffoldSecondaryBackground,
         colorSchemeSeed: green,
         appBarTheme: const AppBarTheme(
-          backgroundColor: white,
-          shadowColor: white,
+          backgroundColor: scaffoldSecondaryBackground,
+          shadowColor: scaffoldSecondaryBackground,
           centerTitle: true,
         ),
         dividerTheme: const DividerThemeData(color: Color(0xFFEAEEF2)),

@@ -1,12 +1,9 @@
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/profile/call_view.dart';
 import 'package:carting/presentation/views/profile/info_view.dart';
-import 'package:carting/presentation/views/profile/lenguage_view.dart';
 import 'package:carting/presentation/views/profile/quest_view.dart';
-import 'package:carting/presentation/views/profile/theme_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,176 +19,222 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
         actions: [
-          TextButton(
+          IconButton(
             onPressed: () {
-              context.go(AppRouteName.auth);
+              context.push(AppRouteName.notification);
             },
-            child: Row(
-              children: [
-                AppIcons.leftIcon.svg(color: red),
-                const SizedBox(width: 6),
-                const Text(
-                  "Chiqish",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: red,
-                  ),
-                )
-              ],
-            ),
-          ),
+            icon: AppIcons.notifications.svg(),
+          )
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16).copyWith(top: 0),
         child: Column(
           children: [
-            Container(
-              height: 80,
-              width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(20, 12, 0, 12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: whiteSmoke,
-              ),
-              child: Row(
+            SizedBox(
+              height: 300,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: blue.withOpacity(.5),
-                    radius: 28,
-                  ),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  Container(
+                    height: 260,
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(32),
+                      color: white,
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "R. Abdullaev",
+                        const Spacer(),
+                        const Text(
+                          "Asror Imomqulov",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 24,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text(
-                          "+998 91 008 43 48",
+                        const Text(
+                          "+998 99 844 13 54",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.push(AppRouteName.profileInfo);
+                                },
+                                child: Container(
+                                  height: 84,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24),
+                                    color: scaffoldSecondaryBackground,
+                                  ),
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      AppIcons.user.svg(),
+                                      const Text(
+                                        "Shaxsiy ma'lumotlar",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const CallView(),
+                                  ));
+                                },
+                                child: Container(
+                                  height: 84,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24),
+                                    color: scaffoldSecondaryBackground,
+                                  ),
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      AppIcons.support.svg(),
+                                      const Text(
+                                        "Qo'llab quvvatlash",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const QuestView(),
+                                  ));
+                                },
+                                child: Container(
+                                  height: 84,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24),
+                                    color: scaffoldSecondaryBackground,
+                                  ),
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      AppIcons.question.svg(),
+                                      const Text(
+                                        "Ko'p beriladigan savollar",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      context.push(AppRouteName.profileInfo);
-                    },
-                    icon: AppIcons.chevronRight.svg(),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    color: whiteSmoke,
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ThemeView(),
-                        ));
-                      },
-                      contentPadding: EdgeInsets.zero,
-                      leading: AppImages.theme.imgAsset(height: 32, width: 32),
-                      title: const Text(
-                        "Mavzu",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      trailing: AppIcons.chevronRight.svg(),
-                    ),
-                  ),
-                  const Divider(height: 1),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    color: whiteSmoke,
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const LenguageView(),
-                        ));
-                      },
-                      contentPadding: EdgeInsets.zero,
-                      leading: AppImages.lenguage.imgAsset(
-                        height: 32,
-                        width: 32,
-                      ),
-                      title: const Text(
-                        "Til",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      trailing: AppIcons.chevronRight.svg(),
+                  const Positioned(
+                    top: 0,
+                    child: Hero(
+                      tag: "avatar",
+                      child: CircleAvatar(radius: 56),
                     ),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Column(
-                children: [
-                  WListTile(
-                    title: "Ko’p so’raladigan savollar",
-                    leadingImage: AppImages.quest,
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const QuestView(),
-                      ));
-                    },
-                  ),
-                  const Divider(height: 1),
-                  WListTile(
-                    title: "Ilovani baholang",
-                    leadingImage: AppImages.ballOrder,
-                    onTap: () {},
-                  ),
-                  const Divider(height: 1),
-                  WListTile(
-                    title: "Qo’llab-quvvatlash markazi",
-                    leadingImage: AppImages.callCentr,
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const CallView(),
-                      ));
-                    },
-                  ),
-                  const Divider(height: 1),
-                  WListTile(
-                    title: "Biz haqimizda",
-                    leadingImage: AppImages.info,
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const InfoView(),
-                      ));
-                    },
-                  ),
-                ],
-              ),
-            )
+            WListTile(
+              title: "Sozlamalar",
+              leading: AppIcons.setting.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const QuestView(),
+                ));
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: "Ilovani baholang",
+              leading: AppIcons.lovely.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const QuestView(),
+                ));
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: "Mavzu",
+              leading: AppIcons.moon.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const QuestView(),
+                ));
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: "Til",
+              leading: AppIcons.language.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const QuestView(),
+                ));
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: "Biz haqimizda",
+              leading: AppIcons.info.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const InfoView(),
+                ));
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: "Chiqish",
+              leading: AppIcons.turnOff.svg(height: 28, width: 28),
+              onTap: () {
+                context.go(AppRouteName.auth);
+              },
+            ),
+            const SizedBox(height: 8),
           ],
         ),
       ),
@@ -203,24 +246,28 @@ class WListTile extends StatelessWidget {
   const WListTile({
     super.key,
     required this.title,
-    required this.leadingImage,
+    required this.leading,
     required this.onTap,
     this.trailing,
   });
   final String title;
-  final String leadingImage;
+  final Widget leading;
   final Function() onTap;
   final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: white,
+      ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      color: whiteSmoke,
       child: ListTile(
         onTap: onTap,
         contentPadding: EdgeInsets.zero,
-        leading: leadingImage.imgAsset(height: 32, width: 32),
+        minVerticalPadding: 0,
+        leading: leading,
         title: Text(
           title,
           style: const TextStyle(

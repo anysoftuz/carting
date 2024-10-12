@@ -22,7 +22,7 @@ sealed class AppRouts {
       GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRouteName.splash,
+    initialLocation: AppRouteName.home,
     errorBuilder: (context, state) => const ErrorView(),
     routes: [
       GoRoute(

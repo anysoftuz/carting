@@ -58,7 +58,7 @@ class WButton extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: width,
-        height: height ?? 64,
+        height: height ?? 56,
         margin: margin,
         padding: padding ?? EdgeInsets.zero,
         alignment: Alignment.center,

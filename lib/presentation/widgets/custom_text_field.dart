@@ -97,7 +97,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.title.isNotEmpty
               ? Text(
                   widget.title,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: darkText.withOpacity(.3),
+                  ),
                 )
               : const SizedBox(),
           widget.title.isNotEmpty
@@ -151,7 +155,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         onPressed: widget.onprefixIconPressed ?? () {})
                     : null,
                 focusColor: white,
-                fillColor: widget.fillColor ?? whiteSmoke,
+                fillColor: widget.fillColor ?? white,
                 hoverColor: white,
                 filled: true,
                 border: widget.border ??
@@ -172,7 +176,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       borderSide: const BorderSide(color: whiteSmoke),
                     ),
                 hintText: widget.hintText,
-                hintStyle: widget.hintStyle,
+                hintStyle: widget.hintStyle ??
+                    TextStyle(
+                      color: darkText.withOpacity(.3),
+                    ),
                 // hintStyle: fonts.subtitle1.copyWith(
                 //     color: colors.customBlack.withOpacity(0.5), fontSize: 14.sp),
                 // errorText: widget.error,

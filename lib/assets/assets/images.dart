@@ -10,7 +10,7 @@ class AppImages {
   static const callCentr = 'assets/images/call-centr.png';
   static const info = 'assets/images/info.png';
   static const lenguage = 'assets/images/lenguage.png';
-  static const logoText = 'assets/images/logo_text.png';
+  static const logoText = 'assets/images/logo_text.png';static const logoTextDark = 'assets/images/logo_text_dark.png';
   static const quest = 'assets/images/quest.png';
   static const theme = 'assets/images/theme.png';
   static const main = 'assets/images/main.png';

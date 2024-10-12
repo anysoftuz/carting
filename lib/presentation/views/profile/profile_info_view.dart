@@ -35,62 +35,62 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Profile")),
+      bottomNavigationBar: SafeArea(
+        child: WButton(
+          margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+          onTap: () {},
+          text: "Saqlash",
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          CircleAvatar(
-            radius: 56,
-            backgroundImage: images != null ? FileImage(images!) : null,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: () {
-                  imagesFile();
-                },
-                child: const Text(
-                  "Yuklash",
-                  style: TextStyle(color: blue),
-                ),
+          Center(
+            child: SizedBox(
+              height: 100,
+              child: Stack(
+                children: [
+                  Hero(
+                    tag: "avatar",
+                    child: CircleAvatar(
+                      radius: 56,
+                      backgroundImage:
+                          images != null ? FileImage(images!) : null,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: WButton(
+                      onTap: () {
+                        imagesFile();
+                      },
+                      height: 32,
+                      width: 32,
+                      color: white,
+                      child: AppIcons.camera.svg(),
+                    ),
+                  )
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  images = null;
-                  setState(() {});
-                },
-                child: const Text(
-                  "O’chirish",
-                  style: TextStyle(color: red),
-                ),
-              ),
-            ],
+            ),
           ),
+          const SizedBox(height: 24),
           const CustomTextField(
-            title: "Ism va familiya",
-            hintText: "Ism va familiya",
-          ),
-          const SizedBox(height: 16),
-          const CustomTextField(
-            title: "Telefon raqam",
-            hintText: "Telefon raqam",
-          ),
-          const SizedBox(height: 16),
-          const CustomTextField(
-            title: "Elektron pochta manzili",
-            hintText: "Elektron pochta manzili",
+            title: "Kompaniya nomi",
+            hintText: "Kompaniya nomi",
           ),
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Manzil",
-            hintText: "Manzil",
-            suffixIcon: AppIcons.finishLocation.svg(),
+            title: "Telefon raqam",
+            hintText: "Telefon raqam",
+            suffixIcon: AppIcons.edit.svg(),
           ),
           const SizedBox(height: 16),
-          WButton(
-            onTap: () {},
-            text: "Saqlash",
-          )
+          const CustomTextField(
+            title: "Telegram",
+            hintText: "t.me/",
+          ),
         ],
       ),
     );

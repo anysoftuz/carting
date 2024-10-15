@@ -10,7 +10,8 @@ class AppImages {
   static const callCentr = 'assets/images/call-centr.png';
   static const info = 'assets/images/info.png';
   static const lenguage = 'assets/images/lenguage.png';
-  static const logoText = 'assets/images/logo_text.png';static const logoTextDark = 'assets/images/logo_text_dark.png';
+  static const logoText = 'assets/images/logo_text.png';
+  static const logoTextDark = 'assets/images/logo_text_dark.png';
   static const quest = 'assets/images/quest.png';
   static const theme = 'assets/images/theme.png';
   static const main = 'assets/images/main.png';
@@ -24,6 +25,18 @@ class AppImages {
   static const trucks4 = 'assets/images/trucks-04.png';
   static const trucks5 = 'assets/images/trucks-05.png';
   static const trucks6 = 'assets/images/trucks-06.png';
+  static const gazel = 'assets/images/gazel.png';
+  static const image_7 = 'assets/images/image_7.png';
+  static const image_13 = 'assets/images/image_13.png';
+  static const rent = 'assets/images/rent.png';
+  static const roller = 'assets/images/roller.png';
+  static const trackMini = 'assets/images/track_mini.png';
+  static const truckHight = 'assets/images/truck_hight.png';
+  static const truckMiddle = 'assets/images/truck_middle.png';
+  static const truck = 'assets/images/truck.png';
+  static const mask = 'assets/images/mask.png';
+  static const workshops = 'assets/images/workshops.png';
+  static const masters = 'assets/images/masters.png';
 }
 
 extension ImgExt on String {

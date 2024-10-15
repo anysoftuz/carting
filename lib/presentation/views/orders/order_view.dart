@@ -1,9 +1,9 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/presentation/views/orders/orders_info_finish_view.dart';
-import 'package:carting/presentation/views/orders/orders_info_view.dart';
+import 'package:carting/presentation/views/orders/type_of_service_view.dart';
+import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
 
 class OrderView extends StatefulWidget {
@@ -17,176 +17,136 @@ class _OrderViewState extends State<OrderView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Buyurtmalar")),
-      body: DefaultTabController(
-        length: 2,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 44,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: WTabBar(
-                  tabs: [
-                    Text("Aktiv"),
-                    Text("Tugallangan"),
-                  ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: AppIcons.filter.svg(),
+        ),
+        title: SizedBox(
+          height: 24,
+          width: 128,
+          child: AppImages.logoTextDark.imgAsset(),
+        ),
+        actions: [
+          WButton(
+            margin: const EdgeInsets.only(right: 16),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const TypeOfServiceView(),
+              ));
+            },
+            height: 40,
+            width: 40,
+            borderRadius: 12,
+            color: green,
+            child: AppIcons.addCircle.svg(),
+          )
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size(double.infinity, 64),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            child: CustomTextField(
+              prefixIcon: AppIcons.searchNormal.svg(),
+              hintText: "Kerakli e’lonni qidiring",
+            ),
+          ),
+        ),
+      ),
+      body: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemBuilder: (context, index) => Container(
+          height: 340,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            color: white,
+          ),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(24),
+                ),
+                child: AppImages.mask.imgAsset(
+                  height: 196,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  SizedBox(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.all(16),
-                      itemBuilder: (context, index) => Container(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-                        decoration: BoxDecoration(
-                          color: whiteSmoke,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: OrderIteam(
-                          index: index,
-                          isFinsh: false,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Furgon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      itemCount: 12,
-                    ),
-                  ),
-                  SizedBox(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.all(16),
-                      itemBuilder: (context, index) => Container(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-                        decoration: BoxDecoration(
-                          color: whiteSmoke,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: OrderIteam(
-                          index: index,
-                          isFinsh: true,
-                        ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          AppIcons.shipping.svg(),
+                          const SizedBox(width: 4),
+                          const Expanded(
+                            child: Text(
+                              "Yuk tashish",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      itemCount: 12,
-                    ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          AppIcons.location.svg(),
+                          const SizedBox(width: 4),
+                          const Expanded(
+                            child: Text(
+                              "Toshkent, Yakkasaroy tumani",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          AppIcons.star.svg(),
+                          const SizedBox(width: 4),
+                          const Expanded(
+                            child: Text(
+                              "4.5",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              )
+            ],
+          ),
         ),
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
+        itemCount: 12,
       ),
-    );
-  }
-}
-
-class OrderIteam extends StatelessWidget {
-  const OrderIteam({super.key, required this.index, required this.isFinsh});
-  final int index;
-  final bool isFinsh;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          minVerticalPadding: 0,
-          leading: AppIcons.delivery.svg(),
-          title: const Text(
-            "Mebel",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          subtitle: const Text(
-            "2 х 3 х 2 m²",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        const Divider(height: 1),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: AppIcons.check.svg(),
-          title: const Text(
-            "Buyurtma holati",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          subtitle: Text(
-            isFinsh
-                ? "Tugallangan"
-                : index != 0
-                    ? "Qabul qilindi: 60A522AC (Камаз)"
-                    : "Haydovchi kutilmoqda",
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: isFinsh ? green : null),
-          ),
-        ),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: AppIcons.time.svg(),
-          title: const Text(
-            "Yetkizib berish taxminiy vaqti",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          subtitle: const Text(
-            "18.07.2024 16:00",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: AppIcons.price.svg(),
-          title: const Text(
-            "Yetkazib berish narxi",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          subtitle: const Text(
-            "500 000",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        const Divider(height: 1),
-        const SizedBox(height: 12),
-        WButton(
-          onTap: () {
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => isFinsh
-                  ? const OrdersInfoFinshView()
-                  : OrdersInfoView(isDelivery: index != 0),
-            ));
-          },
-          color: white,
-          textColor: green,
-          text: "Buyurtma haqida",
-        )
-      ],
     );
   }
 }

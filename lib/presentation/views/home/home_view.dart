@@ -59,6 +59,51 @@ class _HomeViewState extends State<HomeView> {
               borderRadius: BorderRadius.circular(16),
               color: white,
             ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              AppIcons.shipping.svg(),
+                              const SizedBox(width: 4),
+                              const Text("Yuk tashish")
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "500 000 UZS",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    AppImages.truck.imgAsset(height: 48),
+                  ],
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    const Text("Toshkent"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: AppIcons.swap.svg(),
+                    ),
+                    const Text("Samarqand"),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                const Text("16.08.2024")
+              ],
+            ),
           ),
         ),
         separatorBuilder: (context, index) => const SizedBox(

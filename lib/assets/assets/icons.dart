@@ -4,12 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
   static const calendar = "assets/icons/calendar.svg";
+  static const swap = "assets/icons/swap.svg";
+  static const arrowForward = "assets/icons/arrow_forward.svg";
+  static const filter = "assets/icons/filter.svg";
   static const checkboxActiv = "assets/icons/checkbox_activ.svg";
   static const checkbox = "assets/icons/checkbox.svg";
   static const check = "assets/icons/check.svg";
   static const chevronRight = "assets/icons/chevron-right.svg";
   static const contact = "assets/icons/contact.svg";
   static const currentLocation = "assets/icons/current_location.svg";
+  static const location = "assets/icons/location.svg";
+  static const star = "assets/icons/star.svg";
   static const delivery = "assets/icons/delivery.svg";
   static const finishLocation = "assets/icons/finish_location.svg";
   static const home = "assets/icons/home.svg";
@@ -47,6 +52,19 @@ class AppIcons {
   static const checkVerified = "assets/icons/check-verified.svg";
   static const checkboxRadio = "assets/icons/checkbox-radio.svg";
   static const checkboxRadioDis = "assets/icons/checkbox_radio_dis.svg";
+  static const autoRepair = "assets/icons/auto_repair.svg";
+  static const capture = "assets/icons/capture.svg";
+  static const fuelDeliver = "assets/icons/fuel_deliver.svg";
+  static const inTheWarehouseStorage =
+      "assets/icons/in_the_warehouse_storage.svg";
+  static const message = "assets/icons/message-text.svg";
+  static const shipping = "assets/icons/shipping.svg";
+  static const specialTechnique = "assets/icons/special_technique.svg";
+  static const transportRental = "assets/icons/transport_rental.svg";
+  static const transportationOfPassengers =
+      "assets/icons/transportation_of_passengers.svg";
+  static const transportationTransfer =
+      "assets/icons/transportation_transfer.svg";
 }
 
 extension SvgExt on String {

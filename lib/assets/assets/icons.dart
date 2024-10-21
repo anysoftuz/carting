@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
   static const calendar = "assets/icons/calendar.svg";
+  static const editCir = "assets/icons/edit_cir.svg";
+  static const car = "assets/icons/car.svg";
+  static const arrowCircle = "assets/icons/arrow_circle.svg";
   static const swap = "assets/icons/swap.svg";
   static const arrowForward = "assets/icons/arrow_forward.svg";
   static const filter = "assets/icons/filter.svg";

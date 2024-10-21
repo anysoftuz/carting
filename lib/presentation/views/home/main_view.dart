@@ -36,17 +36,22 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             icon: AppIcons.home.svg(color: darkIcon),
             activeIcon: AppIcons.home.svg(color: green),
-            label: "Home",
+            label: "Asosiy",
           ),
           BottomNavigationBarItem(
-            icon: AppIcons.delivery.svg(color: darkIcon),
-            activeIcon: AppIcons.delivery.svg(color: green),
-            label: "Orders",
+            icon: AppIcons.box.svg(color: darkIcon),
+            activeIcon: AppIcons.box.svg(color: green),
+            label: "E’lonlar",
+          ),
+          BottomNavigationBarItem(
+            icon: AppIcons.car.svg(color: darkIcon),
+            activeIcon: AppIcons.car.svg(color: green),
+            label: "Transport",
           ),
           BottomNavigationBarItem(
             icon: AppIcons.profile.svg(color: darkIcon),
             activeIcon: AppIcons.profile.svg(color: green),
-            label: "Profile",
+            label: "Profil",
           ),
         ],
       ),

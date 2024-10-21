@@ -65,6 +65,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
       screen: const SizedBox(),
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,6 +121,20 @@ class TypeOfService {
   TypeOfService({
     required this.icon,
     required this.text,
+    required this.screen,
+  });
+}
+
+class TyperIteam {
+  final Widget icon;
+  final String text;
+  final String subTitle;
+  final Widget screen;
+
+  TyperIteam({
+    required this.icon,
+    required this.text,
+    required this.subTitle,
     required this.screen,
   });
 }

@@ -1,4 +1,5 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -9,35 +10,242 @@ class DeliverInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text("Yuk tashish")),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              WButton(
-                onTap: () {},
-                text: "+998 99 123 45 67",
-              ),
-              const SizedBox(height: 8),
-              WButton(
-                onTap: () {},
-                color: blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppIcons.telegram.svg(),
-                    const SizedBox(width: 12),
-                    const Text("Telegram orqali bog'lanish")
-                  ],
-                ),
-              )
-            ],
+          child: WButton(
+            onTap: () {},
+            text: "Faolsizlantirish",
+            textColor: red,
+            color: red.withOpacity(.2),
           ),
         ),
       ),
-      body: Container(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            WButton(
+              onTap: () {},
+              color: green.withOpacity(.2),
+              textColor: green,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Faol",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  AppIcons.editCir.svg(),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      "Qayerdan",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: dark.withOpacity(.3),
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Toshkent, Yakkasaroy tumani",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: dark,
+                      ),
+                    ),
+                    trailing: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: green,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: AppIcons.location.svg(
+                        height: 24,
+                        width: 24,
+                        color: white,
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(height: 1),
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Qayerga",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: dark.withOpacity(.3),
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Toshkent, Yakkasaroy tumani",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: dark,
+                      ),
+                    ),
+                    trailing: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: green,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: AppIcons.location.svg(
+                        height: 24,
+                        width: 24,
+                        color: white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Yuk vazni",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: dark.withOpacity(.3),
+                          ),
+                        ),
+                        const Text(
+                          "160 kg",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: dark,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Yuk vazni",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: dark.withOpacity(.3),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            AppIcons.calendar.svg(),
+                            const SizedBox(width: 4),
+                            const Text(
+                              "14.08.2024",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: dark,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: ListTile(
+                title: const Text("Qo‘shimcha ma’lumotlar"),
+                minVerticalPadding: 0,
+                titleTextStyle: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: dark.withOpacity(.3),
+                ),
+                subtitleTextStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: dark,
+                ),
+                subtitle:
+                    const Text("Yuk turi, rasmi, yuklash xizmati, to‘lov..."),
+                trailing: AppIcons.arrowForward.svg(),
+              ),
+            ),
+            const SizedBox(height: 8),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: ListTile(
+                title: const Text("Transport turi"),
+                subtitle: const Text("Furgon 4.8x2.05x1.92"),
+                minVerticalPadding: 0,
+                titleTextStyle: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: dark.withOpacity(.3),
+                ),
+                subtitleTextStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: dark,
+                ),
+                trailing: AppImages.truck.imgAsset(),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

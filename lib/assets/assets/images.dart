@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppImages {
   static const logo = 'assets/images/logo.png';
   static const ballOrder = 'assets/images/ball_order.png';
-  static const border = 'assets/images/border.png';
+  static const border = 'assets/images/border.png';  static const banner = 'assets/images/banner.png';
   static const callCentr = 'assets/images/call-centr.png';
   static const info = 'assets/images/info.png';
   static const lenguage = 'assets/images/lenguage.png';

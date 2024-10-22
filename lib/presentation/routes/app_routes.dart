@@ -1,6 +1,7 @@
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/announcements_view.dart';
 import 'package:carting/presentation/views/auth/auth_view.dart';
+import 'package:carting/presentation/views/auth/register_view.dart';
 import 'package:carting/presentation/views/cars/cars_view.dart';
 import 'package:carting/presentation/views/error_view.dart';
 import 'package:carting/presentation/views/home/home_deliver_view.dart';
@@ -20,7 +21,7 @@ sealed class AppRouts {
       GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRouteName.lending,
+    initialLocation: AppRouteName.auth,
     errorBuilder: (context, state) => const ErrorView(),
     routes: [
       GoRoute(
@@ -38,6 +39,10 @@ sealed class AppRouts {
       GoRoute(
         path: AppRouteName.auth,
         builder: (context, state) => const AuthView(),
+      ),
+      GoRoute(
+        path: AppRouteName.register,
+        builder: (context, state) => const RegisterView(),
       ),
       GoRoute(
         path: AppRouteName.profileInfo,

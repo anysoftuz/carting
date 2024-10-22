@@ -13,5 +13,6 @@ abstract class AppRouteName {
   static const ordersHistory = '/ordersHistory';
   static const cars = '/cars';
   static const auth = '/auth';
+  static const register = '/register';
   static const notification = '/notification';
 }

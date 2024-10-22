@@ -18,106 +18,78 @@ class AuthView extends StatefulWidget {
 class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppImages.main),
-          fit: BoxFit.cover,
-        ),
+    return Scaffold(
+      bottomNavigationBar: SafeArea(
+        child: AppImages.logoTextDark.imgAsset(height: 24),
       ),
-      child: Scaffold(
-        backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
-        body: Padding(
-          padding: MediaQuery.of(context).viewPadding,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Kirish",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Profilingizga kirish uchun ro’yxatdan o’tgan raqamingizni kiriting!",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: dark.withOpacity(.3),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            CustomTextField(
+              title: "Telefon",
+              hintText: "+998",
+              formatter: [Formatters.phoneFormatter],
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 32),
+            WButton(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SmsView(isRegister: false),
+                ));
+              },
+              text: "Kirish",
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.sizeOf(context).height * .1),
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 48),
-                        child: AppImages.logoText.imgAsset(),
-                      ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 32, vertical: 24),
-                        child: Text(
-                          "O’zbekiston bo’ylab yuk tashish",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.sizeOf(context).height * .14),
-                    ],
-                  ),
-                ),
-                const Text(
-                  "Raqamingizni kiriting",
+                Text(
+                  "Platformamizda yangimisiz? ",
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: white,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                CustomTextField(
-                  hintText: "Raqamingizni kiriting",
-                  textColor: white,
-                  formatter: [Formatters.phoneFormatter],
-                  keyboardType: TextInputType.phone,
-                  hintStyle: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: white,
+                    color: dark.withOpacity(.3),
                   ),
-                  fillColor: whiteSmoke.withOpacity(.24),
                 ),
-                const Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-                      child: Text(
-                        "Yoki",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: white,
-                        ),
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    context.go(AppRouteName.register);
+                  },
+                  child: const Text(
+                    " Ro‘yhatdan o‘tish",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: blue,
                     ),
-                    Expanded(child: Divider()),
-                  ],
-                ),
-                WButton(
-                  onTap: () {
-                    context.go(AppRouteName.homeDeliver);
-                  },
-                  color: whiteSmoke.withOpacity(.24),
-                  text: "Google orqali kirish",
-                ),
-                const SizedBox(height: 56),
-                WButton(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SmsView(),
-                    ));
-                  },
-                  text: "Davom etish",
-                ),
+                  ),
+                )
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

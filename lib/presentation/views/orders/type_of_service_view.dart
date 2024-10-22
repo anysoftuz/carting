@@ -1,6 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/presentation/views/orders/auto_repair_view.dart';
+import 'package:carting/presentation/views/auto_repair/auto_repair_view.dart';
 import 'package:flutter/material.dart';
 
 class TypeOfServiceView extends StatefulWidget {

@@ -130,7 +130,7 @@ class _SmsViewState extends State<SmsView> {
                     builder: (context) => const IdentityChooseView(),
                   ));
                 } else {
-                  context.go(AppRouteName.homeDeliver);
+                  context.go(AppRouteName.home);
                 }
               },
               text: "Tasdiqlash",

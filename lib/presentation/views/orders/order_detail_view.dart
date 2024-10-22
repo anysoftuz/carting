@@ -158,6 +158,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 16),
               ],
             ),
           )

@@ -4,7 +4,7 @@ import 'package:carting/presentation/views/auth/auth_view.dart';
 import 'package:carting/presentation/views/auth/register_view.dart';
 import 'package:carting/presentation/views/cars/cars_view.dart';
 import 'package:carting/presentation/views/error_view.dart';
-import 'package:carting/presentation/views/home/home_deliver_view.dart';
+import 'package:carting/presentation/views/home/home_view.dart';
 import 'package:carting/presentation/views/home/main_view.dart';
 import 'package:carting/presentation/views/home/notification_view.dart';
 import 'package:carting/presentation/views/lending_view.dart';
@@ -21,7 +21,7 @@ sealed class AppRouts {
       GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRouteName.auth,
+    initialLocation: AppRouteName.home,
     errorBuilder: (context, state) => const ErrorView(),
     routes: [
       GoRoute(
@@ -98,8 +98,8 @@ sealed class AppRouts {
       StatefulShellBranch(
         routes: [
           GoRoute(
-            path: AppRouteName.homeDeliver,
-            builder: (context, state) => const HomeDeliverView(),
+            path: AppRouteName.home,
+            builder: (context, state) => const HomeView(),
           ),
         ],
       ),

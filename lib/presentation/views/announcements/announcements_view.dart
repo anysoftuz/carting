@@ -82,7 +82,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
             ),
           ],
           body: ListView.separated(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16).copyWith(bottom: 100),
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
                 Navigator.of(context, rootNavigator: true)

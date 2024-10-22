@@ -6,6 +6,8 @@ class AppIcons {
   static const calendar = "assets/icons/calendar.svg";
   static const editCir = "assets/icons/edit_cir.svg";
   static const car = "assets/icons/car.svg";
+  static const car_2 = "assets/icons/car_2.svg";
+  static const car_3 = "assets/icons/car_3.svg";
   static const arrowCircle = "assets/icons/arrow_circle.svg";
   static const swap = "assets/icons/swap.svg";
   static const arrowForward = "assets/icons/arrow_forward.svg";

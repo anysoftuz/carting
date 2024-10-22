@@ -33,10 +33,12 @@ class _CallViewState extends State<CallView> {
           ),
         ),
       ),
-      bottomNavigationBar: WButton(
-        margin: const EdgeInsets.all(16),
-        onTap: () {},
-        text: "Yuborish",
+      bottomNavigationBar: SafeArea(
+        child: WButton(
+          margin: const EdgeInsets.all(16),
+          onTap: () {},
+          text: "Yuborish",
+        ),
       ),
     );
   }

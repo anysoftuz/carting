@@ -1,6 +1,8 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/auto_repair/masters_type_view.dart';
+import 'package:carting/presentation/views/auto_repair/workshops_view.dart';
 import 'package:flutter/material.dart';
 
 class AutoRepairView extends StatelessWidget {
@@ -25,6 +27,11 @@ class AutoRepairView extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 title: const Text("Ustaxonalar"),
                 trailing: AppIcons.arrowForward.svg(),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const WorkshopsView(),
+                  ));
+                },
               ),
             ),
             const SizedBox(height: 12),
@@ -39,6 +46,11 @@ class AutoRepairView extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 title: const Text("Ustalar"),
                 trailing: AppIcons.arrowForward.svg(),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MastersTypeView(),
+                  ));
+                },
               ),
             )
           ],

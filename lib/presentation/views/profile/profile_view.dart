@@ -99,7 +99,8 @@ class _ProfileViewState extends State<ProfileView> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
+                                  Navigator.of(context, rootNavigator: true)
+                                      .push(MaterialPageRoute(
                                     builder: (context) => const CallView(),
                                   ));
                                 },
@@ -234,7 +235,7 @@ class _ProfileViewState extends State<ProfileView> {
                 context.go(AppRouteName.auth);
               },
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 120),
           ],
         ),
       ),

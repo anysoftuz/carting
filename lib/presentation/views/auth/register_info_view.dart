@@ -65,7 +65,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
             ),
             WButton(
               onTap: () {
-                context.go(AppRouteName.homeDeliver);
+                context.go(AppRouteName.home);
               },
               margin: const EdgeInsets.symmetric(horizontal: 16),
               text: "Ro‘yxatdan o‘tish",

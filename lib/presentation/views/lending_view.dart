@@ -56,7 +56,7 @@ class _LendingViewState extends State<LendingView> {
             child: WButton(
               margin: const EdgeInsets.all(16),
               onTap: () {
-                context.go(AppRouteName.home);
+                context.go(AppRouteName.auth);
               },
               text: "Boshlash",
             ),

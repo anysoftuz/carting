@@ -2,8 +2,16 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/auto_repair/auto_repair_view.dart';
+import 'package:carting/presentation/views/cars/transport_transfer_view.dart';
+import 'package:carting/presentation/views/delivery/delivery_view.dart';
+import 'package:carting/presentation/views/fuel_delivery/fuel_delivery_view.dart';
+import 'package:carting/presentation/views/home/deliver_info_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
+import 'package:carting/presentation/views/passengers_transport/passengers_transport_view.dart';
+import 'package:carting/presentation/views/peregon_service/peregon_service_view.dart';
+import 'package:carting/presentation/views/special_technical_services/special_technical_services_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_view.dart';
+import 'package:carting/presentation/views/transport_rental/transport_rental_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Yetkazib\nberish",
-      screen: const SizedBox(),
+      screen: const DeliveryView(),
     ),
     TypeOfService(
       icon: AppIcons.transportRental.svg(
@@ -30,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Peregon xizmati",
-      screen: const SizedBox(),
+      screen: const PeregonServiceView(),
     ),
     TypeOfService(
       icon: AppIcons.shipping.svg(
@@ -38,12 +46,12 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Yuk \ntashish",
-      screen: const SizedBox(),
+      screen: const DeliverInfoView(),
     ),
     TypeOfService(
       icon: AppIcons.fuelDeliver.svg(),
       text: "Yoqilg‘i yetkazish",
-      screen: const SizedBox(),
+      screen: const FuelDeliveryView(),
     ),
     TypeOfService(
       icon: AppIcons.transportationOfPassengers.svg(
@@ -51,12 +59,12 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Yo'lovchilarni tashish",
-      screen: const SizedBox(),
+      screen: const PassengersTransportView(),
     ),
     TypeOfService(
       icon: AppIcons.car_3.svg(),
       text: "Transport ijarasi",
-      screen: const SizedBox(),
+      screen: const TransportRentalView(),
     ),
     TypeOfService(
       icon: AppIcons.specialTechnique.svg(
@@ -64,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Maxsus texnika xizmatlari",
-      screen: const SizedBox(),
+      screen: const SpecialTechnicalServicesView(),
     ),
     TypeOfService(
       icon: AppIcons.autoRepair.svg(),
@@ -74,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
-      screen: const SizedBox(),
+      screen: const TransportTransferView(),
     ),
     TypeOfService(
       icon: AppIcons.inTheWarehouseStorage.svg(),

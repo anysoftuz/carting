@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class AppImages {
   static const logo = 'assets/images/logo.png';
   static const ballOrder = 'assets/images/ball_order.png';
-  static const border = 'assets/images/border.png';  static const banner = 'assets/images/banner.png';
+  static const border = 'assets/images/border.png';
+  static const banner = 'assets/images/banner.png';
   static const callCentr = 'assets/images/call-centr.png';
   static const info = 'assets/images/info.png';
   static const lenguage = 'assets/images/lenguage.png';
@@ -37,6 +38,8 @@ class AppImages {
   static const mask = 'assets/images/mask.png';
   static const workshops = 'assets/images/workshops.png';
   static const masters = 'assets/images/masters.png';
+  static const moto = 'assets/images/moto.png';
+   static const image_10 = 'assets/images/image_10.png';
 }
 
 extension ImgExt on String {

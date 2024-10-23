@@ -21,7 +21,7 @@ sealed class AppRouts {
       GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRouteName.home,
+    initialLocation: AppRouteName.lending,
     errorBuilder: (context, state) => const ErrorView(),
     routes: [
       GoRoute(

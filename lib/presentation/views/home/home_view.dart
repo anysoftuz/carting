@@ -5,7 +5,7 @@ import 'package:carting/presentation/views/auto_repair/auto_repair_view.dart';
 import 'package:carting/presentation/views/cars/transport_transfer_view.dart';
 import 'package:carting/presentation/views/delivery/delivery_view.dart';
 import 'package:carting/presentation/views/fuel_delivery/fuel_delivery_view.dart';
-import 'package:carting/presentation/views/home/deliver_info_view.dart';
+import 'package:carting/presentation/views/home/shipping_create_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/views/passengers_transport/passengers_transport_view.dart';
 import 'package:carting/presentation/views/peregon_service/peregon_service_view.dart';
@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
         width: 40,
       ),
       text: "Yuk \ntashish",
-      screen: const DeliverInfoView(),
+      screen: const ShippingCreateView(),
     ),
     TypeOfService(
       icon: AppIcons.fuelDeliver.svg(),

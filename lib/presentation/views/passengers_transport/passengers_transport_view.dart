@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -23,7 +24,13 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
         child: WButton(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const AdditionalInformationView(),
+              builder: (context) => LocationView(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AdditionalInformationView(),
+                  ));
+                },
+              ),
             ));
           },
           margin: const EdgeInsets.all(16),
@@ -58,16 +65,27 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                         color: dark,
                       ),
                     ),
-                    trailing: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: green,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: AppIcons.location.svg(
-                        height: 24,
-                        width: 24,
-                        color: white,
+                    trailing: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LocationView(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: green,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: AppIcons.location.svg(
+                          height: 24,
+                          width: 24,
+                          color: white,
+                        ),
                       ),
                     ),
                   ),
@@ -92,16 +110,27 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                         color: dark,
                       ),
                     ),
-                    trailing: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: green,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: AppIcons.location.svg(
-                        height: 24,
-                        width: 24,
-                        color: white,
+                    trailing: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LocationView(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: green,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: AppIcons.location.svg(
+                          height: 24,
+                          width: 24,
+                          color: white,
+                        ),
                       ),
                     ),
                   ),

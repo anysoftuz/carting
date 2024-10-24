@@ -7,18 +7,18 @@ import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryView extends StatefulWidget {
-  const DeliveryView({super.key});
+class ShippingCreateView extends StatefulWidget {
+  const ShippingCreateView({super.key});
 
   @override
-  State<DeliveryView> createState() => _DeliveryViewState();
+  State<ShippingCreateView> createState() => _ShippingCreateViewState();
 }
 
-class _DeliveryViewState extends State<DeliveryView> {
+class _ShippingCreateViewState extends State<ShippingCreateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yetkazib berish")),
+      appBar: AppBar(title: const Text("Yuk tashish")),
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
@@ -26,7 +26,8 @@ class _DeliveryViewState extends State<DeliveryView> {
               builder: (context) => LocationView(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
+                    builder: (context) =>
+                        const AdditionalInformationView(isDelivery: true),
                   ));
                 },
               ),

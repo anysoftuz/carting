@@ -13,15 +13,16 @@ class StorageServiceInfoView extends StatefulWidget {
 
 class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
   List<String> list = [
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
+    AppImages.ombor,
+    AppImages.ombor,
+    AppImages.ombor,
+    AppImages.ombor,
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -130,7 +131,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
               const SizedBox(height: 32),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: scaffoldSecondaryBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -149,7 +150,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: scaffoldSecondaryBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(

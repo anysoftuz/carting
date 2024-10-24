@@ -13,10 +13,10 @@ class WorkshopsInfoView extends StatefulWidget {
 
 class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
   List<String> list = [
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
+    AppImages.workshop,
+    AppImages.workshop,
+    AppImages.workshop,
+    AppImages.workshop,
   ];
 
   List<String> list2 = [

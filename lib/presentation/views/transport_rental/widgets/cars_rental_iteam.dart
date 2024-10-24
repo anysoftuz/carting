@@ -3,13 +3,17 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:flutter/material.dart';
 
-class WorkshopsIteam extends StatelessWidget {
-  const WorkshopsIteam({super.key});
+class CarsRentalIteam extends StatelessWidget {
+  const CarsRentalIteam({
+    super.key,
+    required this.title,
+  });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 312,
+      height: 316,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         color: white,
@@ -20,7 +24,7 @@ class WorkshopsIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.workshop.imgAsset(
+            child: AppImages.kiaSonet.imgAsset(
               height: 196,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -35,12 +39,25 @@ class WorkshopsIteam extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Carbox",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "800 000 UZS",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   Row(
@@ -50,12 +67,13 @@ class WorkshopsIteam extends StatelessWidget {
                         width: 16,
                       ),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
                           "Toshkent, Yakkasaroy tumani",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
+                            color: dark.withOpacity(.3),
                           ),
                         ),
                       ),

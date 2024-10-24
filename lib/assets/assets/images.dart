@@ -39,7 +39,12 @@ class AppImages {
   static const workshops = 'assets/images/workshops.png';
   static const masters = 'assets/images/masters.png';
   static const moto = 'assets/images/moto.png';
-   static const image_10 = 'assets/images/image_10.png';
+  static const image_10 = 'assets/images/image_10.png';
+  static const kiaSonet = 'assets/images/Kia_Sonet.png';
+  static const workshop = 'assets/images/workshop.png';
+  static const exp = 'assets/images/exp.png';
+  static const bulldozer = 'assets/images/bulldozer.png';
+  static const ombor = 'assets/images/ombor.png';
 }
 
 extension ImgExt on String {

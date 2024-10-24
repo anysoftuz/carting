@@ -20,7 +20,7 @@ class MastersIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.mask.imgAsset(
+            child: AppImages.exp.imgAsset(
               height: 196,
               width: double.infinity,
               fit: BoxFit.cover,

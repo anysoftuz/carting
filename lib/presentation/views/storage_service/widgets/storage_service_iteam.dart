@@ -20,7 +20,7 @@ class StorageServiceIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.mask.imgAsset(
+            child: AppImages.ombor.imgAsset(
               height: 204,
               width: double.infinity,
               fit: BoxFit.cover,

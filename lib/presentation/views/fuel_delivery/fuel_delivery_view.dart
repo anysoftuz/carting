@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,16 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
       appBar: AppBar(title: const Text("Yoqilg‘i yetkazish")),
       bottomNavigationBar: SafeArea(
         child: WButton(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => LocationView(
+                isOne: true,
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ));
+          },
           margin: const EdgeInsets.all(16),
           text: "Tasdiqlash",
         ),
@@ -48,16 +58,28 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                     color: dark,
                   ),
                 ),
-                trailing: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: green,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: AppIcons.location.svg(
-                    height: 24,
-                    width: 24,
-                    color: white,
+                trailing: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LocationView(
+                        isOne: true,
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: green,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: AppIcons.location.svg(
+                      height: 24,
+                      width: 24,
+                      color: white,
+                    ),
                   ),
                 ),
               ),

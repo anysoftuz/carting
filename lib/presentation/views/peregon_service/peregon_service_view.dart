@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -21,7 +22,13 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
         child: WButton(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const AdditionalInformationView(),
+              builder: (context) => LocationView(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AdditionalInformationView(),
+                  ));
+                },
+              ),
             ));
           },
           margin: const EdgeInsets.all(16),
@@ -56,16 +63,27 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                         color: dark,
                       ),
                     ),
-                    trailing: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: green,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: AppIcons.location.svg(
-                        height: 24,
-                        width: 24,
-                        color: white,
+                    trailing: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LocationView(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: green,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: AppIcons.location.svg(
+                          height: 24,
+                          width: 24,
+                          color: white,
+                        ),
                       ),
                     ),
                   ),
@@ -90,16 +108,27 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                         color: dark,
                       ),
                     ),
-                    trailing: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: green,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: AppIcons.location.svg(
-                        height: 24,
-                        width: 24,
-                        color: white,
+                    trailing: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LocationView(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: green,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: AppIcons.location.svg(
+                          height: 24,
+                          width: 24,
+                          color: white,
+                        ),
                       ),
                     ),
                   ),
@@ -122,7 +151,6 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                 color: white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
               child: ListTile(
                 title: const Text("Qo‘shimcha ma’lumotlar"),
                 minVerticalPadding: 0,
@@ -136,9 +164,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                   fontWeight: FontWeight.w500,
                   color: dark,
                 ),
-                subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov...",
-                ),
+                subtitle: const Text("Izoh, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

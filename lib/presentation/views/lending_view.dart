@@ -29,7 +29,9 @@ class _LendingViewState extends State<LendingView> {
       body: Column(
         children: [
           Expanded(
-            child: AppImages.banner.imgAsset(fit: BoxFit.cover),
+            child: AppImages.banner.imgAsset(
+              fit: BoxFit.cover,
+            ),
           ),
           const Text(
             "Xush kelibsiz",

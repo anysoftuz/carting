@@ -2,6 +2,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_title.dart';
 import 'package:flutter/material.dart';
 
 class MasterInfoView extends StatefulWidget {
@@ -13,10 +14,10 @@ class MasterInfoView extends StatefulWidget {
 
 class _MasterInfoViewState extends State<MasterInfoView> {
   List<String> list = [
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
+    AppImages.exp,
+    AppImages.exp,
+    AppImages.exp,
+    AppImages.exp,
   ];
 
   List<String> list2 = [
@@ -29,6 +30,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -106,24 +108,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                 ),
               ),
               const SizedBox(height: 12),
-              Container(
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                height: 24,
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Xizmatlar",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: dark.withOpacity(.4),
-                  ),
-                ),
-              ),
+              const WTitle(title: "Xizmatlar"),
               const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
@@ -134,7 +119,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     list2.length,
                     (index) => Container(
                       decoration: BoxDecoration(
-                        color: white,
+                        color: scaffoldSecondaryBackground,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -155,7 +140,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
               const SizedBox(height: 32),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: scaffoldSecondaryBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -174,7 +159,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: scaffoldSecondaryBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(

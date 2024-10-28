@@ -17,3 +17,13 @@ samples, guidance on mobile development, and a full API reference.
 
 rename setAppName --targets ios,android --value "CARTING"  
 rename setBundleId --targets ios,android --value "uz.anysoft.carting"
+
+build apk with low size:
+flutter build apk --split-per-abi
+
+build appbundle:
+flutter build appbundle --release --build-name=1.0.7 --build-number=9
+flutter build apk --release
+
+build runner:
+flutter pub run build_runner build --delete-conflicting-outputs

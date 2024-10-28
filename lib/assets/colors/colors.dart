@@ -83,11 +83,11 @@ const _grayLight = Color(0xFFF3F5F9);
 
 List<BoxShadow> wboxShadow = [
   BoxShadow(
-    offset: const Offset(0, 4),
-    blurRadius: 4,
+    color: darkText.withOpacity(.08),
+    blurRadius: 8.4,
     spreadRadius: 0,
-    color: black.withOpacity(.25),
-  ),
+    offset: const Offset(0, 2),
+  )
 ];
 
 List<BoxShadow> wboxShadowRed = [

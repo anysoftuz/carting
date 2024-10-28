@@ -2,9 +2,9 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/cars/shipping_view.dart';
 import 'package:carting/presentation/views/cars/special_technique_view.dart';
-import 'package:carting/presentation/views/cars/transport_transfer_view.dart';
 import 'package:carting/presentation/views/cars/transportation_of_passengers_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
+import 'package:carting/presentation/views/transport_transfer/transport_transfer_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -91,6 +91,7 @@ class _CarsViewState extends State<CarsView> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: white,
+              boxShadow: wboxShadow,
             ),
             padding: EdgeInsets.symmetric(
               vertical: 12,

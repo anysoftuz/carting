@@ -119,7 +119,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ? const SizedBox(height: 6)
               : const SizedBox(),
           SizedBox(
-            height: widget.noHeight ? null : widget.height ?? 58,
+            height: widget.noHeight ? null : widget.height ?? 64,
             child: TextFormField(
               initialValue: widget.initialValue,
               expands: widget.expands ?? true,
@@ -155,7 +155,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         onPressed: widget.onprefixIconPressed ?? () {})
                     : null,
                 focusColor: white,
-                fillColor: widget.fillColor ?? white,
+                fillColor: widget.fillColor ?? const Color(0xFFF3F3F3),
                 hoverColor: white,
                 filled: true,
                 border: widget.border ??

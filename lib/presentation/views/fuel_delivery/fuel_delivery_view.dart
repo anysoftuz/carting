@@ -19,14 +19,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LocationView(
-                isOne: true,
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ));
+            Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
           text: "Tasdiqlash",

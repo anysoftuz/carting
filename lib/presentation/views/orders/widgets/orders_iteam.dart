@@ -1,4 +1,3 @@
-
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -14,6 +13,7 @@ class OrdersIteam extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         color: white,
+        boxShadow: wboxShadow,
       ),
       child: Column(
         children: [

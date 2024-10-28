@@ -5,6 +5,9 @@ import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryView extends StatefulWidget {
@@ -15,6 +18,20 @@ class DeliveryView extends StatefulWidget {
 }
 
 class _DeliveryViewState extends State<DeliveryView> {
+  late TextEditingController controller;
+  String selectedUnit = 'kg';
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +39,7 @@ class _DeliveryViewState extends State<DeliveryView> {
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LocationView(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
-                  ));
-                },
-              ),
-            ));
+            Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
           text: "Ro‘yxatdan o‘tish",
@@ -140,12 +149,94 @@ class _DeliveryViewState extends State<DeliveryView> {
             MinTextField(
               text: "Yuk vazni",
               hintText: "0",
-              suffixIcon: const Text(
-                "kg",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
+              keyboardType: TextInputType.number,
+              formatter: [Formatters.numberFormat],
+              // suffixIcon: const Text(
+              //   "kg",
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     fontWeight: FontWeight.w400,
+              //     color: dark,
+              //   ),
+              // ),
+              suffixIcon: Builder(
+                builder: (context) => GestureDetector(
+                  onTap: () async {
+                    final RenderBox button =
+                        context.findRenderObject() as RenderBox;
+                    final RenderBox overlay = Overlay.of(context)
+                        .context
+                        .findRenderObject() as RenderBox;
+
+                    final RelativeRect position = RelativeRect.fromRect(
+                      Rect.fromPoints(
+                        button.localToGlobal(Offset(0, button.size.height),
+                            ancestor: overlay),
+                        button.localToGlobal(
+                            button.size.bottomRight(Offset.zero),
+                            ancestor: overlay),
+                      ),
+                      Offset.zero & overlay.size,
+                    );
+
+                    String? selected = await showMenu<String>(
+                      context: context,
+                      position: position,
+                      color: white,
+                      shadowColor: black.withOpacity(.3),
+                      menuPadding: const EdgeInsets.symmetric(vertical: 4),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      items: ['kg', 'm³', 'litr'].map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          height: 24,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 2,
+                          ),
+                          child: SizedBox(
+                            width: 140,
+                            child: Row(
+                              children: [
+                                Text(choice),
+                                const Spacer(),
+                                SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: choice == selectedUnit
+                                      ? AppIcons.checkboxRadio.svg(
+                                          height: 16,
+                                          width: 16,
+                                        )
+                                      : AppIcons.checkboxRadioDis.svg(
+                                          height: 16,
+                                          width: 16,
+                                        ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+
+                    if (selected != null) {
+                      setState(() {
+                        selectedUnit = selected;
+                      });
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        selectedUnit,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      AppIcons.arrowBottom.svg(color: dark.withOpacity(.3)),
+                    ],
+                  ),
                 ),
               ),
               onChanged: (value) {},
@@ -153,22 +244,44 @@ class _DeliveryViewState extends State<DeliveryView> {
             const SizedBox(height: 8),
             MinTextField(
               text: "Jo‘natish sanasi",
-              hintText: "0",
-              prefixIcon: AppIcons.calendar.svg(
-                height: 24,
-                width: 24,
+              hintText: "",
+              keyboardType: TextInputType.datetime,
+              controller: controller,
+              formatter: [Formatters.dateFormatter],
+              prefixIcon: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const WClaendar(),
+                  ).then(
+                    (value) {
+                      if (value != null) {
+                        controller.text = MyFunction.dateFormat(value);
+                      }
+                    },
+                  );
+                },
+                child: AppIcons.calendar.svg(
+                  height: 24,
+                  width: 24,
+                ),
               ),
               onChanged: (value) {},
             ),
             const SizedBox(height: 8),
-            Container(
+            DecoratedBox(
               decoration: BoxDecoration(
                 color: white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
               child: ListTile(
                 title: const Text("Qo‘shimcha ma’lumotlar"),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AdditionalInformationView(),
+                  ));
+                },
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -181,7 +294,9 @@ class _DeliveryViewState extends State<DeliveryView> {
                   color: dark,
                 ),
                 subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov...",
+                  "Yuk turi, rasmi, yuklash xizmati, to‘lov",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 trailing: AppIcons.arrowForward.svg(),
               ),
@@ -208,7 +323,8 @@ class _DeliveryViewState extends State<DeliveryView> {
                 ),
                 trailing: AppImages.truck.imgAsset(),
               ),
-            )
+            ),
+            const SizedBox(height: 8),
           ],
         ),
       ),

@@ -5,6 +5,9 @@ import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class PassengersTransportView extends StatefulWidget {
@@ -16,6 +19,19 @@ class PassengersTransportView extends StatefulWidget {
 }
 
 class _PassengersTransportViewState extends State<PassengersTransportView> {
+  late TextEditingController controller;
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +39,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LocationView(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
-                  ));
-                },
-              ),
-            ));
+            Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
           text: "Ro‘yxatdan o‘tish",
@@ -141,15 +149,35 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
             MinTextField(
               text: "Yo‘lovchi soni",
               hintText: "Miqdorni kiriting",
+              keyboardType: TextInputType.number,
+              formatter: [Formatters.numberFormat],
               onChanged: (value) {},
             ),
             const SizedBox(height: 8),
             MinTextField(
               text: "Jo‘natish sanasi",
-              hintText: "0",
-              prefixIcon: AppIcons.calendar.svg(
-                height: 24,
-                width: 24,
+              hintText: "",
+              keyboardType: TextInputType.datetime,
+              controller: controller,
+              formatter: [Formatters.dateFormatter],
+              prefixIcon: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const WClaendar(),
+                  ).then(
+                    (value) {
+                      if (value != null) {
+                        controller.text = MyFunction.dateFormat(value);
+                      }
+                    },
+                  );
+                },
+                child: AppIcons.calendar.svg(
+                  height: 24,
+                  width: 24,
+                ),
               ),
               onChanged: (value) {},
             ),
@@ -159,8 +187,12 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                 color: white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 12),
               child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AdditionalInformationView(),
+                  ));
+                },
                 title: const Text("Qo‘shimcha ma’lumotlar"),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
@@ -173,9 +205,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                   fontWeight: FontWeight.w500,
                   color: dark,
                 ),
-                subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov...",
-                ),
+                subtitle: const Text("Izoh, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

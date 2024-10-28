@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'CARTING',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
+        fontFamily: 'Lufga',
         scaffoldBackgroundColor: scaffoldSecondaryBackground,
         colorSchemeSeed: green,
         appBarTheme: const AppBarTheme(

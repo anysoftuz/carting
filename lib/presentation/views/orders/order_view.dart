@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/views/orders/widgets/orders_iteam.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
@@ -20,7 +21,11 @@ class _OrderViewState extends State<OrderView> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const FilterView(),
+            ));
+          },
           icon: AppIcons.filter.svg(),
         ),
         title: SizedBox(

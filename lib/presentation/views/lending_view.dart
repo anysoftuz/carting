@@ -31,6 +31,7 @@ class _LendingViewState extends State<LendingView> {
           Expanded(
             child: AppImages.banner.imgAsset(
               fit: BoxFit.cover,
+              width: double.infinity,
             ),
           ),
           const Text(

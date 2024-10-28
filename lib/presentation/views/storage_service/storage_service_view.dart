@@ -1,4 +1,5 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_info_view.dart';
 import 'package:carting/presentation/views/storage_service/widgets/storage_service_iteam.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,11 @@ class _StorageServiceViewState extends State<StorageServiceView> {
         title: const Text("Saqlash xizmati"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FilterView(),
+              ));
+            },
             icon: AppIcons.filter.svg(),
           )
         ],

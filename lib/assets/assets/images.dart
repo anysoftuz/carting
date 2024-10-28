@@ -21,6 +21,7 @@ class AppImages {
   static const orderHistor = 'assets/images/order_histor.png';
   static const uzbekistan = 'assets/images/uzbekistan.png';
   static const russia = 'assets/images/russia.png';
+  static const eng = 'assets/images/eng.png';
   static const trucks2 = 'assets/images/trucks-02.png';
   static const trucks3 = 'assets/images/trucks-03.png';
   static const trucks4 = 'assets/images/trucks-04.png';
@@ -45,6 +46,13 @@ class AppImages {
   static const exp = 'assets/images/exp.png';
   static const bulldozer = 'assets/images/bulldozer.png';
   static const ombor = 'assets/images/ombor.png';
+  static const avtobus = 'assets/images/avtobus.png';
+  static const avtokran = 'assets/images/avtokran.png';
+  static const bulldozer2 = 'assets/images/bulldozer2.png';
+  static const bus = 'assets/images/bus.png';
+  static const carSilver = 'assets/images/car_silver.png';
+  static const ddd = 'assets/images/ddd.png';
+  static const ekskivator = 'assets/images/ekskivator.png';
 }
 
 extension ImgExt on String {

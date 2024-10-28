@@ -5,6 +5,9 @@ import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class SpecialTechnicalServicesView extends StatefulWidget {
@@ -17,6 +20,22 @@ class SpecialTechnicalServicesView extends StatefulWidget {
 
 class _SpecialTechnicalServicesViewState
     extends State<SpecialTechnicalServicesView> {
+  late TextEditingController controller;
+  late TextEditingController controller2;
+  @override
+  void initState() {
+    controller = TextEditingController();
+    controller2 = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    controller2.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +43,7 @@ class _SpecialTechnicalServicesViewState
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LocationView(
-                isOne: true,
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
-                  ));
-                },
-              ),
-            ));
+            Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
           text: "Ro‘yxatdan o‘tish",
@@ -94,18 +104,56 @@ class _SpecialTechnicalServicesViewState
             const SizedBox(height: 8),
             MinTextField(
               text: "Qaysi sanadan",
-              prefixIcon: AppIcons.calendar.svg(
-                height: 24,
-                width: 24,
+              hintText: "",
+              controller: controller,
+              keyboardType: TextInputType.datetime,
+              formatter: [Formatters.dateFormatter],
+              prefixIcon: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const WClaendar(),
+                  ).then(
+                    (value) {
+                      if (value != null) {
+                        controller.text = MyFunction.dateFormat(value);
+                      }
+                    },
+                  );
+                },
+                child: AppIcons.calendar.svg(
+                  height: 24,
+                  width: 24,
+                ),
               ),
               onChanged: (value) {},
             ),
             const SizedBox(height: 8),
             MinTextField(
               text: "Qaysi sanagacha",
-              prefixIcon: AppIcons.calendar.svg(
-                height: 24,
-                width: 24,
+              hintText: "",
+              controller: controller2,
+              keyboardType: TextInputType.datetime,
+              formatter: [Formatters.dateFormatter],
+              prefixIcon: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const WClaendar(),
+                  ).then(
+                    (value) {
+                      if (value != null) {
+                        controller2.text = MyFunction.dateFormat(value);
+                      }
+                    },
+                  );
+                },
+                child: AppIcons.calendar.svg(
+                  height: 24,
+                  width: 24,
+                ),
               ),
               onChanged: (value) {},
             ),
@@ -116,6 +164,11 @@ class _SpecialTechnicalServicesViewState
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AdditionalInformationView(),
+                  ));
+                },
                 title: const Text("Qo‘shimcha ma’lumotlar"),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(

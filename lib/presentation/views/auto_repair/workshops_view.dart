@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/presentation/views/auto_repair/widgets/workshops_iteam.dart';
 import 'package:carting/presentation/views/auto_repair/workshops_info_view.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:flutter/material.dart';
 
 class WorkshopsView extends StatelessWidget {
@@ -13,7 +14,11 @@ class WorkshopsView extends StatelessWidget {
         title: const Text("Ustaxonalar"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FilterView(),
+              ));
+            },
             icon: AppIcons.filter.svg(),
           ),
         ],

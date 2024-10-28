@@ -1,5 +1,6 @@
 import 'package:carting/assets/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MinTextField extends StatelessWidget {
   const MinTextField({
@@ -15,6 +16,8 @@ class MinTextField extends StatelessWidget {
     this.prefix,
     this.onsuffixIconPressed,
     this.onprefixIconPressed,
+    this.formatter,
+    this.keyboardType = TextInputType.text,
   });
   final String text;
   final String hintText;
@@ -25,6 +28,8 @@ class MinTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
+  final List<TextInputFormatter>? formatter;
+  final TextInputType keyboardType;
   final void Function()? onsuffixIconPressed;
   final void Function()? onprefixIconPressed;
 
@@ -59,6 +64,8 @@ class MinTextField extends StatelessWidget {
                 child: TextField(
                   controller: controller,
                   onChanged: onChanged,
+                  inputFormatters: formatter,
+                  keyboardType: keyboardType,
                   decoration: InputDecoration(
                     prefix: prefix,
                     suffixStyle: const TextStyle(color: darkText),

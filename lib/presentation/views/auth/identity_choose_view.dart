@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -25,7 +27,10 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: SafeArea(
-        child: AppImages.logoTextDark.imgAsset(height: 24),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
+          child: AppImages.logoTextDark.imgAsset(height: 24),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

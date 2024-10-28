@@ -15,7 +15,78 @@ class DeliverInfoView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: WButton(
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                useRootNavigator: true,
+                builder: (context) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 4,
+                      width: 64,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: const Color(0xFFB7BFC6),
+                      ),
+                      margin: const EdgeInsets.all(12),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24,
+                        horizontal: 16,
+                      ),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Haqiqatdan ham e’lonni bekor qilmoqchimisiz?",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: dark.withOpacity(.3),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: WButton(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  text: "Yo‘q",
+                                  textColor: darkText,
+                                  color: const Color(0xFFF3F3F3),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: WButton(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  text: "Yo‘q",
+                                  textColor: darkText,
+                                  color: const Color(0xFFF3F3F3),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 24),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
             text: "Faolsizlantirish",
             textColor: red,
             color: red.withOpacity(.2),
@@ -215,8 +286,11 @@ class DeliverInfoView extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: dark,
                 ),
-                subtitle:
-                    const Text("Yuk turi, rasmi, yuklash xizmati, to‘lov..."),
+                subtitle: const Text(
+                  "Yuk turi, rasmi, yuklash xizmati, to‘lov",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

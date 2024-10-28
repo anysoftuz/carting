@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/routes/route_name.dart';
@@ -20,7 +22,10 @@ class _AuthViewState extends State<AuthView> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: SafeArea(
-        child: AppImages.logoTextDark.imgAsset(height: 24),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
+          child: AppImages.logoTextDark.imgAsset(height: 24),
+        ),
       ),
       appBar: AppBar(),
       body: SingleChildScrollView(

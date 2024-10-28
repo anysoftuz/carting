@@ -13,6 +13,7 @@ class MastersIteam extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         color: white,
+        boxShadow: wboxShadow,
       ),
       child: Column(
         children: [

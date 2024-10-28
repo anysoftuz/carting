@@ -21,7 +21,10 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: SafeArea(
-        child: AppImages.logoTextDark.imgAsset(height: 24),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: AppImages.logoTextDark.imgAsset(height: 24),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

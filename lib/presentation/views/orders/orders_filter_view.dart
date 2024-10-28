@@ -1,4 +1,5 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/widgets/orders_iteam.dart';
 
 import 'package:flutter/material.dart';
@@ -24,7 +25,11 @@ class _OrdersFilterViewState extends State<OrdersFilterView> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FilterView(),
+              ));
+            },
             icon: AppIcons.filter.svg(),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/presentation/views/auto_repair/master_info_view.dart';
 import 'package:carting/presentation/views/auto_repair/widgets/masters_iteam.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:flutter/material.dart';
 
 class MastersListView extends StatelessWidget {
@@ -11,10 +12,14 @@ class MastersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(title),
+        title: Text(title),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FilterView(),
+              ));
+            },
             icon: AppIcons.filter.svg(),
           ),
         ],

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,8 @@ class _MainViewState extends State<MainView> {
       bottomNavigationBar: SafeArea(
         child: Container(
           height: 64,
-          margin: const EdgeInsets.symmetric(horizontal: 52),
+          margin: const EdgeInsets.symmetric(horizontal: 52)
+              .copyWith(bottom: Platform.isIOS ? 0 : 16),
           padding: const EdgeInsets.symmetric(
             vertical: 12,
             horizontal: 32,

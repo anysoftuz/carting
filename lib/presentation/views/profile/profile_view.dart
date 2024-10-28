@@ -4,6 +4,8 @@ import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/profile/call_view.dart';
 import 'package:carting/presentation/views/profile/info_view.dart';
 import 'package:carting/presentation/views/profile/quest_view.dart';
+import 'package:carting/presentation/widgets/w_lenguage.dart';
+import 'package:carting/presentation/widgets/w_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -202,9 +204,12 @@ class _ProfileViewState extends State<ProfileView> {
               title: "Mavzu",
               leading: AppIcons.moon.svg(height: 28, width: 28),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const QuestView(),
-                ));
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  useRootNavigator: true,
+                  builder: (context) => const WTheme(),
+                );
               },
             ),
             const SizedBox(height: 8),
@@ -212,9 +217,12 @@ class _ProfileViewState extends State<ProfileView> {
               title: "Til",
               leading: AppIcons.language.svg(height: 28, width: 28),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const QuestView(),
-                ));
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  useRootNavigator: true,
+                  builder: (context) => const WLenguage(),
+                );
               },
             ),
             const SizedBox(height: 8),

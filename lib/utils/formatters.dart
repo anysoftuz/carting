@@ -31,6 +31,9 @@ class Formatters {
   static final loginFormat = FilteringTextInputFormatter.allow(
     RegExp(r'[a-z0-9]'),
   );
+   static final numberFormat = FilteringTextInputFormatter.allow(
+    RegExp(r'[0-9]'),
+  );
   static final pnflFormat = FilteringTextInputFormatter.allow(
     RegExp(r'[+0-9]'),
   );

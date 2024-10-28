@@ -82,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
-      screen: const TransportTransferView(),
+      screen: const TransportTransferCreateView(),
     ),
     TypeOfService(
       icon: AppIcons.inTheWarehouseStorage.svg(),
@@ -130,6 +130,7 @@ class _HomeViewState extends State<HomeView> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: white,
+              boxShadow: wboxShadow,
             ),
             padding: EdgeInsets.symmetric(
               vertical: 12,

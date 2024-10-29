@@ -14,6 +14,8 @@ class AnnouncementsView extends StatefulWidget {
 }
 
 class _AnnouncementsViewState extends State<AnnouncementsView> {
+  String selectedUnit = 'Barchasi';
+  String selectedUnit2 = 'Barchasi';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,31 +51,185 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            const Text(
-                              "Xizmatlar",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+                        Builder(builder: (context) {
+                          return GestureDetector(
+                            onTap: () async {
+                              final RenderBox button =
+                                  context.findRenderObject() as RenderBox;
+                              final RenderBox overlay = Overlay.of(context)
+                                  .context
+                                  .findRenderObject() as RenderBox;
+
+                              final RelativeRect position =
+                                  RelativeRect.fromRect(
+                                Rect.fromPoints(
+                                  button.localToGlobal(
+                                      Offset(0, button.size.height),
+                                      ancestor: overlay),
+                                  button.localToGlobal(
+                                      button.size.bottomRight(Offset.zero),
+                                      ancestor: overlay),
+                                ),
+                                Offset.zero & overlay.size,
+                              );
+                              String? selected = await showMenu<String>(
+                                context: context,
+                                position: position,
+                                color: white,
+                                shadowColor: black.withOpacity(.3),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                items: [
+                                  'Barchasi',
+                                  'Yuk tashish',
+                                  'Yo‘lovchi tashish',
+                                  'Maxsus texnika',
+                                  'transport transferi',
+                                  'Omborda saqlash'
+                                ].map((String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    height: 32,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          choice,
+                                          style: TextStyle(
+                                            color: dark.withOpacity(.3),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          height: 16,
+                                          width: 16,
+                                          child: choice == selectedUnit2
+                                              ? AppIcons.checkboxRadio.svg(
+                                                  height: 16,
+                                                  width: 16,
+                                                )
+                                              : AppIcons.checkboxRadioDis.svg(
+                                                  height: 16,
+                                                  width: 16,
+                                                ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              );
+
+                              if (selected != null) {
+                                setState(() {
+                                  selectedUnit2 = selected;
+                                });
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  selectedUnit2 == 'Barchasi'
+                                      ? "Xizmatlar"
+                                      : selectedUnit2,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                AppIcons.arrowBottom.svg(),
+                              ],
                             ),
-                            AppIcons.arrowBottom.svg(),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "Status bo’yicha",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: green,
-                              ),
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return GestureDetector(
+                            onTap: () async {
+                              final RenderBox button =
+                                  context.findRenderObject() as RenderBox;
+                              final RenderBox overlay = Overlay.of(context)
+                                  .context
+                                  .findRenderObject() as RenderBox;
+
+                              final RelativeRect position =
+                                  RelativeRect.fromRect(
+                                Rect.fromPoints(
+                                  button.localToGlobal(
+                                      Offset(0, button.size.height),
+                                      ancestor: overlay),
+                                  button.localToGlobal(
+                                      button.size.bottomRight(Offset.zero),
+                                      ancestor: overlay),
+                                ),
+                                Offset.zero & overlay.size,
+                              );
+
+                              String? selected = await showMenu<String>(
+                                context: context,
+                                position: position,
+                                color: white,
+                                shadowColor: black.withOpacity(.3),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                items: ['Barchasi', 'Faol', 'Faol emas']
+                                    .map((String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    height: 32,
+                                    child: SizedBox(
+                                      width: 140,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            choice,
+                                            style: TextStyle(
+                                              color: dark.withOpacity(.3),
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          SizedBox(
+                                            height: 16,
+                                            width: 16,
+                                            child: choice == selectedUnit
+                                                ? AppIcons.checkboxRadio.svg(
+                                                    height: 16,
+                                                    width: 16,
+                                                  )
+                                                : AppIcons.checkboxRadioDis.svg(
+                                                    height: 16,
+                                                    width: 16,
+                                                  ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              );
+
+                              if (selected != null) {
+                                setState(() {
+                                  selectedUnit = selected;
+                                });
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  selectedUnit == 'Barchasi'
+                                      ? "Status bo’yicha"
+                                      : selectedUnit,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: green,
+                                  ),
+                                ),
+                                AppIcons.arrowBottom.svg(color: green),
+                              ],
                             ),
-                            AppIcons.arrowBottom.svg(color: green),
-                          ],
-                        ),
+                          );
+                        }),
                       ],
                     )
                   ],

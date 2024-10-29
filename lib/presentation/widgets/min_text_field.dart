@@ -47,7 +47,7 @@ class MinTextField extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               color: darkText.withOpacity(.3),
             ),

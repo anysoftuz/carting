@@ -6,6 +6,7 @@ import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
 import 'package:carting/presentation/widgets/w_title.dart';
+import 'package:carting/utils/formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -242,6 +243,8 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
             CustomTextField(
               title: "Narx",
               hintText: "Narxni kiriting",
+              keyboardType: TextInputType.number,
+              formatter: [Formatters.numberFormat],
               onChanged: (value) {},
             ),
           ],

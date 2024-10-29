@@ -4,6 +4,7 @@ import 'package:carting/presentation/views/cars/shipping_view.dart';
 import 'package:carting/presentation/views/cars/special_technique_view.dart';
 import 'package:carting/presentation/views/cars/transportation_of_passengers_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
+import 'package:carting/presentation/views/transport_rental/transport_rental_view.dart';
 import 'package:carting/presentation/views/transport_transfer/transport_transfer_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _CarsViewState extends State<CarsView> {
         width: 40,
       ),
       text: "Transport ijarasi",
-      screen: const TransportTransferView(),
+      screen: const TransportRentalView(),
     ),
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
@@ -78,7 +79,7 @@ class _CarsViewState extends State<CarsView> {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: list.length,
         itemBuilder: (context, index) => GestureDetector(

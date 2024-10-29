@@ -184,18 +184,14 @@ class _DeliveryViewState extends State<DeliveryView> {
                       position: position,
                       color: white,
                       shadowColor: black.withOpacity(.3),
-                      menuPadding: const EdgeInsets.symmetric(vertical: 4),
+                      // menuPadding: const EdgeInsets.symmetric(vertical: 4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       items: ['kg', 'm³', 'litr'].map((String choice) {
                         return PopupMenuItem<String>(
                           value: choice,
-                          height: 24,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 2,
-                          ),
+                          height: 40,
                           child: SizedBox(
                             width: 140,
                             child: Row(
@@ -203,16 +199,16 @@ class _DeliveryViewState extends State<DeliveryView> {
                                 Text(choice),
                                 const Spacer(),
                                 SizedBox(
-                                  height: 16,
-                                  width: 16,
+                                  height: 20,
+                                  width: 20,
                                   child: choice == selectedUnit
                                       ? AppIcons.checkboxRadio.svg(
-                                          height: 16,
-                                          width: 16,
+                                          height: 20,
+                                          width: 20,
                                         )
                                       : AppIcons.checkboxRadioDis.svg(
-                                          height: 16,
-                                          width: 16,
+                                          height: 20,
+                                          width: 20,
                                         ),
                                 )
                               ],

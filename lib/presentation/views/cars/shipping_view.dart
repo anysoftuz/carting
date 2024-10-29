@@ -22,7 +22,7 @@ class _ShippingViewState extends State<ShippingView> {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: AppData.shippinglist.length,
         itemBuilder: (context, index) => GestureDetector(
@@ -48,7 +48,7 @@ class _ShippingViewState extends State<ShippingView> {
             ),
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.sizeOf(context).width / 8,
-            ),
+            ).copyWith(top: 8, bottom: 12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -65,7 +65,6 @@ class _ShippingViewState extends State<ShippingView> {
                   maxLines: 1,
                   style: TextStyle(color: dark.withOpacity(.3)),
                 ),
-                const SizedBox(height: 12)
               ],
             ),
           ),

@@ -22,7 +22,7 @@ class _TransportTransferViewState extends State<TransportTransferView> {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: AppData.transportTransfer.length,
         itemBuilder: (context, index) => GestureDetector(

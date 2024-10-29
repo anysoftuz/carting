@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: scaffoldSecondaryBackground,
           shadowColor: scaffoldSecondaryBackground,
+          surfaceTintColor: scaffoldSecondaryBackground,
           centerTitle: true,
+          elevation: 0,
+          scrolledUnderElevation: 0,
         ),
         dividerTheme: const DividerThemeData(color: Color(0xFFEAEEF2)),
       ),

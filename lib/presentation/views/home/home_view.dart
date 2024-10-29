@@ -111,45 +111,65 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16).copyWith(bottom: 120),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          mainAxisExtent: 112,
-        ),
-        itemCount: list.length,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => list[index].screen,
-            ));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: white,
-              boxShadow: wboxShadow,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+              bottom: 8,
             ),
-            padding: EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: MediaQuery.sizeOf(context).width / 8,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                list[index].icon,
-                const SizedBox(height: 4),
-                Text(
-                  list[index].text,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                )
-              ],
+            child: const Text(
+              "Xizmatlar",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-        ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 120),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                mainAxisExtent: 120,
+              ),
+              itemCount: list.length,
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .push(MaterialPageRoute(
+                    builder: (context) => list[index].screen,
+                  ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: white,
+                    boxShadow: wboxShadow,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: MediaQuery.sizeOf(context).width / 8,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      list[index].icon,
+                      const SizedBox(height: 4),
+                      Text(
+                        list[index].text,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -24,7 +24,7 @@ class _TransportationOfPassengersViewState
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: AppData.transportationofPassengers.length,
         itemBuilder: (context, index) => GestureDetector(
@@ -48,6 +48,10 @@ class _TransportationOfPassengersViewState
               color: white,
               boxShadow: wboxShadow,
             ),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 12,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,7 +68,6 @@ class _TransportationOfPassengersViewState
                   maxLines: 1,
                   style: TextStyle(color: dark.withOpacity(.3)),
                 ),
-                const SizedBox(height: 12)
               ],
             ),
           ),

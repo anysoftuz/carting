@@ -50,7 +50,7 @@ class AppData {
       screen: const SizedBox(),
     ),
     TyperIteam(
-      icon: AppImages.image_7.imgAsset(height: 44),
+      icon: AppImages.image_7.imgAsset(height: 40),
       text: "Miniven",
       subTitle: "8 o‘rindiqli",
       screen: const SizedBox(),

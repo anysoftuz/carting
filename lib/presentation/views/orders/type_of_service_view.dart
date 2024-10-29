@@ -76,7 +76,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: list.length,
         itemBuilder: (context, index) => GestureDetector(

@@ -22,7 +22,7 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          mainAxisExtent: 112,
+          mainAxisExtent: 120,
         ),
         itemCount: AppData.specialTechnique.length,
         itemBuilder: (context, index) => GestureDetector(
@@ -46,6 +46,10 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
               color: white,
               boxShadow: wboxShadow,
             ),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 12,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -62,7 +66,6 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
                   maxLines: 1,
                   style: TextStyle(color: dark.withOpacity(.3)),
                 ),
-                const SizedBox(height: 12)
               ],
             ),
           ),

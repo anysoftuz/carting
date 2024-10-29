@@ -5,6 +5,7 @@ class WTabBar extends StatelessWidget {
   final TabController? tabController;
   final List<Widget> tabs;
   final Function(int)? onTap;
+  final bool? isScrollable;
   final EdgeInsetsGeometry? padding;
 
   const WTabBar({
@@ -13,6 +14,7 @@ class WTabBar extends StatelessWidget {
     super.key,
     this.onTap,
     this.padding,
+    this.isScrollable,
   });
 
   @override
@@ -24,8 +26,14 @@ class WTabBar extends StatelessWidget {
       ),
       child: TabBar(
         dividerColor: Colors.transparent,
+        tabAlignment: TabAlignment.start,
         padding: padding ?? const EdgeInsets.all(4),
-        labelPadding: const EdgeInsets.all(12),
+        labelPadding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
+        overlayColor: WidgetStateProperty.all<Color>(Colors.transparent),
+        isScrollable: isScrollable ?? false,
         indicator: ShapeDecoration(
           shadows: [
             BoxShadow(

@@ -53,6 +53,9 @@ class AppImages {
   static const carSilver = 'assets/images/car_silver.png';
   static const ddd = 'assets/images/ddd.png';
   static const ekskivator = 'assets/images/ekskivator.png';
+  static const avatar_1 = 'assets/images/avatar_1.png';
+  static const avatar_2 = 'assets/images/avatar_2.png';
+  static const avatar_3 = 'assets/images/avatar_3.png';
 }
 
 extension ImgExt on String {

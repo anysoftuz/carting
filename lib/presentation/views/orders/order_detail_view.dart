@@ -71,7 +71,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       widget.title,
                       style: const TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     Row(
@@ -104,7 +104,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                   "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: dark.withOpacity(.3),
                   ),
                 ),
@@ -121,7 +121,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       width: 24,
                     ),
                     title: const Text(
-                      "IzoToshkent, Yakkasaroy tumanihlar",
+                      "Toshkent, Yakkasaroy tumanihlar",
                       maxLines: 1,
                     ),
                     trailing: AppIcons.arrowCircle.svg(),

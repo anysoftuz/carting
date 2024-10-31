@@ -51,7 +51,7 @@ class StorageServiceIteam extends StatelessWidget {
                         "800 000 UZS",
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],

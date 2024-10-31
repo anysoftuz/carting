@@ -219,7 +219,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                                   "${list[index].kg} KG",
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Row(
@@ -230,7 +230,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                                       "${list[index].width}  m²",
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     const SizedBox(width: 12),
@@ -240,7 +240,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                                       "${list[index].height}  m²",
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ],

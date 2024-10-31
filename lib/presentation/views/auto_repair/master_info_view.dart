@@ -70,7 +70,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     "AVTOritet",
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
@@ -103,7 +103,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                 "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark.withOpacity(.3),
                 ),
               ),
@@ -130,7 +130,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                         list2[index],
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -150,7 +150,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     width: 24,
                   ),
                   title: const Text(
-                    "IzoToshkent, Yakkasaroy tumanihlar",
+                    "Toshkent, Yakkasaroy tumanihlar",
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),

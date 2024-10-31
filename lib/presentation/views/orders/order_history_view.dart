@@ -100,7 +100,7 @@ class OrderHistoryIteam extends StatelessWidget {
             "Tashkent → Andijan",
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
           trailing: Container(
@@ -141,7 +141,7 @@ class OrderHistoryIteam extends StatelessWidget {
             "500 000 so’m",
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
               color: black,
             ),
           ),

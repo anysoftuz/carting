@@ -1,11 +1,14 @@
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
+import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
 class TransportTransferView extends StatefulWidget {
-  const TransportTransferView({super.key});
+  const TransportTransferView({super.key, this.isCreate = false});
+  final bool isCreate;
 
   @override
   State<TransportTransferView> createState() => _TransportTransferViewState();
@@ -27,18 +30,26 @@ class _TransportTransferViewState extends State<TransportTransferView> {
         itemCount: AppData.transportTransfer.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => OrdersFilterView(
-                title: AppData.transportTransfer[index].text,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => OrderDetailView(
-                        title: AppData.transportTransfer[index].text),
-                  ));
-                },
-              ),
-            ));
+            if (widget.isCreate) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const AnnouncementCreateView(
+                  filter: TypeOfServiceEnum.transportTransfer,
+                ),
+              ));
+            } else {
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                builder: (context) => OrdersFilterView(
+                  title: AppData.transportTransfer[index].text,
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => OrderDetailView(
+                          title: AppData.transportTransfer[index].text),
+                    ));
+                  },
+                ),
+              ));
+            }
           },
           child: Container(
             decoration: BoxDecoration(

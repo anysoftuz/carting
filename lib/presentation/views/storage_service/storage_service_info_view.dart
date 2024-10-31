@@ -63,7 +63,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     "AVTOritet",
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
@@ -95,7 +95,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                 "800 000 UZS",
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 8),
@@ -103,7 +103,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                 "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark.withOpacity(.3),
                 ),
               ),
@@ -141,7 +141,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     width: 24,
                   ),
                   title: const Text(
-                    "IzoToshkent, Yakkasaroy tumanihlar",
+                    "Toshkent, Yakkasaroy tumanihlar",
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),

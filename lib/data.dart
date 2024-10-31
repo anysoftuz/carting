@@ -140,4 +140,78 @@ class AppData {
       screen: const SizedBox(),
     ),
   ];
+
+  static List<CarType> carsList = [
+    CarType(
+      name: "Chevrolet Cobalt",
+      description: "Sedan, benzin",
+    ),
+    CarType(
+      name: "Chevrolet Lacetti",
+      description: "Sedan, benzin",
+    ),
+    CarType(
+      name: "BYD Chazor DMI",
+      description: "Sedan, elektr/benzin",
+    ),
+  ];
+  static List<CarType> carsList2 = [
+    CarType(
+      name: "Kia Sonet",
+      description: "Krossover, benzin",
+    ),
+    CarType(
+      name: "Chevrolet Tracker",
+      description: "Krossover, benzin",
+    ),
+  ];
+
+  static List<CarType> mastersType = [
+    CarType(
+      name: "Kuzov ustasi",
+      description: "Polirovka, bo‘yoq, qirilish, buklanish",
+    ),
+    CarType(
+      name: "Avtoelektrik",
+      description: "Elektrga oid barcha ishlar, fara, tablo",
+    ),
+    CarType(
+      name: "Mator ustasi",
+      description: "dvigitel motor ishlari",
+    ),
+  ];
+
+  static List<String> categories = [
+    "Motorist",
+    "Avtoelektrika",
+    "Kuzovchi",
+    "Avtotuning",
+    'Hodovik'
+  ];
+  static List<String> services = [
+    "Polirovka",
+    "Keramika",
+    "Bo’yoq",
+    "Myatina",
+  ];
+}
+
+class CarType {
+  final String name;
+  final String description;
+
+  CarType({
+    required this.name,
+    required this.description,
+  });
+}
+
+class FuelType {
+  final TextEditingController controllerName;
+  final TextEditingController controllerPrice;
+
+  FuelType({
+    required this.controllerName,
+    required this.controllerPrice,
+  });
 }

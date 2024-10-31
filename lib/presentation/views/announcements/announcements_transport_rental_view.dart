@@ -1,24 +1,27 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
-import 'package:carting/presentation/views/transport_rental/cars_rental_info_view.dart';
+import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/widgets/w_title.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
-class CarsTypeView extends StatefulWidget {
-  const CarsTypeView({super.key});
+class AnnouncementsTransportRentalView extends StatefulWidget {
+  const AnnouncementsTransportRentalView({super.key});
 
   @override
-  State<CarsTypeView> createState() => _CarsTypeViewState();
+  State<AnnouncementsTransportRentalView> createState() =>
+      _AnnouncementsTransportRentalViewState();
 }
 
-class _CarsTypeViewState extends State<CarsTypeView> {
+class _AnnouncementsTransportRentalViewState
+    extends State<AnnouncementsTransportRentalView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
-        title: const Text("Yengil avtomobillar"),
+        title: const Text("Transport ijarasi"),
         backgroundColor: white,
       ),
       body: SingleChildScrollView(
@@ -35,8 +38,9 @@ class _CarsTypeViewState extends State<CarsTypeView> {
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        CarsRentalInfoView(title: AppData.carsList[index].name),
+                    builder: (context) => const AnnouncementCreateView(
+                      filter: TypeOfServiceEnum.transportRental,
+                    ),
                   ));
                 },
               ),
@@ -53,8 +57,8 @@ class _CarsTypeViewState extends State<CarsTypeView> {
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CarsRentalInfoView(
-                      title: AppData.carsList2[index].name,
+                    builder: (context) => const AnnouncementCreateView(
+                      filter: TypeOfServiceEnum.transportRental,
                     ),
                   ));
                 },

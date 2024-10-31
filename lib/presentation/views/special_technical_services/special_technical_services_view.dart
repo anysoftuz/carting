@@ -71,7 +71,7 @@ class _SpecialTechnicalServicesViewState
                   "Toshkent, Yakkasaroy tumani",
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: dark,
                   ),
                 ),
@@ -178,7 +178,7 @@ class _SpecialTechnicalServicesViewState
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text("Izoh, to‘lov turi, narx"),
@@ -202,7 +202,7 @@ class _SpecialTechnicalServicesViewState
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 trailing: AppImages.bulldozer.imgAsset(),

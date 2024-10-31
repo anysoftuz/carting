@@ -67,7 +67,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -112,7 +112,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -192,7 +192,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text("Izoh, to‘lov turi, narx"),

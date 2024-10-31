@@ -37,7 +37,7 @@ class _CarAddViewState extends State<CarAddView> {
               "Transport davlat raqami",
               style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 8),
@@ -148,7 +148,7 @@ class _CarAddViewState extends State<CarAddView> {
                           "Seriya",
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -169,7 +169,7 @@ class _CarAddViewState extends State<CarAddView> {
                           "Texpasport raqami",
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -201,7 +201,7 @@ class _CarAddViewState extends State<CarAddView> {
                       "Tasdiqlangan transport!",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: green,
                       ),
                     ),

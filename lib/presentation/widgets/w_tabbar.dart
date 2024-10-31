@@ -60,11 +60,11 @@ class WTabBar extends StatelessWidget {
         unselectedLabelStyle:
             Theme.of(context).textTheme.displayLarge!.copyWith(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
         labelStyle: Theme.of(context).textTheme.displayLarge!.copyWith(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
         unselectedLabelColor: shuttleGrey,
         labelColor: white,

@@ -1,11 +1,17 @@
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
+import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
 class SpecialTechniqueView extends StatefulWidget {
-  const SpecialTechniqueView({super.key});
+  const SpecialTechniqueView({
+    super.key,
+    this.isCreate = false,
+  });
+  final bool isCreate;
 
   @override
   State<SpecialTechniqueView> createState() => _SpecialTechniqueViewState();
@@ -27,18 +33,26 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
         itemCount: AppData.specialTechnique.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => OrdersFilterView(
-                title: AppData.specialTechnique[index].text,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => OrderDetailView(
-                        title: AppData.specialTechnique[index].text),
-                  ));
-                },
-              ),
-            ));
+            if (widget.isCreate) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const AnnouncementCreateView(
+                  filter: TypeOfServiceEnum.specialTechnique,
+                ),
+              ));
+            } else {
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                builder: (context) => OrdersFilterView(
+                  title: AppData.specialTechnique[index].text,
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => OrderDetailView(
+                          title: AppData.specialTechnique[index].text),
+                    ));
+                  },
+                ),
+              ));
+            }
           },
           child: Container(
             decoration: BoxDecoration(

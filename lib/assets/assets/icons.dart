@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
+  static const add = "assets/icons/add.svg";
   static const calendar = "assets/icons/calendar.svg";
   static const editCir = "assets/icons/edit_cir.svg";
   static const cash = "assets/icons/cash.svg";

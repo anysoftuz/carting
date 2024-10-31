@@ -69,7 +69,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -114,7 +114,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -283,7 +283,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text(
@@ -311,7 +311,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 trailing: AppImages.truck.imgAsset(),

@@ -69,7 +69,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -114,7 +114,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -202,7 +202,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text("Izoh, to‘lov turi, narx"),
@@ -226,7 +226,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 trailing: AppImages.image_7.imgAsset(width: 120),

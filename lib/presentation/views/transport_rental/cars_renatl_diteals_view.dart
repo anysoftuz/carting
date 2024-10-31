@@ -5,7 +5,8 @@ import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
 class CarsRenatlDitealsView extends StatefulWidget {
-  const CarsRenatlDitealsView({super.key});
+  const CarsRenatlDitealsView({super.key, this.myAnnouncement = false});
+  final bool myAnnouncement;
 
   @override
   State<CarsRenatlDitealsView> createState() => _CarsRenatlDitealsViewState();
@@ -74,7 +75,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     "AVTOritet",
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
@@ -106,7 +107,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                 "800 000 UZS",
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 8),
@@ -114,7 +115,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                 "CityRentCar kompaniyasi o‘z mijozlari uchun hamyonbop narxdagi Kia Sonetni taklif qiladi",
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark.withOpacity(.3),
                 ),
               ),
@@ -147,7 +148,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                           list2[index],
                           style: const TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ],
@@ -171,7 +172,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     width: 24,
                   ),
                   title: const Text(
-                    "IzoToshkent, Yakkasaroy tumanihlar",
+                    "Toshkent, Yakkasaroy tumanihlar",
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
@@ -184,7 +185,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     "Ranglar:",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                   ),
@@ -214,7 +215,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Dvigitel hajmi: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -237,7 +238,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Konditsioner: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -260,7 +261,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Uzatmalar qutisi: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -283,7 +284,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Sug‘urta borligi: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -306,7 +307,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Bagaj hajmi: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -329,7 +330,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "O‘rindiqlar soni: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -349,10 +350,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: RichText(
                   text: TextSpan(
-                    text: "OSutkalik km limiti: ",
+                    text: "Sutkalik km limiti: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -375,7 +376,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     text: "Depozit summasi: ",
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: dark.withOpacity(.3),
                     ),
                     children: const [
@@ -405,24 +406,57 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                 ),
               ),
               const SizedBox(height: 32),
-              WButton(
-                onTap: () {},
-                text: "Qo‘ng‘iroq qilish",
-              ),
-              const SizedBox(height: 8),
-              WButton(
-                onTap: () {},
-                color: blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppIcons.telegram.svg(),
-                    const SizedBox(width: 12),
-                    const Text("Telegram orqali bog‘lanish")
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
+              Builder(
+                builder: (context) {
+                  if (widget.myAnnouncement) {
+                    return Column(
+                      children: [
+                        Center(
+                          child: Text(
+                            "E’lon vaqti: 16.08.2024, 09:14",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300,
+                              color: dark.withOpacity(.3),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        WButton(
+                          onTap: () {},
+                          text: "Faolsizlantirish",
+                          color: red.withOpacity(.1),
+                          textColor: red,
+                        ),
+                        const SizedBox(height: 32),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        WButton(
+                          onTap: () {},
+                          text: "Qo‘ng‘iroq qilish",
+                        ),
+                        const SizedBox(height: 8),
+                        WButton(
+                          onTap: () {},
+                          color: blue,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppIcons.telegram.svg(),
+                              const SizedBox(width: 12),
+                              const Text("Telegram orqali bog‘lanish")
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  }
+                },
+              )
             ],
           ),
         ),

@@ -1,12 +1,18 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/auto_repair/masters_type_view.dart';
 import 'package:carting/presentation/views/auto_repair/workshops_view.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
 class AutoRepairView extends StatelessWidget {
-  const AutoRepairView({super.key});
+  const AutoRepairView({
+    super.key,
+    this.isCreate = false,
+  });
+  final bool isCreate;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +34,17 @@ class AutoRepairView extends StatelessWidget {
                 title: const Text("Ustaxonalar"),
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const WorkshopsView(),
-                  ));
+                  if (isCreate) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AnnouncementCreateView(
+                        filter: TypeOfServiceEnum.workshops,
+                      ),
+                    ));
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const WorkshopsView(),
+                    ));
+                  }
                 },
               ),
             ),
@@ -48,7 +62,7 @@ class AutoRepairView extends StatelessWidget {
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const MastersTypeView(),
+                    builder: (context) => const MastersTypeView(isCreate: true),
                   ));
                 },
               ),

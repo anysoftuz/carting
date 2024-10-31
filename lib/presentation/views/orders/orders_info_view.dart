@@ -42,7 +42,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                       "Yukinggiz allaqachon yo’lda!",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: green,
                       ),
                     ),
@@ -260,7 +260,7 @@ class OrdersInfoTile extends StatelessWidget {
           subtitle,
           style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ],

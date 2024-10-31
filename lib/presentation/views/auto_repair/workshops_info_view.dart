@@ -68,7 +68,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     "AVTOritet",
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
@@ -101,7 +101,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                 "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark.withOpacity(.3),
                 ),
               ),
@@ -119,7 +119,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   "Toifalar",
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: dark.withOpacity(.4),
                   ),
                 ),
@@ -145,7 +145,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                         list2[index],
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -166,7 +166,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   "Xizmatlar",
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: dark.withOpacity(.4),
                   ),
                 ),
@@ -192,7 +192,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                         list2[index],
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -212,7 +212,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     width: 24,
                   ),
                   title: const Text(
-                    "IzoToshkent, Yakkasaroy tumanihlar",
+                    "Toshkent, Yakkasaroy tumanihlar",
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),

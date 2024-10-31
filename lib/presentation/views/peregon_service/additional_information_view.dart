@@ -72,7 +72,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(
@@ -90,7 +90,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(
@@ -108,7 +108,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(
@@ -126,7 +126,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(
@@ -144,7 +144,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(
@@ -163,7 +163,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 minVerticalPadding: 0,
                 titleTextStyle: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitleTextStyle: TextStyle(

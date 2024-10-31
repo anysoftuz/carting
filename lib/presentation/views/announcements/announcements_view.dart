@@ -1,8 +1,11 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/presentation/views/announcements/announcements_type_view.dart';
+import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/home/deliver_info_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
+import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
 
@@ -20,17 +23,39 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+              builder: (context) => const FilterView(),
+            ));
+          },
+          icon: AppIcons.filter.svg(),
+        ),
         title: const Text("E’lonlar"),
         bottom: PreferredSize(
-          preferredSize: const Size(double.infinity, 64),
+          preferredSize: const Size(double.infinity, 72),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
             child: CustomTextField(
               prefixIcon: AppIcons.searchNormal.svg(),
               hintText: "Kerakli e’lonni qidiring",
             ),
           ),
         ),
+        actions: [
+          WButton(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                builder: (context) => const AnnouncementsTypeView(),
+              ));
+            },
+            height: 40,
+            width: 40,
+            borderRadius: 12,
+            child: AppIcons.addCircle.svg(),
+          ),
+          const SizedBox(width: 12),
+        ],
       ),
       body: DefaultTabController(
         length: 3,
@@ -45,8 +70,8 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
                       isScrollable: true,
                       tabs: [
                         Text("Barchasi"),
-                        Text("Mening buyurtmalarim"),
-                        Text("Mening xizmatlarim"),
+                        Text("Buyurtmalarim"),
+                        Text("Xizmatlarim"),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -131,7 +156,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
                                   : selectedUnit2,
                               style: const TextStyle(
                                 fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                             AppIcons.arrowBottom.svg(),
@@ -201,7 +226,7 @@ class AnnouncementsIteam extends StatelessWidget {
                         "Faol",
                         style: TextStyle(
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                           color: green,
                         ),
                       ),

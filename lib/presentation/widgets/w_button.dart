@@ -77,7 +77,7 @@ class WButton extends StatelessWidget {
                       height: 1.36,
                       color: textColor,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                 child: child ??
                     Text(

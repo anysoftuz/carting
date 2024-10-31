@@ -135,7 +135,7 @@ class DeliverInfoView extends StatelessWidget {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -169,7 +169,7 @@ class DeliverInfoView extends StatelessWidget {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -217,7 +217,7 @@ class DeliverInfoView extends StatelessWidget {
                           "160 kg",
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color: dark,
                           ),
                         ),
@@ -255,7 +255,7 @@ class DeliverInfoView extends StatelessWidget {
                               "14.08.2024",
                               style: TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w400,
                                 color: dark,
                               ),
                             ),
@@ -283,7 +283,7 @@ class DeliverInfoView extends StatelessWidget {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text(
@@ -311,7 +311,7 @@ class DeliverInfoView extends StatelessWidget {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 trailing: AppImages.truck.imgAsset(),

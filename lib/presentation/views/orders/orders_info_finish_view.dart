@@ -58,7 +58,7 @@ class _OrdersInfoFinshViewState extends State<OrdersInfoFinshView> {
                     "Yukinggiz yetkazildi!",
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       color: green,
                     ),
                   ),

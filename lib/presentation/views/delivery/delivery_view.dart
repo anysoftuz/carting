@@ -69,7 +69,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -114,7 +114,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                       "Toshkent, Yakkasaroy tumani",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         color: dark,
                       ),
                     ),
@@ -286,7 +286,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 subtitle: const Text(
@@ -314,7 +314,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: dark,
                 ),
                 trailing: AppImages.truck.imgAsset(),

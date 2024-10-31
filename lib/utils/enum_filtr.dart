@@ -30,3 +30,15 @@ enum FilterType {
   contact,
   status
 }
+
+enum TypeOfServiceEnum {
+  shipping,
+  transportationOfPassengers,
+  specialTechnique,
+  transportRental,
+  workshops,
+  masters,
+  transportTransfer,
+  storageInWarehouse,
+  fuelDelivery;
+}

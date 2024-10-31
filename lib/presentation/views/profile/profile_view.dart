@@ -54,7 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
                           "Asror Imomqulov",
                           style: TextStyle(
                             fontSize: 24,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         const Text(
@@ -281,7 +281,7 @@ class WListTile extends StatelessWidget {
           title,
           style: const TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
         trailing: trailing ?? AppIcons.chevronRight.svg(),

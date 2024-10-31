@@ -63,17 +63,24 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
       bottomNavigationBar: WBottomPadding(
         child: WButton(
           onTap: () {
-            if (widget.filter == TypeOfServiceEnum.transportRental) {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    const CarsRenatlDitealsView(myAnnouncement: true),
-              ));
+            if (images.isNotEmpty) {
+              if (widget.filter == TypeOfServiceEnum.transportRental) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      const CarsRenatlDitealsView(myAnnouncement: true),
+                ));
+              } else {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AnnouncementsCreateInfoView(
+                    filter: widget.filter,
+                    images: images,
+                  ),
+                ));
+              }
             } else {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AnnouncementsCreateInfoView(
-                  filter: widget.filter,
-                ),
-              ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Rasim qo'shing")),
+              );
             }
           },
           text: "Joylash",
@@ -377,6 +384,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                               child: WTextField(
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
+                                keyboardType: TextInputType.number,
+                                formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -397,6 +406,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                               child: WTextField(
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
+                                keyboardType: TextInputType.number,
+                                formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -417,6 +428,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                               child: WTextField(
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
+                                keyboardType: TextInputType.number,
+                                formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -882,6 +895,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         WTextField(
                           title: 'Narx',
                           hintText: 'Narxni kiriting',
+                          keyboardType: TextInputType.number,
+                          formatter: [Formatters.numberFormat],
                           onChanged: (value) {},
                         ),
                       ],

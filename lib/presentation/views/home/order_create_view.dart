@@ -7,6 +7,7 @@ import 'package:carting/data/models/car_model.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
+import 'package:carting/utils/formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -347,10 +348,11 @@ class _OrderCreateViewState extends State<OrderCreateView> {
             suffixIcon: AppIcons.arrowBottom.svg(),
           ),
           const SizedBox(height: 16),
-          const CustomTextField(
+          CustomTextField(
             title: "Narx (so’m)",
             hintText: "450 000 - 630 000",
             keyboardType: TextInputType.number,
+            formatter: [Formatters.numberFormat],
           ),
           const SizedBox(height: 16),
           WButton(

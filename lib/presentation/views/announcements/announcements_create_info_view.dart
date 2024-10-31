@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -9,8 +11,13 @@ import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementsCreateInfoView extends StatefulWidget {
-  const AnnouncementsCreateInfoView({super.key, required this.filter});
+  const AnnouncementsCreateInfoView({
+    super.key,
+    required this.filter,
+    required this.images,
+  });
   final TypeOfServiceEnum filter;
+  final List<File> images;
 
   @override
   State<AnnouncementsCreateInfoView> createState() =>
@@ -19,12 +26,6 @@ class AnnouncementsCreateInfoView extends StatefulWidget {
 
 class _AnnouncementsCreateInfoViewState
     extends State<AnnouncementsCreateInfoView> {
-  List<String> list = [
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
-    AppImages.mask,
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +48,9 @@ class _AnnouncementsCreateInfoViewState
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: PageView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => Image.asset(
-                  list[index],
+                itemCount: widget.images.length,
+                itemBuilder: (context, index) => Image.file(
+                  widget.images[index],
                   fit: BoxFit.cover,
                 ),
               ),

@@ -166,7 +166,6 @@ class _OrdersInfoDeliverViewState extends State<OrdersInfoDeliverView> {
                 Expanded(
                   child: WButton(
                     onTap: () {
-                      print("Nima gap");
                       showModalBottomSheet(
                         context: context,
                         backgroundColor: white,

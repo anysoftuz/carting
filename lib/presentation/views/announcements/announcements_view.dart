@@ -16,9 +16,29 @@ class AnnouncementsView extends StatefulWidget {
   State<AnnouncementsView> createState() => _AnnouncementsViewState();
 }
 
-class _AnnouncementsViewState extends State<AnnouncementsView> {
+class _AnnouncementsViewState extends State<AnnouncementsView>
+    with SingleTickerProviderStateMixin {
   String selectedUnit = 'Barchasi';
   String selectedUnit2 = 'Barchasi';
+
+  late TabController _tabController;
+  ValueNotifier<int> tabIndex = ValueNotifier(0);
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: 3);
+    _tabController.addListener(() {
+      tabIndex.value = _tabController.index;
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,91 +63,102 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
           ),
         ),
         actions: [
-          WButton(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                builder: (context) => const AnnouncementsTypeView(),
-              ));
+          ValueListenableBuilder(
+            valueListenable: tabIndex,
+            builder: (context, value, __) {
+              return AnimatedCrossFade(
+                firstChild: WButton(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => const AnnouncementsTypeView(),
+                    ));
+                  },
+                  height: 40,
+                  width: 40,
+                  borderRadius: 12,
+                  child: AppIcons.addCircle.svg(),
+                ),
+                secondChild: const SizedBox(),
+                alignment: Alignment.center,
+                crossFadeState: value == 0
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 200),
+                reverseDuration: const Duration(milliseconds: 200),
+              );
             },
-            height: 40,
-            width: 40,
-            borderRadius: 12,
-            child: AppIcons.addCircle.svg(),
           ),
           const SizedBox(width: 12),
         ],
       ),
-      body: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    WTabBar(
-                      isScrollable: true,
-                      tabs: [
-                        Text("Barchasi"),
-                        Text("Buyurtmalarim"),
-                        Text("Xizmatlarim"),
-                      ],
-                    ),
-                  ],
-                ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  WTabBar(
+                    isScrollable: true,
+                    tabController: _tabController,
+                    tabs: const [
+                      Text("Barchasi"),
+                      Text("Buyurtmalarim"),
+                      Text("Xizmatlarim"),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ],
-          body: TabBarView(
-            children: [
-              ListView.separated(
-                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    Navigator.of(context, rootNavigator: true)
-                        .push(MaterialPageRoute(
-                      builder: (context) => const DeliverInfoView(),
-                    ));
-                  },
-                  child: const AnnouncementsIteam(isPrice: true),
-                ),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16),
-                itemCount: 12,
-              ),
-              ListView.separated(
-                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    Navigator.of(context, rootNavigator: true)
-                        .push(MaterialPageRoute(
-                      builder: (context) => const DeliverInfoView(),
-                    ));
-                  },
-                  child: const AnnouncementsIteam(),
-                ),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16),
-                itemCount: 12,
-              ),
-              ListView.separated(
-                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    Navigator.of(context, rootNavigator: true)
-                        .push(MaterialPageRoute(
-                      builder: (context) => const DeliverInfoView(),
-                    ));
-                  },
-                  child: const AnnouncementsIteam(),
-                ),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16),
-                itemCount: 12,
-              ),
-            ],
           ),
+        ],
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            ListView.separated(
+              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .push(MaterialPageRoute(
+                    builder: (context) => const DeliverInfoView(),
+                  ));
+                },
+                child: const AnnouncementsIteam(isPrice: true),
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemCount: 12,
+            ),
+            ListView.separated(
+              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .push(MaterialPageRoute(
+                    builder: (context) => const DeliverInfoView(),
+                  ));
+                },
+                child: const AnnouncementsIteam(),
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemCount: 12,
+            ),
+            ListView.separated(
+              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .push(MaterialPageRoute(
+                    builder: (context) => const DeliverInfoView(),
+                  ));
+                },
+                child: const AnnouncementsIteam(),
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemCount: 12,
+            ),
+          ],
         ),
       ),
     );

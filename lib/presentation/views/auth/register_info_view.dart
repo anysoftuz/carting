@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -68,7 +69,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                 context.go(AppRouteName.home);
               },
               margin: const EdgeInsets.symmetric(horizontal: 16),
-              text: "Ro‘yxatdan o‘tish",
+              text: AppLocalizations.of(context)!.register,
             ),
           ],
         ),
@@ -98,19 +99,19 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                 ]
               : [
                   CustomTextField(
-                    title: 'Ism',
+                    title: AppLocalizations.of(context)!.firstName,
                     hintText: "Ismingizni kiriting",
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    title: 'Familiya',
+                    title: AppLocalizations.of(context)!.lastName,
                     hintText: "Familiyangizni kiriting",
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    title: 'Telefon',
+                    title: AppLocalizations.of(context)!.phoneNumer,
                     hintText: "+998",
                     onChanged: (value) {},
                   ),

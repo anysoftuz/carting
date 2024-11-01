@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -140,7 +141,7 @@ class _WClaendarState extends State<WClaendar> {
                 onTap: () {
                   Navigator.pop(context, _selectedDay);
                 },
-                text: "Saqlash",
+                text: AppLocalizations.of(context)!.save,
               )
             ],
           ),

@@ -5,10 +5,12 @@ class StorageKeys {
 
   static const FIRST_TIME_WATCH_REEL = 'is_first_time_watch_reel';
   static const CHUCK = 'chuck';
+  static const MODE = 'mode';
   static const LANGUAGE = 'language';
   static const TOKEN = 'token';
   static const REFRESH = 'refresh';
   static const ON_BOARDING = 'onboarding';
+  static const ORGID = 'org_id';
   static const SEARCH_HISTORY = 'search_history';
   static const USER_CURRENT_LOCATION = 'user_current_location';
   static const CACHED_PRODUCTS_LIST = 'cached_persons_list';
@@ -29,8 +31,8 @@ class StorageKeys {
   static const PRSTATUS = 'prstatus';
   static const FINANCE = 'finance';
   static const PAYMENTS = 'payment';
-  static const KSPECIAL = 'kspecial';
-  static const KPI = 'kpi';
+  static const deviceModel = 'deviceModel';
+  static const deviceId = 'deviceId';
   static const ACCOUNTS = 'accounts';
   static const ProcessStatus = 'processtatus';
   static const CUPONS = 'cupons';

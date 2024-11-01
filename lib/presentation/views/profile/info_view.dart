@@ -1,3 +1,4 @@
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 class InfoView extends StatefulWidget {
@@ -11,7 +12,7 @@ class _InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Biz haqimizda")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.aboutUs)),
       body: const SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(

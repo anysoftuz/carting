@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
@@ -55,7 +56,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
         child: WButton(
           onTap: () {},
           margin: const EdgeInsets.all(16),
-          text: "Tasdiqlash",
+          text: AppLocalizations.of(context)!.confirm,
         ),
       ),
       body: SingleChildScrollView(

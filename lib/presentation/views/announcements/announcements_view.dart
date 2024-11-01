@@ -61,12 +61,12 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
         length: 3,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-                    const WTabBar(
+                    WTabBar(
                       isScrollable: true,
                       tabs: [
                         Text("Barchasi"),
@@ -74,114 +74,59 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
                         Text("Xizmatlarim"),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    Builder(builder: (context) {
-                      return GestureDetector(
-                        onTap: () async {
-                          final RenderBox button =
-                              context.findRenderObject() as RenderBox;
-                          final RenderBox overlay = Overlay.of(context)
-                              .context
-                              .findRenderObject() as RenderBox;
-
-                          final RelativeRect position = RelativeRect.fromRect(
-                            Rect.fromPoints(
-                              button.localToGlobal(
-                                  Offset(0, button.size.height),
-                                  ancestor: overlay),
-                              button.localToGlobal(
-                                  button.size.bottomRight(Offset.zero),
-                                  ancestor: overlay),
-                            ),
-                            Offset.zero & overlay.size,
-                          );
-                          String? selected = await showMenu<String>(
-                            context: context,
-                            position: position,
-                            color: white,
-                            shadowColor: black.withOpacity(.3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            items: [
-                              'Barchasi',
-                              'Yuk tashish',
-                              'Yo‘lovchi tashish',
-                              'Maxsus texnika',
-                              'transport transferi',
-                              'Omborda saqlash'
-                            ].map((String choice) {
-                              return PopupMenuItem<String>(
-                                value: choice,
-                                height: 32,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      choice,
-                                      style: TextStyle(
-                                        color: dark.withOpacity(.3),
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    SizedBox(
-                                      height: 16,
-                                      width: 16,
-                                      child: choice == selectedUnit2
-                                          ? AppIcons.checkboxRadio.svg(
-                                              height: 16,
-                                              width: 16,
-                                            )
-                                          : AppIcons.checkboxRadioDis.svg(
-                                              height: 16,
-                                              width: 16,
-                                            ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          );
-
-                          if (selected != null) {
-                            setState(() {
-                              selectedUnit2 = selected;
-                            });
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              selectedUnit2 == 'Barchasi'
-                                  ? "Xizmatlar"
-                                  : selectedUnit2,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            AppIcons.arrowBottom.svg(),
-                          ],
-                        ),
-                      );
-                    }),
                   ],
                 ),
               ),
             ),
           ],
-          body: ListView.separated(
-            padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
-                Navigator.of(context, rootNavigator: true)
-                    .push(MaterialPageRoute(
-                  builder: (context) => const DeliverInfoView(),
-                ));
-              },
-              child: const AnnouncementsIteam(),
-            ),
-            separatorBuilder: (context, index) => const SizedBox(height: 16),
-            itemCount: 12,
+          body: TabBarView(
+            children: [
+              ListView.separated(
+                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => const DeliverInfoView(),
+                    ));
+                  },
+                  child: const AnnouncementsIteam(isPrice: true),
+                ),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16),
+                itemCount: 12,
+              ),
+              ListView.separated(
+                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => const DeliverInfoView(),
+                    ));
+                  },
+                  child: const AnnouncementsIteam(),
+                ),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16),
+                itemCount: 12,
+              ),
+              ListView.separated(
+                padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                      builder: (context) => const DeliverInfoView(),
+                    ));
+                  },
+                  child: const AnnouncementsIteam(),
+                ),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16),
+                itemCount: 12,
+              ),
+            ],
           ),
         ),
       ),
@@ -190,9 +135,8 @@ class _AnnouncementsViewState extends State<AnnouncementsView> {
 }
 
 class AnnouncementsIteam extends StatelessWidget {
-  const AnnouncementsIteam({
-    super.key,
-  });
+  const AnnouncementsIteam({super.key, this.isPrice = false});
+  final bool isPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -213,25 +157,38 @@ class AnnouncementsIteam extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: green.withOpacity(.2),
-                      ),
-                      child: const Text(
-                        "Faol",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: green,
+                    Builder(builder: (context) {
+                      if (isPrice) {
+                        return const Text(
+                          '500 000 UZS',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: dark,
+                          ),
+                        );
+                      }
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 10,
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: green.withOpacity(.2),
+                        ),
+                        child: const Text(
+                          "Faol",
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            color: green,
+                          ),
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 8),
                     Text(
                       "Yuk tashish",
                       style: TextStyle(

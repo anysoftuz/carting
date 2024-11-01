@@ -1,7 +1,9 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/src/settings/local_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WLenguage extends StatefulWidget {
   const WLenguage({super.key});
@@ -15,22 +17,42 @@ class _WLenguageState extends State<WLenguage> {
     InfoRowMod(
       icon: AppImages.uzbekistan.imgAsset(height: 24),
       title: "Ўзбек",
+      type: 'kk',
     ),
     InfoRowMod(
       icon: AppImages.uzbekistan.imgAsset(height: 24),
       title: "O‘zbek",
+      type: 'uz',
     ),
     InfoRowMod(
       icon: AppImages.russia.imgAsset(height: 24),
       title: "Русский",
+      type: 'ru',
     ),
     InfoRowMod(
       icon: AppImages.eng.imgAsset(height: 24),
       title: "English",
+      type: 'en',
     ),
   ];
 
-  ValueNotifier<int> selIndex = ValueNotifier(1);
+  ValueNotifier<int> selectIndex = ValueNotifier(0);
+  @override
+  void initState() {
+    if (Provider.of<LocaleProvider>(context, listen: false).locale ==
+        const Locale('ru')) {
+      selectIndex.value = 2;
+    } else if (Provider.of<LocaleProvider>(context, listen: false).locale ==
+        const Locale('en')) {
+      selectIndex.value = 3;
+    } else if (Provider.of<LocaleProvider>(context, listen: false).locale ==
+        const Locale('kk')) {
+      selectIndex.value = 0;
+    } else {
+      selectIndex.value = 1;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +77,7 @@ class _WLenguageState extends State<WLenguage> {
             borderRadius: BorderRadius.circular(24),
           ),
           child: ValueListenableBuilder(
-            valueListenable: selIndex,
+            valueListenable: selectIndex,
             builder: (context, value, __) {
               return Column(
                 children: [
@@ -63,7 +85,10 @@ class _WLenguageState extends State<WLenguage> {
                     list.length,
                     (index) => ListTile(
                       onTap: () {
-                        selIndex.value = index;
+                        selectIndex.value = index;
+                        Provider.of<LocaleProvider>(context, listen: false)
+                            .setLocale(Locale(list[index].type));
+                        Navigator.pop(context);
                       },
                       leading: list[index].icon,
                       title: Text(list[index].title),
@@ -86,9 +111,11 @@ class _WLenguageState extends State<WLenguage> {
 class InfoRowMod {
   final Widget icon;
   final String title;
+  final String type;
 
   InfoRowMod({
     required this.icon,
     required this.title,
+    this.type = 'uz',
   });
 }

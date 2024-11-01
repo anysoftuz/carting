@@ -60,6 +60,7 @@ class _WThemeState extends State<WTheme> {
                     (index) => ListTile(
                       onTap: () {
                         selIndex.value = index;
+                        Navigator.pop(context);
                       },
                       leading: list[index].icon,
                       title: Text(list[index].title),

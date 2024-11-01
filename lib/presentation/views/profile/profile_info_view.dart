@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +35,14 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Profile")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.personalInformation),
+      ),
       bottomNavigationBar: SafeArea(
         child: WButton(
           margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           onTap: () {},
-          text: "Saqlash",
+          text: AppLocalizations.of(context)!.save,
         ),
       ),
       body: ListView(

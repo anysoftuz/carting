@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 class FilterView extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FilterViewState extends State<FilterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Filter"),
+        title: Text(AppLocalizations.of(context)!.filter),
         actions: [
           TextButton(
             onPressed: () {},

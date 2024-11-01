@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/auth/identity_choose_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -137,7 +138,7 @@ class _SmsViewState extends State<SmsView> {
                   context.go(AppRouteName.home);
                 }
               },
-              text: "Tasdiqlash",
+              text: AppLocalizations.of(context)!.confirm,
             ),
             const SizedBox(height: 24),
             Row(

@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
@@ -42,7 +43,7 @@ class _TransportTransferCreateViewState
             Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
-          text: "Ro‘yxatdan o‘tish",
+          text: AppLocalizations.of(context)!.register,
         ),
       ),
       body: SingleChildScrollView(

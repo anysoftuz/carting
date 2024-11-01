@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/auth/sms_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
@@ -32,9 +33,9 @@ class _RegisterViewState extends State<RegisterView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Ro‘yxatdan o‘tish",
-              style: TextStyle(
+             Text(
+              AppLocalizations.of(context)!.register,
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w600,
               ),

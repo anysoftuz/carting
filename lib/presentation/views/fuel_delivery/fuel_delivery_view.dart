@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -25,7 +26,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
             Navigator.of(context).pop();
           },
           margin: const EdgeInsets.all(16),
-          text: "Tasdiqlash",
+          text: AppLocalizations.of(context)!.confirm,
         ),
       ),
       body: SingleChildScrollView(

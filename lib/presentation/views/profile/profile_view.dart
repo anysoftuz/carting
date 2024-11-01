@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/profile/call_view.dart';
 import 'package:carting/presentation/views/profile/info_view.dart';
@@ -84,10 +85,11 @@ class _ProfileViewState extends State<ProfileView> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       AppIcons.user.svg(),
-                                      const Text(
-                                        "Shaxsiy ma'lumotlar",
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .personalInformation,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -114,14 +116,15 @@ class _ProfileViewState extends State<ProfileView> {
                                   ),
                                   padding: const EdgeInsets.all(12),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       AppIcons.support.svg(),
-                                      const Text(
-                                        "Qo'llab quvvatlash",
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        AppLocalizations.of(context)!.support,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        maxLines: 2,
+                                        style: const TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -147,14 +150,16 @@ class _ProfileViewState extends State<ProfileView> {
                                   ),
                                   padding: const EdgeInsets.all(12),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       AppIcons.question.svg(),
-                                      const Text(
-                                        "Ko'p beriladigan savollar",
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .frequentlyAskedQuestions,
+                                        maxLines: 2,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -181,7 +186,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 16),
             WListTile(
-              title: "Sozlamalar",
+              title: AppLocalizations.of(context)!.settings,
               leading: AppIcons.setting.svg(height: 28, width: 28),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -191,7 +196,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 8),
             WListTile(
-              title: "Ilovani baholang",
+              title: AppLocalizations.of(context)!.rateTheApp,
               leading: AppIcons.lovely.svg(height: 28, width: 28),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -201,7 +206,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 8),
             WListTile(
-              title: "Mavzu",
+              title: AppLocalizations.of(context)!.theme,
               leading: AppIcons.moon.svg(height: 28, width: 28),
               onTap: () {
                 showModalBottomSheet(
@@ -214,7 +219,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 8),
             WListTile(
-              title: "Til",
+              title: AppLocalizations.of(context)!.lenguage,
               leading: AppIcons.language.svg(height: 28, width: 28),
               onTap: () {
                 showModalBottomSheet(
@@ -227,7 +232,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 8),
             WListTile(
-              title: "Biz haqimizda",
+              title: AppLocalizations.of(context)?.aboutUs ?? '--',
               leading: AppIcons.info.svg(height: 28, width: 28),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -237,7 +242,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 8),
             WListTile(
-              title: "Chiqish",
+              title: AppLocalizations.of(context)!.logOut,
               leading: AppIcons.turnOff.svg(height: 28, width: 28),
               onTap: () {
                 context.go(AppRouteName.auth);

@@ -4,6 +4,7 @@ import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/data/models/send_code_body.dart';
 import 'package:carting/data/models/send_code_model.dart';
 import 'package:carting/data/models/user_model.dart';
+import 'package:carting/data/models/user_update_model.dart';
 import 'package:carting/data/models/verify_body.dart';
 import 'package:carting/infrastructure/repo/auth_repo.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
@@ -24,6 +25,24 @@ enum AuthenticationStatus {
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _repository;
   AuthBloc(this._repository) : super(const AuthState()) {
+    on<UpdateUserEvent>((event, emit) async {
+      emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
+      final response = await _repository.userUpdate(
+        UserUpdateModel(
+          firstName: event.name,
+          lastName: event.lastName,
+          userType:
+              state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type,
+          phoneNumber: event.phone,
+        ),
+      );
+      if (response.isRight) {
+        emit(state.copyWith(statusSms: FormzSubmissionStatus.success));
+        add(GetMeEvent());
+      } else {
+        emit(state.copyWith(statusSms: FormzSubmissionStatus.failure));
+      }
+    });
     on<CheckUserEvent>((event, emit) {
       final token = StorageRepository.getString(StorageKeys.TOKEN);
       if (token.isEmpty) {

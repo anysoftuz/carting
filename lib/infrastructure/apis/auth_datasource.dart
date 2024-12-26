@@ -87,8 +87,9 @@ class AuthDataSourcheImpl implements AuthDatasourche {
   Future<bool> userUpdate(UserUpdateModel body) {
     return _handle.apiCantrol(
       request: () {
-        return dioAuth.get(
+        return dioAuth.put(
           'user',
+          data: body.toJson(),
           options: Options(
             headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
                 ? {

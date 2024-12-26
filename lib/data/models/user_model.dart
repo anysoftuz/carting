@@ -18,11 +18,11 @@ class UserModel {
   @JsonKey(name: "username")
   final String username;
   @JsonKey(name: "full_name")
-  final dynamic fullName;
+  final String fullName;
   @JsonKey(name: "first_name")
-  final dynamic firstName;
+  final String firstName;
   @JsonKey(name: "last_name")
-  final dynamic lastName;
+  final String lastName;
   @JsonKey(name: "phone_number")
   final String phoneNumber;
   @JsonKey(name: "type")

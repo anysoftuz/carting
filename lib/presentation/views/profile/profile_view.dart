@@ -8,6 +8,7 @@ import 'package:carting/presentation/views/profile/info_view.dart';
 import 'package:carting/presentation/views/profile/quest_view.dart';
 import 'package:carting/presentation/widgets/w_lenguage.dart';
 import 'package:carting/presentation/widgets/w_theme.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -42,139 +43,151 @@ class _ProfileViewState extends State<ProfileView> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  Container(
-                    height: 260,
-                    width: double.infinity,
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: white,
-                    ),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        const Text(
-                          "Asror Imomqulov",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                          ),
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return Container(
+                        height: 260,
+                        width: double.infinity,
+                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(32),
+                          color: white,
                         ),
-                        const Text(
-                          "+998 99 844 13 54",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Row(
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  context.push(AppRouteName.profileInfo);
-                                },
-                                child: Container(
-                                  height: 84,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(24),
-                                    color: scaffoldSecondaryBackground,
-                                  ),
-                                  padding: const EdgeInsets.all(12),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      AppIcons.user.svg(),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .personalInformation,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                            const Spacer(),
+                            Text(
+                              state.userModel.fullName.isEmpty
+                                  ? "Tanitilmagan"
+                                  : state.userModel.fullName,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .push(MaterialPageRoute(
-                                    builder: (context) => const CallView(),
-                                  ));
-                                },
-                                child: Container(
-                                  height: 84,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(24),
-                                    color: scaffoldSecondaryBackground,
-                                  ),
-                                  padding: const EdgeInsets.all(12),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      AppIcons.support.svg(),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        AppLocalizations.of(context)!.support,
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                            Text(
+                              MyFunction.formatPhoneNumber(
+                                state.userModel.phoneNumber,
+                              ),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const QuestView(),
-                                  ));
-                                },
-                                child: Container(
-                                  height: 84,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(24),
-                                    color: scaffoldSecondaryBackground,
-                                  ),
-                                  padding: const EdgeInsets.all(12),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      AppIcons.question.svg(),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .frequentlyAskedQuestions,
-                                        maxLines: 2,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                        ),
+                            const SizedBox(height: 24),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      context.push(AppRouteName.profileInfo);
+                                    },
+                                    child: Container(
+                                      height: 84,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        color: scaffoldSecondaryBackground,
                                       ),
-                                    ],
+                                      padding: const EdgeInsets.all(12),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AppIcons.user.svg(),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .personalInformation,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => const CallView(),
+                                      ));
+                                    },
+                                    child: Container(
+                                      height: 84,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        color: scaffoldSecondaryBackground,
+                                      ),
+                                      padding: const EdgeInsets.all(12),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          AppIcons.support.svg(),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .support,
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => const QuestView(),
+                                      ));
+                                    },
+                                    child: Container(
+                                      height: 84,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        color: scaffoldSecondaryBackground,
+                                      ),
+                                      padding: const EdgeInsets.all(12),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          AppIcons.question.svg(),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .frequentlyAskedQuestions,
+                                            maxLines: 2,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
                   const Positioned(
                     top: 0,

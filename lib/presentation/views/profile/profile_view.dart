@@ -1,3 +1,4 @@
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
@@ -8,6 +9,7 @@ import 'package:carting/presentation/views/profile/quest_view.dart';
 import 'package:carting/presentation/widgets/w_lenguage.dart';
 import 'package:carting/presentation/widgets/w_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileView extends StatefulWidget {
@@ -245,7 +247,7 @@ class _ProfileViewState extends State<ProfileView> {
               title: AppLocalizations.of(context)!.logOut,
               leading: AppIcons.turnOff.svg(height: 28, width: 28),
               onTap: () {
-                context.go(AppRouteName.auth);
+                context.read<AuthBloc>().add(LogOutEvent());
               },
             ),
             const SizedBox(height: 120),

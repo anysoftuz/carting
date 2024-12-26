@@ -1,25 +1,35 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/send_code_model.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/auth/identity_choose_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:pinput/pinput.dart';
 
 class SmsView extends StatefulWidget {
-  const SmsView({super.key, required this.isRegister});
+  const SmsView({
+    super.key,
+    required this.isRegister,
+    required this.model,
+    required this.phone,
+  });
   final bool isRegister;
+  final SendCodeModel model;
+  final String phone;
 
   @override
   State<SmsView> createState() => _SmsViewState();
 }
 
 class _SmsViewState extends State<SmsView> {
+  late TextEditingController controller;
   ValueNotifier<int> start = ValueNotifier(60);
   late Timer _timer;
   void startTimer() {
@@ -38,7 +48,15 @@ class _SmsViewState extends State<SmsView> {
   }
 
   @override
+  void initState() {
+    controller = TextEditingController(text: widget.model.securityCode);
+    super.initState();
+    startTimer();
+  }
+
+  @override
   void dispose() {
+    controller.delete();
     _timer.cancel();
     super.dispose();
   }
@@ -47,12 +65,6 @@ class _SmsViewState extends State<SmsView> {
     int minutes = start.value ~/ 60;
     int seconds = start.value % 60;
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startTimer();
   }
 
   @override
@@ -95,6 +107,7 @@ class _SmsViewState extends State<SmsView> {
             Directionality(
               textDirection: TextDirection.ltr,
               child: Pinput(
+                controller: controller,
                 separatorBuilder: (index) => const SizedBox(width: 8),
                 defaultPinTheme: PinTheme(
                   height: 56,
@@ -106,7 +119,9 @@ class _SmsViewState extends State<SmsView> {
                   padding: const EdgeInsets.all(8),
                 ),
                 validator: (value) {
-                  return value == '2222' ? null : 'Pin is incorrect';
+                  return value == widget.model.securityCode
+                      ? null
+                      : 'Pin is incorrect';
                 },
                 hapticFeedbackType: HapticFeedbackType.lightImpact,
                 onCompleted: (pin) {
@@ -114,6 +129,9 @@ class _SmsViewState extends State<SmsView> {
                 },
                 onChanged: (value) {
                   debugPrint('onChanged: $value');
+                  if (value.length > 2) {
+                    setState(() {});
+                  }
                 },
                 cursor: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -128,17 +146,29 @@ class _SmsViewState extends State<SmsView> {
               ),
             ),
             const SizedBox(height: 40),
-            WButton(
-              onTap: () {
-                if (widget.isRegister) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const IdentityChooseView(),
-                  ));
-                } else {
-                  context.go(AppRouteName.home);
-                }
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return WButton(
+                  onTap: () {
+                    context.read<AuthBloc>().add(VerifyEvent(
+                          phone: widget.phone,
+                          onError: () {},
+                          onSucces: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const IdentityChooseView(),
+                            ));
+                          },
+                          sessionToken: widget.model.sessionToken,
+                          securityCode: widget.model.securityCode,
+                          isLogin: !widget.isRegister,
+                        ));
+                  },
+                  isLoading: state.statusSms.isInProgress,
+                  isDisabled:
+                      controller.text.isEmpty || controller.text.length < 4,
+                  text: AppLocalizations.of(context)!.confirm,
+                );
               },
-              text: AppLocalizations.of(context)!.confirm,
             ),
             const SizedBox(height: 24),
             Row(

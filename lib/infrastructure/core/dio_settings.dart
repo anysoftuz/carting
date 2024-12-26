@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 class DioSettings {
   BaseOptions _dioBaseOptions = BaseOptions(
-    baseUrl: "https://api.gettest.uz/api",
+    baseUrl: "https://api.carting.uz/api/mobile/v1/",
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
@@ -16,7 +16,7 @@ class DioSettings {
 
   void setBaseOptions({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: "https://api.gettest.uz/api",
+      baseUrl: "https://api.carting.uz/api/mobile/v1/",
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{},
@@ -26,7 +26,7 @@ class DioSettings {
   }
 
   final BaseOptions _dioBaseOptionsForAuth = BaseOptions(
-    baseUrl: "https://api.gettest.uz/api",
+    baseUrl: "https://api.carting.uz/api/mobile/v1/",
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
@@ -36,7 +36,7 @@ class DioSettings {
 
   void setBaseOptionsForAuth({String? lang}) {
     _dioBaseOptions = BaseOptions(
-      baseUrl: "https://api.gettest.uz/api",
+      baseUrl: "https://api.carting.uz/api/mobile/v1/",
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
       headers: <String, dynamic>{},

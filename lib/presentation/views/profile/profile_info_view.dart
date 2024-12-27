@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/utils/log_service.dart';
+import 'package:carting/utils/resize_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,13 +31,18 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   late TextEditingController controllerLastName;
   late TextEditingController controllerFullName;
   late TextEditingController controllerPhone;
+  late TextEditingController controllerTG;
   File? images;
 
   void imagesFile() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
-      images = File(image.path);
+      final images2 = File(image.path);
+      final compressedFile = await resizeAndCompressImage(images2, 1000000);
+      images = compressedFile;
+      Log.i('Siqilgan fayl: ${await convertFileToBase64(images)}');
+      print('Yangi hajmi: ${compressedFile.lengthSync()} bayt');
       setState(() {});
     } on PlatformException catch (e) {
       debugPrint(e.toString());
@@ -56,9 +64,29 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
         context.read<AuthBloc>().state.userModel.phoneNumber,
       ),
     );
+    controllerTG = TextEditingController();
 
     // controllerName = TextEditingController(text: context.read<AuthBloc>().state.userModel.lastName);
     super.initState();
+  }
+
+  Future<String?> convertFileToBase64(File? file) async {
+    if (file == null) {
+      return null; // Agar fayl bo'lmasa, null qaytaramiz
+    }
+
+    try {
+      // Faylni o'qib, Uint8List ga o'zgartirish
+      final bytes = await file.readAsBytes();
+
+      // Base64 formatga o‘tkazish
+      final base64String = base64Encode(bytes);
+
+      return base64String;
+    } catch (e) {
+      Log.i('Error while converting to base64: $e');
+      return null; // Xatolik yuz bersa, null qaytaramiz
+    }
   }
 
   @override
@@ -72,15 +100,19 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           builder: (context, state) {
             return WButton(
               margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              onTap: () {
-                context.read<AuthBloc>().add(UpdateUserEvent(
-                      name: controllerName.text,
-                      lastName: controllerLastName.text,
-                      phone: MyFunction.convertPhoneNumber(
-                        controllerPhone.text,
-                      ),
-                      onSucces: () {},
-                    ));
+              onTap: () async {
+                final text = await convertFileToBase64(images);
+                await Clipboard.setData(ClipboardData(text: text ?? ""));
+                // context.read<AuthBloc>().add(UpdateUserEvent(
+                //   name: controllerName.text,
+                //   lastName: controllerLastName.text,
+                //   phone: MyFunction.convertPhoneNumber(
+                //     controllerPhone.text,
+                //   ),
+                //   images: await convertFileToBase64(images),
+                //   tgName: controllerTG.text,
+                //   onSucces: () {},
+                // ));
               },
               isLoading: state.statusSms.isInProgress,
               text: AppLocalizations.of(context)!.save,
@@ -96,13 +128,22 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
               height: 100,
               child: Stack(
                 children: [
-                  Hero(
-                    tag: "avatar",
-                    child: CircleAvatar(
-                      radius: 56,
-                      backgroundImage:
-                          images != null ? FileImage(images!) : null,
-                    ),
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return Hero(
+                        tag: "avatar",
+                        child: CircleAvatar(
+                          radius: 56,
+                          backgroundImage: images != null
+                              ? FileImage(images!)
+                              : state.userModel.photo.isEmpty
+                                  ? null
+                                  : CachedNetworkImageProvider(
+                                      'https://api.carting.uz/uploads/files/${state.userModel.photo}',
+                                    ),
+                        ),
+                      );
+                    },
                   ),
                   Positioned(
                     bottom: 0,
@@ -147,9 +188,10 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             },
           ),
           const SizedBox(height: 16),
-          const CustomTextField(
+          CustomTextField(
             title: "Telegram",
             hintText: "t.me/",
+            controller: controllerTG,
           ),
         ],
       ),

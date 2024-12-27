@@ -79,7 +79,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const Divider(height: 1),
@@ -97,7 +97,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const Divider(height: 1),
@@ -115,7 +115,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const Divider(height: 1),
@@ -133,7 +133,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const WTitle(title: "Yuklash xizmati"),
@@ -151,7 +151,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const Divider(height: 1),
@@ -170,7 +170,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                 subtitleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const WTitle(title: "Yuk rasmlari (10 tagacha)"),

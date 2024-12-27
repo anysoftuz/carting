@@ -63,7 +63,7 @@ class WButton extends StatelessWidget {
         padding: padding ?? EdgeInsets.zero,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isDisabled ? green.withOpacity(.3) : color ?? green,
+          color: isDisabled ? green.withValues(alpha: .3) : color ?? green,
           borderRadius: BorderRadius.circular(borderRadius),
           border: border,
           gradient: isDisabled ? null : gradient,

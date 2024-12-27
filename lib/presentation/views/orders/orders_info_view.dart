@@ -28,7 +28,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
           if (widget.isDelivery)
             Container(
               decoration: BoxDecoration(
-                color: green.withOpacity(.2),
+                color: green.withValues(alpha: .2),
                 borderRadius: BorderRadius.circular(20),
               ),
               margin: const EdgeInsets.only(bottom: 16),
@@ -135,7 +135,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
             const SizedBox(height: 16),
             WButton(
               onTap: () {},
-              color: red.withOpacity(.2),
+              color: red.withValues(alpha: .2),
               textColor: red,
               text: "Buyurtmani bekor qilish",
             ),
@@ -210,7 +210,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                 Expanded(
                   child: WButton(
                     onTap: () {},
-                    color: red.withOpacity(.2),
+                    color: red.withValues(alpha: .2),
                     textColor: red,
                     text: "Bekor qilish",
                   ),

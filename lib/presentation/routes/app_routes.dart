@@ -1,3 +1,6 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/service_locator.dart';
+import 'package:carting/infrastructure/repo/advertisement_repo.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/announcements_view.dart';
 import 'package:carting/presentation/views/auth/auth_view.dart';
@@ -14,6 +17,7 @@ import 'package:carting/presentation/views/profile/profile_info_view.dart';
 import 'package:carting/presentation/views/profile/profile_view.dart';
 import 'package:carting/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 sealed class AppRouts {
@@ -21,7 +25,7 @@ sealed class AppRouts {
       GlobalKey<NavigatorState>();
   static GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRouteName.home,
+    initialLocation: AppRouteName.splash,
     errorBuilder: (context, state) => const ErrorView(),
     routes: [
       GoRoute(
@@ -92,7 +96,12 @@ sealed class AppRouts {
 
   static final mainView = StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) {
-      return MainView(navigationShell: navigationShell);
+      return BlocProvider(
+        create: (context) => AdvertisementBloc(
+          serviceLocator<AdvertisementRepo>(),
+        ),
+        child: MainView(navigationShell: navigationShell),
+      );
     },
     branches: <StatefulShellBranch>[
       StatefulShellBranch(

@@ -89,7 +89,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                                 text: "25 ta izoh",
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: dark.withOpacity(.3),
+                                  color: dark.withValues(alpha: .3),
                                 ),
                               )
                             ],
@@ -105,7 +105,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.3),
+                    color: dark.withValues(alpha: .3),
                   ),
                 ),
                 const SizedBox(height: 24),

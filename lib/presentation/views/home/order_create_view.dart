@@ -196,8 +196,9 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                       duration: const Duration(microseconds: 300),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color:
-                            value == index ? green.withOpacity(.2) : whiteSmoke,
+                        color: value == index
+                            ? green.withValues(alpha: .2)
+                            : whiteSmoke,
                         border:
                             value == index ? Border.all(color: green) : null,
                       ),
@@ -270,7 +271,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
               builder: (context, valu, __) {
                 return CupertinoSwitch(
                   value: valu,
-                  activeColor: green,
+                  activeTrackColor: green,
                   onChanged: (value) {
                     check.value = value;
                   },

@@ -81,7 +81,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                               text: "25 ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
-                                color: dark.withOpacity(.3),
+                                color: dark.withValues(alpha: .3),
                               ),
                             )
                           ],
@@ -104,7 +104,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const SizedBox(height: 16),
@@ -114,7 +114,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.3),
+                    color: dark.withValues(alpha: .3),
                   ),
                   children: const [
                     TextSpan(

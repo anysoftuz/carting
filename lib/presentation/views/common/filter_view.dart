@@ -55,7 +55,7 @@ class _FilterViewState extends State<FilterView> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withOpacity(.3),
+                      color: dark.withValues(alpha: .3),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -70,7 +70,7 @@ class _FilterViewState extends State<FilterView> {
                           color: green,
                           boxShadow: [
                             BoxShadow(
-                              color: green.withOpacity(.32),
+                              color: green.withValues(alpha: .32),
                               blurRadius: 16,
                               spreadRadius: -24,
                               offset: const Offset(0, 8),
@@ -114,7 +114,7 @@ class _FilterViewState extends State<FilterView> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withOpacity(.3),
+                      color: dark.withValues(alpha: .3),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -129,7 +129,7 @@ class _FilterViewState extends State<FilterView> {
                           color: green,
                           boxShadow: [
                             BoxShadow(
-                              color: green.withOpacity(.32),
+                              color: green.withValues(alpha: .32),
                               blurRadius: 16,
                               spreadRadius: -24,
                               offset: const Offset(0, 8),

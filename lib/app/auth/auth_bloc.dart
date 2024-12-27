@@ -25,6 +25,15 @@ enum AuthenticationStatus {
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo _repository;
   AuthBloc(this._repository) : super(const AuthState()) {
+    on<RefreshToken>((event, emit) async {
+      final result = await _repository.refreshToken();
+      if (result.isRight) {
+        add(GetMeEvent());
+      } else {
+        emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
+      }
+    });
+
     on<UpdateUserEvent>((event, emit) async {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.userUpdate(
@@ -34,6 +43,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           userType:
               state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type,
           phoneNumber: event.phone,
+          tgLink: event.tgName ?? '/test',
+          base64: event.images,
         ),
       );
       if (response.isRight) {

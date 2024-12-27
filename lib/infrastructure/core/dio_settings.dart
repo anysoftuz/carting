@@ -10,7 +10,12 @@ class DioSettings {
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
-    headers: <String, dynamic>{},
+    headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+        ? {
+            'Authorization':
+                'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+          }
+        : {},
     validateStatus: (status) => status != null && status <= 500,
   );
 

@@ -27,8 +27,12 @@ class UserModel {
   final String phoneNumber;
   @JsonKey(name: "type")
   final String type;
+  @JsonKey(name: "tg_link")
+  final String tgLink;
+  @JsonKey(name: "photo")
+  final String photo;
 
- const UserModel({
+  const UserModel({
     this.id = 0,
     this.username = '',
     this.fullName = '',
@@ -36,6 +40,8 @@ class UserModel {
     this.lastName = '',
     this.phoneNumber = '',
     this.type = '',
+    this.tgLink = '',
+    this.photo = '',
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

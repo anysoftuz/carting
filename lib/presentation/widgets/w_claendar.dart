@@ -89,7 +89,7 @@ class _WClaendarState extends State<WClaendar> {
                     cellMargin: const EdgeInsets.all(2),
                     cellPadding: EdgeInsets.zero,
                     todayDecoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.4),
+                      color: Colors.green.withValues(alpha: 0.4),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     selectedDecoration: BoxDecoration(

@@ -45,7 +45,7 @@ class _OrdersInfoFinshViewState extends State<OrdersInfoFinshView> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: green.withOpacity(.2),
+              color: green.withValues(alpha: .2),
               borderRadius: BorderRadius.circular(20),
             ),
             padding: const EdgeInsets.all(20),

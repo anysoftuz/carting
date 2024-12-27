@@ -18,6 +18,7 @@ abstract class AuthDatasourche {
   Future<ResponseModel<SendCodeModel>> sendCode(SendCodeBody body);
   Future<ResponseModel<TokenModel>> verifyPost(VerifyBody body);
   Future<bool> userUpdate(UserUpdateModel body);
+  Future<ResponseModel<TokenModel>> refreshToken();
 }
 
 class AuthDataSourcheImpl implements AuthDatasourche {
@@ -74,6 +75,24 @@ class AuthDataSourcheImpl implements AuthDatasourche {
         return dio.post(
           'phone/verify',
           data: body.toJson(),
+        );
+      },
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => TokenModel.fromJson(p0 as Map<String, dynamic>),
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<TokenModel>> refreshToken() {
+    return _handle.apiCantrol(
+      request: () {
+        return dio.post(
+          'refresh_token',
+          data: {
+            "refreshToken": StorageRepository.getString(StorageKeys.REFRESH)
+          },
         );
       },
       body: (response) => ResponseModel.fromJson(

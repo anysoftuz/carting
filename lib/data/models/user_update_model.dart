@@ -23,12 +23,18 @@ class UserUpdateModel {
   final String userType;
   @JsonKey(name: "phone_number")
   final String phoneNumber;
+  @JsonKey(name: "tg_link")
+  final String? tgLink;
+  @JsonKey(name: "base64")
+  final String? base64;
 
   UserUpdateModel({
     required this.firstName,
     required this.lastName,
     required this.userType,
     required this.phoneNumber,
+    this.tgLink,
+    this.base64,
   });
 
   factory UserUpdateModel.fromJson(Map<String, dynamic> json) =>

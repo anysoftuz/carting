@@ -88,7 +88,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                               text: "25 ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
-                                color: dark.withOpacity(.3),
+                                color: dark.withValues(alpha: .3),
                               ),
                             )
                           ],
@@ -104,7 +104,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const SizedBox(height: 12),

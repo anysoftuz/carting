@@ -15,7 +15,7 @@ class ErrorHandle {
         return body(response.data as T);
       }
       if (response.statusCode == 401) {
-        serviceLocator<AuthBloc>().add(LogOutEvent());
+        serviceLocator<AuthBloc>().add(RefreshToken());
       }
       Log.e(response.statusCode);
       throw ServerException(

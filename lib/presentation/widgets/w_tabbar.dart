@@ -39,16 +39,16 @@ class WTabBar extends StatelessWidget {
             BoxShadow(
               blurRadius: 1,
               offset: const Offset(0, 3),
-              color: black.withOpacity(0.04),
+              color: black.withValues(alpha: 0.04),
             ),
             BoxShadow(
               blurRadius: 8,
               offset: const Offset(0, 3),
-              color: black.withOpacity(0.12),
+              color: black.withValues(alpha: 0.12),
             ),
           ],
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: black.withOpacity(0.04)),
+            side: BorderSide(color: black.withValues(alpha: 0.04)),
             borderRadius: BorderRadius.circular(16),
           ),
           color: const Color(0xFF1A1F23),

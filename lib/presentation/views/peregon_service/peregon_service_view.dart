@@ -61,7 +61,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withOpacity(.3),
+                        color: dark.withValues(alpha: .3),
                       ),
                     ),
                     subtitle: const Text(
@@ -106,7 +106,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withOpacity(.3),
+                        color: dark.withValues(alpha: .3),
                       ),
                     ),
                     subtitle: const Text(
@@ -189,7 +189,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,

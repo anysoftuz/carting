@@ -86,7 +86,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                               text: "25 ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
-                                color: dark.withOpacity(.3),
+                                color: dark.withValues(alpha: .3),
                               ),
                             )
                           ],
@@ -102,7 +102,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
               ),
               const SizedBox(height: 12),
@@ -120,7 +120,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.4),
+                    color: dark.withValues(alpha: .4),
                   ),
                 ),
               ),
@@ -167,7 +167,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.4),
+                    color: dark.withValues(alpha: .4),
                   ),
                 ),
               ),

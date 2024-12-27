@@ -50,7 +50,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: dark.withOpacity(.3),
+                color: dark.withValues(alpha: .3),
               ),
               textAlign: TextAlign.center,
             ),
@@ -68,7 +68,8 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                       isLegal.value = true;
                     },
                     title: const Text("Yuridik shaxs"),
-                    titleTextStyle: TextStyle(color: dark.withOpacity(.3)),
+                    titleTextStyle:
+                        TextStyle(color: dark.withValues(alpha: .3)),
                     trailing: value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -90,7 +91,8 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                       isLegal.value = false;
                     },
                     title: const Text("Jismoniy shaxs"),
-                    titleTextStyle: TextStyle(color: dark.withOpacity(.3)),
+                    titleTextStyle:
+                        TextStyle(color: dark.withValues(alpha: .3)),
                     trailing: !value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),

@@ -100,7 +100,7 @@ class _WTextFieldState extends State<WTextField> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: darkText.withOpacity(.3),
+                    color: darkText.withValues(alpha: .3),
                   ),
                 )
               : const SizedBox(),
@@ -162,7 +162,7 @@ class _WTextFieldState extends State<WTextField> {
                     OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide(
-                        color: const Color(0xFFC2C2C2).withOpacity(.2),
+                        color: const Color(0xFFC2C2C2).withValues(alpha: .2),
                       ),
                     ),
                 enabledBorder: widget.border ??
@@ -171,7 +171,7 @@ class _WTextFieldState extends State<WTextField> {
                         widget.borderRadius ?? 16,
                       ),
                       borderSide: BorderSide(
-                        color: const Color(0xFFC2C2C2).withOpacity(.2),
+                        color: const Color(0xFFC2C2C2).withValues(alpha: .2),
                       ),
                     ),
                 focusedBorder: widget.border ??
@@ -180,16 +180,16 @@ class _WTextFieldState extends State<WTextField> {
                         widget.borderRadius ?? 16,
                       ),
                       borderSide: BorderSide(
-                        color: const Color(0xFFC2C2C2).withOpacity(.2),
+                        color: const Color(0xFFC2C2C2).withValues(alpha: .2),
                       ),
                     ),
                 hintText: widget.hintText,
                 hintStyle: widget.hintStyle ??
                     TextStyle(
-                      color: darkText.withOpacity(.3),
+                      color: darkText.withValues(alpha: .3),
                     ),
                 // hintStyle: fonts.subtitle1.copyWith(
-                //     color: colors.customBlack.withOpacity(0.5), fontSize: 14.sp),
+                //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,
                 // errorStyle: fonts.caption.copyWith(color: colors.error),
                 contentPadding:

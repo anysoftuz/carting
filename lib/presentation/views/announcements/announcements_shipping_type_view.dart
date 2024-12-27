@@ -58,7 +58,7 @@ class _AnnouncementsShippingTypeViewState
                   AppData.shippinglist[index].subTitle,
                   textAlign: TextAlign.center,
                   maxLines: 1,
-                  style: TextStyle(color: dark.withOpacity(.3)),
+                  style: TextStyle(color: dark.withValues(alpha: .3)),
                 ),
               ],
             ),

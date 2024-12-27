@@ -108,7 +108,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withOpacity(.3),
+                              color: dark.withValues(alpha: .3),
                             ),
                           ),
                           subtitle: const Text(
@@ -153,7 +153,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withOpacity(.3),
+                              color: dark.withValues(alpha: .3),
                             ),
                           ),
                           subtitle: const Text(
@@ -203,7 +203,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: dark.withOpacity(.3),
+                          color: dark.withValues(alpha: .3),
                         ),
                       ),
                       subtitle: const Text(
@@ -486,7 +486,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                         context: context,
                                         position: position,
                                         color: white,
-                                        shadowColor: black.withOpacity(.3),
+                                        shadowColor:
+                                            black.withValues(alpha: .3),
                                         menuPadding: const EdgeInsets.symmetric(
                                             vertical: 4),
                                         shape: RoundedRectangleBorder(
@@ -545,8 +546,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: const TextStyle(
                                               color: Colors.black),
                                         ),
-                                        AppIcons.arrowBottom
-                                            .svg(color: dark.withOpacity(.3)),
+                                        AppIcons.arrowBottom.svg(
+                                            color: dark.withValues(alpha: .3)),
                                       ],
                                     ),
                                   ),
@@ -607,7 +608,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -623,8 +624,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                                 color: green,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color:
-                                                        green.withOpacity(.32),
+                                                    color: green.withValues(
+                                                        alpha: .32),
                                                     blurRadius: 16,
                                                     spreadRadius: -24,
                                                     offset: const Offset(0, 8),
@@ -670,7 +671,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -686,8 +687,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                                 color: green,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color:
-                                                        green.withOpacity(.32),
+                                                    color: green.withValues(
+                                                        alpha: .32),
                                                     blurRadius: 16,
                                                     spreadRadius: -24,
                                                     offset: const Offset(0, 8),
@@ -744,7 +745,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -760,8 +761,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                                 color: green,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color:
-                                                        green.withOpacity(.32),
+                                                    color: green.withValues(
+                                                        alpha: .32),
                                                     blurRadius: 16,
                                                     spreadRadius: -24,
                                                     offset: const Offset(0, 8),

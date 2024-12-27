@@ -44,7 +44,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.3),
+                    color: dark.withValues(alpha: .3),
                   ),
                 ),
                 subtitle: const Text(
@@ -122,7 +122,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                           context: context,
                           position: position,
                           color: white,
-                          shadowColor: black.withOpacity(.3),
+                          shadowColor: black.withValues(alpha: .3),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -181,7 +181,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withOpacity(.3),
+                              color: dark.withValues(alpha: .3),
                             ),
                           ),
                           subtitle: Row(
@@ -218,7 +218,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.3),
+                    color: dark.withValues(alpha: .3),
                   ),
                 ),
                 subtitle: const Text(

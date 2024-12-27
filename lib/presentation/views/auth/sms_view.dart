@@ -98,7 +98,7 @@ class _SmsViewState extends State<SmsView> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -179,7 +179,7 @@ class _SmsViewState extends State<SmsView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withOpacity(.3),
+                    color: dark.withValues(alpha: .3),
                   ),
                 ),
                 ValueListenableBuilder(

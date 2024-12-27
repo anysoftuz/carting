@@ -27,7 +27,7 @@ class _OrdersInfoDeliverViewState extends State<OrdersInfoDeliverView> {
           if (widget.isActiv)
             Container(
               decoration: BoxDecoration(
-                color: green.withOpacity(.2),
+                color: green.withValues(alpha: .2),
                 borderRadius: BorderRadius.circular(20),
               ),
               margin: const EdgeInsets.only(bottom: 16),
@@ -178,7 +178,7 @@ class _OrdersInfoDeliverViewState extends State<OrdersInfoDeliverView> {
                         builder: (context) => const CancelView(),
                       );
                     },
-                    color: red.withOpacity(.2),
+                    color: red.withValues(alpha: .2),
                     textColor: red,
                     text: "Bekor qilish",
                   ),

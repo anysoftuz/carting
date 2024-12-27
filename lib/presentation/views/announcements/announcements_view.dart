@@ -1,13 +1,16 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcements_type_view.dart';
+import 'package:carting/presentation/views/announcements/widgets/announcements_iteam.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/home/deliver_info_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class AnnouncementsView extends StatefulWidget {
   const AnnouncementsView({super.key});
@@ -26,6 +29,9 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
 
   @override
   void initState() {
+    context.read<AdvertisementBloc>().add(GetAdvertisementsEvent());
+    context.read<AdvertisementBloc>().add(GetAdvertisementsProvideEvent());
+    context.read<AdvertisementBloc>().add(GetAdvertisementsReceiveEvent());
     super.initState();
     _tabController = TabController(vsync: this, length: 3);
     _tabController.addListener(() {
@@ -116,159 +122,138 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
         body: TabBarView(
           controller: _tabController,
           children: [
-            ListView.separated(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => const DeliverInfoView(),
-                  ));
-                },
-                child: const AnnouncementsIteam(isPrice: true),
-              ),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 12,
+            BlocBuilder<AdvertisementBloc, AdvertisementState>(
+              builder: (context, state) {
+                if (state.status.isInProgress) {
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => const WShimmer(
+                      height: 152,
+                      width: double.infinity,
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: 12,
+                  );
+                }
+                return RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    context
+                        .read<AdvertisementBloc>()
+                        .add(GetAdvertisementsEvent());
+                    Future.delayed(Duration.zero);
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .push(MaterialPageRoute(
+                          builder: (context) => DeliverInfoView(
+                            model: state.advertisement[index],
+                          ),
+                        ));
+                      },
+                      child: AnnouncementsIteam(
+                        isPrice: true,
+                        model: state.advertisement[index],
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: state.advertisement.length,
+                  ),
+                );
+              },
             ),
-            ListView.separated(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => const DeliverInfoView(),
-                  ));
-                },
-                child: const AnnouncementsIteam(),
-              ),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 12,
+            BlocBuilder<AdvertisementBloc, AdvertisementState>(
+              builder: (context, state) {
+                if (state.statusPROVIDE.isInProgress) {
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => const WShimmer(
+                      height: 152,
+                      width: double.infinity,
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: 12,
+                  );
+                }
+                return RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    context
+                        .read<AdvertisementBloc>()
+                        .add(GetAdvertisementsProvideEvent());
+                    Future.delayed(Duration.zero);
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .push(MaterialPageRoute(
+                          builder: (context) => DeliverInfoView(
+                            model: state.advertisementPROVIDE[index],
+                          ),
+                        ));
+                      },
+                      child: AnnouncementsIteam(
+                        model: state.advertisementPROVIDE[index],
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: state.advertisementPROVIDE.length,
+                  ),
+                );
+              },
             ),
-            ListView.separated(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => const DeliverInfoView(),
-                  ));
-                },
-                child: const AnnouncementsIteam(),
-              ),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 12,
+            BlocBuilder<AdvertisementBloc, AdvertisementState>(
+              builder: (context, state) {
+                if (state.statusRECEIVE.isInProgress) {
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => const WShimmer(
+                      height: 152,
+                      width: double.infinity,
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: 12,
+                  );
+                }
+                return RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    context
+                        .read<AdvertisementBloc>()
+                        .add(GetAdvertisementsReceiveEvent());
+                    Future.delayed(Duration.zero);
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .push(MaterialPageRoute(
+                          builder: (context) => DeliverInfoView(
+                            model: state.advertisementRECEIVE[index],
+                          ),
+                        ));
+                      },
+                      child: AnnouncementsIteam(
+                        model: state.advertisementRECEIVE[index],
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: state.advertisementRECEIVE.length,
+                  ),
+                );
+              },
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AnnouncementsIteam extends StatelessWidget {
-  const AnnouncementsIteam({super.key, this.isPrice = false});
-  final bool isPrice;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 152,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: white,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Builder(builder: (context) {
-                      if (isPrice) {
-                        return const Text(
-                          '500 000 UZS',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: dark,
-                          ),
-                        );
-                      }
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 10,
-                        ),
-                        margin: const EdgeInsets.only(bottom: 8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: green.withOpacity(.2),
-                        ),
-                        child: const Text(
-                          "Faol",
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            color: green,
-                          ),
-                        ),
-                      );
-                    }),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Yuk tashish",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withOpacity(.3),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              AppImages.truck.imgAsset(height: 48),
-            ],
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              const Text(
-                "Toshkent",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: AppIcons.swap.svg(),
-              ),
-              const Text(
-                "Samarqand",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "16.08.2024",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: dark.withOpacity(.3),
-            ),
-          )
-        ],
       ),
     );
   }

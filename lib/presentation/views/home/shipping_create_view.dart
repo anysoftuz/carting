@@ -63,7 +63,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withOpacity(.3),
+                        color: dark.withValues(alpha: .3),
                       ),
                     ),
                     subtitle: const Text(
@@ -108,7 +108,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withOpacity(.3),
+                        color: dark.withValues(alpha: .3),
                       ),
                     ),
                     subtitle: const Text(
@@ -176,7 +176,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       context: context,
                       position: position,
                       color: white,
-                      shadowColor: black.withOpacity(.3),
+                      shadowColor: black.withValues(alpha: .3),
                       menuPadding: const EdgeInsets.symmetric(vertical: 4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -227,7 +227,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                         selectedUnit,
                         style: const TextStyle(color: Colors.black),
                       ),
-                      AppIcons.arrowBottom.svg(color: dark.withOpacity(.3)),
+                      AppIcons.arrowBottom
+                          .svg(color: dark.withValues(alpha: .3)),
                     ],
                   ),
                 ),
@@ -280,7 +281,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
@@ -308,7 +309,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withOpacity(.3),
+                  color: dark.withValues(alpha: .3),
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,

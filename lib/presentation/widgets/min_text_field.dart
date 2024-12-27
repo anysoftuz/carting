@@ -49,7 +49,7 @@ class MinTextField extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: darkText.withOpacity(.3),
+              color: darkText.withValues(alpha: .3),
             ),
           ),
           Row(
@@ -75,7 +75,7 @@ class MinTextField extends StatelessWidget {
                     hintText: hintText,
                     hintStyle: hintStyle ??
                         TextStyle(
-                          color: darkText.withOpacity(.3),
+                          color: darkText.withValues(alpha: .3),
                         ),
                   ),
                   style: const TextStyle(fontSize: 16),

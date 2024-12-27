@@ -68,7 +68,7 @@ class _CarAddViewState extends State<CarAddView> {
                       hintStyle: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
-                        color: dark.withOpacity(.5),
+                        color: dark.withValues(alpha: .5),
                       ),
                       border: InputBorder.none,
                     ),
@@ -104,7 +104,7 @@ class _CarAddViewState extends State<CarAddView> {
                               hintStyle: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
-                                color: dark.withOpacity(.5),
+                                color: dark.withValues(alpha: .5),
                               ),
                               border: InputBorder.none,
                             ),
@@ -187,7 +187,7 @@ class _CarAddViewState extends State<CarAddView> {
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
-                color: green.withOpacity(.2),
+                color: green.withValues(alpha: .2),
                 borderRadius: BorderRadius.circular(20),
               ),
               margin: const EdgeInsets.only(bottom: 12),

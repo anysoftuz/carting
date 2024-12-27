@@ -41,6 +41,9 @@ dependencies:
   json_annotation: ^4.9.0
   connectivity_plus: ^6.1.1
   internet_connection_checker: ^3.0.1
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+  image: ^4.5.2
 
 dev_dependencies:
   flutter_test:

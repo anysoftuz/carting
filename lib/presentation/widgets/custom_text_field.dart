@@ -100,7 +100,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: darkText.withOpacity(.3),
+                    color: darkText.withValues(alpha: .3),
                   ),
                 )
               : const SizedBox(),
@@ -178,10 +178,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 hintText: widget.hintText,
                 hintStyle: widget.hintStyle ??
                     TextStyle(
-                      color: darkText.withOpacity(.3),
+                      color: darkText.withValues(alpha: .3),
                     ),
                 // hintStyle: fonts.subtitle1.copyWith(
-                //     color: colors.customBlack.withOpacity(0.5), fontSize: 14.sp),
+                //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,
                 // errorStyle: fonts.caption.copyWith(color: colors.error),
                 contentPadding:

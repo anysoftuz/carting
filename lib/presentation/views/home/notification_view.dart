@@ -45,7 +45,7 @@ class _NotificationViewState extends State<NotificationView> {
                   textColor: red,
                   height: 40,
                   borderRadius: 12,
-                  color: red.withOpacity(.2),
+                  color: red.withValues(alpha: .2),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -65,7 +65,7 @@ class _NotificationViewState extends State<NotificationView> {
         child: WButton(
           onTap: () {},
           textColor: green,
-          color: green.withOpacity(.2),
+          color: green.withValues(alpha: .2),
           text: "O’qilgan sifatida belgilash",
         ),
       ),

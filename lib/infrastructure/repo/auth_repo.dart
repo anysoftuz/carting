@@ -37,7 +37,8 @@ class AuthRepo implements IAuthRepo {
   }
 
   @override
-  Future<Either<Failure, ResponseModel<SendCodeModel>>> sendCode(SendCodeBody body) async {
+  Future<Either<Failure, ResponseModel<SendCodeModel>>> sendCode(
+      SendCodeBody body) async {
     try {
       final result = await dataSourcheImpl.sendCode(body);
       return Right(result);
@@ -54,7 +55,8 @@ class AuthRepo implements IAuthRepo {
   }
 
   @override
-  Future<Either<Failure, ResponseModel<TokenModel>>> verifyPost(VerifyBody body) async {
+  Future<Either<Failure, ResponseModel<TokenModel>>> verifyPost(
+      VerifyBody body) async {
     try {
       final result = await dataSourcheImpl.verifyPost(body);
       await StorageRepository.putString(
@@ -82,6 +84,31 @@ class AuthRepo implements IAuthRepo {
   Future<Either<Failure, bool>> userUpdate(UserUpdateModel body) async {
     try {
       final result = await dataSourcheImpl.userUpdate(body);
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<TokenModel>>> refreshToken() async {
+    try {
+      final result = await dataSourcheImpl.refreshToken();
+      await StorageRepository.putString(
+        StorageKeys.TOKEN,
+        result.data.token,
+      );
+      await StorageRepository.putString(
+        StorageKeys.REFRESH,
+        result.data.refreshToken,
+      );
       return Right(result);
     } on DioException {
       return Left(DioFailure());

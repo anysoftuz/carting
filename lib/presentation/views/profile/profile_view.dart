@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -189,12 +190,30 @@ class _ProfileViewState extends State<ProfileView> {
                       );
                     },
                   ),
-                  const Positioned(
-                    top: 0,
-                    child: Hero(
-                      tag: "avatar",
-                      child: CircleAvatar(radius: 56),
-                    ),
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      if (state.userModel.photo.isEmpty) {
+                        return const Positioned(
+                          top: 0,
+                          child: Hero(
+                            tag: "avatar",
+                            child: CircleAvatar(radius: 56),
+                          ),
+                        );
+                      }
+                      return Positioned(
+                        top: 0,
+                        child: Hero(
+                          tag: "avatar",
+                          child: CircleAvatar(
+                            radius: 56,
+                            backgroundImage: CachedNetworkImageProvider(
+                              'https://api.carting.uz/uploads/files/${state.userModel.photo}',
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

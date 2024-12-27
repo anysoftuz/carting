@@ -88,7 +88,7 @@ class _AnnouncementsCreateInfoViewState
                                   text: "25 ta izoh",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: dark.withOpacity(.3),
+                                    color: dark.withValues(alpha: .3),
                                   ),
                                 )
                               ],
@@ -112,7 +112,7 @@ class _AnnouncementsCreateInfoViewState
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withOpacity(.3),
+                      color: dark.withValues(alpha: .3),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -132,7 +132,7 @@ class _AnnouncementsCreateInfoViewState
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: dark.withOpacity(.3),
+                                    color: dark.withValues(alpha: .3),
                                   ),
                                 ),
                                 subtitle: const Text(
@@ -178,7 +178,7 @@ class _AnnouncementsCreateInfoViewState
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: dark.withOpacity(.3),
+                                    color: dark.withValues(alpha: .3),
                                   ),
                                 ),
                                 subtitle: const Text(
@@ -233,7 +233,7 @@ class _AnnouncementsCreateInfoViewState
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: dark.withOpacity(.3),
+                                    color: dark.withValues(alpha: .3),
                                   ),
                                 ),
                                 subtitle: const Text(
@@ -285,7 +285,7 @@ class _AnnouncementsCreateInfoViewState
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
-                                          color: dark.withOpacity(.3),
+                                          color: dark.withValues(alpha: .3),
                                         ),
                                       ),
                                       subtitle: const Text(
@@ -318,7 +318,7 @@ class _AnnouncementsCreateInfoViewState
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
-                                          color: dark.withOpacity(.3),
+                                          color: dark.withValues(alpha: .3),
                                         ),
                                       ),
                                       subtitle: const Text(
@@ -485,7 +485,7 @@ class _AnnouncementsCreateInfoViewState
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: dark.withOpacity(.3),
+                                color: dark.withValues(alpha: .3),
                               ),
                             ),
                             subtitle: const Text(
@@ -610,7 +610,7 @@ class _AnnouncementsCreateInfoViewState
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
-                                      color: dark.withOpacity(.3),
+                                      color: dark.withValues(alpha: .3),
                                     ),
                                   ),
                                   RichText(
@@ -627,7 +627,7 @@ class _AnnouncementsCreateInfoViewState
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         )
                                       ],
@@ -648,7 +648,7 @@ class _AnnouncementsCreateInfoViewState
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         )
                                       ],
@@ -669,7 +669,7 @@ class _AnnouncementsCreateInfoViewState
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withOpacity(.3),
+                                            color: dark.withValues(alpha: .3),
                                           ),
                                         )
                                       ],
@@ -690,7 +690,7 @@ class _AnnouncementsCreateInfoViewState
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
-                                    color: dark.withOpacity(.3),
+                                    color: dark.withValues(alpha: .3),
                                   ),
                                 ),
                                 subtitle: const Text(
@@ -716,7 +716,7 @@ class _AnnouncementsCreateInfoViewState
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w300,
-                        color: dark.withOpacity(.3),
+                        color: dark.withValues(alpha: .3),
                       ),
                     ),
                   ),
@@ -724,7 +724,7 @@ class _AnnouncementsCreateInfoViewState
                   WButton(
                     onTap: () {},
                     text: "Faolsizlantirish",
-                    color: red.withOpacity(.1),
+                    color: red.withValues(alpha: .1),
                     textColor: red,
                   ),
                   const SizedBox(height: 32),

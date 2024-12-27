@@ -10,6 +10,8 @@ class UpdateUserEvent extends AuthEvent {
   final String name;
   final String lastName;
   final String phone;
+  final String? images;
+  final String? tgName;
   final VoidCallback onSucces;
 
   UpdateUserEvent({
@@ -17,6 +19,8 @@ class UpdateUserEvent extends AuthEvent {
     required this.lastName,
     required this.phone,
     required this.onSucces,
+    this.images,
+    this.tgName,
   });
 }
 
@@ -53,3 +57,5 @@ class VerifyEvent extends AuthEvent {
 }
 
 class LogOutEvent extends AuthEvent {}
+
+class RefreshToken extends AuthEvent {}

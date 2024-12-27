@@ -23,7 +23,7 @@ class WTitle extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 14,
-          color: black.withOpacity(.3),
+          color: black.withValues(alpha: .3),
         ),
       ),
     );

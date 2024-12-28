@@ -58,9 +58,9 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                 trailing: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LocationView(
+                      builder: (context) => LocationView(isFirst: false,
                         isOne: true,
-                        onTap: () {
+                        onTap: (mapPoint) {
                           Navigator.of(context).pop();
                         },
                       ),

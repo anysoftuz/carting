@@ -3,6 +3,7 @@ import 'package:carting/presentation/views/common/app_lat_long.dart';
 import 'package:carting/presentation/views/common/clusterized_icon_painter.dart';
 import 'package:carting/presentation/views/common/location_service.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
+import 'package:carting/utils/log_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -12,21 +13,20 @@ import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 
-/// Метод для генерации точек на карте
-List<MapPoint> _getMapPoints() {
-  return [
-    MapPoint(
-      name: 'Toshkent',
-      latitude: const TashketnLoaction().lat,
-      longitude: const TashketnLoaction().long,
-    ),
-  ];
-}
-
 class LocationView extends StatefulWidget {
-  const LocationView({super.key, required this.onTap, this.isOne = false});
-  final VoidCallback onTap;
+  const LocationView({
+    super.key,
+    required this.onTap,
+    this.isOne = false,
+    this.point1,
+    this.point2,
+    required this.isFirst,
+  });
+  final Function(MapPoint? point) onTap;
   final bool isOne;
+  final MapPoint? point1;
+  final MapPoint? point2;
+  final bool isFirst;
 
   @override
   State<LocationView> createState() => _LocationViewState();
@@ -36,8 +36,10 @@ class _LocationViewState extends State<LocationView> {
   late TextEditingController controllerLat;
   late TextEditingController controllerLong;
   late YandexMapController mapController;
+  List<MapPoint> list = [];
 
   CameraPosition? _userLocation;
+  CameraPosition? _position;
 
   String _address = 'Manzil aniqlanmoqda...';
 
@@ -46,11 +48,23 @@ class _LocationViewState extends State<LocationView> {
 
   @override
   void initState() {
-    controllerLat = TextEditingController(text: "Toshkent, Yakkasaroy tumani");
-    controllerLong = TextEditingController(text: "Samarqand, Samarqand tumani");
+    getMerk();
+    controllerLat =
+        TextEditingController(text: widget.point1?.name ?? "Nomalum");
+    controllerLong =
+        TextEditingController(text: widget.point2?.name ?? "Nomalum");
+
     super.initState();
     AndroidYandexMap.useAndroidViewSurface = true;
     _initPermission().ignore();
+  }
+
+  getMerk() {
+    if (widget.point1 != null) {
+      Log.i('Kirdik');
+      list.add(widget.point1!);
+      setState(() {});
+    }
   }
 
   /// Метод, который включает слой местоположения пользователя на карте
@@ -113,7 +127,7 @@ class _LocationViewState extends State<LocationView> {
 
   /// Метод для генерации объектов маркеров для отображения на карте
   List<PlacemarkMapObject> _getPlacemarkObjects(BuildContext context) {
-    return _getMapPoints()
+    return list
         .map(
           (point) => PlacemarkMapObject(
             mapId: MapObjectId('MapObject $point'),
@@ -225,7 +239,11 @@ class _LocationViewState extends State<LocationView> {
               top: false,
               child: WButton(
                 onTap: () {
-                  widget.onTap();
+                  widget.onTap(MapPoint(
+                    name: _address,
+                    latitude: _position?.target.latitude ?? 0,
+                    longitude: _position?.target.latitude ?? 0,
+                  ));
                 },
                 text: AppLocalizations.of(context)!.confirm,
               ),
@@ -248,6 +266,14 @@ class _LocationViewState extends State<LocationView> {
           YandexMap(
             onMapCreated: (controller) async {
               mapController = controller;
+              mapController.moveCamera(CameraUpdate.newCameraPosition(
+                CameraPosition(
+                  target: Point(
+                    latitude: const TashketnLoaction().lat,
+                    longitude: const TashketnLoaction().long,
+                  ),
+                ),
+              ));
               await _initLocationLayer();
             },
             onCameraPositionChanged: (cameraPosition, reason, finished) async {
@@ -257,6 +283,11 @@ class _LocationViewState extends State<LocationView> {
                   cameraPosition.target.latitude,
                   cameraPosition.target.longitude,
                 );
+                if (widget.isFirst) {
+                  controllerLat.text = _address;
+                } else {
+                  controllerLong.text = _address;
+                }
                 print("Map tapped at: $_address");
               }
               setState(() {
@@ -353,19 +384,6 @@ class _LocationViewState extends State<LocationView> {
           //     ),
           //   ),
           // )
-          Positioned(
-            top: 60,
-            left: 20,
-            right: 20,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              color: Colors.white,
-              child: Text(
-                _address,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -77,8 +77,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                     trailing: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            onTap: () {
+                          builder: (context) => LocationView(isFirst: false,
+                            onTap: (mapPoint) {
                               Navigator.pop(context);
                             },
                           ),
@@ -122,8 +122,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                     trailing: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            onTap: () {
+                          builder: (context) => LocationView(isFirst: false,
+                            onTap: (mapPoint) {
                               Navigator.pop(context);
                             },
                           ),

@@ -123,7 +123,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => LocationView(
-                                  onTap: () {
+                                  isFirst: true,
+                                  onTap: (mapPoint) {
                                     Navigator.pop(context);
                                   },
                                 ),
@@ -168,7 +169,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => LocationView(
-                                  onTap: () {
+                                  isFirst: false,
+                                  onTap: (mapPoint) {
                                     Navigator.pop(context);
                                   },
                                 ),
@@ -218,7 +220,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => LocationView(
-                              onTap: () {
+                              isFirst: false,
+                              onTap: (mapPoint) {
                                 Navigator.pop(context);
                               },
                             ),

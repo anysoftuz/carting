@@ -148,7 +148,8 @@ class _AnnouncementsCreateInfoViewState
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                       builder: (context) => LocationView(
-                                        onTap: () {
+                                        isFirst: false,
+                                        onTap: (mapPoint) {
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -194,7 +195,8 @@ class _AnnouncementsCreateInfoViewState
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                       builder: (context) => LocationView(
-                                        onTap: () {
+                                        isFirst: false,
+                                        onTap: (mapPoint) {
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -249,7 +251,8 @@ class _AnnouncementsCreateInfoViewState
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
                                       builder: (context) => LocationView(
-                                        onTap: () {
+                                        isFirst: false,
+                                        onTap: (mapPoint) {
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -500,7 +503,8 @@ class _AnnouncementsCreateInfoViewState
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => LocationView(
-                                    onTap: () {
+                                    isFirst: false,
+                                    onTap: (mapPoint) {
                                       Navigator.pop(context);
                                     },
                                   ),

@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/location_view.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -21,6 +22,8 @@ class DeliveryView extends StatefulWidget {
 class _DeliveryViewState extends State<DeliveryView> {
   late TextEditingController controller;
   String selectedUnit = 'kg';
+  MapPoint? point1;
+  MapPoint? point2;
   @override
   void initState() {
     controller = TextEditingController();
@@ -66,9 +69,9 @@ class _DeliveryViewState extends State<DeliveryView> {
                         color: dark.withValues(alpha: .3),
                       ),
                     ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
+                    subtitle: Text(
+                      point1?.name ?? 'Nomalum',
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: dark,
@@ -78,8 +81,15 @@ class _DeliveryViewState extends State<DeliveryView> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LocationView(
-                            onTap: () {
+                            isFirst: true,
+                            point1: point1,
+                            point2: point2,
+                            onTap: (mapPoint) {
                               Navigator.pop(context);
+                              if (mapPoint != null) {
+                                point1 = mapPoint;
+                                setState(() {});
+                              }
                             },
                           ),
                         ));
@@ -111,9 +121,9 @@ class _DeliveryViewState extends State<DeliveryView> {
                         color: dark.withValues(alpha: .3),
                       ),
                     ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
+                    subtitle: Text(
+                      point2?.name ?? 'Nomalum',
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: dark,
@@ -123,8 +133,15 @@ class _DeliveryViewState extends State<DeliveryView> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LocationView(
-                            onTap: () {
+                            isFirst: false,
+                            point1: point1,
+                            point2: point2,
+                            onTap: (mapPoint) {
                               Navigator.pop(context);
+                              if (mapPoint != null) {
+                                point2 = mapPoint;
+                                setState(() {});
+                              }
                             },
                           ),
                         ));

@@ -75,8 +75,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                     trailing: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            onTap: () {
+                          builder: (context) => LocationView(isFirst: false,
+                            onTap: (mapPoint) {
                               Navigator.of(context).pop();
                             },
                           ),
@@ -120,8 +120,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                     trailing: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            onTap: () {
+                          builder: (context) => LocationView(isFirst: false,
+                            onTap: (mapPoint) {
                               Navigator.of(context).pop();
                             },
                           ),

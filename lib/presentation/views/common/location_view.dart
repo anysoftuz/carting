@@ -1,9 +1,26 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/presentation/views/common/app_lat_long.dart';
+import 'package:carting/presentation/views/common/clusterized_icon_painter.dart';
+import 'package:carting/presentation/views/common/location_service.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
+import 'package:flutter/material.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+
+/// Метод для генерации точек на карте
+List<MapPoint> _getMapPoints() {
+  return [
+    MapPoint(
+      name: 'Toshkent',
+      latitude: const TashketnLoaction().lat,
+      longitude: const TashketnLoaction().long,
+    ),
+  ];
+}
 
 class LocationView extends StatefulWidget {
   const LocationView({super.key, required this.onTap, this.isOne = false});
@@ -17,12 +34,96 @@ class LocationView extends StatefulWidget {
 class _LocationViewState extends State<LocationView> {
   late TextEditingController controllerLat;
   late TextEditingController controllerLong;
+  late YandexMapController mapController;
+  CameraPosition? _userLocation;
+
+  /// Значение текущего масштаба карты
+  var _mapZoom = 0.0;
 
   @override
   void initState() {
     controllerLat = TextEditingController(text: "Toshkent, Yakkasaroy tumani");
     controllerLong = TextEditingController(text: "Samarqand, Samarqand tumani");
     super.initState();
+    _initPermission().ignore();
+  }
+
+  /// Метод, который включает слой местоположения пользователя на карте
+  /// Выполняется проверка на доступ к местоположению, в случае отсутствия
+  /// разрешения - выводит сообщение
+  Future<void> _initLocationLayer() async {
+    final locationPermissionIsGranted =
+        await Permission.location.request().isGranted;
+
+    if (locationPermissionIsGranted) {
+      await mapController.toggleUserLayer(visible: true);
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Нет доступа к местоположению пользователя'),
+          ),
+        );
+      });
+    }
+  }
+
+  /// Метод для получения коллекции кластеризованных маркеров
+  ClusterizedPlacemarkCollection _getClusterizedCollection({
+    required List<PlacemarkMapObject> placemarks,
+  }) {
+    return ClusterizedPlacemarkCollection(
+      mapId: const MapObjectId('clusterized-1'),
+      placemarks: placemarks,
+      radius: 50,
+      minZoom: 15,
+      onClusterAdded: (self, cluster) async {
+        return cluster.copyWith(
+          appearance: cluster.appearance.copyWith(
+            opacity: 1.0,
+            icon: PlacemarkIcon.single(
+              PlacemarkIconStyle(
+                image: BitmapDescriptor.fromBytes(
+                  await ClusterIconPainter(cluster.size).getClusterIconBytes(),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      onClusterTap: (self, cluster) async {
+        await mapController.moveCamera(
+          animation:
+              const MapAnimation(type: MapAnimationType.linear, duration: 0.3),
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: cluster.placemarks.first.point,
+              zoom: _mapZoom + 1,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  /// Метод для генерации объектов маркеров для отображения на карте
+  List<PlacemarkMapObject> _getPlacemarkObjects(BuildContext context) {
+    return _getMapPoints()
+        .map(
+          (point) => PlacemarkMapObject(
+            mapId: MapObjectId('MapObject $point'),
+            point: Point(latitude: point.latitude, longitude: point.longitude),
+            opacity: 1,
+            icon: PlacemarkIcon.single(
+              PlacemarkIconStyle(
+                image: BitmapDescriptor.fromAssetImage(
+                  'assets/images/location.png',
+                ),
+              ),
+            ),
+          ),
+        )
+        .toList();
   }
 
   @override
@@ -101,17 +202,76 @@ class _LocationViewState extends State<LocationView> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // await _fetchCurrentLocation();
+          await _initLocationLayer();
+        },
+      ),
       body: Stack(
         children: <Widget>[
           // Google Map
-          FlutterMap(
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'dev.fleaflet.flutter_map.example',
-                maxZoom: 19,
+          YandexMap(
+            onMapCreated: (controller) async {
+              mapController = controller;
+              await _initLocationLayer();
+            },
+            onCameraPositionChanged: (cameraPosition, reason, finished) {
+              print("Map tapped at: $cameraPosition");
+              setState(() {
+                _mapZoom = cameraPosition.zoom;
+              });
+            },
+            mapObjects: [
+              _getClusterizedCollection(
+                placemarks: _getPlacemarkObjects(context),
               ),
             ],
+            onUserLocationAdded: (view) async {
+              // получаем местоположение пользователя
+              _userLocation = await mapController.getUserCameraPosition();
+              // если местоположение найдено, центрируем карту относительно этой точки
+              if (_userLocation != null) {
+                await mapController.moveCamera(
+                  CameraUpdate.newCameraPosition(
+                    _userLocation!.copyWith(zoom: 15),
+                  ),
+                  animation: const MapAnimation(
+                    type: MapAnimationType.linear,
+                    duration: 0.3,
+                  ),
+                );
+              }
+              // меняем внешний вид маркера - делаем его непрозрачным
+              return view.copyWith(
+                arrow: view.arrow.copyWith(
+                  opacity: 1,
+                  icon: PlacemarkIcon.single(
+                    PlacemarkIconStyle(
+                      image: BitmapDescriptor.fromAssetImage(
+                        'assets/images/location.png',
+                      ),
+                    ),
+                  ),
+                ),
+                pin: view.pin.copyWith(
+                  opacity: 1,
+                  icon: PlacemarkIcon.single(
+                    PlacemarkIconStyle(
+                      image: BitmapDescriptor.fromAssetImage(
+                        'assets/images/location.png',
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            onMapTap: (Point point) async {
+              mapController.moveCamera(
+                CameraUpdate.newCameraPosition(CameraPosition(target: point)),
+                animation: const MapAnimation(duration: 1.0),
+              );
+            },
           ),
           // Location marker in the center
           Center(
@@ -137,20 +297,58 @@ class _LocationViewState extends State<LocationView> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 16,
-            right: 16,
-            child: CircleAvatar(
-              backgroundColor: white,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: AppIcons.gps.svg(),
-              ),
-            ),
-          )
+          // Positioned(
+          //   bottom: 16,
+          //   right: 16,
+          //   child: CircleAvatar(
+          //     backgroundColor: white,
+          //     child: IconButton(
+          //       onPressed: () {
+          //         Navigator.pop(context);
+          //       },
+          //       icon: AppIcons.gps.svg(),
+          //     ),
+          //   ),
+          // )
         ],
+      ),
+    );
+  }
+
+  /// Проверка разрешений на доступ к геопозиции пользователя
+  Future<void> _initPermission() async {
+    if (!await LocationService().checkPermission()) {
+      await LocationService().requestPermission();
+    }
+    await _fetchCurrentLocation();
+  }
+
+  /// Получение текущей геопозиции пользователя
+  Future<void> _fetchCurrentLocation() async {
+    AppLatLong location;
+    const defLocation = TashketnLoaction();
+    try {
+      location = await LocationService().getCurrentLocation();
+    } catch (_) {
+      location = defLocation;
+    }
+    _moveToCurrentLocation(location);
+  }
+
+  /// Метод для показа текущей позиции
+  Future<void> _moveToCurrentLocation(
+    AppLatLong appLatLong,
+  ) async {
+    mapController.moveCamera(
+      animation: const MapAnimation(type: MapAnimationType.linear, duration: 1),
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: Point(
+            latitude: appLatLong.lat,
+            longitude: appLatLong.long,
+          ),
+          zoom: 15,
+        ),
       ),
     );
   }

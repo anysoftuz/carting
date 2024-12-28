@@ -17,6 +17,7 @@ abstract class AuthDatasourche {
   Future<ResponseModel<UserModel>> getMe();
   Future<ResponseModel<SendCodeModel>> sendCode(SendCodeBody body);
   Future<ResponseModel<TokenModel>> verifyPost(VerifyBody body);
+  Future<ResponseModel<TokenModel>> registerPost(UserUpdateModel body);
   Future<bool> userUpdate(UserUpdateModel body);
   Future<ResponseModel<TokenModel>> refreshToken();
 }
@@ -88,7 +89,7 @@ class AuthDataSourcheImpl implements AuthDatasourche {
   Future<ResponseModel<TokenModel>> refreshToken() {
     return _handle.apiCantrol(
       request: () {
-        return dio.post(
+        return dioAuth.post(
           'refresh_token',
           data: {
             "refreshToken": StorageRepository.getString(StorageKeys.REFRESH)
@@ -106,20 +107,28 @@ class AuthDataSourcheImpl implements AuthDatasourche {
   Future<bool> userUpdate(UserUpdateModel body) {
     return _handle.apiCantrol(
       request: () {
-        return dioAuth.put(
+        return dio.put(
           'user',
           data: body.toJson(),
-          options: Options(
-            headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
-                ? {
-                    'Authorization':
-                        'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
-                  }
-                : {},
-          ),
         );
       },
       body: (response) => true,
+    );
+  }
+
+  @override
+  Future<ResponseModel<TokenModel>> registerPost(UserUpdateModel body) {
+    return _handle.apiCantrol(
+      request: () {
+        return dioAuth.post(
+          'user/register',
+          data: body.toJson(),
+        );
+      },
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => TokenModel.fromJson(p0 as Map<String, dynamic>),
+      ),
     );
   }
 }

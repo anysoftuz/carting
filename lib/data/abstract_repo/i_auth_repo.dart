@@ -16,6 +16,9 @@ abstract class IAuthRepo {
   Future<Either<Failure, ResponseModel<TokenModel>>> verifyPost(
     VerifyBody body,
   );
+  Future<Either<Failure, ResponseModel<TokenModel>>> registerPost(
+    UserUpdateModel body,
+  );
   Future<Either<Failure, ResponseModel<TokenModel>>> refreshToken();
   Future<Either<Failure, bool>> userUpdate(UserUpdateModel body);
 }

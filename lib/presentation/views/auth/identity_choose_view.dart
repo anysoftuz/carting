@@ -8,7 +8,8 @@ import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
 class IdentityChooseView extends StatefulWidget {
-  const IdentityChooseView({super.key});
+  const IdentityChooseView({super.key, required this.phone});
+  final String phone;
 
   @override
   State<IdentityChooseView> createState() => _IdentityChooseViewState();
@@ -104,8 +105,10 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
             WButton(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      RegisterInfoView(isLegal: isLegal.value),
+                  builder: (context) => RegisterInfoView(
+                    isLegal: isLegal.value,
+                    phone: widget.phone,
+                  ),
                 ));
               },
               text: "Davom etish",

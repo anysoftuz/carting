@@ -25,8 +25,6 @@ dependencies:
   image_picker: ^1.1.2
   mask_text_input_formatter: ^2.9.0
   pinput: ^5.0.0
-  flutter_map: ^7.0.2
-  flutter_map_cancellable_tile_provider: ^3.0.2
   table_calendar:
     git: https://github.com/aleksanderwozniak/table_calendar.git
   intl: ^0.19.0
@@ -44,6 +42,9 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.4.1
   image: ^4.5.2
+  yandex_mapkit: ^4.1.0
+  geolocator: ^13.0.2
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:

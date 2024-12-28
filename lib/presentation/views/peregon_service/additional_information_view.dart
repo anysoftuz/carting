@@ -27,6 +27,7 @@ class AdditionalInformationView extends StatefulWidget {
 
 class _AdditionalInformationViewState extends State<AdditionalInformationView> {
   List<File> images = [];
+  ValueNotifier<bool> payDate = ValueNotifier(true);
 
   void imagesFile() async {
     try {
@@ -226,18 +227,33 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
             const SizedBox(height: 12),
             const WTitle(title: "To‘lov"),
             const SizedBox(height: 12),
-            ListTile(
-              onTap: () {},
-              leading: AppIcons.cash.svg(),
-              title: const Text("Naqd"),
-              trailing: AppIcons.checkboxRadio.svg(),
-            ),
-            const Divider(height: 1),
-            ListTile(
-              onTap: () {},
-              leading: AppIcons.card.svg(),
-              title: const Text("Karta"),
-              trailing: AppIcons.checkboxRadioDis.svg(),
+            ValueListenableBuilder(
+              valueListenable: payDate,
+              builder: (context, value, child) => Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      payDate.value = true;
+                    },
+                    leading: AppIcons.cash.svg(),
+                    title: const Text("Naqd"),
+                    trailing: value
+                        ? AppIcons.checkboxRadio.svg()
+                        : AppIcons.checkboxRadioDis.svg(),
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    onTap: () {
+                      payDate.value = false;
+                    },
+                    leading: AppIcons.card.svg(),
+                    title: const Text("Karta"),
+                    trailing: !value
+                        ? AppIcons.checkboxRadio.svg()
+                        : AppIcons.checkboxRadioDis.svg(),
+                  ),
+                ],
+              ),
             ),
             const Divider(height: 1),
             const SizedBox(height: 12),

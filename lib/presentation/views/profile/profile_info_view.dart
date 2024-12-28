@@ -42,7 +42,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
       final compressedFile = await resizeAndCompressImage(images2, 1000000);
       images = compressedFile;
       Log.i('Siqilgan fayl: ${await convertFileToBase64(images)}');
-      print('Yangi hajmi: ${compressedFile.lengthSync()} bayt');
+      Log.i('Yangi hajmi: ${compressedFile.lengthSync()} bayt');
       setState(() {});
     } on PlatformException catch (e) {
       debugPrint(e.toString());

@@ -1,15 +1,19 @@
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class RegisterInfoView extends StatefulWidget {
-  const RegisterInfoView({super.key, required this.isLegal});
+  const RegisterInfoView(
+      {super.key, required this.isLegal, required this.phone});
   final bool isLegal;
+  final String phone;
 
   @override
   State<RegisterInfoView> createState() => _RegisterInfoViewState();
@@ -17,10 +21,25 @@ class RegisterInfoView extends StatefulWidget {
 
 class _RegisterInfoViewState extends State<RegisterInfoView> {
   late ValueNotifier<bool> isActive;
+  late TextEditingController controllerName;
+  late TextEditingController controllerLastName;
+  late TextEditingController controllerPhone;
   @override
   void initState() {
     isActive = ValueNotifier(false);
+    controllerName = TextEditingController();
+    controllerLastName = TextEditingController();
+    controllerPhone =
+        TextEditingController(text: MyFunction.formatPhoneNumber(widget.phone));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controllerName.dispose();
+    controllerLastName.dispose();
+    controllerPhone.dispose();
   }
 
   @override
@@ -64,12 +83,32 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                 )
               ],
             ),
-            WButton(
-              onTap: () {
-                context.go(AppRouteName.home);
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return WButton(
+                  onTap: () {
+                    if (controllerName.text.isNotEmpty &&
+                        controllerLastName.text.isNotEmpty) {
+                      context.read<AuthBloc>().add(RegisterUserEvent(
+                            name: controllerName.text,
+                            lastName: controllerLastName.text,
+                            phone: MyFunction.convertPhoneNumber(
+                              controllerPhone.text,
+                            ),
+                            isUser: widget.isLegal,
+                            onSucces: () {},
+                          ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Malumotlarni to'ldiring"),
+                      ));
+                    }
+                  },
+                  isLoading: state.statusSms.isInProgress,
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  text: AppLocalizations.of(context)!.register,
+                );
               },
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              text: AppLocalizations.of(context)!.register,
             ),
           ],
         ),
@@ -101,18 +140,22 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                   CustomTextField(
                     title: AppLocalizations.of(context)!.firstName,
                     hintText: "Ismingizni kiriting",
+                    controller: controllerName,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: AppLocalizations.of(context)!.lastName,
                     hintText: "Familiyangizni kiriting",
+                    controller: controllerLastName,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: AppLocalizations.of(context)!.phoneNumer,
                     hintText: "+998",
+                    controller: controllerPhone,
+                    readOnly: true,
                     onChanged: (value) {},
                   ),
                 ],

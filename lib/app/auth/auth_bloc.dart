@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:carting/assets/constants/app_constants.dart';
 import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/data/models/send_code_body.dart';
 import 'package:carting/data/models/send_code_model.dart';
@@ -8,6 +9,7 @@ import 'package:carting/data/models/user_update_model.dart';
 import 'package:carting/data/models/verify_body.dart';
 import 'package:carting/infrastructure/repo/auth_repo.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
+import 'package:carting/utils/log_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -34,8 +36,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<UpdateUserEvent>((event, emit) async {
+    on<RegisterUserEvent>((event, emit) async {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
+      final result = await _repository.registerPost(UserUpdateModel(
+        firstName: event.name,
+        lastName: event.lastName,
+        userType: event.isUser ? 'PHYSICAL' : 'CLIENT',
+        phoneNumber: event.phone,
+        tgLink: AppConstants.tgLink,
+        base64: AppConstants.image,
+      ));
+      if (result.isRight) {
+        add(GetMeEvent());
+      } else {
+        emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
+      }
+    });
+
+    on<UpdateUserEvent>((event, emit) async {
+      emit(state.copyWith(
+        statusSms: FormzSubmissionStatus.inProgress,
+        status: AuthenticationStatus.loading,
+      ));
       final response = await _repository.userUpdate(
         UserUpdateModel(
           firstName: event.name,
@@ -48,8 +70,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
       if (response.isRight) {
-        emit(state.copyWith(statusSms: FormzSubmissionStatus.success));
-        add(GetMeEvent());
+        await Future.delayed(const Duration(seconds: 5), () {
+          emit(state.copyWith(
+            statusSms: FormzSubmissionStatus.inProgress,
+            status: AuthenticationStatus.loading,
+          ));
+          add(GetMeEvent());
+        });
       } else {
         emit(state.copyWith(statusSms: FormzSubmissionStatus.failure));
       }
@@ -113,16 +140,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<GetMeEvent>((event, emit) async {
       final response = await _repository.getMe();
       if (response.isRight) {
-        if (response.right.status == 200) {
-          emit(state.copyWith(
-            status: AuthenticationStatus.authenticated,
-            userModel: response.right.data,
-          ));
-        } else {
-          emit(state.copyWith(
-            status: AuthenticationStatus.unauthenticated,
-          ));
-        }
+        Log.i("Salom Loginga kirdik");
+        emit(state.copyWith(
+          status: AuthenticationStatus.authenticated,
+          userModel: response.right.data,
+          statusSms: FormzSubmissionStatus.initial,
+        ));
+        Log.i("Salom Loginga kirdik holat ${state.status}");
       } else {
         emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
       }

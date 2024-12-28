@@ -6,6 +6,22 @@ class GetMeEvent extends AuthEvent {}
 
 class CheckUserEvent extends AuthEvent {}
 
+class RegisterUserEvent extends AuthEvent {
+  final String name;
+  final String lastName;
+  final String phone;
+  final bool isUser;
+  final VoidCallback onSucces;
+
+  RegisterUserEvent({
+    required this.name,
+    required this.lastName,
+    required this.phone,
+    required this.onSucces,
+    required this.isUser,
+  });
+}
+
 class UpdateUserEvent extends AuthEvent {
   final String name;
   final String lastName;

@@ -49,5 +49,7 @@
 		<string>Need to upload image CARTING</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Need to upload image CARTING</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Доступ к геолокации пользователя необходим для отображения текущей геопозиции</string>
 	</dict>
 </plist>

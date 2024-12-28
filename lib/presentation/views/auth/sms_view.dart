@@ -155,7 +155,9 @@ class _SmsViewState extends State<SmsView> {
                           onError: () {},
                           onSucces: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const IdentityChooseView(),
+                              builder: (context) =>  IdentityChooseView(
+                                phone:  widget.phone,
+                              ),
                             ));
                           },
                           sessionToken: widget.model.sessionToken,

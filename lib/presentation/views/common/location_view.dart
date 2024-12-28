@@ -3,6 +3,7 @@ import 'package:carting/presentation/views/common/app_lat_long.dart';
 import 'package:carting/presentation/views/common/clusterized_icon_painter.dart';
 import 'package:carting/presentation/views/common/location_service.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
+
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -35,7 +36,10 @@ class _LocationViewState extends State<LocationView> {
   late TextEditingController controllerLat;
   late TextEditingController controllerLong;
   late YandexMapController mapController;
+
   CameraPosition? _userLocation;
+
+  String _address = 'Manzil aniqlanmoqda...';
 
   /// Значение текущего масштаба карты
   var _mapZoom = 0.0;
@@ -45,6 +49,7 @@ class _LocationViewState extends State<LocationView> {
     controllerLat = TextEditingController(text: "Toshkent, Yakkasaroy tumani");
     controllerLong = TextEditingController(text: "Samarqand, Samarqand tumani");
     super.initState();
+    AndroidYandexMap.useAndroidViewSurface = true;
     _initPermission().ignore();
   }
 
@@ -126,6 +131,35 @@ class _LocationViewState extends State<LocationView> {
         .toList();
   }
 
+  Future<String> getPlaceMarkFromYandex(double lat, double lon) async {
+    try {
+      final searchPoint = await YandexSearch.searchByText(
+        searchText: 'Nashriyot', // Empty search text for reverse geocoding
+        geometry: Geometry.fromPoint(Point(latitude: lat, longitude: lon)),
+        searchOptions: const SearchOptions(
+          searchType: SearchType.geo,
+          geometry: true,
+          disableSpellingCorrection: true,
+          resultPageSize: 1,
+        ),
+      );
+
+      final results = await searchPoint.$2;
+      if (results.items != null) {
+        if (results.items!.isNotEmpty) {
+          final address =
+              results.items!.first.toponymMetadata?.address.formattedAddress ??
+                  'Unknown location';
+          return address;
+        }
+      }
+      return 'No address found';
+    } catch (e) {
+      print('Error getting address: $e');
+      return 'Error getting address';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -204,9 +238,12 @@ class _LocationViewState extends State<LocationView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          // await _fetchCurrentLocation();
           await _initLocationLayer();
+          await _fetchCurrentLocation();
         },
+        backgroundColor: white,
+        shape: const CircleBorder(),
+        child: AppIcons.gps.svg(),
       ),
       body: Stack(
         children: <Widget>[
@@ -216,8 +253,15 @@ class _LocationViewState extends State<LocationView> {
               mapController = controller;
               await _initLocationLayer();
             },
-            onCameraPositionChanged: (cameraPosition, reason, finished) {
+            onCameraPositionChanged: (cameraPosition, reason, finished) async {
               print("Map tapped at: $cameraPosition");
+              if (finished) {
+                _address = await getPlaceMarkFromYandex(
+                  cameraPosition.target.latitude,
+                  cameraPosition.target.longitude,
+                );
+                print("Map tapped at: $_address");
+              }
               setState(() {
                 _mapZoom = cameraPosition.zoom;
               });
@@ -249,8 +293,9 @@ class _LocationViewState extends State<LocationView> {
                   icon: PlacemarkIcon.single(
                     PlacemarkIconStyle(
                       image: BitmapDescriptor.fromAssetImage(
-                        'assets/images/location.png',
+                        'assets/images/location_current.png',
                       ),
+                      scale: .2,
                     ),
                   ),
                 ),
@@ -259,8 +304,9 @@ class _LocationViewState extends State<LocationView> {
                   icon: PlacemarkIcon.single(
                     PlacemarkIconStyle(
                       image: BitmapDescriptor.fromAssetImage(
-                        'assets/images/location.png',
+                        'assets/images/location_current.png',
                       ),
+                      scale: .2,
                     ),
                   ),
                 ),
@@ -310,6 +356,19 @@ class _LocationViewState extends State<LocationView> {
           //     ),
           //   ),
           // )
+          Positioned(
+            top: 20,
+            left: 20,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              color: Colors.white,
+              child: Text(
+                _address,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
         ],
       ),
     );

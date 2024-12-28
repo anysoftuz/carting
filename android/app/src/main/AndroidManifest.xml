@@ -4,10 +4,14 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:label="CARTING"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.yandex.mapkit.API_KEY"
+            android:value="064458e6-eb38-4127-a7ff-acdb1a820cdf" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

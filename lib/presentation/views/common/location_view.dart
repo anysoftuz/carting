@@ -133,18 +133,15 @@ class _LocationViewState extends State<LocationView> {
 
   Future<String> getPlaceMarkFromYandex(double lat, double lon) async {
     try {
-      final searchPoint = await YandexSearch.searchByText(
-        searchText: 'Nashriyot', // Empty search text for reverse geocoding
-        geometry: Geometry.fromPoint(Point(latitude: lat, longitude: lon)),
+      final resultWithSession = await YandexSearch.searchByPoint(
+        point: Point(latitude: lat, longitude: lon),
         searchOptions: const SearchOptions(
           searchType: SearchType.geo,
-          geometry: true,
-          disableSpellingCorrection: true,
-          resultPageSize: 1,
+          geometry: false,
         ),
       );
 
-      final results = await searchPoint.$2;
+      final results = await resultWithSession.$2;
       if (results.items != null) {
         if (results.items!.isNotEmpty) {
           final address =
@@ -357,7 +354,7 @@ class _LocationViewState extends State<LocationView> {
           //   ),
           // )
           Positioned(
-            top: 20,
+            top: 60,
             left: 20,
             right: 20,
             child: Container(

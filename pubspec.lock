@@ -382,6 +382,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flex_dropdown:
+    dependency: "direct main"
+    description:
+      name: flex_dropdown
+      sha256: "35209a5780d121ded6b4736f89066e05178093e44e6fd5da1867d553ea3456db"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   flutter:
     dependency: "direct main"
     description: flutter

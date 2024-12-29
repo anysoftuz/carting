@@ -25,6 +25,7 @@ class _CarsViewState extends State<CarsView> {
       ),
       text: "Yuk \ntashish",
       screen: const ShippingView(),
+      serviceId: 1,
     ),
     TypeOfService(
       icon: AppIcons.transportationOfPassengers.svg(
@@ -33,6 +34,7 @@ class _CarsViewState extends State<CarsView> {
       ),
       text: "Yo'lovchilarni tashish",
       screen: const TransportationOfPassengersView(),
+      serviceId: 2,
     ),
     TypeOfService(
       icon: AppIcons.specialTechnique.svg(
@@ -41,6 +43,7 @@ class _CarsViewState extends State<CarsView> {
       ),
       text: "Maxsus texnika xizmatlari",
       screen: const SpecialTechniqueView(),
+      serviceId: 3,
     ),
     TypeOfService(
       icon: AppIcons.transportRental.svg(
@@ -49,11 +52,13 @@ class _CarsViewState extends State<CarsView> {
       ),
       text: "Transport ijarasi",
       screen: const TransportRentalView(),
+      serviceId: 4,
     ),
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
       screen: const TransportTransferView(),
+      serviceId: 6,
     ),
   ];
 

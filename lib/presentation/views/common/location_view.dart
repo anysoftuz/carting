@@ -242,7 +242,7 @@ class _LocationViewState extends State<LocationView> {
                   widget.onTap(MapPoint(
                     name: _address,
                     latitude: _position?.target.latitude ?? 0,
-                    longitude: _position?.target.latitude ?? 0,
+                    longitude: _position?.target.longitude ?? 0,
                   ));
                 },
                 text: AppLocalizations.of(context)!.confirm,
@@ -283,6 +283,7 @@ class _LocationViewState extends State<LocationView> {
                   cameraPosition.target.latitude,
                   cameraPosition.target.longitude,
                 );
+                _position = cameraPosition;
                 if (widget.isFirst) {
                   controllerLat.text = _address;
                 } else {

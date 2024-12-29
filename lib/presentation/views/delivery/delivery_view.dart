@@ -1,16 +1,22 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/delivery_create_model.dart';
+import 'package:carting/data/models/location_model.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
+import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeliveryView extends StatefulWidget {
   const DeliveryView({super.key});
@@ -21,18 +27,35 @@ class DeliveryView extends StatefulWidget {
 
 class _DeliveryViewState extends State<DeliveryView> {
   late TextEditingController controller;
+  late TextEditingController controllerCount;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
   String selectedUnit = 'kg';
   MapPoint? point1;
   MapPoint? point2;
+  ValueNotifier<bool> payDate = ValueNotifier(true);
+  ValueNotifier<int> trTypeId = ValueNotifier(0);
+  ValueNotifier<int> loadTypeId = ValueNotifier(1);
+  ValueNotifier<int> loadServiceId = ValueNotifier(1);
   @override
   void initState() {
     controller = TextEditingController();
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
+    controllerCount = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    controllerCommet.dispose();
+    controllerPrice.dispose();
+    controllerCount.dispose();
+    payDate.dispose();
+    trTypeId.dispose();
+    loadTypeId.dispose();
+    loadServiceId.dispose();
     super.dispose();
   }
 
@@ -41,142 +64,84 @@ class _DeliveryViewState extends State<DeliveryView> {
     return Scaffold(
       appBar: AppBar(title: const Text("Yetkazib berish")),
       bottomNavigationBar: SafeArea(
-        child: WButton(
-          onTap: () {
-            Navigator.of(context).pop();
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                if (point1 != null &&
+                    point2 != null &&
+                    controllerCount.text.isNotEmpty &&
+                    controllerPrice.text.isNotEmpty) {
+                  final model = DeliveryCreateModel(
+                    toLocation: LocationModel(
+                      lat: point2!.latitude,
+                      lng: point2!.longitude,
+                      name: point2!.name,
+                    ),
+                    fromLocation: LocationModel(
+                      lat: point1!.latitude,
+                      lng: point1!.longitude,
+                      name: point1!.name,
+                    ),
+                    serviceName: 'Yetkazib berish',
+                    details: Details(
+                      transportationTypeId:
+                          state.transportationTypes[trTypeId.value].id,
+                      loadTypeId: '${loadTypeId.value}',
+                      loadServiceId: '${loadServiceId.value}',
+                      loadWeight: LoadWeight(
+                        amount: int.tryParse(controllerCount.text) ?? 0,
+                        name: selectedUnit,
+                      ),
+                    ),
+                    advType: 'RECEIVE',
+                    serviceTypeId: 9,
+                    shipmentDate: controller.text,
+                    note: controllerCommet.text,
+                    payType: payDate.value ? 'CASH' : 'CARD',
+                    price: int.tryParse(
+                            controllerPrice.text.replaceAll(' ', '')) ??
+                        0,
+                  ).toJson();
+                  context
+                      .read<AdvertisementBloc>()
+                      .add(CreateDeliveryEvent(model: model));
+                } else {
+                  Log.e(point1!.latitude);
+                  Log.e(point1!.longitude);
+                  Log.e(point2!.latitude);
+                  Log.e(point2!.longitude);
+                  CustomSnackbar.show(
+                    context,
+                    "Kerakli ma'lumotlarni kirgazing",
+                  );
+                }
+              },
+              margin: const EdgeInsets.all(16),
+              text: AppLocalizations.of(context)!.register,
+            );
           },
-          margin: const EdgeInsets.all(16),
-          text: AppLocalizations.of(context)!.register,
         ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      "Qayerdan",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: Text(
-                      point1?.name ?? 'Nomalum',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            isFirst: true,
-                            point1: point1,
-                            point2: point2,
-                            onTap: (mapPoint) {
-                              Navigator.pop(context);
-                              if (mapPoint != null) {
-                                point1 = mapPoint;
-                                setState(() {});
-                              }
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Divider(height: 1),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Qayerga",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: Text(
-                      point2?.name ?? 'Nomalum',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(
-                            isFirst: false,
-                            point1: point1,
-                            point2: point2,
-                            onTap: (mapPoint) {
-                              Navigator.pop(context);
-                              if (mapPoint != null) {
-                                point2 = mapPoint;
-                                setState(() {});
-                              }
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            SelectionLocationField(
+              onTap1: (point) {
+                point1 = point;
+              },
+              onTap2: (point) {
+                point2 = point;
+              },
             ),
             const SizedBox(height: 8),
             MinTextField(
               text: "Yuk vazni",
               hintText: "0",
+              controller: controllerCount,
               keyboardType: TextInputType.number,
               formatter: [Formatters.numberFormat],
-              // suffixIcon: const Text(
-              //   "kg",
-              //   style: TextStyle(
-              //     fontSize: 16,
-              //     fontWeight: FontWeight.w400,
-              //     color: dark,
-              //   ),
-              // ),
               suffixIcon: Builder(
                 builder: (context) => GestureDetector(
                   onTap: () async {
@@ -206,34 +171,36 @@ class _DeliveryViewState extends State<DeliveryView> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      items: ['kg', 'm³', 'litr'].map((String choice) {
-                        return PopupMenuItem<String>(
-                          value: choice,
-                          height: 40,
-                          child: SizedBox(
-                            width: 140,
-                            child: Row(
-                              children: [
-                                Text(choice),
-                                const Spacer(),
-                                SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: choice == selectedUnit
-                                      ? AppIcons.checkboxRadio.svg(
-                                          height: 20,
-                                          width: 20,
-                                        )
-                                      : AppIcons.checkboxRadioDis.svg(
-                                          height: 20,
-                                          width: 20,
-                                        ),
-                                )
-                              ],
+                      items: ['kg', 'm³', 'litr'].map(
+                        (String choice) {
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            height: 40,
+                            child: SizedBox(
+                              width: 140,
+                              child: Row(
+                                children: [
+                                  Text(choice),
+                                  const Spacer(),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: choice == selectedUnit
+                                        ? AppIcons.checkboxRadio.svg(
+                                            height: 20,
+                                            width: 20,
+                                          )
+                                        : AppIcons.checkboxRadioDis.svg(
+                                            height: 20,
+                                            width: 20,
+                                          ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }).toList(),
+                          );
+                        },
+                      ).toList(),
                     );
 
                     if (selected != null) {
@@ -262,11 +229,13 @@ class _DeliveryViewState extends State<DeliveryView> {
               hintText: "",
               keyboardType: TextInputType.datetime,
               controller: controller,
+              readOnly: true,
               formatter: [Formatters.dateFormatter],
               prefixIcon: GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -294,7 +263,14 @@ class _DeliveryViewState extends State<DeliveryView> {
                 title: const Text("Qo‘shimcha ma’lumotlar"),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
+                    builder: (context) => AdditionalInformationView(
+                      isDelivery: true,
+                      controllerCommet: controllerCommet,
+                      controllerPrice: controllerPrice,
+                      loadServiceId: loadServiceId,
+                      loadTypeId: loadTypeId,
+                      payDate: payDate,
+                    ),
                   ));
                 },
                 minVerticalPadding: 0,
@@ -317,27 +293,8 @@ class _DeliveryViewState extends State<DeliveryView> {
               ),
             ),
             const SizedBox(height: 8),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: ListTile(
-                title: const Text("Transport turi"),
-                subtitle: const Text("Furgon 4.8x2.05x1.92"),
-                minVerticalPadding: 0,
-                titleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-                subtitleTextStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                trailing: AppImages.truck.imgAsset(),
-              ),
+            WSelectionItam(
+              onTap: (index) {},
             ),
             const SizedBox(height: 8),
           ],

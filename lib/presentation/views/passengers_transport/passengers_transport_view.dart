@@ -1,12 +1,13 @@
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
+import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class PassengersTransportView extends StatefulWidget {
 
 class _PassengersTransportViewState extends State<PassengersTransportView> {
   late TextEditingController controller;
+  MapPoint? point1;
+  MapPoint? point2;
   @override
   void initState() {
     controller = TextEditingController();
@@ -50,101 +53,13 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      "Qayerdan",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(isFirst: false,
-                            onTap: (mapPoint) {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Divider(height: 1),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Qayerga",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(isFirst: false,
-                            onTap: (mapPoint) {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            SelectionLocationField(
+              onTap1: (point) {
+                point1 = point;
+              },
+              onTap2: (point) {
+                point2 = point;
+              },
             ),
             const SizedBox(height: 8),
             MinTextField(
@@ -164,7 +79,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
               prefixIcon: GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
-                    context: context,
+                    context: context,isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -211,28 +126,9 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
               ),
             ),
             const SizedBox(height: 8),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: ListTile(
-                title: const Text("Transport turi"),
-                subtitle: const Text("Furgon 4.8x2.05x1.92"),
-                minVerticalPadding: 0,
-                titleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-                subtitleTextStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                trailing: AppImages.image_7.imgAsset(width: 120),
-              ),
-            )
+            WSelectionItam(
+              onTap: (int index) {},
+            ),
           ],
         ),
       ),

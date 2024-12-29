@@ -18,6 +18,7 @@ class MinTextField extends StatelessWidget {
     this.onprefixIconPressed,
     this.formatter,
     this.keyboardType = TextInputType.text,
+   this. readOnly= false, 
   });
   final String text;
   final String hintText;
@@ -32,6 +33,7 @@ class MinTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final void Function()? onsuffixIconPressed;
   final void Function()? onprefixIconPressed;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class MinTextField extends StatelessWidget {
                 child: TextField(
                   controller: controller,
                   onChanged: onChanged,
+                  readOnly:readOnly,
                   inputFormatters: formatter,
                   keyboardType: keyboardType,
                   decoration: InputDecoration(

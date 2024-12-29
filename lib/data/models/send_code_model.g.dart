@@ -34,7 +34,7 @@ Map<String, dynamic> _$HeadersToJson(Headers instance) => <String, dynamic>{
       'user_agent': instance.userAgent,
     };
 
-Validation _$ValidationFromJson(Map<String, dynamic> json) => const Validation();
+Validation _$ValidationFromJson(Map<String, dynamic> json) => Validation();
 
 Map<String, dynamic> _$ValidationToJson(Validation instance) =>
     <String, dynamic>{};

@@ -1,9 +1,10 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
+import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
 import 'package:carting/utils/formatters.dart';
@@ -19,15 +20,24 @@ class PeregonServiceView extends StatefulWidget {
 
 class _PeregonServiceViewState extends State<PeregonServiceView> {
   late TextEditingController controller;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
+  MapPoint? point1;
+  MapPoint? point2;
+
   @override
   void initState() {
     controller = TextEditingController();
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    controllerCommet.dispose();
+    controllerPrice.dispose();
     super.dispose();
   }
 
@@ -38,7 +48,17 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            Navigator.of(context).pop();
+            if (controllerPrice.text.isEmpty &&
+                point1 == null &&
+                point2 == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Ma'lumotlarni to'liq kirgazing"),
+                ),
+              );
+            } else {
+              Navigator.of(context).pop();
+            }
           },
           margin: const EdgeInsets.all(16),
           text: AppLocalizations.of(context)!.register,
@@ -48,101 +68,13 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      "Qayerdan",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(isFirst: false,
-                            onTap: (mapPoint) {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Divider(height: 1),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "Qayerga",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
-                      ),
-                    ),
-                    subtitle: const Text(
-                      "Toshkent, Yakkasaroy tumani",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: dark,
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LocationView(isFirst: false,
-                            onTap: (mapPoint) {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: green,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: AppIcons.location.svg(
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            SelectionLocationField(
+              onTap1: (point) {
+                point1 = point;
+              },
+              onTap2: (point) {
+                point2 = point;
+              },
             ),
             const SizedBox(height: 8),
             MinTextField(
@@ -156,6 +88,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                   showModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
                     builder: (context) => const WClaendar(),
                   ).then(
                     (value) {
@@ -181,7 +114,10 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
+                    builder: (context) => AdditionalInformationView(
+                      controllerCommet: controllerCommet,
+                      controllerPrice: controllerPrice,
+                    ),
                   ));
                 },
                 title: const Text("Qo‘shimcha ma’lumotlar"),

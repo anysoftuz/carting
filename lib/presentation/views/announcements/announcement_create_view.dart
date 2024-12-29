@@ -4,9 +4,10 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
 import 'package:carting/presentation/views/announcements/announcements_create_info_view.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/transport_rental/cars_renatl_diteals_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
+import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_bottom_padding.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
@@ -39,6 +40,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
       controllerPrice: TextEditingController(),
     ),
   ];
+  MapPoint? point1;
+  MapPoint? point2;
 
   void imagesFile() async {
     try {
@@ -90,160 +93,29 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Builder(builder: (context) {
-              switch (widget.filter) {
-                case TypeOfServiceEnum.shipping ||
-                      TypeOfServiceEnum.transportationOfPassengers ||
-                      TypeOfServiceEnum.transportTransfer:
-                  return DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            "Qayerdan",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "Toshkent, Yakkasaroy tumani",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: dark,
-                            ),
-                          ),
-                          trailing: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LocationView(
-                                  isFirst: true,
-                                  onTap: (mapPoint) {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ));
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: green,
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: AppIcons.location.svg(
-                                height: 24,
-                                width: 24,
-                                color: white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Divider(height: 1),
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Qayerga",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "Toshkent, Yakkasaroy tumani",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: dark,
-                            ),
-                          ),
-                          trailing: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LocationView(
-                                  isFirst: false,
-                                  onTap: (mapPoint) {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ));
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: green,
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: AppIcons.location.svg(
-                                height: 24,
-                                width: 24,
-                                color: white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                default:
-                  return DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        "Qayerga",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: dark.withValues(alpha: .3),
-                        ),
-                      ),
-                      subtitle: const Text(
-                        "Toshkent, Yakkasaroy tumani",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: dark,
-                        ),
-                      ),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LocationView(
-                              isFirst: false,
-                              onTap: (mapPoint) {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: green,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child: AppIcons.location.svg(
-                            height: 24,
-                            width: 24,
-                            color: white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-              }
-            }),
+            Builder(
+              builder: (context) {
+                switch (widget.filter) {
+                  case TypeOfServiceEnum.shipping ||
+                        TypeOfServiceEnum.transportationOfPassengers ||
+                        TypeOfServiceEnum.transportTransfer:
+                    return SelectionLocationField(
+                      onTap1: (point) {
+                        point1 = point;
+                      },
+                      onTap2: (point) {
+                        point2 = point;
+                      },
+                    );
+                  default:
+                    return SelectionLocationField(
+                      onTap2: (point) {
+                        point2 = point;
+                      },
+                    );
+                }
+              },
+            ),
             const SizedBox(height: 24),
             const WTitle(title: "Furgon rasmlari (10 tagacha)", color: white),
             const SizedBox(height: 12),

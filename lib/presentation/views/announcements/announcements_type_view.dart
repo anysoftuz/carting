@@ -27,6 +27,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       ),
       text: "Yuk \ntashish",
       screen: const AnnouncementsShippingTypeView(),
+      serviceId: 1,
     ),
     TypeOfService(
       icon: AppIcons.transportationOfPassengers.svg(
@@ -35,11 +36,13 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       ),
       text: "Yo'lovchilarni tashish",
       screen: const AnnouncementsTransportationOfPassengersView(),
+      serviceId: 2,
     ),
     TypeOfService(
       icon: AppIcons.car_3.svg(),
       text: "Transport ijarasi",
       screen: const AnnouncementsTransportRentalView(),
+      serviceId: 3,
     ),
     TypeOfService(
       icon: AppIcons.specialTechnique.svg(
@@ -48,16 +51,19 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       ),
       text: "Maxsus texnika xizmatlari",
       screen: const SpecialTechniqueView(isCreate: true),
+      serviceId: 3,
     ),
     TypeOfService(
       icon: AppIcons.autoRepair.svg(),
       text: "Avto ta'mirlash",
       screen: const AutoRepairView(isCreate: true),
+      serviceId: 5,
     ),
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
       screen: const TransportTransferView(isCreate: true),
+      serviceId: 6,
     ),
     TypeOfService(
       icon: AppIcons.inTheWarehouseStorage.svg(),
@@ -65,6 +71,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       screen: const AnnouncementCreateView(
         filter: TypeOfServiceEnum.storageInWarehouse,
       ),
+      serviceId: 7,
     ),
     TypeOfService(
       icon: AppIcons.fuelDeliver.svg(),
@@ -72,6 +79,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       screen: const AnnouncementCreateView(
         filter: TypeOfServiceEnum.fuelDelivery,
       ),
+      serviceId: 8,
     ),
   ];
 

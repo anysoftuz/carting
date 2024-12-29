@@ -19,6 +19,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
       ),
       text: "Yuk \ntashish",
       screen: const SizedBox(),
+      serviceId: 1,
     ),
     TypeOfService(
       icon: AppIcons.transportationOfPassengers.svg(
@@ -27,6 +28,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
       ),
       text: "Yo'lovchilarni tashish",
       screen: const SizedBox(),
+      serviceId: 2,
     ),
     TypeOfService(
       icon: AppIcons.specialTechnique.svg(
@@ -35,6 +37,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
       ),
       text: "Maxsus texnika xizmatlari",
       screen: const SizedBox(),
+      serviceId: 3,
     ),
     TypeOfService(
       icon: AppIcons.transportRental.svg(
@@ -43,26 +46,31 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
       ),
       text: "Transport ijarasi",
       screen: const SizedBox(),
+      serviceId: 4,
     ),
     TypeOfService(
       icon: AppIcons.autoRepair.svg(),
       text: "Avto ta'mirlash",
       screen: const AutoRepairView(),
+      serviceId: 5,
     ),
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
       screen: const SizedBox(),
+      serviceId: 6,
     ),
     TypeOfService(
       icon: AppIcons.inTheWarehouseStorage.svg(),
       text: "Omborda saqlash",
       screen: const SizedBox(),
+      serviceId: 7,
     ),
     TypeOfService(
       icon: AppIcons.fuelDeliver.svg(),
       text: "Yoqilg‘i yetkazish",
       screen: const SizedBox(),
+      serviceId: 8,
     ),
   ];
 
@@ -117,11 +125,13 @@ class TypeOfService {
   final Widget icon;
   final String text;
   final Widget screen;
+  final int serviceId;
 
   TypeOfService({
     required this.icon,
     required this.text,
     required this.screen,
+    required this.serviceId,
   });
 }
 

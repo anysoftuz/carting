@@ -1,12 +1,13 @@
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
+import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
+import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _SpecialTechnicalServicesViewState
     extends State<SpecialTechnicalServicesView> {
   late TextEditingController controller;
   late TextEditingController controller2;
+  MapPoint? point;
   @override
   void initState() {
     controller = TextEditingController();
@@ -54,54 +56,10 @@ class _SpecialTechnicalServicesViewState
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: ListTile(
-                title: Text(
-                  "Qayerga",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
-                  ),
-                ),
-                subtitle: const Text(
-                  "Toshkent, Yakkasaroy tumani",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: dark,
-                  ),
-                ),
-                trailing: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LocationView(
-                        isFirst: false,
-                        isOne: true,
-                        onTap: (mapPoint) {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: green,
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: AppIcons.location.svg(
-                      height: 24,
-                      width: 24,
-                      color: white,
-                    ),
-                  ),
-                ),
-              ),
+            SelectionLocationField(
+              onTap2: (point) {
+                point = point;
+              },
             ),
             const SizedBox(height: 8),
             MinTextField(
@@ -114,6 +72,7 @@ class _SpecialTechnicalServicesViewState
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -142,6 +101,7 @@ class _SpecialTechnicalServicesViewState
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -188,28 +148,9 @@ class _SpecialTechnicalServicesViewState
               ),
             ),
             const SizedBox(height: 8),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: ListTile(
-                title: const Text("Transport turi"),
-                subtitle: const Text("Бульдозер"),
-                minVerticalPadding: 0,
-                titleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-                subtitleTextStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                trailing: AppImages.bulldozer.imgAsset(),
-              ),
-            )
+            WSelectionItam(
+              onTap: (int index) {},
+            ),
           ],
         ),
       ),

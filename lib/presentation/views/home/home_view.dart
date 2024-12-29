@@ -1,3 +1,4 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -14,6 +15,7 @@ import 'package:carting/presentation/views/storage_service/storage_service_view.
 import 'package:carting/presentation/views/transport_rental/transport_rental_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -31,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       text: "Yetkazib\nberish",
       screen: const DeliveryView(),
+      serviceId: 9,
     ),
     TypeOfService(
       icon: AppIcons.transportRental.svg(
@@ -39,6 +42,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       text: "Peregon xizmati",
       screen: const PeregonServiceView(),
+      serviceId: 10,
     ),
     TypeOfService(
       icon: AppIcons.shipping.svg(
@@ -47,11 +51,13 @@ class _HomeViewState extends State<HomeView> {
       ),
       text: "Yuk \ntashish",
       screen: const ShippingCreateView(),
+      serviceId: 1,
     ),
     TypeOfService(
       icon: AppIcons.fuelDeliver.svg(),
       text: "Yoqilg‘i yetkazish",
       screen: const FuelDeliveryView(),
+      serviceId: 8,
     ),
     TypeOfService(
       icon: AppIcons.transportationOfPassengers.svg(
@@ -60,11 +66,13 @@ class _HomeViewState extends State<HomeView> {
       ),
       text: "Yo'lovchilarni tashish",
       screen: const PassengersTransportView(),
+      serviceId: 2,
     ),
     TypeOfService(
       icon: AppIcons.car_3.svg(),
       text: "Transport ijarasi",
       screen: const TransportRentalView(),
+      serviceId: 4,
     ),
     TypeOfService(
       icon: AppIcons.specialTechnique.svg(
@@ -73,21 +81,25 @@ class _HomeViewState extends State<HomeView> {
       ),
       text: "Maxsus texnika xizmatlari",
       screen: const SpecialTechnicalServicesView(),
+      serviceId: 3,
     ),
     TypeOfService(
       icon: AppIcons.autoRepair.svg(),
       text: "Avto ta'mirlash",
       screen: const AutoRepairView(),
+      serviceId: 5,
     ),
     TypeOfService(
       icon: AppIcons.transportationTransfer.svg(),
       text: "Transport transferi",
       screen: const TransportTransferCreateView(),
+      serviceId: 6,
     ),
     TypeOfService(
       icon: AppIcons.inTheWarehouseStorage.svg(),
       text: "Omborda saqlash",
       screen: const StorageServiceView(),
+      serviceId: 7,
     ),
   ];
 
@@ -138,9 +150,15 @@ class _HomeViewState extends State<HomeView> {
               itemCount: list.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
+                  final bloc = context.read<AdvertisementBloc>();
+                  bloc.add(GetTransportationTypesEvent(
+                      serviceId: list[index].serviceId));
                   Navigator.of(context, rootNavigator: true)
                       .push(MaterialPageRoute(
-                    builder: (context) => list[index].screen,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: list[index].screen,
+                    ),
                   ));
                 },
                 child: Container(

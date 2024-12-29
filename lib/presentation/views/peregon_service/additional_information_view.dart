@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/type_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
 import 'package:carting/presentation/widgets/w_title.dart';
-import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,8 +18,18 @@ class AdditionalInformationView extends StatefulWidget {
   const AdditionalInformationView({
     super.key,
     this.isDelivery = false,
+    this.controllerCommet,
+    this.controllerPrice,
+    this.loadTypeId,
+    this.loadServiceId,
+    this.payDate,
   });
   final bool isDelivery;
+  final TextEditingController? controllerCommet;
+  final TextEditingController? controllerPrice;
+  final ValueNotifier<int>? loadTypeId;
+  final ValueNotifier<int>? loadServiceId;
+  final ValueNotifier<bool>? payDate;
 
   @override
   State<AdditionalInformationView> createState() =>
@@ -28,6 +39,23 @@ class AdditionalInformationView extends StatefulWidget {
 class _AdditionalInformationViewState extends State<AdditionalInformationView> {
   List<File> images = [];
   ValueNotifier<bool> payDate = ValueNotifier(true);
+  ValueNotifier<int> loadTypeId = ValueNotifier(0);
+  ValueNotifier<int> loadServiceId = ValueNotifier(0);
+
+  @override
+  void initState() {
+    if (widget.payDate != null) {
+      payDate.value = widget.payDate!.value;
+    }
+    if (widget.loadTypeId != null) {
+      loadTypeId.value = widget.loadTypeId!.value - 1;
+    }
+    if (widget.loadServiceId != null) {
+      loadServiceId.value = widget.loadServiceId!.value - 1;
+    }
+
+    super.initState();
+  }
 
   void imagesFile() async {
     try {
@@ -46,6 +74,15 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+
+    loadTypeId.dispose();
+    payDate.dispose();
+    loadServiceId.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
@@ -55,7 +92,18 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
       ),
       bottomNavigationBar: SafeArea(
         child: WButton(
-          onTap: () {},
+          onTap: () {
+            if (widget.loadTypeId != null) {
+              widget.loadTypeId!.value = loadTypeId.value + 1;
+            }
+            if (widget.loadServiceId != null) {
+              widget.loadServiceId!.value = loadServiceId.value + 1;
+            }
+            if (widget.payDate != null) {
+              widget.payDate!.value = payDate.value;
+            }
+            Navigator.pop(context);
+          },
           margin: const EdgeInsets.all(16),
           text: AppLocalizations.of(context)!.confirm,
         ),
@@ -66,113 +114,74 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
           children: [
             if (widget.isDelivery) ...[
               const WTitle(title: "Yuk turi"),
-              ListTile(
-                title: const Text("Boshqa materiallar"),
-                subtitle: const Text("Boshqa materiallar"),
-                trailing: AppIcons.checkboxRadioDis.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                title: const Text("Qurilish mollari"),
-                subtitle: const Text("Mebel, plintus, gipsokarton"),
-                trailing: AppIcons.checkboxRadioDis.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                title: const Text("Oziq ovqat"),
-                subtitle: const Text("Ichimliklar, gazli, mineral suvlar"),
-                trailing: AppIcons.checkboxRadioDis.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                title: const Text("Uskunalar va ehtiyot qismlar"),
-                subtitle: const Text("kuzovlar, yoritgich, generator"),
-                trailing: AppIcons.checkboxRadioDis.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
+              ValueListenableBuilder(
+                valueListenable: loadTypeId,
+                builder: (context, value, __) {
+                  return ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => ListTile(
+                      title: Text(list[index].title),
+                      subtitle: Text(list[index].subtitle),
+                      onTap: () {
+                        loadTypeId.value = index;
+                      },
+                      trailing: value == index
+                          ? AppIcons.checkboxRadio.svg()
+                          : AppIcons.checkboxRadioDis.svg(),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      minVerticalPadding: 0,
+                      titleTextStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: dark,
+                      ),
+                      subtitleTextStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: dark.withValues(alpha: .3),
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 1),
+                    itemCount: list.length,
+                    shrinkWrap: true,
+                  );
+                },
               ),
               const WTitle(title: "Yuklash xizmati"),
-              ListTile(
-                title: const Text("Yuk tashuvchilarsiz"),
-                subtitle: const Text("Yordam kerak emas"),
-                trailing: AppIcons.checkboxRadioDis.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                title: const Text("Haydovchi yuklarni tashishi kerak"),
-                subtitle:
-                    const Text("50 kgdan ortiq bo’lmagan yuklarni tashish"),
-                trailing: AppIcons.checkboxRadio.svg(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                minVerticalPadding: 0,
-                titleTextStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
-                ),
-                subtitleTextStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
+              ValueListenableBuilder(
+                valueListenable: loadServiceId,
+                builder: (context, value, __) {
+                  return ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => ListTile(
+                      title: Text(list2[index].title),
+                      subtitle: Text(list2[index].subtitle),
+                      onTap: () {
+                        loadServiceId.value = index;
+                      },
+                      trailing: value == index
+                          ? AppIcons.checkboxRadio.svg()
+                          : AppIcons.checkboxRadioDis.svg(),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      minVerticalPadding: 0,
+                      titleTextStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: dark,
+                      ),
+                      subtitleTextStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: dark.withValues(alpha: .3),
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 1),
+                    itemCount: list2.length,
+                    shrinkWrap: true,
+                  );
+                },
               ),
               const WTitle(title: "Yuk rasmlari (10 tagacha)"),
               const SizedBox(height: 12),
@@ -222,6 +231,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
               maxLines: 5,
               noHeight: true,
               expands: false,
+              controller: widget.controllerCommet,
               onChanged: (value) {},
             ),
             const SizedBox(height: 12),
@@ -261,7 +271,8 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
               title: "Narx",
               hintText: "Narxni kiriting",
               keyboardType: TextInputType.number,
-              formatter: [Formatters.numberFormat],
+              controller: widget.controllerPrice,
+              formatter: [PriceFormatter()],
               onChanged: (value) {},
             ),
           ],

@@ -106,7 +106,10 @@ class AnnouncementsIteam extends StatelessWidget {
           Row(
             children: [
               Text(
-                (model.fromLocation?.name ?? "Nomalum").split(' ').first,
+                (model.fromLocation?.name ?? "Nomalum").split(' ').first ==
+                        "Oʻzbekiston,"
+                    ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
+                    : (model.fromLocation?.name ?? "Nomalum").split(' ').first,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -118,7 +121,10 @@ class AnnouncementsIteam extends StatelessWidget {
                 child: AppIcons.swap.svg(),
               ),
               Text(
-                (model.toLocation?.name ?? "Nomalum").split(' ').first,
+                (model.toLocation?.name ?? "Nomalum").split(' ').first ==
+                        "Oʻzbekiston,"
+                    ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
+                    : (model.fromLocation?.name ?? "Nomalum").split(' ').first,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

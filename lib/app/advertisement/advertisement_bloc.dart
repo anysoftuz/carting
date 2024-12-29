@@ -2,6 +2,7 @@ import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/repo/advertisement_repo.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -16,6 +17,7 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
       final respons = await _repo.createAdvertisement(event.model);
       if (respons.isRight) {
         emit(state.copyWith(statusCreate: FormzSubmissionStatus.success));
+        event.onSucces();
         add(GetAdvertisementsProvideEvent());
         add(GetAdvertisementsReceiveEvent());
       } else {

@@ -16,6 +16,10 @@ class GetTransportationTypesEvent extends AdvertisementEvent {
 
 class CreateDeliveryEvent extends AdvertisementEvent {
   final Map<String, dynamic> model;
+  final VoidCallback onSucces;
 
-  CreateDeliveryEvent({required this.model});
+  CreateDeliveryEvent({
+    required this.model,
+    required this.onSucces,
+  });
 }

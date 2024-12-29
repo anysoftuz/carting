@@ -32,6 +32,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (result.isRight) {
         add(GetMeEvent());
       } else {
+        await StorageRepository.putString(
+          StorageKeys.TOKEN,
+          '',
+        );
+        await StorageRepository.putString(
+          StorageKeys.REFRESH,
+          '',
+        );
         emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
       }
     });

@@ -13,10 +13,10 @@ import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
 import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
-import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class DeliveryView extends StatefulWidget {
   const DeliveryView({super.key});
@@ -71,7 +71,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                 if (point1 != null &&
                     point2 != null &&
                     controllerCount.text.isNotEmpty &&
-                    controllerPrice.text.isNotEmpty) {
+                    controllerPrice.text.isNotEmpty&&controller.text.isNotEmpty) {
                   final model = DeliveryCreateModel(
                     toLocation: LocationModel(
                       lat: point2!.latitude,
@@ -103,14 +103,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                             controllerPrice.text.replaceAll(' ', '')) ??
                         0,
                   ).toJson();
-                  context
-                      .read<AdvertisementBloc>()
-                      .add(CreateDeliveryEvent(model: model));
+                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                        model: model,
+                        onSucces: () {
+                          Navigator.pop(context);
+                        },
+                      ));
                 } else {
-                  Log.e(point1!.latitude);
-                  Log.e(point1!.longitude);
-                  Log.e(point2!.latitude);
-                  Log.e(point2!.longitude);
                   CustomSnackbar.show(
                     context,
                     "Kerakli ma'lumotlarni kirgazing",
@@ -118,6 +117,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                 }
               },
               margin: const EdgeInsets.all(16),
+              isLoading: state.statusCreate.isInProgress,
               text: AppLocalizations.of(context)!.register,
             );
           },
@@ -294,7 +294,9 @@ class _DeliveryViewState extends State<DeliveryView> {
             ),
             const SizedBox(height: 8),
             WSelectionItam(
-              onTap: (index) {},
+              onTap: (index) {
+                trTypeId.value = index;
+              },
             ),
             const SizedBox(height: 8),
           ],

@@ -1,8 +1,12 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/location_model.dart';
+import 'package:carting/data/models/passenger_transportation_create_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -11,6 +15,8 @@ import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class PassengersTransportView extends StatefulWidget {
   const PassengersTransportView({super.key});
@@ -22,17 +28,30 @@ class PassengersTransportView extends StatefulWidget {
 
 class _PassengersTransportViewState extends State<PassengersTransportView> {
   late TextEditingController controller;
+  late TextEditingController controllerCount;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
+  ValueNotifier<bool> payDate = ValueNotifier(true);
+  ValueNotifier<int> trTypeId = ValueNotifier(0);
   MapPoint? point1;
   MapPoint? point2;
   @override
   void initState() {
     controller = TextEditingController();
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
+    controllerCount = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    controllerCommet.dispose();
+    controllerPrice.dispose();
+    controllerCount.dispose();
+    payDate.dispose();
+    trTypeId.dispose();
     super.dispose();
   }
 
@@ -41,12 +60,59 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
     return Scaffold(
       appBar: AppBar(title: const Text("Yo‘lovchilarni tashish")),
       bottomNavigationBar: SafeArea(
-        child: WButton(
-          onTap: () {
-            Navigator.of(context).pop();
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                if (point1 != null &&
+                    point2 != null &&
+                    controllerCount.text.isNotEmpty &&
+                    controllerPrice.text.isNotEmpty &&
+                    controller.text.isNotEmpty) {
+                  final model = PassengerTransportationCreateModel(
+                    toLocation: LocationModel(
+                      lat: point2!.latitude,
+                      lng: point2!.longitude,
+                      name: point2!.name,
+                    ),
+                    fromLocation: LocationModel(
+                      lat: point1!.latitude,
+                      lng: point1!.longitude,
+                      name: point1!.name,
+                    ),
+                    serviceName: 'Yo‘lovchilarni tashish',
+                    details: DetailsModel(
+                      transportationTypeId:
+                          state.transportationTypes[trTypeId.value].id,
+                      passengerCount: int.tryParse(controllerCount.text) ?? 0,
+                    ),
+                    advType: 'RECEIVE',
+                    serviceTypeId: 2,
+                    shipmentDate: controller.text,
+                    note: controllerCommet.text,
+                    payType: payDate.value ? 'CASH' : 'CARD',
+                    price: int.tryParse(
+                            controllerPrice.text.replaceAll(' ', '')) ??
+                        0,
+                  ).toJson();
+                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                        model: model,
+                        onSucces: () {
+                          Navigator.pop(context);
+                        },
+                      ));
+                } else {
+                  CustomSnackbar.show(
+                    context,
+                    "Kerakli ma'lumotlarni kirgazing",
+                  );
+                }
+              },
+              margin: const EdgeInsets.all(16),
+              isLoading: state.statusCreate.isInProgress,
+              text: AppLocalizations.of(context)!.register,
+            );
           },
-          margin: const EdgeInsets.all(16),
-          text: AppLocalizations.of(context)!.register,
         ),
       ),
       body: SingleChildScrollView(
@@ -66,6 +132,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
               text: "Yo‘lovchi soni",
               hintText: "Miqdorni kiriting",
               keyboardType: TextInputType.number,
+              controller: controllerCount,
               formatter: [Formatters.numberFormat],
               onChanged: (value) {},
             ),
@@ -79,7 +146,8 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
               prefixIcon: GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
-                    context: context,isScrollControlled: true,
+                    context: context,
+                    isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -106,7 +174,10 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
+                    builder: (context) => AdditionalInformationView(
+                      controllerCommet: controllerCommet,
+                      controllerPrice: controllerPrice,
+                    ),
                   ));
                 },
                 title: const Text("Qo‘shimcha ma’lumotlar"),
@@ -127,7 +198,9 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
             ),
             const SizedBox(height: 8),
             WSelectionItam(
-              onTap: (int index) {},
+              onTap: (int index) {
+                trTypeId.value = index;
+              },
             ),
           ],
         ),

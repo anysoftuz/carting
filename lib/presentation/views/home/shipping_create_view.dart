@@ -1,8 +1,13 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/delivery_create_model.dart';
+import 'package:carting/data/models/location_model.dart';
+
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -11,6 +16,8 @@ import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class ShippingCreateView extends StatefulWidget {
   const ShippingCreateView({super.key});
@@ -21,18 +28,35 @@ class ShippingCreateView extends StatefulWidget {
 
 class _ShippingCreateViewState extends State<ShippingCreateView> {
   late TextEditingController controller;
+  late TextEditingController controllerCount;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
   String selectedUnit = 'kg';
   MapPoint? point1;
   MapPoint? point2;
+  ValueNotifier<bool> payDate = ValueNotifier(true);
+  ValueNotifier<int> trTypeId = ValueNotifier(0);
+  ValueNotifier<int> loadTypeId = ValueNotifier(1);
+  ValueNotifier<int> loadServiceId = ValueNotifier(1);
   @override
   void initState() {
     controller = TextEditingController();
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
+    controllerCount = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    controllerCommet.dispose();
+    controllerPrice.dispose();
+    controllerCount.dispose();
+    payDate.dispose();
+    trTypeId.dispose();
+    loadTypeId.dispose();
+    loadServiceId.dispose();
     super.dispose();
   }
 
@@ -41,12 +65,63 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
     return Scaffold(
       appBar: AppBar(title: const Text("Yuk tashish")),
       bottomNavigationBar: SafeArea(
-        child: WButton(
-          onTap: () {
-            Navigator.of(context).pop();
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                if (point1 != null &&
+                    point2 != null &&
+                    controllerCount.text.isNotEmpty &&
+                    controllerPrice.text.isNotEmpty) {
+                  final model = DeliveryCreateModel(
+                    toLocation: LocationModel(
+                      lat: point2!.latitude,
+                      lng: point2!.longitude,
+                      name: point2!.name,
+                    ),
+                    fromLocation: LocationModel(
+                      lat: point1!.latitude,
+                      lng: point1!.longitude,
+                      name: point1!.name,
+                    ),
+                    serviceName: 'Yuk tashish',
+                    details: Details(
+                      transportationTypeId:
+                          state.transportationTypes[trTypeId.value].id,
+                      loadTypeId: '${loadTypeId.value}',
+                      loadServiceId: '${loadServiceId.value}',
+                      loadWeight: LoadWeight(
+                        amount: int.tryParse(controllerCount.text) ?? 0,
+                        name: selectedUnit,
+                      ),
+                    ),
+                    advType: 'RECEIVE',
+                    serviceTypeId: 1,
+                    shipmentDate: controller.text,
+                    note: controllerCommet.text,
+                    payType: payDate.value ? 'CASH' : 'CARD',
+                    price: int.tryParse(
+                            controllerPrice.text.replaceAll(' ', '')) ??
+                        0,
+                  ).toJson();
+                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                        model: model,
+                        onSucces: () {
+                          Navigator.pop(context);
+                        },
+                      ));
+                } else {
+                  CustomSnackbar.show(
+                    context,
+                    "Kerakli ma'lumotlarni kirgazing",
+                  );
+                }
+              },
+              margin: const EdgeInsets.all(16),
+              isLoading: state.statusCreate.isInProgress,
+              text: AppLocalizations.of(context)!.register,
+            );
           },
-          margin: const EdgeInsets.all(16),
-          text: AppLocalizations.of(context)!.register,
         ),
       ),
       body: SingleChildScrollView(
@@ -160,7 +235,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
               prefixIcon: GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
-                    context: context,isScrollControlled: true,
+                    context: context,
+                    isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (context) => const WClaendar(),
                   ).then(
@@ -187,8 +263,14 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        const AdditionalInformationView(isDelivery: true),
+                    builder: (context) => AdditionalInformationView(
+                      isDelivery: true,
+                      controllerCommet: controllerCommet,
+                      controllerPrice: controllerPrice,
+                      loadServiceId: loadServiceId,
+                      loadTypeId: loadTypeId,
+                      payDate: payDate,
+                    ),
                   ));
                 },
                 title: const Text("Qo‘shimcha ma’lumotlar"),
@@ -213,7 +295,9 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
             ),
             const SizedBox(height: 8),
             WSelectionItam(
-              onTap: (int index) {},
+              onTap: (int index) {
+                trTypeId.value = index;
+              },
             ),
           ],
         ),

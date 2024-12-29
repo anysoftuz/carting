@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -5,7 +7,6 @@ import 'package:carting/presentation/views/orders/orders_info_deliver_view.dart'
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/formatters.dart';
-import 'package:flutter/material.dart';
 
 class CarAddView extends StatefulWidget {
   const CarAddView({super.key});

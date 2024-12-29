@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:flutter/material.dart';
 
 class WorkshopsInfoView extends StatefulWidget {
   const WorkshopsInfoView({super.key});

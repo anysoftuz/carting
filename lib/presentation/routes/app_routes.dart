@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/infrastructure/core/service_locator.dart';
 import 'package:carting/infrastructure/repo/advertisement_repo.dart';
@@ -16,9 +20,6 @@ import 'package:carting/presentation/views/orders/order_view.dart';
 import 'package:carting/presentation/views/profile/profile_info_view.dart';
 import 'package:carting/presentation/views/profile/profile_view.dart';
 import 'package:carting/presentation/views/splash_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 sealed class AppRouts {
   static final GlobalKey<NavigatorState> navigatorKey =

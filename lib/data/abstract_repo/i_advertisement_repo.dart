@@ -1,4 +1,5 @@
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/data/models/fuels_info_model.dart';
 import 'package:carting/data/models/response_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/core/exceptions/failures.dart';
@@ -16,4 +17,7 @@ abstract class IAdvertisementRepo {
     int servisId,
   );
   Future<Either<Failure, bool>> createAdvertisement(Map<String, dynamic> model);
+  Future<Either<Failure, ResponseModel<List<FuelsInfoModel>>>> fuels(
+    int fuelsId,
+  );
 }

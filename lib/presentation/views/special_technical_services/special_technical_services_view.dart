@@ -1,8 +1,11 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/special_equipment_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -11,6 +14,8 @@ import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class SpecialTechnicalServicesView extends StatefulWidget {
   const SpecialTechnicalServicesView({super.key});
@@ -24,11 +29,17 @@ class _SpecialTechnicalServicesViewState
     extends State<SpecialTechnicalServicesView> {
   late TextEditingController controller;
   late TextEditingController controller2;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
+  ValueNotifier<bool> payDate = ValueNotifier(true);
+  ValueNotifier<int> trTypeId = ValueNotifier(0);
   MapPoint? point;
   @override
   void initState() {
     controller = TextEditingController();
     controller2 = TextEditingController();
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
     super.initState();
   }
 
@@ -36,6 +47,10 @@ class _SpecialTechnicalServicesViewState
   void dispose() {
     controller.dispose();
     controller2.dispose();
+    controllerCommet.dispose();
+    controllerPrice.dispose();
+    payDate.dispose();
+    trTypeId.dispose();
     super.dispose();
   }
 
@@ -44,12 +59,53 @@ class _SpecialTechnicalServicesViewState
     return Scaffold(
       appBar: AppBar(title: const Text("Maxsus texnika xizmatlari")),
       bottomNavigationBar: SafeArea(
-        child: WButton(
-          onTap: () {
-            Navigator.of(context).pop();
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                if (point != null &&
+                    controller2.text.isNotEmpty &&
+                    controllerPrice.text.isNotEmpty &&
+                    controller.text.isNotEmpty) {
+                  final model = SpecialEquipmentModel(
+                    toLocation: ToLocation(
+                      lat: point!.latitude,
+                      lng: point!.longitude,
+                      name: point!.name,
+                    ),
+                    serviceName: 'Maxsus texnika',
+                    details: DetailsSpecial(
+                      transportationTypeId:
+                          state.transportationTypes[trTypeId.value].id,
+                      fromDate: controller.text,
+                      toDate: controller2.text,
+                    ),
+                    advType: 'RECEIVE',
+                    serviceTypeId: 3,
+                    note: controllerCommet.text,
+                    payType: payDate.value ? 'CASH' : 'CARD',
+                    price: int.tryParse(
+                            controllerPrice.text.replaceAll(' ', '')) ??
+                        0,
+                  ).toJson();
+                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                        model: model,
+                        onSucces: () {
+                          Navigator.pop(context);
+                        },
+                      ));
+                } else {
+                  CustomSnackbar.show(
+                    context,
+                    "Kerakli ma'lumotlarni kirgazing",
+                  );
+                }
+              },
+              isLoading: state.statusCreate.isInProgress,
+              margin: const EdgeInsets.all(16),
+              text: AppLocalizations.of(context)!.register,
+            );
           },
-          margin: const EdgeInsets.all(16),
-          text: AppLocalizations.of(context)!.register,
         ),
       ),
       body: SingleChildScrollView(
@@ -128,7 +184,11 @@ class _SpecialTechnicalServicesViewState
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AdditionalInformationView(),
+                    builder: (context) => AdditionalInformationView(
+                      controllerCommet: controllerCommet,
+                      controllerPrice: controllerPrice,
+                      payDate: payDate,
+                    ),
                   ));
                 },
                 title: const Text("Qo‘shimcha ma’lumotlar"),
@@ -149,7 +209,9 @@ class _SpecialTechnicalServicesViewState
             ),
             const SizedBox(height: 8),
             WSelectionItam(
-              onTap: (int index) {},
+              onTap: (int index) {
+                trTypeId.value = index;
+              },
             ),
           ],
         ),

@@ -1,6 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:pinput/pinput.dart';
+
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -8,10 +13,6 @@ import 'package:carting/data/models/send_code_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/auth/identity_choose_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
-import 'package:pinput/pinput.dart';
 
 class SmsView extends StatefulWidget {
   const SmsView({

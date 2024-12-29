@@ -1,7 +1,7 @@
-import 'package:carting/presentation/views/common/app_lat_long.dart';
-import 'package:carting/presentation/views/common/app_location.dart';
 import 'package:geolocator/geolocator.dart';
 
+import 'package:carting/presentation/views/common/app_lat_long.dart';
+import 'package:carting/presentation/views/common/app_location.dart';
 
 class LocationService implements AppLocation {
   final defLocation = const TashketnLoaction();

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
@@ -9,7 +11,6 @@ import 'package:carting/presentation/views/cars/special_technique_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/views/transport_transfer/transport_transfer_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
-import 'package:flutter/material.dart';
 
 class AnnouncementsTypeView extends StatefulWidget {
   const AnnouncementsTypeView({super.key});

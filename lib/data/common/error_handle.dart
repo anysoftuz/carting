@@ -1,9 +1,10 @@
+import 'package:dio/dio.dart';
+
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/infrastructure/core/exceptions/exceptions.dart';
 import 'package:carting/infrastructure/core/exceptions/failures.dart';
 import 'package:carting/infrastructure/core/service_locator.dart';
 import 'package:carting/utils/log_service.dart';
-import 'package:dio/dio.dart';
 
 class ErrorHandle {
   Future<R> apiCantrol<T, R>(

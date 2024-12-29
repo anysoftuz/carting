@@ -1,7 +1,8 @@
-import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import 'package:carting/assets/assets/images.dart';
+import 'package:carting/assets/colors/colors.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});

@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/presentation/views/auto_repair/master_info_view.dart';
 import 'package:carting/presentation/views/auto_repair/widgets/masters_iteam.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
-import 'package:flutter/material.dart';
 
 class MastersListView extends StatelessWidget {
   const MastersListView({super.key, required this.title});

@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
-import 'package:flutter/material.dart';
 
 class AnnouncementsTransportationOfPassengersView extends StatefulWidget {
   const AnnouncementsTransportationOfPassengersView({super.key});

@@ -1,8 +1,11 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/peregon_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -10,6 +13,7 @@ import 'package:carting/presentation/widgets/w_claendar.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PeregonServiceView extends StatefulWidget {
   const PeregonServiceView({super.key});
@@ -24,6 +28,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
   late TextEditingController controllerPrice;
   MapPoint? point1;
   MapPoint? point2;
+  ValueNotifier<bool> payDate = ValueNotifier(true);
 
   @override
   void initState() {
@@ -38,6 +43,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
     controller.dispose();
     controllerCommet.dispose();
     controllerPrice.dispose();
+    payDate.dispose();
     super.dispose();
   }
 
@@ -48,16 +54,41 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
-            if (controllerPrice.text.isEmpty &&
-                point1 == null &&
-                point2 == null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Ma'lumotlarni to'liq kirgazing"),
+            if (point1 != null &&
+                point2 != null &&
+                controllerPrice.text.isNotEmpty &&
+                controller.text.isNotEmpty) {
+              final model = PeregonModel(
+                toLocation: Location(
+                  lat: point2!.latitude,
+                  lng: point2!.longitude,
+                  name: point2!.name,
                 ),
-              );
+                fromLocation: Location(
+                  lat: point1!.latitude,
+                  lng: point1!.longitude,
+                  name: point1!.name,
+                ),
+                serviceName: 'Peregon xizmati',
+                advType: 'RECEIVE',
+                serviceTypeId: 10,
+                shipmentDate: controller.text,
+                note: controllerCommet.text,
+                payType: payDate.value ? 'CASH' : 'CARD',
+                price:
+                    int.tryParse(controllerPrice.text.replaceAll(' ', '')) ?? 0,
+              ).toJson();
+              context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                    model: model,
+                    onSucces: () {
+                      Navigator.pop(context);
+                    },
+                  ));
             } else {
-              Navigator.of(context).pop();
+              CustomSnackbar.show(
+                context,
+                "Kerakli ma'lumotlarni kirgazing",
+              );
             }
           },
           margin: const EdgeInsets.all(16),
@@ -117,6 +148,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                     builder: (context) => AdditionalInformationView(
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
+                      payDate: payDate,
                     ),
                   ));
                 },

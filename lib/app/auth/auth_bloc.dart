@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+
 import 'package:carting/assets/constants/app_constants.dart';
 import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/data/models/send_code_body.dart';
@@ -10,9 +14,6 @@ import 'package:carting/data/models/verify_body.dart';
 import 'package:carting/infrastructure/repo/auth_repo.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
 import 'package:carting/utils/log_service.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

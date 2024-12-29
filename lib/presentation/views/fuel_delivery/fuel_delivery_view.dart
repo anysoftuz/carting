@@ -1,12 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data.dart';
+import 'package:carting/data/models/fuels_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/widgets/min_text_field.dart';
 import 'package:carting/presentation/widgets/selection_location_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_selection_fuels.dart';
 import 'package:carting/utils/formatters.dart';
-import 'package:flutter/material.dart';
 
 class FuelDeliveryView extends StatefulWidget {
   const FuelDeliveryView({super.key});
@@ -16,19 +23,39 @@ class FuelDeliveryView extends StatefulWidget {
 }
 
 class _FuelDeliveryViewState extends State<FuelDeliveryView> {
-  String selectedUnit = 'Ai 80';
+  late TextEditingController controller;
+  FuelsModel selectedUnit = AppData.fuels.first;
   MapPoint? point;
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+    context.read<AdvertisementBloc>().add(GetFuelsEvent(id: selectedUnit.id));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Yoqilg‘i yetkazish")),
       bottomNavigationBar: SafeArea(
-        child: WButton(
-          onTap: () {
-            Navigator.of(context).pop();
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              margin: const EdgeInsets.all(16),
+              isLoading: state.statusCreate.isInProgress,
+              text: AppLocalizations.of(context)!.confirm,
+            );
           },
-          margin: const EdgeInsets.all(16),
-          text: AppLocalizations.of(context)!.confirm,
         ),
       ),
       body: SingleChildScrollView(
@@ -47,6 +74,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                   child: MinTextField(
                     text: "Hamji (litr)",
                     hintText: "0 litr",
+                    controller: controller,
                     keyboardType: TextInputType.number,
                     formatter: [Formatters.numberFormat],
                     onChanged: (value) {},
@@ -77,7 +105,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                           Offset.zero & overlay.size,
                         );
 
-                        String? selected = await showMenu<String>(
+                        FuelsModel? selected = await showMenu<FuelsModel>(
                           context: context,
                           position: position,
                           color: white,
@@ -85,9 +113,8 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          items: ['Ai 80', 'Ai 91', 'Ai 92', 'Ai 95']
-                              .map((String choice) {
-                            return PopupMenuItem<String>(
+                          items: AppData.fuels.map((FuelsModel choice) {
+                            return PopupMenuItem<FuelsModel>(
                               value: choice,
                               height: 32,
                               child: SizedBox(
@@ -95,7 +122,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      choice,
+                                      choice.type,
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
@@ -127,6 +154,11 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                           setState(() {
                             selectedUnit = selected;
                           });
+                          if (context.mounted) {
+                            context
+                                .read<AdvertisementBloc>()
+                                .add(GetFuelsEvent(id: selected.id));
+                          }
                         }
                       },
                       child: DecoratedBox(
@@ -147,7 +179,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  selectedUnit,
+                                  selectedUnit.type,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
@@ -166,30 +198,8 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
               ],
             ),
             const SizedBox(height: 12),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: ListTile(
-                title: Text(
-                  "Kompaniyalar ro‘yhati",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
-                  ),
-                ),
-                subtitle: const Text(
-                  "Kompaniyani tanlang",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: dark,
-                  ),
-                ),
-                trailing: AppIcons.arrowBottom.svg(),
-              ),
+            WSelectionFuels(
+              onTap: (model) {},
             ),
           ],
         ),

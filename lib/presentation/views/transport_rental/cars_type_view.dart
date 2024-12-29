@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
 import 'package:carting/presentation/views/transport_rental/cars_rental_info_view.dart';
 import 'package:carting/presentation/widgets/w_title.dart';
-import 'package:flutter/material.dart';
 
 class CarsTypeView extends StatefulWidget {
   const CarsTypeView({super.key});

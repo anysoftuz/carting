@@ -1,17 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
+
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/app_lat_long.dart';
 import 'package:carting/presentation/views/common/clusterized_icon_painter.dart';
 import 'package:carting/presentation/views/common/location_service.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
-import 'package:carting/utils/log_service.dart';
-
-import 'package:flutter/material.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/log_service.dart';
 
 class LocationView extends StatefulWidget {
   const LocationView({

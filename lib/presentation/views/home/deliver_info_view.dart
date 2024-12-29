@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:flutter/material.dart';
 
 class DeliverInfoView extends StatelessWidget {
   const DeliverInfoView({super.key, required this.model});

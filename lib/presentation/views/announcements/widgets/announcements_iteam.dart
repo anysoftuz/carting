@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/utils/my_function.dart';
-import 'package:flutter/material.dart';
 
 class AnnouncementsIteam extends StatelessWidget {
   const AnnouncementsIteam({

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
@@ -14,8 +17,6 @@ import 'package:carting/presentation/views/special_technical_services/special_te
 import 'package:carting/presentation/views/storage_service/storage_service_view.dart';
 import 'package:carting/presentation/views/transport_rental/transport_rental_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

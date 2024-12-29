@@ -1,9 +1,10 @@
 import 'dart:io';
 
-import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/assets/colors/colors.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});

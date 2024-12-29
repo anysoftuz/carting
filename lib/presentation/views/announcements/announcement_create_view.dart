@@ -1,5 +1,10 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
@@ -15,10 +20,6 @@ import 'package:carting/presentation/widgets/w_text_field.dart';
 import 'package:carting/presentation/widgets/w_title.dart';
 import 'package:carting/utils/enum_filtr.dart';
 import 'package:carting/utils/formatters.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AnnouncementCreateView extends StatefulWidget {
   const AnnouncementCreateView({

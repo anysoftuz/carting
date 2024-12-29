@@ -1,8 +1,41 @@
 import 'package:carting/assets/assets/images.dart';
+import 'package:carting/data/models/fuels_model.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:flutter/material.dart';
 
 class AppData {
+  static List<FuelsModel> fuels = [
+    FuelsModel(
+      id: 1,
+      type: 'AI 80',
+      price: '',
+    ),
+    FuelsModel(
+      id: 2,
+      type: 'AI 92',
+      price: '',
+    ),
+    FuelsModel(
+      id: 3,
+      type: 'AI 95',
+      price: '',
+    ),
+    FuelsModel(
+      id: 4,
+      type: 'AI 98',
+      price: '',
+    ),
+    FuelsModel(
+      id: 5,
+      type: 'AI 100',
+      price: '',
+    ),
+    FuelsModel(
+      id: 6,
+      type: 'Disel',
+      price: '',
+    ),
+  ];
   static List<TyperIteam> shippinglist = [
     TyperIteam(
       icon: AppImages.truck.imgAsset(height: 56),

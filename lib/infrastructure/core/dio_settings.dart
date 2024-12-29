@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
 import 'package:carting/utils/log_service.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class DioSettings {
   BaseOptions _dioBaseOptions = BaseOptions(

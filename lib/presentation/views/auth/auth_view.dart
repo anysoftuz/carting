@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -10,9 +14,6 @@ import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/formatters.dart';
 import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/my_function.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 
 class AuthView extends StatefulWidget {
   const AuthView({super.key});

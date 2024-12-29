@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data.dart';
 import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
-import 'package:flutter/material.dart';
 
 class ShippingView extends StatefulWidget {
   const ShippingView({super.key});

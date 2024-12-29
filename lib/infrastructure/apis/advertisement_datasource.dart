@@ -1,5 +1,6 @@
 import 'package:carting/data/common/error_handle.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/data/models/fuels_info_model.dart';
 import 'package:carting/data/models/response_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/core/dio_settings.dart';
@@ -14,6 +15,7 @@ abstract class AdvertisementDatasource {
     int servisId,
   );
   Future<bool> createAdvertisement(Map<String, dynamic> model);
+  Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId);
 }
 
 class AdvertisementDatasourceImpl implements AdvertisementDatasource {
@@ -84,6 +86,23 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
         data: model,
       ),
       body: (response) => true,
+    );
+  }
+
+  @override
+  Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId) {
+    return _handle.apiCantrol(
+      request: () => dio.get(
+        'list/fuels?fuel_id=$fuelsId',
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => (p0 as List)
+            .map(
+              (e) => FuelsInfoModel.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
     );
   }
 }

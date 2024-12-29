@@ -76,9 +76,12 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
               return AnimatedCrossFade(
                 firstChild: WButton(
                   onTap: () {
+                    final bloc = context.read<AdvertisementBloc>();
                     Navigator.of(context, rootNavigator: true)
                         .push(MaterialPageRoute(
-                      builder: (context) => const AnnouncementsTypeView(),
+                      builder: (context) => AnnouncementsTypeView(
+                        bloc: bloc,
+                      ),
                     ));
                   },
                   height: 40,

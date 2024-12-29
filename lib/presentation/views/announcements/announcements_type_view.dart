@@ -1,3 +1,4 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -11,9 +12,11 @@ import 'package:carting/presentation/views/cars/special_technique_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/views/transport_transfer/transport_transfer_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnnouncementsTypeView extends StatefulWidget {
-  const AnnouncementsTypeView({super.key});
+  const AnnouncementsTypeView({super.key, required this.bloc});
+  final AdvertisementBloc bloc;
 
   @override
   State<AnnouncementsTypeView> createState() => _AnnouncementsTypeViewState();
@@ -100,7 +103,10 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => list[index].screen,
+              builder: (context) => BlocProvider.value(
+                value: widget.bloc,
+                child: list[index].screen,
+              ),
             ));
           },
           child: Container(

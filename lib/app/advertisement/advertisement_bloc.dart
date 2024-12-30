@@ -42,7 +42,10 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
 
     on<GetTransportationTypesEvent>((event, emit) async {
       emit(state.copyWith(statusTrTypes: FormzSubmissionStatus.inProgress));
-      final respons = await _repo.getTransportationTypes(event.serviceId);
+      final respons = await _repo.getTransportationTypes(
+        event.serviceId,
+        isRECEIVE: event.isRECEIVE,
+      );
       if (respons.isRight) {
         emit(state.copyWith(
           statusTrTypes: FormzSubmissionStatus.success,

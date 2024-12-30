@@ -4,7 +4,6 @@ import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/data.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
@@ -26,9 +25,10 @@ class SpecialTechniqueView extends StatefulWidget {
 class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
   @override
   void initState() {
-    context
-        .read<AdvertisementBloc>()
-        .add(GetTransportationTypesEvent(serviceId: 3));
+    context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
+          serviceId: 3,
+          isRECEIVE: true,
+        ));
     super.initState();
   }
 
@@ -69,15 +69,14 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
                     ),
                   ));
                 } else {
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => OrdersFilterView(
-                      title: AppData.specialTechnique[index].text,
+                      title: state.transportationTypes[index].name,
                       onTap: () {
-                        Navigator.of(context, rootNavigator: true)
-                            .push(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => OrderDetailView(
-                              title: AppData.specialTechnique[index].text),
+                            title: state.transportationTypes[index].name,
+                          ),
                         ));
                       },
                     ),

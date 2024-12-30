@@ -1,8 +1,13 @@
 import 'dart:io';
 
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
+import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -43,6 +48,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
   ];
   MapPoint? point1;
   MapPoint? point2;
+  late TextEditingController controllerCount;
+  late TextEditingController controllerCommet;
+  late TextEditingController controllerPrice;
 
   void imagesFile() async {
     try {
@@ -61,33 +69,60 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
   }
 
   @override
+  void initState() {
+    controllerCommet = TextEditingController();
+    controllerPrice = TextEditingController();
+    controllerCount = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controllerCommet.dispose();
+    controllerPrice.dispose();
+    controllerCount.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Ma’lumotlar")),
       bottomNavigationBar: WBottomPadding(
-        child: WButton(
-          onTap: () {
-            if (images.isNotEmpty) {
-              if (widget.filter == TypeOfServiceEnum.transportRental) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      const CarsRenatlDitealsView(myAnnouncement: true),
-                ));
-              } else {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AnnouncementsCreateInfoView(
-                    filter: widget.filter,
-                    images: images,
-                  ),
-                ));
-              }
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Rasim qo'shing")),
-              );
-            }
+        child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+          builder: (context, state) {
+            return WButton(
+              onTap: () {
+                if (images.isNotEmpty &&
+                    controllerCommet.text.isNotEmpty &&
+                    controllerPrice.text.isNotEmpty &&
+                    controllerCount.text.isNotEmpty &&
+                    point1 != null &&
+                    point2 != null) {
+                  if (widget.filter == TypeOfServiceEnum.transportRental) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          const CarsRenatlDitealsView(myAnnouncement: true),
+                    ));
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AnnouncementsCreateInfoView(
+                        filter: widget.filter,
+                        images: images,
+                      ),
+                    ));
+                  }
+                } else {
+                  CustomSnackbar.show(
+                    context,
+                    "Kerakli ma'lumotlarni kirgazing",
+                  );
+                }
+              },
+              text: "Joylash",
+              isLoading: state.statusCreate.isInProgress,
+            );
           },
-          text: "Joylash",
         ),
       ),
       body: SingleChildScrollView(
@@ -118,7 +153,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
               },
             ),
             const SizedBox(height: 24),
-            const WTitle(title: "Furgon rasmlari (10 tagacha)", color: white),
+            const WTitle(title: "Rasmlari (10 tagacha)", color: white),
             const SizedBox(height: 12),
             GridView.builder(
               itemCount: images.length + 1,
@@ -243,6 +278,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         WTextField(
                           title: '1 sutkalik narx',
                           hintText: 'Narxni kiriting',
+                          keyboardType: TextInputType.number,
+                          formatter: [PriceFormatter()],
                           onChanged: (value) {},
                         ),
                         const SizedBox(height: 16),
@@ -261,7 +298,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
-                                formatter: [Formatters.numberFormat],
+                                formatter: [PriceFormatter()],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -283,7 +320,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
-                                formatter: [Formatters.numberFormat],
+                                formatter: [PriceFormatter()],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -305,7 +342,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 title: 'Narx',
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
-                                formatter: [Formatters.numberFormat],
+                                formatter: [PriceFormatter()],
                                 onChanged: (value) {},
                               ),
                             ),
@@ -333,6 +370,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 text: "Maksimal yuk sig‘imi",
                                 hintText: "0",
                                 keyboardType: TextInputType.number,
+                                controller: controllerCount,
                                 formatter: [Formatters.numberFormat],
                                 suffixIcon: Builder(
                                   builder: (context) => GestureDetector(
@@ -715,9 +753,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                             keyboardType: TextInputType.number,
                                             controller:
                                                 fuelList[index].controllerPrice,
-                                            formatter: [
-                                              Formatters.numberFormat
-                                            ],
+                                            formatter: [PriceFormatter()],
                                             onChanged: (value) {},
                                           ),
                                         ),
@@ -766,14 +802,16 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                           minLines: 5,
                           maxLines: 5,
                           expands: false,
+                          controller: controllerCommet,
                           onChanged: (value) {},
                         ),
                         const SizedBox(height: 8),
                         WTextField(
                           title: 'Narx',
                           hintText: 'Narxni kiriting',
+                          controller: controllerPrice,
                           keyboardType: TextInputType.number,
-                          formatter: [Formatters.numberFormat],
+                          formatter: [PriceFormatter()],
                           onChanged: (value) {},
                         ),
                       ],

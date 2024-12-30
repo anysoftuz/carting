@@ -1,3 +1,4 @@
+import 'package:carting/presentation/routes/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -12,6 +13,7 @@ import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
+import 'package:go_router/go_router.dart';
 
 class AnnouncementsView extends StatefulWidget {
   const AnnouncementsView({super.key});
@@ -76,13 +78,17 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
               return AnimatedCrossFade(
                 firstChild: WButton(
                   onTap: () {
-                    final bloc = context.read<AdvertisementBloc>();
-                    Navigator.of(context, rootNavigator: true)
-                        .push(MaterialPageRoute(
-                      builder: (context) => AnnouncementsTypeView(
-                        bloc: bloc,
-                      ),
-                    ));
+                    if (value == 2) {
+                      final bloc = context.read<AdvertisementBloc>();
+                      Navigator.of(context, rootNavigator: true)
+                          .push(MaterialPageRoute(
+                        builder: (context) => AnnouncementsTypeView(
+                          bloc: bloc,
+                        ),
+                      ));
+                    } else if (value == 1) {
+                      context.go(AppRouteName.home);
+                    }
                   },
                   height: 40,
                   width: 40,
@@ -172,49 +178,6 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
             ),
             BlocBuilder<AdvertisementBloc, AdvertisementState>(
               builder: (context, state) {
-                if (state.statusPROVIDE.isInProgress) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => const WShimmer(
-                      height: 152,
-                      width: double.infinity,
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: 12,
-                  );
-                }
-                return RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    context
-                        .read<AdvertisementBloc>()
-                        .add(GetAdvertisementsProvideEvent());
-                    Future.delayed(Duration.zero);
-                  },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true)
-                            .push(MaterialPageRoute(
-                          builder: (context) => DeliverInfoView(
-                            model: state.advertisementPROVIDE[index],
-                          ),
-                        ));
-                      },
-                      child: AnnouncementsIteam(
-                        model: state.advertisementPROVIDE[index],
-                      ),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: state.advertisementPROVIDE.length,
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<AdvertisementBloc, AdvertisementState>(
-              builder: (context, state) {
                 if (state.statusRECEIVE.isInProgress) {
                   return ListView.separated(
                     padding: const EdgeInsets.all(16).copyWith(bottom: 100),
@@ -252,6 +215,49 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 16),
                     itemCount: state.advertisementRECEIVE.length,
+                  ),
+                );
+              },
+            ),
+            BlocBuilder<AdvertisementBloc, AdvertisementState>(
+              builder: (context, state) {
+                if (state.statusPROVIDE.isInProgress) {
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => const WShimmer(
+                      height: 152,
+                      width: double.infinity,
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: 12,
+                  );
+                }
+                return RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    context
+                        .read<AdvertisementBloc>()
+                        .add(GetAdvertisementsProvideEvent());
+                    Future.delayed(Duration.zero);
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .push(MaterialPageRoute(
+                          builder: (context) => DeliverInfoView(
+                            model: state.advertisementPROVIDE[index],
+                          ),
+                        ));
+                      },
+                      child: AnnouncementsIteam(
+                        model: state.advertisementPROVIDE[index],
+                      ),
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: state.advertisementPROVIDE.length,
                   ),
                 );
               },

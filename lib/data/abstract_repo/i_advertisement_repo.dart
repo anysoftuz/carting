@@ -14,8 +14,9 @@ abstract class IAdvertisementRepo {
   );
   Future<Either<Failure, ResponseModel<List<TransportationTypesModel>>>>
       getTransportationTypes(
-    int servisId,
-  );
+    int servisId, {
+    bool isRECEIVE = false,
+  });
   Future<Either<Failure, bool>> createAdvertisement(Map<String, dynamic> model);
   Future<Either<Failure, ResponseModel<List<FuelsInfoModel>>>> fuels(
     int fuelsId,

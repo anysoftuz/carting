@@ -57,9 +57,13 @@ class _AnnouncementsShippingTypeViewState
             itemCount: state.transportationTypes.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AnnouncementCreateView(
-                    filter: TypeOfServiceEnum.shipping,
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: const AnnouncementCreateView(
+                      filter: TypeOfServiceEnum.shipping,
+                    ),
                   ),
                 ));
               },

@@ -52,9 +52,12 @@ class AdvertisementRepo implements IAdvertisementRepo {
 
   @override
   Future<Either<Failure, ResponseModel<List<TransportationTypesModel>>>>
-      getTransportationTypes(int servisId) async {
+      getTransportationTypes(
+    int servisId, {
+    bool isRECEIVE = false,
+  }) async {
     try {
-      final result = await dataSourcheImpl.getTransportationTypes(servisId);
+      final result = await dataSourcheImpl.getTransportationTypes(servisId,isRECEIVE: isRECEIVE);
       return Right(result);
     } on DioException {
       return Left(DioFailure());

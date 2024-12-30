@@ -16,8 +16,12 @@ class GetFuelsEvent extends AdvertisementEvent {
 
 class GetTransportationTypesEvent extends AdvertisementEvent {
   final int serviceId;
+  final bool isRECEIVE;
 
-  GetTransportationTypesEvent({required this.serviceId});
+  GetTransportationTypesEvent({
+    required this.serviceId,
+    this.isRECEIVE = false,
+  });
 }
 
 class CreateDeliveryEvent extends AdvertisementEvent {

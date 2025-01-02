@@ -4,30 +4,30 @@ import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:flutter/material.dart';
 
-class SelectionLocationField extends StatefulWidget {
-  const SelectionLocationField(
-      {super.key, this.onTap1, this.onTap2, this.isOne = false});
-  final Function(MapPoint? point)? onTap1;
-  final Function(MapPoint? point)? onTap2;
-  final bool isOne;
+class InfoLocationField extends StatefulWidget {
+  const InfoLocationField({
+    super.key,
+    this.point1,
+    this.point2,
+  });
+  final MapPoint? point1;
+  final MapPoint? point2;
 
   @override
-  State<SelectionLocationField> createState() => _SelectionLocationFieldState();
+  State<InfoLocationField> createState() => _InfoLocationFieldState();
 }
 
-class _SelectionLocationFieldState extends State<SelectionLocationField> {
-  MapPoint? point1;
-  MapPoint? point2;
+class _InfoLocationFieldState extends State<InfoLocationField> {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: white,
+        color: scaffoldSecondaryBackground,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         children: [
-          if (widget.onTap1 != null)
+          if (widget.point1 != null)
             ListTile(
               title: Text(
                 "Qayerdan",
@@ -38,7 +38,7 @@ class _SelectionLocationFieldState extends State<SelectionLocationField> {
                 ),
               ),
               subtitle: Text(
-                point1?.name ?? 'Nomalum',
+                widget.point1?.name ?? 'Nomalum',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -50,15 +50,10 @@ class _SelectionLocationFieldState extends State<SelectionLocationField> {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => LocationView(
                       isFirst: true,
-                      point1: point1,
-                      point2: point2,
+                      point1: widget.point1,
+                      point2: widget.point2,
                       onTap: (mapPoint) {
                         Navigator.pop(context);
-                        if (mapPoint != null) {
-                          point1 = mapPoint;
-                          widget.onTap1!(point1);
-                          setState(() {});
-                        }
                       },
                     ),
                   ));
@@ -77,12 +72,12 @@ class _SelectionLocationFieldState extends State<SelectionLocationField> {
                 ),
               ),
             ),
-          if (widget.onTap1 != null)
+          if (widget.point1 != null)
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Divider(height: 1),
             ),
-          if (widget.onTap2 != null)
+          if (widget.point2 != null)
             ListTile(
               title: Text(
                 "Qayerga",
@@ -93,7 +88,7 @@ class _SelectionLocationFieldState extends State<SelectionLocationField> {
                 ),
               ),
               subtitle: Text(
-                point2?.name ?? 'Nomalum',
+                widget.point2?.name ?? 'Nomalum',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -106,16 +101,10 @@ class _SelectionLocationFieldState extends State<SelectionLocationField> {
                     MaterialPageRoute(
                       builder: (context) => LocationView(
                         isFirst: false,
-                        point1: point1,
-                        point2: point2,
-                        isOne: widget.isOne,
+                        point1: widget.point1,
+                        point2: widget.point2,
                         onTap: (mapPoint) {
                           Navigator.pop(context);
-                          if (mapPoint != null) {
-                            point2 = mapPoint;
-                            widget.onTap2!(point2);
-                            setState(() {});
-                          }
                         },
                       ),
                     ),

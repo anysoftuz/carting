@@ -27,7 +27,7 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
   void initState() {
     context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
           serviceId: 3,
-          isRECEIVE: true,
+          isRECEIVE: widget.isCreate,
         ));
     super.initState();
   }
@@ -62,11 +62,15 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
             itemCount: state.transportationTypes.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
                 if (widget.isCreate) {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>  AnnouncementCreateView(
-                      filter: TypeOfServiceEnum.specialTechnique,
-                      carId: state.transportationTypes[index].id,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: AnnouncementCreateView(
+                        filter: TypeOfServiceEnum.specialTechnique,
+                        carId: state.transportationTypes[index].id,
+                      ),
                     ),
                   ));
                 } else {

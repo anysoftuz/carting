@@ -11,14 +11,15 @@ TransportTransferModel _$TransportTransferModelFromJson(
     TransportTransferModel(
       advType: json['adv_type'] as String,
       serviceTypeId: (json['service_type_id'] as num).toInt(),
-      shipmentDate: json['shipment_date'] as String,
+      shipmentDate: json['shipment_date'] as String?,
       fromLocation:
-          Location.fromJson(json['from_location'] as Map<String, dynamic>),
+          LocationModel.fromJson(json['from_location'] as Map<String, dynamic>),
       toLocation:
-          Location.fromJson(json['to_location'] as Map<String, dynamic>),
-      payType: json['pay_type'] as String,
+          LocationModel.fromJson(json['to_location'] as Map<String, dynamic>),
+      payType: json['pay_type'] as String?,
       price: (json['price'] as num).toInt(),
-      details: Details.fromJson(json['details'] as Map<String, dynamic>),
+      details:
+          DetailsTransfer.fromJson(json['details'] as Map<String, dynamic>),
       note: json['note'] as String,
       serviceName: json['service_name'] as String,
     );
@@ -38,24 +39,14 @@ Map<String, dynamic> _$TransportTransferModelToJson(
       'note': instance.note,
     };
 
-Details _$DetailsFromJson(Map<String, dynamic> json) => Details(
+DetailsTransfer _$DetailsTransferFromJson(Map<String, dynamic> json) =>
+    DetailsTransfer(
       transportationTypeId: (json['transportation_type_id'] as num).toInt(),
       transportCount: (json['transport_count'] as num).toInt(),
     );
 
-Map<String, dynamic> _$DetailsToJson(Details instance) => <String, dynamic>{
+Map<String, dynamic> _$DetailsTransferToJson(DetailsTransfer instance) =>
+    <String, dynamic>{
       'transportation_type_id': instance.transportationTypeId,
       'transport_count': instance.transportCount,
-    };
-
-Location _$LocationFromJson(Map<String, dynamic> json) => Location(
-      lat: (json['lat'] as num).toDouble(),
-      lng: (json['lng'] as num).toDouble(),
-      name: json['name'] as String,
-    );
-
-Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
-      'lat': instance.lat,
-      'lng': instance.lng,
-      'name': instance.name,
     };

@@ -2,6 +2,7 @@
 //
 //     final transportTransferModel = transportTransferModelFromJson(jsonString);
 
+import 'package:carting/data/models/location_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
@@ -22,27 +23,27 @@ class TransportTransferModel {
   @JsonKey(name: "service_name")
   final String serviceName;
   @JsonKey(name: "shipment_date")
-  final String shipmentDate;
+  final String? shipmentDate;
   @JsonKey(name: "from_location")
-  final Location fromLocation;
+  final LocationModel fromLocation;
   @JsonKey(name: "to_location")
-  final Location toLocation;
+  final LocationModel toLocation;
   @JsonKey(name: "pay_type")
-  final String payType;
+  final String? payType;
   @JsonKey(name: "price")
   final int price;
   @JsonKey(name: "details")
-  final Details details;
+  final DetailsTransfer details;
   @JsonKey(name: "note")
   final String note;
 
   TransportTransferModel({
     required this.advType,
     required this.serviceTypeId,
-    required this.shipmentDate,
+    this.shipmentDate,
     required this.fromLocation,
     required this.toLocation,
-    required this.payType,
+    this.payType,
     required this.price,
     required this.details,
     required this.note,
@@ -56,40 +57,19 @@ class TransportTransferModel {
 }
 
 @JsonSerializable()
-class Details {
+class DetailsTransfer {
   @JsonKey(name: "transportation_type_id")
   final int transportationTypeId;
   @JsonKey(name: "transport_count")
   final int transportCount;
 
-  Details({
+  DetailsTransfer({
     required this.transportationTypeId,
     required this.transportCount,
   });
 
-  factory Details.fromJson(Map<String, dynamic> json) =>
-      _$DetailsFromJson(json);
+  factory DetailsTransfer.fromJson(Map<String, dynamic> json) =>
+      _$DetailsTransferFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DetailsToJson(this);
-}
-
-@JsonSerializable()
-class Location {
-  @JsonKey(name: "lat")
-  final double lat;
-  @JsonKey(name: "lng")
-  final double lng;
-  @JsonKey(name: "name")
-  final String name;
-
-  Location({
-    required this.lat,
-    required this.lng,
-    required this.name,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LocationToJson(this);
+  Map<String, dynamic> toJson() => _$DetailsTransferToJson(this);
 }

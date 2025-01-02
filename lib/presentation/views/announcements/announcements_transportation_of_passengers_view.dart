@@ -21,9 +21,10 @@ class _AnnouncementsTransportationOfPassengersViewState
     extends State<AnnouncementsTransportationOfPassengersView> {
   @override
   void initState() {
-    context
-        .read<AdvertisementBloc>()
-        .add(GetTransportationTypesEvent(serviceId: 2));
+    context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
+          serviceId: 2,
+          isRECEIVE: true,
+        ));
     super.initState();
   }
 
@@ -57,10 +58,14 @@ class _AnnouncementsTransportationOfPassengersViewState
             itemCount: state.transportationTypes.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>  AnnouncementCreateView(
-                    filter: TypeOfServiceEnum.transportationOfPassengers,
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: AnnouncementCreateView(
+                      filter: TypeOfServiceEnum.transportationOfPassengers,
                       carId: state.transportationTypes[index].id,
+                    ),
                   ),
                 ));
               },

@@ -2,6 +2,11 @@ import 'dart:io';
 
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_delivery_model.dart';
+import 'package:carting/data/models/location_model.dart';
+import 'package:carting/data/models/passenger_transportation_create_model.dart';
+import 'package:carting/data/models/special_equipment_create_model.dart';
+import 'package:carting/data/models/transport_transfer_model.dart';
+import 'package:carting/data/models/warehouse_model.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -102,32 +107,123 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                     controllerCount.text.isNotEmpty &&
                     point1 != null &&
                     point2 != null) {
-                  final model = AdvertisementDeliveryModel(
-                    toLocation: Location(
-                      lat: point2!.latitude,
-                      lng: point2!.longitude,
-                      name: point2!.name,
-                    ),
-                    fromLocation: Location(
-                      lat: point1!.latitude,
-                      lng: point1!.longitude,
-                      name: point1!.name,
-                    ),
-                    serviceName: 'Yuk tashish',
-                    details: Details(
-                      transportationTypeId: widget.carId,
-                      loadWeight: LoadWeight(
-                        amount: int.tryParse(controllerCount.text) ?? 0,
-                        name: selectedUnit,
-                      ),
-                    ),
-                    advType: 'PROVIDE',
-                    serviceTypeId: 1,
-                    note: controllerCommet.text,
-                    price: int.tryParse(
-                            controllerPrice.text.replaceAll(' ', '')) ??
-                        0,
-                  ).toJson();
+                  final model = switch (widget.filter) {
+                    TypeOfServiceEnum.storageInWarehouse => WarehouseModel(
+                        toLocation: ToLocation(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        details: DetailsWarehouse(area: '100'),
+                        advType: 'PROVIDE',
+                        serviceTypeId: 1,
+                        note: controllerCommet.text,
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                      ).toJson(),
+                    TypeOfServiceEnum.shipping => AdvertisementDeliveryModel(
+                        toLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        fromLocation: LocationModel(
+                          lat: point1!.latitude,
+                          lng: point1!.longitude,
+                          name: point1!.name,
+                        ),
+                        serviceName: 'Yuk tashish',
+                        details: Details(
+                          transportationTypeId: widget.carId,
+                          loadWeight: LoadWeight(
+                            amount: int.tryParse(controllerCount.text) ?? 0,
+                            name: selectedUnit,
+                          ),
+                        ),
+                        advType: 'PROVIDE',
+                        serviceTypeId: 1,
+                        note: controllerCommet.text,
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                      ).toJson(),
+                    TypeOfServiceEnum.transportationOfPassengers =>
+                      PassengerTransportationCreateModel(
+                        toLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        fromLocation: LocationModel(
+                          lat: point1!.latitude,
+                          lng: point1!.longitude,
+                          name: point1!.name,
+                        ),
+                        serviceName: 'Yo‘lovchilarni tashish',
+                        details: DetailsModel(
+                          transportationTypeId: widget.carId,
+                          passengerCount:
+                              int.tryParse(controllerCount.text) ?? 0,
+                        ),
+                        advType: 'PROVIDE',
+                        serviceTypeId: 2,
+                        shipmentDate: '',
+                        note: controllerCommet.text,
+                        payType: 'CASH',
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                      ).toJson(),
+                    TypeOfServiceEnum.specialTechnique =>
+                      SpecialEquipmentCreateModel(
+                        toLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        details: DetailsSpecialEquipment(
+                          transportationTypeId: widget.carId,
+                        ),
+                        advType: 'PROVIDE',
+                        serviceTypeId: 2,
+                        note: controllerCommet.text,
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                      ).toJson(),
+                    TypeOfServiceEnum.transportRental =>
+                      throw UnimplementedError(),
+                    TypeOfServiceEnum.workshops => throw UnimplementedError(),
+                    TypeOfServiceEnum.masters => throw UnimplementedError(),
+                    TypeOfServiceEnum.transportTransfer =>
+                      TransportTransferModel(
+                        toLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        fromLocation: LocationModel(
+                          lat: point1!.latitude,
+                          lng: point1!.longitude,
+                          name: point1!.name,
+                        ),
+                        serviceName: 'Transport transferi',
+                        details: DetailsTransfer(
+                          transportationTypeId: widget.carId,
+                          transportCount:
+                              int.tryParse(controllerCount.text) ?? 0,
+                        ),
+                        advType: 'RECEIVE',
+                        serviceTypeId: 6,
+                        note: controllerCommet.text,
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                      ).toJson(),
+                    TypeOfServiceEnum.fuelDelivery =>
+                      throw UnimplementedError(),
+                  };
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
                         onSucces: () {
@@ -181,6 +277,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                     );
                   default:
                     return SelectionLocationField(
+                      isOne: true,
                       onTap2: (point) {
                         point2 = point;
                       },
@@ -508,6 +605,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                               return MinTextField(
                                 text: "Maksimal yo‘lovchi soni",
                                 hintText: "0",
+                                controller: controllerCount,
                                 keyboardType: TextInputType.number,
                                 formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},

@@ -209,7 +209,9 @@ class _LocationViewState extends State<LocationView> {
               ),
               child: Column(
                 children: [
-                  TextField(
+                 
+                  if (!widget.isOne) ...[
+                     TextField(
                     controller: controllerLat,
                     decoration: const InputDecoration(
                       labelText: 'Qayerdan',
@@ -217,10 +219,11 @@ class _LocationViewState extends State<LocationView> {
                       border: InputBorder.none,
                     ),
                   ),
-                  if (!widget.isOne) ...[
                     const Divider(height: 1),
                     // To Location
-                    TextField(
+                   
+                  ],
+                   TextField(
                       controller: controllerLong,
                       decoration: const InputDecoration(
                         labelText: 'Qayerga',
@@ -228,7 +231,6 @@ class _LocationViewState extends State<LocationView> {
                         border: InputBorder.none,
                       ),
                     ),
-                  ],
                 ],
               ),
             ),

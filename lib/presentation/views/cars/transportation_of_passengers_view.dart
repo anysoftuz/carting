@@ -21,10 +21,9 @@ class _TransportationOfPassengersViewState
     extends State<TransportationOfPassengersView> {
   @override
   void initState() {
-    context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
-          serviceId: 2,
-          isRECEIVE: true,
-        ));
+    context
+        .read<AdvertisementBloc>()
+        .add(GetTransportationTypesEvent(serviceId: 2));
     super.initState();
   }
 

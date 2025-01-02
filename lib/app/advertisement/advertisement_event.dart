@@ -8,6 +8,8 @@ class GetAdvertisementsProvideEvent extends AdvertisementEvent {}
 
 class GetAdvertisementsReceiveEvent extends AdvertisementEvent {}
 
+class GetCarsEvent extends AdvertisementEvent {}
+
 class GetFuelsEvent extends AdvertisementEvent {
   final int id;
 

@@ -19,10 +19,9 @@ class ShippingView extends StatefulWidget {
 class _ShippingViewState extends State<ShippingView> {
   @override
   void initState() {
-    context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
-          serviceId: 1,
-          isRECEIVE: true,
-        ));
+    context
+        .read<AdvertisementBloc>()
+        .add(GetTransportationTypesEvent(serviceId: 1));
     super.initState();
   }
 

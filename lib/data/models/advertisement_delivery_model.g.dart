@@ -12,9 +12,9 @@ AdvertisementDeliveryModel _$AdvertisementDeliveryModelFromJson(
       advType: json['adv_type'] as String,
       serviceTypeId: (json['service_type_id'] as num).toInt(),
       fromLocation:
-          Location.fromJson(json['from_location'] as Map<String, dynamic>),
+          LocationModel.fromJson(json['from_location'] as Map<String, dynamic>),
       toLocation:
-          Location.fromJson(json['to_location'] as Map<String, dynamic>),
+          LocationModel.fromJson(json['to_location'] as Map<String, dynamic>),
       price: (json['price'] as num).toInt(),
       details: Details.fromJson(json['details'] as Map<String, dynamic>),
       note: json['note'] as String,
@@ -53,17 +53,5 @@ LoadWeight _$LoadWeightFromJson(Map<String, dynamic> json) => LoadWeight(
 Map<String, dynamic> _$LoadWeightToJson(LoadWeight instance) =>
     <String, dynamic>{
       'amount': instance.amount,
-      'name': instance.name,
-    };
-
-Location _$LocationFromJson(Map<String, dynamic> json) => Location(
-      lat: (json['lat'] as num).toDouble(),
-      lng: (json['lng'] as num).toDouble(),
-      name: json['name'] as String,
-    );
-
-Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
-      'lat': instance.lat,
-      'lng': instance.lng,
       'name': instance.name,
     };

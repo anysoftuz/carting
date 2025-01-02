@@ -2,6 +2,7 @@
 //
 //     final advertisementDeliveryModel = advertisementDeliveryModelFromJson(jsonString);
 
+import 'package:carting/data/models/location_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
@@ -20,9 +21,9 @@ class AdvertisementDeliveryModel {
   @JsonKey(name: "service_type_id")
   final int serviceTypeId;
   @JsonKey(name: "from_location")
-  final Location fromLocation;
+  final LocationModel fromLocation;
   @JsonKey(name: "to_location")
-  final Location toLocation;
+  final LocationModel toLocation;
   @JsonKey(name: "price")
   final int price;
   @JsonKey(name: "details")
@@ -85,23 +86,4 @@ class LoadWeight {
   Map<String, dynamic> toJson() => _$LoadWeightToJson(this);
 }
 
-@JsonSerializable()
-class Location {
-  @JsonKey(name: "lat")
-  final double lat;
-  @JsonKey(name: "lng")
-  final double lng;
-  @JsonKey(name: "name")
-  final String name;
 
-  Location({
-    required this.lat,
-    required this.lng,
-    required this.name,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LocationToJson(this);
-}

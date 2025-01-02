@@ -1,3 +1,4 @@
+import 'package:carting/data/models/cars_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,19 @@ part 'advertisement_state.dart';
 class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
   final AdvertisementRepo _repo;
   AdvertisementBloc(this._repo) : super(const AdvertisementState()) {
+    on<GetCarsEvent>((event, emit) async {
+      emit(state.copyWith(statusCars: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.cars();
+      if (respons.isRight) {
+        emit(state.copyWith(
+          carsModel: respons.right.data,
+          statusCars: FormzSubmissionStatus.success,
+        ));
+      } else {
+        emit(state.copyWith(statusCars: FormzSubmissionStatus.failure));
+      }
+    });
+    
     on<GetFuelsEvent>((event, emit) async {
       emit(state.copyWith(statusFuels: FormzSubmissionStatus.inProgress));
       final respons = await _repo.fuels(event.id);

@@ -1,3 +1,4 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -5,6 +6,8 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class DeliverInfoView extends StatelessWidget {
   const DeliverInfoView({super.key, required this.model});
@@ -30,82 +33,91 @@ class DeliverInfoView extends StatelessWidget {
                 ),
               ),
               if (model.status == 'ACTIVE')
-                WButton(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      useRootNavigator: true,
-                      builder: (context) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: 4,
-                            width: 64,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: const Color(0xFFB7BFC6),
-                            ),
-                            margin: const EdgeInsets.all(12),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 24,
-                              horizontal: 16,
-                            ),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: white,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Haqiqatdan ham e’lonni bekor qilmoqchimisiz?",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: dark.withValues(alpha: .3),
-                                  ),
+                BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                  builder: (context, state) {
+                    return WButton(
+                      onTap: () {
+                        final bloc = context.read<AdvertisementBloc>();
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          useRootNavigator: true,
+                          builder: (context) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                height: 4,
+                                width: 64,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: const Color(0xFFB7BFC6),
                                 ),
-                                const SizedBox(height: 24),
-                                Row(
+                                margin: const EdgeInsets.all(12),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 24,
+                                  horizontal: 16,
+                                ),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: white,
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      child: WButton(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        text: "Yo‘q",
-                                        textColor: darkText,
-                                        color: const Color(0xFFF3F3F3),
+                                    Text(
+                                      "Haqiqatdan ham e’lonni bekor qilmoqchimisiz?",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: dark.withValues(alpha: .3),
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: WButton(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        text: "Yo‘q",
-                                        textColor: darkText,
-                                        color: const Color(0xFFF3F3F3),
-                                      ),
+                                    const SizedBox(height: 24),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: WButton(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            text: "Yo‘q",
+                                            textColor: darkText,
+                                            color: const Color(0xFFF3F3F3),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: WButton(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                              bloc.add(
+                                                  DeactivetEvent(id: model.id));
+                                              Navigator.pop(context);
+                                            },
+                                            text: "Ha",
+                                            textColor: darkText,
+                                            color: const Color(0xFFF3F3F3),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    const SizedBox(height: 24),
                                   ],
                                 ),
-                                const SizedBox(height: 24),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                      text: "Faolsizlantirish",
+                      textColor: red,
+                      isLoading: state.statusCreate.isInProgress,
+                      color: red.withValues(alpha: .2),
                     );
                   },
-                  text: "Faolsizlantirish",
-                  textColor: red,
-                  color: red.withValues(alpha: .2),
                 ),
             ],
           ),

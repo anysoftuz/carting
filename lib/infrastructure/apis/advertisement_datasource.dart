@@ -1,6 +1,7 @@
 import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/data/common/error_handle.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/data/models/cars_model.dart';
 import 'package:carting/data/models/fuels_info_model.dart';
 import 'package:carting/data/models/response_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
@@ -20,6 +21,7 @@ abstract class AdvertisementDatasource {
   });
   Future<bool> createAdvertisement(Map<String, dynamic> model);
   Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId);
+  Future<ResponseModel<List<CarsModel>>> cars();
   Future<bool> deactivetAdvertisement(int id);
 }
 
@@ -170,6 +172,31 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
         ),
       ),
       body: (response) => true,
+    );
+  }
+  
+  @override
+  Future<ResponseModel<List<CarsModel>>> cars()  {
+    return _handle.apiCantrol(
+      request: () => dio.get(
+        'list/cars',
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => (p0 as List)
+            .map(
+              (e) => CarsModel.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
     );
   }
 }

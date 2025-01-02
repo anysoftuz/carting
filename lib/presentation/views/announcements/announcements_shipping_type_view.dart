@@ -21,9 +21,10 @@ class _AnnouncementsShippingTypeViewState
     extends State<AnnouncementsShippingTypeView> {
   @override
   void initState() {
-    context
-        .read<AdvertisementBloc>()
-        .add(GetTransportationTypesEvent(serviceId: 1));
+    context.read<AdvertisementBloc>().add(GetTransportationTypesEvent(
+          serviceId: 1,
+          isRECEIVE: true,
+        ));
     super.initState();
   }
 
@@ -61,7 +62,7 @@ class _AnnouncementsShippingTypeViewState
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => BlocProvider.value(
                     value: bloc,
-                    child:  AnnouncementCreateView(
+                    child: AnnouncementCreateView(
                       filter: TypeOfServiceEnum.shipping,
                       carId: state.transportationTypes[index].id,
                     ),

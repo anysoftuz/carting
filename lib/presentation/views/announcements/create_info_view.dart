@@ -1,18 +1,18 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/views/common/map_point.dart';
+import 'package:carting/presentation/widgets/info_location_field.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/data.dart';
-import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:carting/presentation/widgets/w_title.dart';
-import 'package:carting/utils/enum_filtr.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class CreateInfoView extends StatefulWidget {
   const CreateInfoView({
@@ -119,6 +119,22 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  InfoLocationField(
+                    point1: widget.model.fromLocation != null
+                        ? MapPoint(
+                            name: widget.model.fromLocation!.name,
+                            latitude: widget.model.fromLocation!.lat,
+                            longitude: widget.model.fromLocation!.lng,
+                          )
+                        : null,
+                    point2: widget.model.toLocation != null
+                        ? MapPoint(
+                            name: widget.model.toLocation!.name,
+                            latitude: widget.model.toLocation!.lat,
+                            longitude: widget.model.toLocation!.lng,
+                          )
+                        : null,
+                  ),
                   // Builder(builder: (context) {
                   //   switch (widget.filter) {
                   //     case TypeOfServiceEnum.shipping:
@@ -530,6 +546,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //       return const SizedBox();
                   //   }
                   // }),
+
                   const SizedBox(height: 16),
                   Container(
                     decoration: BoxDecoration(
@@ -725,11 +742,100 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                         ),
                       ),
                     ),
-                  const SizedBox(height: 16),
+                  if (widget.model.shipmentDate != null)
+                    const SizedBox(height: 16),
                   if (widget.model.status == 'ACTIVE')
+                    BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                      builder: (context, state) {
+                        return WButton(
+                          onTap: () {
+                            final bloc = context.read<AdvertisementBloc>();
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              useRootNavigator: true,
+                              builder: (context) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height: 4,
+                                    width: 64,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: const Color(0xFFB7BFC6),
+                                    ),
+                                    margin: const EdgeInsets.all(12),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 24,
+                                      horizontal: 16,
+                                    ),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: white,
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Haqiqatdan ham e’lonni bekor qilmoqchimisiz?",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: dark.withValues(alpha: .3),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 24),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: WButton(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                text: "Yo‘q",
+                                                textColor: darkText,
+                                                color: const Color(0xFFF3F3F3),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 12),
+                                            Expanded(
+                                              child: WButton(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                  bloc.add(DeactivetEvent(
+                                                    id: widget.model.id,
+                                                  ));
+                                                  Navigator.pop(context);
+                                                },
+                                                text: "Ha",
+                                                textColor: darkText,
+                                                color: const Color(0xFFF3F3F3),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 24),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                          text: "Faolsizlantirish",
+                          isLoading: state.statusCreate.isInProgress,
+                          color: red.withValues(alpha: .1),
+                          textColor: red,
+                        );
+                      },
+                    )
+                  else
                     WButton(
                       onTap: () {},
-                      text: "Faolsizlantirish",
+                      text: "Faol emas",
                       color: red.withValues(alpha: .1),
                       textColor: red,
                     ),

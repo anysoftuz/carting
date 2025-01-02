@@ -1,6 +1,7 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/location_model.dart';
 import 'package:carting/data/models/transport_transfer_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
@@ -70,18 +71,18 @@ class _TransportTransferCreateViewState
                     controllerPrice.text.isNotEmpty &&
                     controller.text.isNotEmpty) {
                   final model = TransportTransferModel(
-                    toLocation: Location(
+                    toLocation: LocationModel(
                       lat: point2!.latitude,
                       lng: point2!.longitude,
                       name: point2!.name,
                     ),
-                    fromLocation: Location(
+                    fromLocation: LocationModel(
                       lat: point1!.latitude,
                       lng: point1!.longitude,
                       name: point1!.name,
                     ),
                     serviceName: 'Transport transferi',
-                    details: Details(
+                    details: DetailsTransfer(
                       transportationTypeId:
                           state.transportationTypes[trTypeId.value].id,
                       transportCount: int.tryParse(controllerCount.text) ?? 0,

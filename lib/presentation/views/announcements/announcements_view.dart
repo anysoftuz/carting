@@ -158,10 +158,14 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                     padding: const EdgeInsets.all(16).copyWith(bottom: 100),
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
+                        final bloc = context.read<AdvertisementBloc>();
                         Navigator.of(context, rootNavigator: true)
                             .push(MaterialPageRoute(
-                          builder: (context) => DeliverInfoView(
-                            model: state.advertisement[index],
+                          builder: (context) => BlocProvider.value(
+                            value: bloc,
+                            child: DeliverInfoView(
+                              model: state.advertisement[index],
+                            ),
                           ),
                         ));
                       },
@@ -202,10 +206,14 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                     padding: const EdgeInsets.all(16).copyWith(bottom: 100),
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
+                        final bloc = context.read<AdvertisementBloc>();
                         Navigator.of(context, rootNavigator: true)
                             .push(MaterialPageRoute(
-                          builder: (context) => DeliverInfoView(
-                            model: state.advertisementRECEIVE[index],
+                          builder: (context) => BlocProvider.value(
+                            value: bloc,
+                            child: DeliverInfoView(
+                              model: state.advertisementRECEIVE[index],
+                            ),
                           ),
                         ));
                       },
@@ -245,10 +253,14 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                     padding: const EdgeInsets.all(16).copyWith(bottom: 100),
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
+                        final bloc = context.read<AdvertisementBloc>();
                         Navigator.of(context, rootNavigator: true)
                             .push(MaterialPageRoute(
-                          builder: (context) => CreateInfoView(
-                            model: state.advertisementPROVIDE[index],
+                          builder: (context) => BlocProvider.value(
+                            value: bloc,
+                            child: CreateInfoView(
+                              model: state.advertisementPROVIDE[index],
+                            ),
                           ),
                         ));
                       },

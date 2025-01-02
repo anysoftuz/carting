@@ -1,5 +1,6 @@
 import 'package:carting/data/abstract_repo/i_advertisement_repo.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/data/models/cars_model.dart';
 import 'package:carting/data/models/fuels_info_model.dart';
 import 'package:carting/data/models/response_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
@@ -114,6 +115,23 @@ class AdvertisementRepo implements IAdvertisementRepo {
   Future<Either<Failure, bool>> deactivetAdvertisement(int id) async {
     try {
       final result = await dataSourcheImpl.deactivetAdvertisement(id);
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<List<CarsModel>>>> cars() async {
+    try {
+      final result = await dataSourcheImpl.cars();
       return Right(result);
     } on DioException {
       return Left(DioFailure());

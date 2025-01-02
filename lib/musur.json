@@ -1,23 +1,14 @@
 {
-  "adv_type": "PROVIDE",
-  "service_type_id": 1,
-  "from_location": {
-    "lat": 38.80717,
-    "lng": 65.6059717,
-    "name": "Toshkent shahri, Yunusobod tumani"
-  },
+  "adv_type": "PROVIDE", 
+  "service_type_id": 7,
   "to_location": {
-    "lat": 40.5146549,
-    "lng": 70.9325211,
-    "name": "Toshkent shahri, Yunusobod tumani"
-  },
-  "price": 30000000,
+      "lat": 40.5146549,
+      "lng": 70.9325211,
+      "name": "Toshkent shahri, Yunusobod tumani"
+  }, 
+  "price": 30000000, 
   "details": {
-    "transportation_type_id": 1,
-    "load_weight": {
-      "amount": 200,
-      "name": "kg"
-    }
-  },
-  "note": "Test"
+      "area": "100" 
+  }, 
+  "note": "Test" 
 }

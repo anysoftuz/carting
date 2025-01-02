@@ -20,6 +20,7 @@ abstract class AdvertisementDatasource {
   });
   Future<bool> createAdvertisement(Map<String, dynamic> model);
   Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId);
+  Future<bool> deactivetAdvertisement(int id);
 }
 
 class AdvertisementDatasourceImpl implements AdvertisementDatasource {
@@ -150,6 +151,25 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
             )
             .toList(),
       ),
+    );
+  }
+
+  @override
+  Future<bool> deactivetAdvertisement(int id) {
+    return _handle.apiCantrol(
+      request: () => dio.put(
+        'advertisement',
+        data: {"id": id, "status": "IN_ACTIVE"},
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => true,
     );
   }
 }

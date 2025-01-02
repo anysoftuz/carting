@@ -25,7 +25,7 @@ class AdvertisementModel {
   @JsonKey(name: "details")
   final Details? details;
   @JsonKey(name: "images")
-  final dynamic images;
+  final List<String>? images;
   @JsonKey(name: "note")
   final String note;
   @JsonKey(name: "comments")

@@ -1,32 +1,23 @@
-[
-  {
-    "id": 1,
-    "type": "AI 80",
-    "price": "8500"
+{
+  "adv_type": "PROVIDE",
+  "service_type_id": 1,
+  "from_location": {
+    "lat": 38.80717,
+    "lng": 65.6059717,
+    "name": "Toshkent shahri, Yunusobod tumani"
   },
-  {
-    "id": 2,
-    "type": "AI 92",
-    "price": "10500"
+  "to_location": {
+    "lat": 40.5146549,
+    "lng": 70.9325211,
+    "name": "Toshkent shahri, Yunusobod tumani"
   },
-  {
-    "id": 3,
-    "type": "AI 95",
-    "price": "13500"
+  "price": 30000000,
+  "details": {
+    "transportation_type_id": 1,
+    "load_weight": {
+      "amount": 200,
+      "name": "kg"
+    }
   },
-  {
-    "id": 4,
-    "type": "AI 98",
-    "price": "14500"
-  },
-  {
-    "id": 5,
-    "type": "AI 100",
-    "price": "15500"
-  },
-  {
-    "id": 6,
-    "type": "Disel",
-    "price": "13000"
-  }
-]
+  "note": "Test"
+}

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/data/models/advertisement_delivery_model.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -30,8 +31,10 @@ class AnnouncementCreateView extends StatefulWidget {
   const AnnouncementCreateView({
     super.key,
     required this.filter,
+    required this.carId,
   });
   final TypeOfServiceEnum filter;
+  final int carId;
 
   @override
   State<AnnouncementCreateView> createState() => _AnnouncementCreateViewState();
@@ -99,19 +102,52 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                     controllerCount.text.isNotEmpty &&
                     point1 != null &&
                     point2 != null) {
-                  if (widget.filter == TypeOfServiceEnum.transportRental) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          const CarsRenatlDitealsView(myAnnouncement: true),
-                    ));
-                  } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AnnouncementsCreateInfoView(
-                        filter: widget.filter,
-                        images: images,
+                  final model = AdvertisementDeliveryModel(
+                    toLocation: Location(
+                      lat: point2!.latitude,
+                      lng: point2!.longitude,
+                      name: point2!.name,
+                    ),
+                    fromLocation: Location(
+                      lat: point1!.latitude,
+                      lng: point1!.longitude,
+                      name: point1!.name,
+                    ),
+                    serviceName: 'Yuk tashish',
+                    details: Details(
+                      transportationTypeId: widget.carId,
+                      loadWeight: LoadWeight(
+                        amount: int.tryParse(controllerCount.text) ?? 0,
+                        name: selectedUnit,
                       ),
-                    ));
-                  }
+                    ),
+                    advType: 'PROVIDE',
+                    serviceTypeId: 1,
+                    note: controllerCommet.text,
+                    price: int.tryParse(
+                            controllerPrice.text.replaceAll(' ', '')) ??
+                        0,
+                  ).toJson();
+                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
+                        model: model,
+                        onSucces: () {
+                          if (widget.filter ==
+                              TypeOfServiceEnum.transportRental) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const CarsRenatlDitealsView(
+                                myAnnouncement: true,
+                              ),
+                            ));
+                          } else {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AnnouncementsCreateInfoView(
+                                filter: widget.filter,
+                                images: images,
+                              ),
+                            ));
+                          }
+                        },
+                      ));
                 } else {
                   CustomSnackbar.show(
                     context,

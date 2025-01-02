@@ -23,6 +23,7 @@ class MastersTypeView extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const AnnouncementCreateView(
                   filter: TypeOfServiceEnum.masters,
+                  carId: 0,
                 ),
               ));
             } else {

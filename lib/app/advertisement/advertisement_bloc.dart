@@ -27,6 +27,19 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
       }
     });
 
+    on<DeactivetEvent>((event, emit) async {
+      emit(state.copyWith(statusCreate: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.deactivetAdvertisement(event.id);
+      if (respons.isRight) {
+        emit(state.copyWith(statusCreate: FormzSubmissionStatus.success));
+        add(GetAdvertisementsEvent());
+        add(GetAdvertisementsProvideEvent());
+        add(GetAdvertisementsReceiveEvent());
+      } else {
+        emit(state.copyWith(statusCreate: FormzSubmissionStatus.failure));
+      }
+    });
+
     on<CreateDeliveryEvent>((event, emit) async {
       emit(state.copyWith(statusCreate: FormzSubmissionStatus.inProgress));
       final respons = await _repo.createAdvertisement(event.model);

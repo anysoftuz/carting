@@ -64,8 +64,9 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
               onTap: () {
                 if (widget.isCreate) {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AnnouncementCreateView(
+                    builder: (context) =>  AnnouncementCreateView(
                       filter: TypeOfServiceEnum.specialTechnique,
+                      carId: state.transportationTypes[index].id,
                     ),
                   ));
                 } else {

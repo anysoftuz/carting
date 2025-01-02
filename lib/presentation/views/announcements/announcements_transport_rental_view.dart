@@ -41,6 +41,7 @@ class _AnnouncementsTransportRentalViewState
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const AnnouncementCreateView(
                       filter: TypeOfServiceEnum.transportRental,
+                      carId: 0,
                     ),
                   ));
                 },
@@ -60,6 +61,7 @@ class _AnnouncementsTransportRentalViewState
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const AnnouncementCreateView(
                       filter: TypeOfServiceEnum.transportRental,
+                      carId: 0,
                     ),
                   ));
                 },

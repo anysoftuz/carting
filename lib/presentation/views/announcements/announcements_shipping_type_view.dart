@@ -61,8 +61,9 @@ class _AnnouncementsShippingTypeViewState
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => BlocProvider.value(
                     value: bloc,
-                    child: const AnnouncementCreateView(
+                    child:  AnnouncementCreateView(
                       filter: TypeOfServiceEnum.shipping,
+                      carId: state.transportationTypes[index].id,
                     ),
                   ),
                 ));

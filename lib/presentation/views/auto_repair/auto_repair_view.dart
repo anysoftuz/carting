@@ -39,6 +39,7 @@ class AutoRepairView extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const AnnouncementCreateView(
                         filter: TypeOfServiceEnum.workshops,
+                        carId: 0,
                       ),
                     ));
                   } else {

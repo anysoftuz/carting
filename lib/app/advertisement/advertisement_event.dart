@@ -33,3 +33,10 @@ class CreateDeliveryEvent extends AdvertisementEvent {
     required this.onSucces,
   });
 }
+
+
+class DeactivetEvent extends AdvertisementEvent {
+  final int id;
+
+  DeactivetEvent({required this.id});
+}

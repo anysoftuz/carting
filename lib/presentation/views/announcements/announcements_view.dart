@@ -1,4 +1,5 @@
 import 'package:carting/presentation/routes/route_name.dart';
+import 'package:carting/presentation/views/announcements/create_info_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -246,7 +247,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                       onTap: () {
                         Navigator.of(context, rootNavigator: true)
                             .push(MaterialPageRoute(
-                          builder: (context) => DeliverInfoView(
+                          builder: (context) => CreateInfoView(
                             model: state.advertisementPROVIDE[index],
                           ),
                         ));

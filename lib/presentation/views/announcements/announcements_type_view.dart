@@ -74,6 +74,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       text: "Omborda saqlash",
       screen: const AnnouncementCreateView(
         filter: TypeOfServiceEnum.storageInWarehouse,
+        carId: 0,
       ),
       serviceId: 7,
     ),
@@ -82,6 +83,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
       text: "Yoqilg‘i yetkazish",
       screen: const AnnouncementCreateView(
         filter: TypeOfServiceEnum.fuelDelivery,
+        carId: 0,
       ),
       serviceId: 8,
     ),

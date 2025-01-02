@@ -58,8 +58,9 @@ class _AnnouncementsTransportationOfPassengersViewState
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AnnouncementCreateView(
+                  builder: (context) =>  AnnouncementCreateView(
                     filter: TypeOfServiceEnum.transportationOfPassengers,
+                      carId: state.transportationTypes[index].id,
                   ),
                 ));
               },

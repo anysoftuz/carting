@@ -59,8 +59,9 @@ class _TransportTransferViewState extends State<TransportTransferView> {
               onTap: () {
                 if (widget.isCreate) {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AnnouncementCreateView(
+                    builder: (context) => AnnouncementCreateView(
                       filter: TypeOfServiceEnum.transportTransfer,
+                      carId: state.transportationTypes[index].id,
                     ),
                   ));
                 } else {

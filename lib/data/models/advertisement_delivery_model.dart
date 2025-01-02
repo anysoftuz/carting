@@ -1,76 +1,63 @@
 // To parse this JSON data, do
 //
-//     final deliveryCreateModel = deliveryCreateModelFromJson(jsonString);
+//     final advertisementDeliveryModel = advertisementDeliveryModelFromJson(jsonString);
 
-import 'package:carting/data/models/location_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
-part 'delivery_create_model.g.dart';
+part 'advertisement_delivery_model.g.dart';
 
-DeliveryCreateModel deliveryCreateModelFromJson(String str) =>
-    DeliveryCreateModel.fromJson(json.decode(str));
+AdvertisementDeliveryModel advertisementDeliveryModelFromJson(String str) =>
+    AdvertisementDeliveryModel.fromJson(json.decode(str));
 
-String deliveryCreateModelToJson(DeliveryCreateModel data) =>
+String advertisementDeliveryModelToJson(AdvertisementDeliveryModel data) =>
     json.encode(data.toJson());
 
 @JsonSerializable()
-class DeliveryCreateModel {
+class AdvertisementDeliveryModel {
   @JsonKey(name: "adv_type")
   final String advType;
   @JsonKey(name: "service_type_id")
   final int serviceTypeId;
-  @JsonKey(name: "service_name")
-  final String serviceName;
-  @JsonKey(name: "shipment_date")
-  final String shipmentDate;
   @JsonKey(name: "from_location")
-  final LocationModel fromLocation;
+  final Location fromLocation;
   @JsonKey(name: "to_location")
-  final LocationModel toLocation;
-  @JsonKey(name: "pay_type")
-  final String? payType;
+  final Location toLocation;
   @JsonKey(name: "price")
   final int price;
   @JsonKey(name: "details")
   final Details details;
   @JsonKey(name: "note")
   final String note;
+  @JsonKey(name: "service_name")
+  final String serviceName;
 
-  DeliveryCreateModel({
+  AdvertisementDeliveryModel({
     required this.advType,
     required this.serviceTypeId,
-    required this.shipmentDate,
     required this.fromLocation,
     required this.toLocation,
-    this.payType,
     required this.price,
     required this.details,
     required this.note,
     required this.serviceName,
   });
 
-  factory DeliveryCreateModel.fromJson(Map<String, dynamic> json) =>
-      _$DeliveryCreateModelFromJson(json);
+  factory AdvertisementDeliveryModel.fromJson(Map<String, dynamic> json) =>
+      _$AdvertisementDeliveryModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DeliveryCreateModelToJson(this);
+  Map<String, dynamic> toJson() => _$AdvertisementDeliveryModelToJson(this);
 }
 
 @JsonSerializable()
 class Details {
   @JsonKey(name: "transportation_type_id")
   final int transportationTypeId;
-  @JsonKey(name: "load_type_id")
-  final String loadTypeId;
-  @JsonKey(name: "load_service_id")
-  final String loadServiceId;
   @JsonKey(name: "load_weight")
   final LoadWeight loadWeight;
 
   Details({
     required this.transportationTypeId,
-    required this.loadTypeId,
-    required this.loadServiceId,
     required this.loadWeight,
   });
 
@@ -96,4 +83,25 @@ class LoadWeight {
       _$LoadWeightFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoadWeightToJson(this);
+}
+
+@JsonSerializable()
+class Location {
+  @JsonKey(name: "lat")
+  final double lat;
+  @JsonKey(name: "lng")
+  final double lng;
+  @JsonKey(name: "name")
+  final String name;
+
+  Location({
+    required this.lat,
+    required this.lng,
+    required this.name,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) =>
+      _$LocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationToJson(this);
 }

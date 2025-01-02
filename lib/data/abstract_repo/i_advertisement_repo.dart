@@ -21,4 +21,5 @@ abstract class IAdvertisementRepo {
   Future<Either<Failure, ResponseModel<List<FuelsInfoModel>>>> fuels(
     int fuelsId,
   );
+  Future<Either<Failure, bool>> deactivetAdvertisement(int id);
 }

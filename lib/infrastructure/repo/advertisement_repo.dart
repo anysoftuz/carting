@@ -57,7 +57,8 @@ class AdvertisementRepo implements IAdvertisementRepo {
     bool isRECEIVE = false,
   }) async {
     try {
-      final result = await dataSourcheImpl.getTransportationTypes(servisId,isRECEIVE: isRECEIVE);
+      final result = await dataSourcheImpl.getTransportationTypes(servisId,
+          isRECEIVE: isRECEIVE);
       return Right(result);
     } on DioException {
       return Left(DioFailure());
@@ -96,6 +97,23 @@ class AdvertisementRepo implements IAdvertisementRepo {
   ) async {
     try {
       final result = await dataSourcheImpl.fuels(fuelsId);
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deactivetAdvertisement(int id) async {
+    try {
+      final result = await dataSourcheImpl.deactivetAdvertisement(id);
       return Right(result);
     } on DioException {
       return Left(DioFailure());

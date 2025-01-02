@@ -104,9 +104,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                 if (images.isNotEmpty &&
                     controllerCommet.text.isNotEmpty &&
                     controllerPrice.text.isNotEmpty &&
-                    controllerCount.text.isNotEmpty &&
-                    point1 != null &&
-                    point2 != null) {
+                    controllerCount.text.isNotEmpty) {
                   final model = switch (widget.filter) {
                     TypeOfServiceEnum.storageInWarehouse => WarehouseModel(
                         toLocation: ToLocation(
@@ -114,9 +112,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                           lng: point2!.longitude,
                           name: point2!.name,
                         ),
-                        details: DetailsWarehouse(area: '100'),
+                        details: DetailsWarehouse(area: controllerCount.text),
                         advType: 'PROVIDE',
-                        serviceTypeId: 1,
+                        serviceTypeId: 7,
                         note: controllerCommet.text,
                         price: int.tryParse(
                                 controllerPrice.text.replaceAll(' ', '')) ??
@@ -186,7 +184,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                           transportationTypeId: widget.carId,
                         ),
                         advType: 'PROVIDE',
-                        serviceTypeId: 2,
+                        serviceTypeId: 3,
                         note: controllerCommet.text,
                         price: int.tryParse(
                                 controllerPrice.text.replaceAll(' ', '')) ??
@@ -214,7 +212,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                           transportCount:
                               int.tryParse(controllerCount.text) ?? 0,
                         ),
-                        advType: 'RECEIVE',
+                        advType: 'PROVIDE',
                         serviceTypeId: 6,
                         note: controllerCommet.text,
                         price: int.tryParse(
@@ -484,6 +482,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         const SizedBox(height: 16),
                         WTextField(
                           title: 'Izoh',
+                          controller: controllerCommet,
                           hintText: 'Yuk haqida izoh qoldiring!',
                           expands: false,
                           maxLines: 5,
@@ -610,11 +609,11 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
                               );
-
                             case TypeOfServiceEnum.transportTransfer:
                               return MinTextField(
                                 text: "Maksimal transport soni",
                                 hintText: "0",
+                                controller: controllerCount,
                                 keyboardType: TextInputType.number,
                                 formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
@@ -631,6 +630,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                     color: dark,
                                   ),
                                 ),
+                                controller: controllerCount,
                                 formatter: [Formatters.numberFormat],
                                 onChanged: (value) {},
                               );

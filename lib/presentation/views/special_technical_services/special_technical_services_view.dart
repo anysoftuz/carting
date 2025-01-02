@@ -12,6 +12,7 @@ import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_claendar.dart';
 import 'package:carting/presentation/widgets/w_selection_iteam.dart';
 import 'package:carting/utils/formatters.dart';
+import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,6 +64,7 @@ class _SpecialTechnicalServicesViewState
           builder: (context, state) {
             return WButton(
               onTap: () {
+                Log.i(point != null);
                 if (point != null &&
                     controller2.text.isNotEmpty &&
                     controllerPrice.text.isNotEmpty &&
@@ -75,8 +77,7 @@ class _SpecialTechnicalServicesViewState
                     ),
                     serviceName: 'Maxsus texnika',
                     details: DetailsSpecial(
-                      transportationTypeId:
-                          state.transportationTypes[trTypeId.value].id,
+                      transportationTypeId: 1,
                       fromDate: controller.text,
                       toDate: controller2.text,
                     ),
@@ -113,8 +114,11 @@ class _SpecialTechnicalServicesViewState
         child: Column(
           children: [
             SelectionLocationField(
-              onTap2: (point) {
-                point = point;
+              isOne: true,
+              onTap2: (point2) {
+                Log.i(point);
+                point = point2;
+                setState(() {});
               },
             ),
             const SizedBox(height: 8),

@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
@@ -135,6 +134,64 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                           )
                         : null,
                   ),
+                  if (widget.model.details?.area != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: scaffoldSecondaryBackground,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            "Maydon",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: dark.withValues(alpha: .3),
+                            ),
+                          ),
+                          subtitle: Text(
+                            "${widget.model.details?.area ?? "Nomalum"} m2",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: dark,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (widget.model.details?.transportCount != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: scaffoldSecondaryBackground,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            "Maksimal transport soni",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: dark.withValues(alpha: .3),
+                            ),
+                          ),
+                          subtitle: Text(
+                            MyFunction.priceFormat(
+                              widget.model.details?.transportCount ?? 0,
+                            ),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: dark,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   // Builder(builder: (context) {
                   //   switch (widget.filter) {
                   //     case TypeOfServiceEnum.shipping:

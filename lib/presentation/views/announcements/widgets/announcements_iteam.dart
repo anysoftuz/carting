@@ -106,26 +106,30 @@ class AnnouncementsIteam extends StatelessWidget {
           const SizedBox(height: 4),
           Row(
             children: [
-              Text(
-                (model.fromLocation?.name ?? "Nomalum").split(' ').first ==
-                        "Oʻzbekiston,"
-                    ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
-                    : (model.fromLocation?.name ?? "Nomalum").split(' ').first,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark,
+              if (model.fromLocation != null)
+                Text(
+                  (model.fromLocation?.name ?? "Nomalum").split(' ').first ==
+                          "Oʻzbekiston,"
+                      ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
+                      : (model.fromLocation?.name ?? "Nomalum")
+                          .split(' ')
+                          .first,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: dark,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: AppIcons.swap.svg(),
-              ),
+              if (model.fromLocation != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: AppIcons.swap.svg(),
+                ),
               Text(
                 (model.toLocation?.name ?? "Nomalum").split(' ').first ==
                         "Oʻzbekiston,"
-                    ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
-                    : (model.fromLocation?.name ?? "Nomalum").split(' ').first,
+                    ? (model.toLocation?.name ?? "Nomalum").split(' ')[1]
+                    : (model.toLocation?.name ?? "Nomalum").split(' ').first,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

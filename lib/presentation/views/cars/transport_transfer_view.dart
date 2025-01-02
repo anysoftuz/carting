@@ -83,8 +83,7 @@ class _TransportTransferCreateViewState
                     ),
                     serviceName: 'Transport transferi',
                     details: DetailsTransfer(
-                      transportationTypeId:
-                          state.transportationTypes[trTypeId.value].id,
+                      transportationTypeId: 1,
                       transportCount: int.tryParse(controllerCount.text) ?? 0,
                     ),
                     advType: 'RECEIVE',

@@ -1,9 +1,11 @@
 import 'package:carting/assets/constants/storage_keys.dart';
 import 'package:carting/data/common/error_handle.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/data/models/advertisment_filter.dart';
 import 'package:carting/data/models/cars_model.dart';
 import 'package:carting/data/models/fuels_info_model.dart';
 import 'package:carting/data/models/response_model.dart';
+import 'package:carting/data/models/transport_specialists_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/core/dio_settings.dart';
 import 'package:carting/infrastructure/core/service_locator.dart';
@@ -11,7 +13,8 @@ import 'package:carting/infrastructure/repo/storage_repository.dart';
 import 'package:dio/dio.dart';
 
 abstract class AdvertisementDatasource {
-  Future<ResponseModel<List<AdvertisementModel>>> getAdvertisements();
+  Future<ResponseModel<List<AdvertisementModel>>> getAdvertisements(
+      FilterModel? model);
   Future<ResponseModel<List<AdvertisementModel>>> getAdvertisementsMe(
     bool isPROVIDE,
   );
@@ -23,6 +26,8 @@ abstract class AdvertisementDatasource {
   Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId);
   Future<ResponseModel<List<CarsModel>>> cars();
   Future<bool> deactivetAdvertisement(int id);
+  Future<ResponseModel<List<TransportSpecialistsModel>>>
+      getTransportSpecialists();
 }
 
 class AdvertisementDatasourceImpl implements AdvertisementDatasource {
@@ -30,10 +35,20 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
   final ErrorHandle _handle = ErrorHandle();
 
   @override
-  Future<ResponseModel<List<AdvertisementModel>>> getAdvertisements() async {
+  Future<ResponseModel<List<AdvertisementModel>>> getAdvertisements(
+    FilterModel? model,
+  ) async {
+    Map<String, dynamic> queryParameters = {};
+    if (model?.serviceId != null) {
+      queryParameters['service_id'] = model?.serviceId;
+    }
+    if (model?.advType != null) {
+      queryParameters['adv_type'] = model?.advType;
+    }
     return _handle.apiCantrol(
       request: () => dio.get(
         'advertisement',
+        queryParameters: queryParameters,
         options: Options(
           headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
               ? {
@@ -174,9 +189,9 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
       body: (response) => true,
     );
   }
-  
+
   @override
-  Future<ResponseModel<List<CarsModel>>> cars()  {
+  Future<ResponseModel<List<CarsModel>>> cars() {
     return _handle.apiCantrol(
       request: () => dio.get(
         'list/cars',
@@ -192,9 +207,32 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
       body: (response) => ResponseModel.fromJson(
         response,
         (p0) => (p0 as List)
-            .map(
-              (e) => CarsModel.fromJson(e as Map<String, dynamic>),
-            )
+            .map((e) => CarsModel.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<List<TransportSpecialistsModel>>>
+      getTransportSpecialists() {
+    return _handle.apiCantrol(
+      request: () => dio.get(
+        'list/transport_specialists',
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => (p0 as List)
+            .map((e) =>
+                TransportSpecialistsModel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
     );

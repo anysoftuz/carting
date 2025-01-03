@@ -2,7 +2,25 @@ part of 'advertisement_bloc.dart';
 
 sealed class AdvertisementEvent {}
 
-class GetAdvertisementsEvent extends AdvertisementEvent {}
+class GetAdvertisementsEvent extends AdvertisementEvent {
+  final int? serviceId;
+  final bool? isPROVIDE;
+
+  GetAdvertisementsEvent({
+    this.serviceId,
+    this.isPROVIDE,
+  });
+}
+
+class GetAdvertisementsFilterEvent extends AdvertisementEvent {
+  final int? serviceId;
+  final bool? isPROVIDE;
+
+  GetAdvertisementsFilterEvent({
+    this.serviceId,
+    this.isPROVIDE,
+  });
+}
 
 class GetAdvertisementsProvideEvent extends AdvertisementEvent {}
 
@@ -36,9 +54,10 @@ class CreateDeliveryEvent extends AdvertisementEvent {
   });
 }
 
-
 class DeactivetEvent extends AdvertisementEvent {
   final int id;
 
   DeactivetEvent({required this.id});
 }
+
+class GetTransportSpecialists extends AdvertisementEvent {}

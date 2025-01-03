@@ -1,24 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class StorageServiceInfoView extends StatefulWidget {
-  const StorageServiceInfoView({super.key});
+  const StorageServiceInfoView({super.key, required this.model});
+  final AdvertisementModel model;
 
   @override
   State<StorageServiceInfoView> createState() => _StorageServiceInfoViewState();
 }
 
 class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
-  List<String> list = [
-    AppImages.ombor,
-    AppImages.ombor,
-    AppImages.ombor,
-    AppImages.ombor,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,13 +38,18 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
             expandedHeight: 400,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: PageView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => Image.asset(
-                  list[index],
-                  fit: BoxFit.cover,
-                ),
-              ),
+              background: widget.model.images != null
+                  ? PageView.builder(
+                      itemCount: widget.model.images?.length,
+                      itemBuilder: (context, index) => CachedNetworkImage(
+                        imageUrl:
+                            'https://api.carting.uz/uploads/files/${widget.model.images![index]}',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : AppImages.ombor.imgAsset(
+                      fit: BoxFit.cover,
+                    ),
             ),
           )
         ],
@@ -60,7 +62,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "AVTOritet",
+                    "Ombor",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -91,16 +93,16 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   )
                 ],
               ),
-              const Text(
-                "800 000 UZS",
-                style: TextStyle(
+              Text(
+                "${MyFunction.priceFormat(widget.model.price ?? 0)} UZS",
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
+                widget.model.note,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -116,10 +118,10 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     fontWeight: FontWeight.w400,
                     color: dark.withValues(alpha: .3),
                   ),
-                  children: const [
+                  children: [
                     TextSpan(
-                      text: "200 m3",
-                      style: TextStyle(
+                      text: "${widget.model.details?.area ?? "Nomalum"} m2",
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: dark,
@@ -140,8 +142,8 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     height: 24,
                     width: 24,
                   ),
-                  title: const Text(
-                    "Toshkent, Yakkasaroy tumanihlar",
+                  title: Text(
+                    widget.model.toLocation?.name ?? "Nomalum",
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
@@ -166,7 +168,8 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   Expanded(
                     child: WButton(
                       onTap: () {},
-                      color: const Color(0xFFD4D5D6),
+                      isDisabled: true,
+                      disabledColor: const Color(0xFFD4D5D6),
                       text: "Navbatga yozilish",
                     ),
                   ),

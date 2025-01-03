@@ -1,3 +1,4 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -7,6 +8,7 @@ import 'package:carting/presentation/views/announcements/announcement_create_vie
 import 'package:carting/presentation/views/auto_repair/masters_type_view.dart';
 import 'package:carting/presentation/views/auto_repair/workshops_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AutoRepairView extends StatelessWidget {
   const AutoRepairView({
@@ -35,16 +37,23 @@ class AutoRepairView extends StatelessWidget {
                 title: const Text("Ustaxonalar"),
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
+                  final bloc = context.read<AdvertisementBloc>();
                   if (isCreate) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AnnouncementCreateView(
-                        filter: TypeOfServiceEnum.workshops,
-                        carId: 0,
+                      builder: (context) => BlocProvider.value(
+                        value: bloc,
+                        child: const AnnouncementCreateView(
+                          filter: TypeOfServiceEnum.workshops,
+                          carId: 0,
+                        ),
                       ),
                     ));
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const WorkshopsView(),
+                      builder: (context) => BlocProvider.value(
+                        value: bloc,
+                        child: const WorkshopsView(),
+                      ),
                     ));
                   }
                 },
@@ -63,8 +72,12 @@ class AutoRepairView extends StatelessWidget {
                 title: const Text("Ustalar"),
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
+                  final bloc = context.read<AdvertisementBloc>();
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const MastersTypeView(isCreate: true),
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: const MastersTypeView(isCreate: true),
+                    ),
                   ));
                 },
               ),

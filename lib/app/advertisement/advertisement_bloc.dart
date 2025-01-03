@@ -1,4 +1,6 @@
+import 'package:carting/data/models/advertisment_filter.dart';
 import 'package:carting/data/models/cars_model.dart';
+import 'package:carting/data/models/transport_specialists_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,20 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
         emit(state.copyWith(statusCars: FormzSubmissionStatus.failure));
       }
     });
-    
+
+    on<GetTransportSpecialists>((event, emit) async {
+      emit(state.copyWith(statusFuels: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.getTransportSpecialists();
+      if (respons.isRight) {
+        emit(state.copyWith(
+          transportSpecialists: respons.right.data,
+          statusFuels: FormzSubmissionStatus.success,
+        ));
+      } else {
+        emit(state.copyWith(statusFuels: FormzSubmissionStatus.failure));
+      }
+    });
+
     on<GetFuelsEvent>((event, emit) async {
       emit(state.copyWith(statusFuels: FormzSubmissionStatus.inProgress));
       final respons = await _repo.fuels(event.id);
@@ -85,7 +100,14 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
 
     on<GetAdvertisementsEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-      final respons = await _repo.getAdvertisements();
+      final respons = await _repo.getAdvertisements(FilterModel(
+        serviceId: event.serviceId,
+        advType: event.isPROVIDE == null
+            ? null
+            : event.isPROVIDE == true
+                ? "PROVIDE"
+                : "RECEIVE",
+      ));
       if (respons.isRight) {
         emit(state.copyWith(
           status: FormzSubmissionStatus.success,
@@ -93,6 +115,26 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
         ));
       } else {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      }
+    });
+
+    on<GetAdvertisementsFilterEvent>((event, emit) async {
+      emit(state.copyWith(statusFilter: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.getAdvertisements(FilterModel(
+        serviceId: event.serviceId,
+        advType: event.isPROVIDE == null
+            ? null
+            : event.isPROVIDE == true
+                ? "PROVIDE"
+                : "RECEIVE",
+      ));
+      if (respons.isRight) {
+        emit(state.copyWith(
+          statusFilter: FormzSubmissionStatus.success,
+          advertisementFilter: respons.right.data,
+        ));
+      } else {
+        emit(state.copyWith(statusFilter: FormzSubmissionStatus.failure));
       }
     });
 

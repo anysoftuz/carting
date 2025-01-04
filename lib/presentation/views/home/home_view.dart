@@ -1,3 +1,4 @@
+import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,6 @@ import 'package:carting/presentation/views/passengers_transport/passengers_trans
 import 'package:carting/presentation/views/peregon_service/peregon_service_view.dart';
 import 'package:carting/presentation/views/special_technical_services/special_technical_services_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_view.dart';
-import 'package:carting/presentation/views/transport_rental/transport_rental_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 
 class HomeView extends StatefulWidget {
@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
     TypeOfService(
       icon: AppIcons.car_3.svg(),
       text: "Transport ijarasi",
-      screen: const TransportRentalView(),
+      screen: const CarsTypeView(),
       serviceId: 4,
     ),
     TypeOfService(

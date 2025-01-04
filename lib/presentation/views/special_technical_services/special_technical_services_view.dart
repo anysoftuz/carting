@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -28,6 +30,7 @@ class SpecialTechnicalServicesView extends StatefulWidget {
 
 class _SpecialTechnicalServicesViewState
     extends State<SpecialTechnicalServicesView> {
+  List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controller2;
   late TextEditingController controllerCommet;
@@ -91,7 +94,8 @@ class _SpecialTechnicalServicesViewState
                   ).toJson();
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
-                        onSucces: () {
+                        images: images,
+                        onSucces: (id) {
                           Navigator.pop(context);
                         },
                       ));
@@ -192,6 +196,12 @@ class _SpecialTechnicalServicesViewState
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
                       payDate: payDate,
+                      images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

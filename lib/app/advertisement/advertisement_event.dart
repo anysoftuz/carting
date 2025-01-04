@@ -46,11 +46,13 @@ class GetTransportationTypesEvent extends AdvertisementEvent {
 
 class CreateDeliveryEvent extends AdvertisementEvent {
   final Map<String, dynamic> model;
-  final VoidCallback onSucces;
+  final List<File> images;
+  final Function(int id) onSucces;
 
   CreateDeliveryEvent({
     required this.model,
     required this.onSucces,
+    required this.images,
   });
 }
 
@@ -61,3 +63,27 @@ class DeactivetEvent extends AdvertisementEvent {
 }
 
 class GetTransportSpecialists extends AdvertisementEvent {}
+
+class ImageCreateEvent extends AdvertisementEvent {
+  final ImageCreateModel model;
+  final VoidCallback onSucces;
+
+  ImageCreateEvent({
+    required this.model,
+    required this.onSucces,
+  });
+}
+
+class GetAdvertisementsIdEvent extends AdvertisementEvent {
+  final int id;
+  final Function(AdvertisementModel) onSucces;
+
+  GetAdvertisementsIdEvent({
+    required this.id,
+    required this.onSucces,
+  });
+}
+
+class GetCategoriesEvent extends AdvertisementEvent {}
+
+class GetServicesEvent extends AdvertisementEvent {}

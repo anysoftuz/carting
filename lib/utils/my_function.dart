@@ -1,6 +1,42 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/utils/log_service.dart';
 import 'package:intl/intl.dart';
 
 class MyFunction {
+  static double calculateAverageRating(List<Comment> comments) {
+    if (comments.isEmpty) {
+      return 0; // Agar ro'yxat bo'sh bo'lsa, 0 qaytariladi
+    }
+
+    // Ratinglarning yig'indisi
+    int totalRating = comments.fold(0, (sum, comment) => sum + comment.rating);
+
+    // O'rtacha qiymatni hisoblash
+    return totalRating / comments.length;
+  }
+
+  static Future<String?> convertFileToBase64(File? file) async {
+    if (file == null) {
+      return null; // Agar fayl bo'lmasa, null qaytaramiz
+    }
+
+    try {
+      // Faylni o'qib, Uint8List ga o'zgartirish
+      final bytes = await file.readAsBytes();
+
+      // Base64 formatga o‘tkazish
+      final base64String = base64Encode(bytes);
+
+      return base64String;
+    } catch (e) {
+      Log.i('Error while converting to base64: $e');
+      return null; // Xatolik yuz bersa, null qaytaramiz
+    }
+  }
+
   static String priceFormat(num data) {
     if (data % 1 >= 0.01) {
       return priceFormat24(data.toDouble());

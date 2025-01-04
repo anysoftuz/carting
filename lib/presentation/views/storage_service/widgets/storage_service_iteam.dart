@@ -100,10 +100,10 @@ class StorageServiceIteam extends StatelessWidget {
                     children: [
                       AppIcons.star.svg(),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "4.5",
-                          style: TextStyle(
+                          "${MyFunction.calculateAverageRating(model.comments ?? [])}",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),

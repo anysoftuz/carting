@@ -158,7 +158,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ));
         Log.i("Salom Loginga kirdik holat ${state.status}");
       } else {
-        emit(state.copyWith(status: AuthenticationStatus.unauthenticated));
+        emit(state.copyWith(
+          status: AuthenticationStatus.unauthenticated,
+          statusSms: FormzSubmissionStatus.failure,
+        ));
       }
     });
 

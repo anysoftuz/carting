@@ -3,7 +3,9 @@ import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/data/models/advertisment_filter.dart';
 import 'package:carting/data/models/cars_model.dart';
 import 'package:carting/data/models/fuels_info_model.dart';
+import 'package:carting/data/models/image_create_model.dart';
 import 'package:carting/data/models/response_model.dart';
+import 'package:carting/data/models/servis_model.dart';
 import 'package:carting/data/models/transport_specialists_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/apis/advertisement_datasource.dart';
@@ -76,7 +78,7 @@ class AdvertisementRepo implements IAdvertisementRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> createAdvertisement(
+  Future<Either<Failure, int>> createAdvertisement(
     Map<String, dynamic> model,
   ) async {
     try {
@@ -148,9 +150,82 @@ class AdvertisementRepo implements IAdvertisementRepo {
   }
 
   @override
-  Future<Either<Failure, ResponseModel<List<TransportSpecialistsModel>>>> getTransportSpecialists() async {
+  Future<Either<Failure, ResponseModel<List<TransportSpecialistsModel>>>>
+      getTransportSpecialists() async {
     try {
       final result = await dataSourcheImpl.getTransportSpecialists();
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<Map<String, dynamic>>>> createImage(
+      ImageCreateModel model) async {
+    try {
+      final result = await dataSourcheImpl.createImage(model);
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<AdvertisementModel>>>
+      getAdvertisementsId(FilterModel? model) async {
+    try {
+      final result = await dataSourcheImpl.getAdvertisementsId(model);
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<List<ServisModel>>>>
+      getCategories() async {
+    try {
+      final result = await dataSourcheImpl.getCategories();
+      return Right(result);
+    } on DioException {
+      return Left(DioFailure());
+    } on ParsingException catch (e) {
+      return Left(ParsingFailure(errorMessage: e.errorMessage));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(
+        errorMessage: e.errorMessage,
+        statusCode: e.statusCode,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResponseModel<List<ServisModel>>>>
+      getServices() async {
+    try {
+      final result = await dataSourcheImpl.getServices();
       return Right(result);
     } on DioException {
       return Left(DioFailure());

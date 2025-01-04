@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -27,6 +29,7 @@ class DeliveryView extends StatefulWidget {
 }
 
 class _DeliveryViewState extends State<DeliveryView> {
+  List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controllerCount;
   late TextEditingController controllerCommet;
@@ -72,7 +75,8 @@ class _DeliveryViewState extends State<DeliveryView> {
                 if (point1 != null &&
                     point2 != null &&
                     controllerCount.text.isNotEmpty &&
-                    controllerPrice.text.isNotEmpty&&controller.text.isNotEmpty) {
+                    controllerPrice.text.isNotEmpty &&
+                    controller.text.isNotEmpty) {
                   final model = DeliveryCreateModel(
                     toLocation: LocationModel(
                       lat: point2!.latitude,
@@ -106,7 +110,8 @@ class _DeliveryViewState extends State<DeliveryView> {
                   ).toJson();
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
-                        onSucces: () {
+                        images: images,
+                        onSucces: (id) {
                           Navigator.pop(context);
                         },
                       ));
@@ -270,7 +275,12 @@ class _DeliveryViewState extends State<DeliveryView> {
                       controllerPrice: controllerPrice,
                       loadServiceId: loadServiceId,
                       loadTypeId: loadTypeId,
-                      payDate: payDate,
+                      payDate: payDate,images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

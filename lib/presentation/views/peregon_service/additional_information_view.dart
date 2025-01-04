@@ -23,13 +23,17 @@ class AdditionalInformationView extends StatefulWidget {
     this.loadTypeId,
     this.loadServiceId,
     this.payDate,
+    required this.onSave,
+    required this.images,
   });
   final bool isDelivery;
+  final List<File> images;
   final TextEditingController? controllerCommet;
   final TextEditingController? controllerPrice;
   final ValueNotifier<int>? loadTypeId;
   final ValueNotifier<int>? loadServiceId;
   final ValueNotifier<bool>? payDate;
+  final Function(List<File> images) onSave;
 
   @override
   State<AdditionalInformationView> createState() =>
@@ -102,6 +106,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
             if (widget.payDate != null) {
               widget.payDate!.value = payDate.value;
             }
+            widget.onSave(images);
             Navigator.pop(context);
           },
           margin: const EdgeInsets.all(16),

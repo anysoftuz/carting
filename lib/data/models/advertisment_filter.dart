@@ -1,8 +1,10 @@
 class FilterModel {
+  int? advId;
   int? serviceId;
   String? advType;
 
   FilterModel({
+    this.advId,
     this.serviceId,
     this.advType,
   });

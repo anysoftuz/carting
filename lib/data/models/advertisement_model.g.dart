@@ -27,7 +27,14 @@ AdvertisementModel _$AdvertisementModelFromJson(Map<String, dynamic> json) =>
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       note: json['note'] as String,
-      comments: json['comments'],
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      transportName: json['transport_name'] as String?,
+      transportIcon: json['transport_icon'] as String?,
+      createdByName: json['created_by_name'] as String?,
+      createdByPhone: json['created_by_phone'] as String?,
+      createdByTgLink: json['created_by_tg_link'] as String?,
       grades: json['grades'],
     );
 
@@ -46,7 +53,26 @@ Map<String, dynamic> _$AdvertisementModelToJson(AdvertisementModel instance) =>
       'images': instance.images,
       'note': instance.note,
       'comments': instance.comments,
+      'transport_name': instance.transportName,
+      'transport_icon': instance.transportIcon,
+      'created_by_name': instance.createdByName,
+      'created_by_phone': instance.createdByPhone,
+      'created_by_tg_link': instance.createdByTgLink,
       'grades': instance.grades,
+    };
+
+Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
+      rating: (json['rating'] as num).toInt(),
+      commentText: json['comment_text'] as String,
+      createdAt: json['created_at'] as String,
+      createdBy: json['created_by'] as String,
+    );
+
+Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
+      'rating': instance.rating,
+      'comment_text': instance.commentText,
+      'created_at': instance.createdAt,
+      'created_by': instance.createdBy,
     };
 
 Details _$DetailsFromJson(Map<String, dynamic> json) => Details(
@@ -64,12 +90,6 @@ Details _$DetailsFromJson(Map<String, dynamic> json) => Details(
           ?.map((e) => Tariff.fromJson(e as Map<String, dynamic>))
           .toList(),
       repairTypeId: (json['repair_type_id'] as num?)?.toInt(),
-      category: (json['category'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      services: (json['services'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       companyName: json['company_name'] as String?,
       transportSpecialistId: (json['transport_specialist_id'] as num?)?.toInt(),
       specialistFirstName: json['specialist_first_name'] as String?,
@@ -96,8 +116,6 @@ Map<String, dynamic> _$DetailsToJson(Details instance) => <String, dynamic>{
       'characteristics': instance.characteristics,
       'tariffs': instance.tariffs,
       'repair_type_id': instance.repairTypeId,
-      'category': instance.category,
-      'services': instance.services,
       'company_name': instance.companyName,
       'transport_specialist_id': instance.transportSpecialistId,
       'specialist_first_name': instance.specialistFirstName,

@@ -57,9 +57,9 @@ class _MastersTypeViewState extends State<MastersTypeView> {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => BlocProvider.value(
                       value: bloc,
-                      child: const AnnouncementCreateView(
+                      child:  AnnouncementCreateView(
                         filter: TypeOfServiceEnum.masters,
-                        carId: 0,
+                        carId: state.transportSpecialists[index].id,
                       ),
                     ),
                   ));

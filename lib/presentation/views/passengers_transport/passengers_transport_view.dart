@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -27,6 +29,7 @@ class PassengersTransportView extends StatefulWidget {
 }
 
 class _PassengersTransportViewState extends State<PassengersTransportView> {
+  List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controllerCount;
   late TextEditingController controllerCommet;
@@ -97,7 +100,8 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                   ).toJson();
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
-                        onSucces: () {
+                        images: images,
+                        onSucces: (id) {
                           Navigator.pop(context);
                         },
                       ));
@@ -177,6 +181,12 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                     builder: (context) => AdditionalInformationView(
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
+                      images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

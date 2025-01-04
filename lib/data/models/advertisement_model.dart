@@ -29,7 +29,17 @@ class AdvertisementModel {
   @JsonKey(name: "note")
   final String note;
   @JsonKey(name: "comments")
-  final dynamic comments;
+  final List<Comment>? comments;
+  @JsonKey(name: "transport_name")
+  final String? transportName;
+  @JsonKey(name: "transport_icon")
+  final String? transportIcon;
+  @JsonKey(name: "created_by_name")
+  final String? createdByName;
+  @JsonKey(name: "created_by_phone")
+  final String? createdByPhone;
+  @JsonKey(name: "created_by_tg_link")
+  final String? createdByTgLink;
   @JsonKey(name: "grades")
   final dynamic grades;
 
@@ -47,6 +57,11 @@ class AdvertisementModel {
     required this.images,
     required this.note,
     required this.comments,
+    required this.transportName,
+    required this.transportIcon,
+    required this.createdByName,
+    required this.createdByPhone,
+    required this.createdByTgLink,
     required this.grades,
   });
 
@@ -54,6 +69,30 @@ class AdvertisementModel {
       _$AdvertisementModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AdvertisementModelToJson(this);
+}
+
+@JsonSerializable()
+class Comment {
+  @JsonKey(name: "rating")
+  final int rating;
+  @JsonKey(name: "comment_text")
+  final String commentText;
+  @JsonKey(name: "created_at")
+  final String createdAt;
+  @JsonKey(name: "created_by")
+  final String createdBy;
+
+  Comment({
+    required this.rating,
+    required this.commentText,
+    required this.createdAt,
+    required this.createdBy,
+  });
+
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CommentToJson(this);
 }
 
 @JsonSerializable()
@@ -72,10 +111,10 @@ class Details {
   final List<Tariff>? tariffs;
   @JsonKey(name: "repair_type_id")
   final int? repairTypeId;
-  @JsonKey(name: "category")
-  final List<String>? category;
-  @JsonKey(name: "services")
-  final List<String>? services;
+  // @JsonKey(name: "category")
+  // final List<String>? category;
+  // @JsonKey(name: "services")
+  // final List<int>? services;
   @JsonKey(name: "company_name")
   final String? companyName;
   @JsonKey(name: "transport_specialist_id")
@@ -113,8 +152,8 @@ class Details {
     this.characteristics,
     this.tariffs,
     this.repairTypeId,
-    this.category,
-    this.services,
+    // this.category,
+    // this.services,
     this.companyName,
     this.transportSpecialistId,
     this.specialistFirstName,

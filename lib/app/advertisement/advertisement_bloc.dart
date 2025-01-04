@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:carting/data/models/advertisment_filter.dart';
 import 'package:carting/data/models/cars_model.dart';
+import 'package:carting/data/models/image_create_model.dart';
+import 'package:carting/data/models/servis_model.dart';
 import 'package:carting/data/models/transport_specialists_model.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +22,49 @@ part 'advertisement_state.dart';
 class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
   final AdvertisementRepo _repo;
   AdvertisementBloc(this._repo) : super(const AdvertisementState()) {
+    on<GetCategoriesEvent>((event, emit) async {
+      emit(state.copyWith(statusCategory: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.getCategories();
+      if (respons.isRight) {
+        emit(state.copyWith(
+          categoriesList: respons.right.data,
+          statusCategory: FormzSubmissionStatus.success,
+        ));
+      } else {
+        emit(state.copyWith(statusCategory: FormzSubmissionStatus.failure));
+      }
+    });
+
+    on<GetServicesEvent>((event, emit) async {
+      emit(state.copyWith(statusServices: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.getServices();
+      if (respons.isRight) {
+        emit(state.copyWith(
+          servicesList: respons.right.data,
+          statusServices: FormzSubmissionStatus.success,
+        ));
+      } else {
+        emit(state.copyWith(statusServices: FormzSubmissionStatus.failure));
+      }
+    });
+    on<ImageCreateEvent>((event, emit) async {
+      final respons = await _repo.createImage(event.model);
+      if (respons.isRight) {
+        event.onSucces();
+      }
+    });
+
+    on<GetAdvertisementsIdEvent>((event, emit) async {
+      emit(state.copyWith(statusCars: FormzSubmissionStatus.inProgress));
+      final respons =
+          await _repo.getAdvertisementsId(FilterModel(advId: event.id));
+      if (respons.isRight) {
+        emit(state.copyWith(statusCars: FormzSubmissionStatus.success));
+        event.onSucces(respons.right.data);
+      } else {
+        emit(state.copyWith(statusCars: FormzSubmissionStatus.failure));
+      }
+    });
     on<GetCarsEvent>((event, emit) async {
       emit(state.copyWith(statusCars: FormzSubmissionStatus.inProgress));
       final respons = await _repo.cars();
@@ -73,10 +121,32 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
       emit(state.copyWith(statusCreate: FormzSubmissionStatus.inProgress));
       final respons = await _repo.createAdvertisement(event.model);
       if (respons.isRight) {
+        if (event.images.isNotEmpty) {
+          List<ImageFiles> list = [];
+          for (var element in event.images) {
+            final text = await MyFunction.convertFileToBase64(element);
+            list.add(ImageFiles(
+              fileName: element.uri.pathSegments.last,
+              base64: text ?? '',
+            ));
+          }
+          add(ImageCreateEvent(
+            model: ImageCreateModel(
+              advertisementId: respons.right,
+              images: list,
+            ),
+            onSucces: () {
+              event.onSucces(respons.right);
+              add(GetAdvertisementsProvideEvent());
+              add(GetAdvertisementsReceiveEvent());
+            },
+          ));
+        } else {
+          event.onSucces(respons.right);
+          add(GetAdvertisementsProvideEvent());
+          add(GetAdvertisementsReceiveEvent());
+        }
         emit(state.copyWith(statusCreate: FormzSubmissionStatus.success));
-        event.onSucces();
-        add(GetAdvertisementsProvideEvent());
-        add(GetAdvertisementsReceiveEvent());
       } else {
         emit(state.copyWith(statusCreate: FormzSubmissionStatus.failure));
       }

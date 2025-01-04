@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/utils/my_function.dart';
@@ -100,7 +100,11 @@ class AnnouncementsIteam extends StatelessWidget {
                   ],
                 ),
               ),
-              AppImages.truck.imgAsset(height: 48),
+              if (model.transportIcon != null)
+                CachedNetworkImage(
+                  imageUrl: model.transportIcon!,
+                  height: 48,
+                )
             ],
           ),
           const SizedBox(height: 4),

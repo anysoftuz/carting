@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -41,7 +40,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
       final images2 = File(image.path);
       final compressedFile = await resizeAndCompressImage(images2, 1000000);
       images = compressedFile;
-      Log.i('Siqilgan fayl: ${await convertFileToBase64(images)}');
+      Log.i('Siqilgan fayl: ${await MyFunction.convertFileToBase64(images)}');
       Log.i('Yangi hajmi: ${compressedFile.lengthSync()} bayt');
       setState(() {});
     } on PlatformException catch (e) {
@@ -70,25 +69,6 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
     super.initState();
   }
 
-  Future<String?> convertFileToBase64(File? file) async {
-    if (file == null) {
-      return null; // Agar fayl bo'lmasa, null qaytaramiz
-    }
-
-    try {
-      // Faylni o'qib, Uint8List ga o'zgartirish
-      final bytes = await file.readAsBytes();
-
-      // Base64 formatga o‘tkazish
-      final base64String = base64Encode(bytes);
-
-      return base64String;
-    } catch (e) {
-      Log.i('Error while converting to base64: $e');
-      return null; // Xatolik yuz bersa, null qaytaramiz
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,18 +81,19 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             return WButton(
               margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               onTap: () async {
-                final text = await convertFileToBase64(images);
-                await Clipboard.setData(ClipboardData(text: text ?? ""));
-                // context.read<AuthBloc>().add(UpdateUserEvent(
-                //   name: controllerName.text,
-                //   lastName: controllerLastName.text,
-                //   phone: MyFunction.convertPhoneNumber(
-                //     controllerPhone.text,
-                //   ),
-                //   images: await convertFileToBase64(images),
-                //   tgName: controllerTG.text,
-                //   onSucces: () {},
-                // ));
+                final text = await MyFunction.convertFileToBase64(images);
+                if (context.mounted) {
+                  context.read<AuthBloc>().add(UpdateUserEvent(
+                        name: controllerName.text,
+                        lastName: controllerLastName.text,
+                        phone: MyFunction.convertPhoneNumber(
+                          controllerPhone.text,
+                        ),
+                        images: text,
+                        tgName: controllerTG.text,
+                        onSucces: () {},
+                      ));
+                }
               },
               isLoading: state.statusSms.isInProgress,
               text: AppLocalizations.of(context)!.save,

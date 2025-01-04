@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -22,7 +24,7 @@ class PeregonServiceView extends StatefulWidget {
   State<PeregonServiceView> createState() => _PeregonServiceViewState();
 }
 
-class _PeregonServiceViewState extends State<PeregonServiceView> {
+class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controllerCommet;
   late TextEditingController controllerPrice;
@@ -79,8 +81,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                     int.tryParse(controllerPrice.text.replaceAll(' ', '')) ?? 0,
               ).toJson();
               context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
-                    model: model,
-                    onSucces: () {
+                    model: model,   images: images,
+                    onSucces: (id) {
                       Navigator.pop(context);
                     },
                   ));
@@ -148,7 +150,12 @@ class _PeregonServiceViewState extends State<PeregonServiceView> {
                     builder: (context) => AdditionalInformationView(
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
-                      payDate: payDate,
+                      payDate: payDate,images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -36,6 +38,7 @@ class _TransportTransferCreateViewState
   MapPoint? point2;
   ValueNotifier<bool> payDate = ValueNotifier(true);
   ValueNotifier<int> trTypeId = ValueNotifier(0);
+  List<File> images = [];
   @override
   void initState() {
     controller = TextEditingController();
@@ -97,7 +100,8 @@ class _TransportTransferCreateViewState
                   ).toJson();
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
-                        onSucces: () {
+                        images: images,
+                        onSucces: (id) {
                           Navigator.pop(context);
                         },
                       ));
@@ -178,6 +182,12 @@ class _TransportTransferCreateViewState
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
                       payDate: payDate,
+                      images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

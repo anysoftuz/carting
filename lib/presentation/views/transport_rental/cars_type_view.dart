@@ -1,10 +1,12 @@
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/data.dart';
 import 'package:carting/presentation/views/transport_rental/cars_rental_info_view.dart';
-import 'package:carting/presentation/widgets/w_title.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class CarsTypeView extends StatefulWidget {
   const CarsTypeView({super.key});
@@ -15,6 +17,12 @@ class CarsTypeView extends StatefulWidget {
 
 class _CarsTypeViewState extends State<CarsTypeView> {
   @override
+  void initState() {
+    context.read<AdvertisementBloc>().add(GetCarsEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
@@ -22,49 +30,44 @@ class _CarsTypeViewState extends State<CarsTypeView> {
         title: const Text("Yengil avtomobillar"),
         backgroundColor: white,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const WTitle(title: "Sedan"),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+      body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
+        builder: (context, state) {
+          if (state.statusCars.isInProgress) {
+            return ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemBuilder: (context, index) => const WShimmer(
+                height: 60,
+                width: double.infinity,
+              ),
+              separatorBuilder: (context, index) => const Divider(),
+              itemCount: 12,
+            );
+          }
+          return RefreshIndicator.adaptive(
+            onRefresh: () async {
+              context.read<AdvertisementBloc>().add(GetCarsEvent());
+              Future.delayed(Duration.zero);
+            },
+            child: ListView.separated(
               itemBuilder: (context, index) => ListTile(
-                title: Text(AppData.carsList[index].name),
-                subtitle: Text(AppData.carsList[index].description),
+                title: Text(state.carsModel[index].name),
+                subtitle: Text(state.carsModel[index].fuelType),
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>
-                        CarsRentalInfoView(title: AppData.carsList[index].name),
+                        CarsRentalInfoView(title: state.carsModel[index].name),
                   ));
                 },
               ),
-              separatorBuilder: (context, index) => const Divider(height: 1),
-              itemCount: AppData.carsList.length,
-            ),
-            const WTitle(title: "Krossover"),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => ListTile(
-                title: Text(AppData.carsList2[index].name),
-                subtitle: Text(AppData.carsList2[index].description),
-                trailing: AppIcons.arrowForward.svg(),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CarsRentalInfoView(
-                      title: AppData.carsList2[index].name,
-                    ),
-                  ));
-                },
+              separatorBuilder: (context, index) => const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Divider(height: 1),
               ),
-              separatorBuilder: (context, index) => const Divider(height: 1),
-              itemCount: AppData.carsList2.length,
+              itemCount: state.carsModel.length,
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

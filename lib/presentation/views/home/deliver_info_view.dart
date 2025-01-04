@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -413,7 +413,7 @@ class DeliverInfoView extends StatelessWidget {
               ),
               child: ListTile(
                 title: const Text("Transport turi"),
-                subtitle: const Text("Furgon 4.8x2.05x1.92"),
+                subtitle: Text(model.transportName ?? "Nomalum"),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -425,7 +425,9 @@ class DeliverInfoView extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                trailing: AppImages.truck.imgAsset(),
+                trailing: model.transportIcon != null
+                    ? CachedNetworkImage(imageUrl: model.transportIcon!)
+                    : null,
               ),
             )
           ],

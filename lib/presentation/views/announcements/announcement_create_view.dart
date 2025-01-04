@@ -3,11 +3,15 @@ import 'dart:io';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_delivery_model.dart';
 import 'package:carting/data/models/location_model.dart';
+import 'package:carting/data/models/master_model.dart';
 import 'package:carting/data/models/passenger_transportation_create_model.dart';
+import 'package:carting/data/models/servis_model.dart';
 import 'package:carting/data/models/special_equipment_create_model.dart';
 import 'package:carting/data/models/transport_transfer_model.dart';
 import 'package:carting/data/models/warehouse_model.dart';
+import 'package:carting/data/models/workshop_model.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
+import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +52,8 @@ class AnnouncementCreateView extends StatefulWidget {
 class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
   String selectedUnit = 'kg';
   List<File> images = [];
+  List<ServisModel> categoriesList = [];
+  List<ServisModel> servicesList = [];
   List<FuelType> fuelList = [
     FuelType(
       controllerName: TextEditingController(),
@@ -59,6 +65,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
   late TextEditingController controllerCount;
   late TextEditingController controllerCommet;
   late TextEditingController controllerPrice;
+  late TextEditingController controllerCompany;
+  late TextEditingController controllerCompany2;
 
   void imagesFile() async {
     try {
@@ -81,6 +89,12 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
     controllerCommet = TextEditingController();
     controllerPrice = TextEditingController();
     controllerCount = TextEditingController();
+    controllerCompany = TextEditingController();
+    controllerCompany2 = TextEditingController();
+    if (widget.filter == TypeOfServiceEnum.workshops) {
+      context.read<AdvertisementBloc>().add(GetCategoriesEvent());
+      context.read<AdvertisementBloc>().add(GetServicesEvent());
+    }
     super.initState();
   }
 
@@ -101,10 +115,20 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
           builder: (context, state) {
             return WButton(
               onTap: () {
-                if (images.isNotEmpty &&
+                if (point2 != null &&
+                    images.isNotEmpty &&
                     controllerCommet.text.isNotEmpty &&
                     controllerPrice.text.isNotEmpty &&
-                    controllerCount.text.isNotEmpty) {
+                    (widget.filter != TypeOfServiceEnum.specialTechnique
+                        ? controllerCount.text.isNotEmpty
+                        : true) &&
+                    (widget.filter == TypeOfServiceEnum.workshops ||
+                            widget.filter == TypeOfServiceEnum.masters
+                        ? controllerCompany.text.isNotEmpty
+                        : true) &&
+                    (widget.filter == TypeOfServiceEnum.masters
+                        ? controllerCompany2.text.isNotEmpty
+                        : true)) {
                   final model = switch (widget.filter) {
                     TypeOfServiceEnum.storageInWarehouse => WarehouseModel(
                         toLocation: ToLocation(
@@ -192,19 +216,56 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                       ).toJson(),
                     TypeOfServiceEnum.transportRental =>
                       throw UnimplementedError(),
-                    TypeOfServiceEnum.workshops => throw UnimplementedError(),
-                    TypeOfServiceEnum.masters => throw UnimplementedError(),
-                    TypeOfServiceEnum.transportTransfer =>
-                      TransportTransferModel(
-                        toLocation: LocationModel(
+                    TypeOfServiceEnum.workshops => WorkshopModel(
+                        advType: "PROVIDE",
+                        serviceTypeId: 5,
+                        fromLocation: LocationModel(
                           lat: point2!.latitude,
                           lng: point2!.longitude,
                           name: point2!.name,
                         ),
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                        details: DetailsWorkshop(
+                          repairTypeId: 1,
+                          category: categoriesList.map((e) => e.id).toList(),
+                          services: servicesList.map((e) => e.id).toList(),
+                          companyName: controllerCompany.text,
+                        ),
+                        note: controllerCommet.text,
+                      ).toJson(),
+                    TypeOfServiceEnum.masters => MasterModel(
+                        advType: "PROVIDE",
+                        serviceTypeId: 5,
                         fromLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
+                        ),
+                        price: int.tryParse(
+                                controllerPrice.text.replaceAll(' ', '')) ??
+                            0,
+                        details: DetailsMaster(
+                          repairTypeId: 2,
+                          services: servicesList.map((e) => e.id).toList(),
+                          transportSpecialistId: widget.carId,
+                          specialistLastName: controllerCompany2.text,
+                          specialistFirstName: controllerCompany.text,
+                        ),
+                        note: controllerCommet.text,
+                      ).toJson(),
+                    TypeOfServiceEnum.transportTransfer =>
+                      TransportTransferModel(
+                        toLocation: LocationModel(
                           lat: point1!.latitude,
                           lng: point1!.longitude,
                           name: point1!.name,
+                        ),
+                        fromLocation: LocationModel(
+                          lat: point2!.latitude,
+                          lng: point2!.longitude,
+                          name: point2!.name,
                         ),
                         serviceName: 'Transport transferi',
                         details: DetailsTransfer(
@@ -222,26 +283,36 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                     TypeOfServiceEnum.fuelDelivery =>
                       throw UnimplementedError(),
                   };
-                  context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
-                        model: model,
-                        onSucces: () {
-                          if (widget.filter ==
-                              TypeOfServiceEnum.transportRental) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const CarsRenatlDitealsView(
-                                myAnnouncement: true,
+                  final bloc = context.read<AdvertisementBloc>();
+                  bloc.add(CreateDeliveryEvent(
+                    model: model,
+                    images: images,
+                    onSucces: (id) {
+                      if (widget.filter == TypeOfServiceEnum.transportRental) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const CarsRenatlDitealsView(
+                            myAnnouncement: true,
+                          ),
+                        ));
+                      } else {
+                        bloc.add(GetAdvertisementsIdEvent(
+                          id: id,
+                          onSucces: (model) {
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: bloc,
+                                child: AnnouncementsCreateInfoView(
+                                  filter: widget.filter,
+                                  model: model,
+                                ),
                               ),
                             ));
-                          } else {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => AnnouncementsCreateInfoView(
-                                filter: widget.filter,
-                                images: images,
-                              ),
-                            ));
-                          }
-                        },
-                      ));
+                          },
+                        ));
+                      }
+                    },
+                  ));
                 } else {
                   CustomSnackbar.show(
                     context,
@@ -660,41 +731,48 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           ),
                                         ),
                                         const SizedBox(height: 8),
-                                        Wrap(
-                                          spacing: 8,
-                                          runSpacing: 8,
-                                          children: List.generate(
-                                            AppData.categories.length,
-                                            (index) => Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: green,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: green.withValues(
-                                                        alpha: .32),
-                                                    blurRadius: 16,
-                                                    spreadRadius: -24,
-                                                    offset: const Offset(0, 8),
-                                                  )
-                                                ],
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 4,
-                                                horizontal: 14,
-                                              ),
-                                              child: Text(
-                                                AppData.categories[index],
-                                                style: const TextStyle(
-                                                  color: white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
+                                        BlocBuilder<AdvertisementBloc,
+                                            AdvertisementState>(
+                                          builder: (context, state) {
+                                            if (state
+                                                .statusCategory.isInProgress) {
+                                              return const WShimmer(
+                                                height: 80,
+                                                width: double.infinity,
+                                              );
+                                            }
+                                            return Wrap(
+                                              spacing: 8,
+                                              runSpacing: 8,
+                                              children: List.generate(
+                                                state.categoriesList.length,
+                                                (index) => GestureDetector(
+                                                  onTap: () {
+                                                    if (categoriesList.contains(
+                                                        state.categoriesList[
+                                                            index])) {
+                                                      categoriesList.remove(
+                                                          state.categoriesList[
+                                                              index]);
+                                                    } else {
+                                                      categoriesList.add(
+                                                          state.categoriesList[
+                                                              index]);
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  child: ServisIteam(
+                                                    model: state
+                                                        .categoriesList[index],
+                                                    isActive: categoriesList
+                                                        .contains(state
+                                                                .categoriesList[
+                                                            index]),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
@@ -723,41 +801,46 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           ),
                                         ),
                                         const SizedBox(height: 8),
-                                        Wrap(
-                                          spacing: 8,
-                                          runSpacing: 8,
-                                          children: List.generate(
-                                            AppData.services.length,
-                                            (index) => Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: green,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: green.withValues(
-                                                        alpha: .32),
-                                                    blurRadius: 16,
-                                                    spreadRadius: -24,
-                                                    offset: const Offset(0, 8),
-                                                  )
-                                                ],
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 4,
-                                                horizontal: 14,
-                                              ),
-                                              child: Text(
-                                                AppData.services[index],
-                                                style: const TextStyle(
-                                                  color: white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
+                                        BlocBuilder<AdvertisementBloc,
+                                            AdvertisementState>(
+                                          builder: (context, state) {
+                                            if (state
+                                                .statusServices.isInProgress) {
+                                              return const WShimmer(
+                                                height: 80,
+                                                width: double.infinity,
+                                              );
+                                            }
+                                            return Wrap(
+                                              spacing: 8,
+                                              runSpacing: 8,
+                                              children: List.generate(
+                                                state.servicesList.length,
+                                                (index) => GestureDetector(
+                                                  onTap: () {
+                                                    if (servicesList.contains(
+                                                        state.servicesList[
+                                                            index])) {
+                                                      servicesList.remove(state
+                                                          .servicesList[index]);
+                                                    } else {
+                                                      servicesList.add(state
+                                                          .servicesList[index]);
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  child: ServisIteam(
+                                                    model: state
+                                                        .servicesList[index],
+                                                    isActive:
+                                                        servicesList.contains(
+                                                            state.servicesList[
+                                                                index]),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
@@ -766,6 +849,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                   WTextField(
                                     title: 'Kompaniya nomi',
                                     hintText: 'Kompaniya nomini kiriting!',
+                                    controller: controllerCompany,
                                     onChanged: (value) {},
                                   ),
                                   const SizedBox(height: 12),
@@ -840,12 +924,14 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                   WTextField(
                                     title: 'Ism',
                                     hintText: 'Sherzod',
+                                    controller: controllerCompany,
                                     onChanged: (value) {},
                                   ),
                                   const SizedBox(height: 12),
                                   WTextField(
                                     title: 'Familiya',
                                     hintText: 'Shermatov',
+                                    controller: controllerCompany2,
                                     onChanged: (value) {},
                                   ),
                                   const SizedBox(height: 12),
@@ -954,6 +1040,51 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
               },
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ServisIteam extends StatelessWidget {
+  const ServisIteam({
+    super.key,
+    required this.model,
+    required this.isActive,
+  });
+
+  final ServisModel model;
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          20,
+        ),
+        color: isActive ? green : scaffoldSecondaryBackground,
+        boxShadow: isActive
+            ? [
+                BoxShadow(
+                  color: green.withValues(alpha: .32),
+                  blurRadius: 16,
+                  spreadRadius: -24,
+                  offset: const Offset(0, 8),
+                )
+              ]
+            : [],
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 4,
+        horizontal: 14,
+      ),
+      child: Text(
+        model.name,
+        style: TextStyle(
+          color: isActive ? white : dark,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );

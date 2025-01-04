@@ -4,7 +4,9 @@ import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/data/models/advertisment_filter.dart';
 import 'package:carting/data/models/cars_model.dart';
 import 'package:carting/data/models/fuels_info_model.dart';
+import 'package:carting/data/models/image_create_model.dart';
 import 'package:carting/data/models/response_model.dart';
+import 'package:carting/data/models/servis_model.dart';
 import 'package:carting/data/models/transport_specialists_model.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
 import 'package:carting/infrastructure/core/dio_settings.dart';
@@ -22,12 +24,20 @@ abstract class AdvertisementDatasource {
     int servisId, {
     bool isRECEIVE = false,
   });
-  Future<bool> createAdvertisement(Map<String, dynamic> model);
+  Future<int> createAdvertisement(Map<String, dynamic> model);
   Future<ResponseModel<List<FuelsInfoModel>>> fuels(int fuelsId);
   Future<ResponseModel<List<CarsModel>>> cars();
   Future<bool> deactivetAdvertisement(int id);
   Future<ResponseModel<List<TransportSpecialistsModel>>>
       getTransportSpecialists();
+  Future<ResponseModel<AdvertisementModel>> getAdvertisementsId(
+    FilterModel? model,
+  );
+  Future<ResponseModel<Map<String, dynamic>>> createImage(
+    ImageCreateModel model,
+  );
+  Future<ResponseModel<List<ServisModel>>> getCategories();
+  Future<ResponseModel<List<ServisModel>>> getServices();
 }
 
 class AdvertisementDatasourceImpl implements AdvertisementDatasource {
@@ -128,7 +138,7 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
   }
 
   @override
-  Future<bool> createAdvertisement(Map<String, dynamic> model) {
+  Future<int> createAdvertisement(Map<String, dynamic> model) {
     return _handle.apiCantrol(
       request: () => dio.post(
         'advertisement',
@@ -142,7 +152,7 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
         ),
         data: model,
       ),
-      body: (response) => true,
+      body: (response) => (response as Map<String, dynamic>)['data']['id'],
     );
   }
 
@@ -233,6 +243,106 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
         (p0) => (p0 as List)
             .map((e) =>
                 TransportSpecialistsModel.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<Map<String, dynamic>>> createImage(
+      ImageCreateModel model) {
+    final models = {
+      'advertisement_id': model.advertisementId,
+      'images': List.generate(
+        model.images.length,
+        (index) =>
+            {"fileName": "test.jpeg", "base64": model.images[index].base64},
+      )
+    };
+    return _handle.apiCantrol(
+      request: () => dio.post(
+        'advertisement/images',
+        data: models,
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => response,
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<AdvertisementModel>> getAdvertisementsId(
+      FilterModel? model) {
+    return _handle.apiCantrol(
+      request: () => dio.get(
+        'advertisement',
+        queryParameters: {'id': model?.advId ?? 0},
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (e) => AdvertisementModel.fromJson(e as Map<String, dynamic>),
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<List<ServisModel>>> getCategories() {
+    return _handle.apiCantrol(
+      request: () => dio.get(
+        'list/workshop_categories',
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => (p0 as List)
+            .map((e) => ServisModel.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+    );
+  }
+
+  @override
+  Future<ResponseModel<List<ServisModel>>> getServices() {
+  return _handle.apiCantrol(
+      request: () => dio.get(
+        'list/workshop_services',
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => ResponseModel.fromJson(
+        response,
+        (p0) => (p0 as List)
+            .map((e) => ServisModel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
     );

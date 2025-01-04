@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -27,6 +29,7 @@ class ShippingCreateView extends StatefulWidget {
 }
 
 class _ShippingCreateViewState extends State<ShippingCreateView> {
+  List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controllerCount;
   late TextEditingController controllerCommet;
@@ -106,7 +109,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                   ).toJson();
                   context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
                         model: model,
-                        onSucces: () {
+                        images: images,
+                        onSucces: (id) {
                           Navigator.pop(context);
                         },
                       ));
@@ -270,6 +274,12 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                       loadServiceId: loadServiceId,
                       loadTypeId: loadTypeId,
                       payDate: payDate,
+                      images: images,
+                      onSave: (list) {
+                        setState(() {
+                          images = list;
+                        });
+                      },
                     ),
                   ));
                 },

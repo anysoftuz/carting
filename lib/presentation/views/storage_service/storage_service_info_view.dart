@@ -73,14 +73,16 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                       AppIcons.star.svg(),
                       RichText(
                         text: TextSpan(
-                          text: "4.5, ",
+                          text:
+                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
                           style: const TextStyle(
                             fontSize: 14,
                             color: dark,
                           ),
                           children: [
                             TextSpan(
-                              text: "25 ta izoh",
+                              text:
+                                  "${widget.model.comments?.length ?? 0} ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
                                 color: dark.withValues(alpha: .3),

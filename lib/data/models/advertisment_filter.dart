@@ -1,12 +1,16 @@
 class FilterModel {
   int? advId;
   int? serviceId;
+  int? specialistId;
+  bool? status;
   String? advType;
 
   FilterModel({
     this.advId,
     this.serviceId,
     this.advType,
+    this.specialistId,
+    this.status,
   });
 
   FilterModel.fromJson(Map<String, dynamic> json) {

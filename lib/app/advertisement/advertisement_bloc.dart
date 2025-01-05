@@ -192,6 +192,8 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
       emit(state.copyWith(statusFilter: FormzSubmissionStatus.inProgress));
       final respons = await _repo.getAdvertisements(FilterModel(
         serviceId: event.serviceId,
+        specialistId: event.specialistId,
+        status: event.status,
         advType: event.isPROVIDE == null
             ? null
             : event.isPROVIDE == true

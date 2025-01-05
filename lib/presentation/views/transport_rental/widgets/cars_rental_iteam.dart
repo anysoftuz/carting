@@ -1,14 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class CarsRentalIteam extends StatelessWidget {
   const CarsRentalIteam({
     super.key,
-    required this.title,
+    required this.model,
   });
-  final String title;
+  final AdvertisementModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,19 @@ class CarsRentalIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.kiaSonet.imgAsset(
-              height: 196,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: model.images != null
+                ? CachedNetworkImage(
+                    imageUrl:
+                        'https://api.carting.uz/uploads/files/${model.images!.first}',
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : AppImages.kiaSonet.imgAsset(
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Expanded(
             child: Padding(
@@ -44,16 +55,16 @@ class CarsRentalIteam extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          title,
+                          model.carName ?? "Nomalum",
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      const Text(
-                        "800 000 UZS",
-                        style: TextStyle(
+                      Text(
+                        "${MyFunction.priceFormat(model.price ?? 0)} UZS",
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                         ),
@@ -70,7 +81,7 @@ class CarsRentalIteam extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          "Toshkent, Yakkasaroy tumani",
+                          model.fromLocation?.name ?? "Nomalum",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -85,10 +96,10 @@ class CarsRentalIteam extends StatelessWidget {
                     children: [
                       AppIcons.star.svg(),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "4.5",
-                          style: TextStyle(
+                          "${MyFunction.calculateAverageRating(model.comments ?? [])}",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),

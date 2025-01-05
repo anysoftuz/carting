@@ -55,6 +55,13 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
     if (model?.advType != null) {
       queryParameters['adv_type'] = model?.advType;
     }
+    if (model?.specialistId != null) {
+      queryParameters['specialist_id'] = model?.specialistId;
+    }
+    if (model?.status != null) {
+      queryParameters['status'] =
+          model!.status == true ? "ACTIVE" : "IN_ACTIVE";
+    }
     return _handle.apiCantrol(
       request: () => dio.get(
         'advertisement',
@@ -327,7 +334,7 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
 
   @override
   Future<ResponseModel<List<ServisModel>>> getServices() {
-  return _handle.apiCantrol(
+    return _handle.apiCantrol(
       request: () => dio.get(
         'list/workshop_services',
         options: Options(

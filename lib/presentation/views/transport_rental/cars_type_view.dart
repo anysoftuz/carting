@@ -54,9 +54,14 @@ class _CarsTypeViewState extends State<CarsTypeView> {
                 subtitle: Text(state.carsModel[index].fuelType),
                 trailing: AppIcons.arrowForward.svg(),
                 onTap: () {
+                  final bloc = context.read<AdvertisementBloc>();
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        CarsRentalInfoView(title: state.carsModel[index].name),
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: CarsRentalInfoView(
+                        title: state.carsModel[index].name,
+                      ),
+                    ),
                   ));
                 },
               ),

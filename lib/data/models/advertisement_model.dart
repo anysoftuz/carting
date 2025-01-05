@@ -40,8 +40,12 @@ class AdvertisementModel {
   final String? createdByPhone;
   @JsonKey(name: "created_by_tg_link")
   final String? createdByTgLink;
-  @JsonKey(name: "grades")
-  final dynamic grades;
+  @JsonKey(name: "workshop_services")
+  final List<String>? workshopServices;
+  @JsonKey(name: "workshop_categories")
+  final List<String>? workshopCategories;
+  @JsonKey(name: "car_name")
+  final String? carName;
 
   AdvertisementModel({
     required this.id,
@@ -62,7 +66,9 @@ class AdvertisementModel {
     required this.createdByName,
     required this.createdByPhone,
     required this.createdByTgLink,
-    required this.grades,
+    required this.workshopServices,
+    required this.workshopCategories,
+    required this.carName,
   });
 
   factory AdvertisementModel.fromJson(Map<String, dynamic> json) =>

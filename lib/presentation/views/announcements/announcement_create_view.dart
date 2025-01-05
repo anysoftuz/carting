@@ -288,16 +288,19 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                     model: model,
                     images: images,
                     onSucces: (id) {
-                      if (widget.filter == TypeOfServiceEnum.transportRental) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const CarsRenatlDitealsView(
-                            myAnnouncement: true,
-                          ),
-                        ));
-                      } else {
-                        bloc.add(GetAdvertisementsIdEvent(
-                          id: id,
-                          onSucces: (model) {
+                      bloc.add(GetAdvertisementsIdEvent(
+                        id: id,
+                        onSucces: (model) {
+                          if (widget.filter ==
+                              TypeOfServiceEnum.transportRental) {
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => CarsRenatlDitealsView(
+                                myAnnouncement: true,
+                                model: model,
+                              ),
+                            ));
+                          } else {
                             Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
                               builder: (context) => BlocProvider.value(
@@ -308,9 +311,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 ),
                               ),
                             ));
-                          },
-                        ));
-                      }
+                          }
+                        },
+                      ));
                     },
                   ));
                 } else {

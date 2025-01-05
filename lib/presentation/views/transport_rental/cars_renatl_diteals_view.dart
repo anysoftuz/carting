@@ -1,30 +1,25 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/advertisement_model.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class CarsRenatlDitealsView extends StatefulWidget {
-  const CarsRenatlDitealsView({super.key, this.myAnnouncement = false});
+  const CarsRenatlDitealsView({
+    super.key,
+    this.myAnnouncement = false,
+    required this.model,
+  });
   final bool myAnnouncement;
+  final AdvertisementModel model;
 
   @override
   State<CarsRenatlDitealsView> createState() => _CarsRenatlDitealsViewState();
 }
 
 class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
-  List<String> list = [
-    AppImages.kiaSonet,
-    AppImages.kiaSonet,
-    AppImages.kiaSonet,
-    AppImages.kiaSonet,
-  ];
-
-  List<String> list2 = [
-    "3 000 000 UZS",
-    "5 000 000 UZS",
-    "16 000 000 UZS",
-  ];
   List<Color> list3 = [
     Colors.amber,
     Colors.brown,
@@ -53,13 +48,16 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
             expandedHeight: 400,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: PageView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => Image.asset(
-                  list[index],
-                  fit: BoxFit.cover,
-                ),
-              ),
+              background: widget.model.images != null
+                  ? PageView.builder(
+                      itemCount: widget.model.images!.length,
+                      itemBuilder: (context, index) => CachedNetworkImage(
+                        imageUrl:
+                            'https://api.carting.uz/uploads/files/${widget.model.images![index]}',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : const SizedBox(),
             ),
           )
         ],
@@ -71,9 +69,9 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "AVTOritet",
-                    style: TextStyle(
+                  Text(
+                    widget.model.carName ?? "Nomalum",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
                     ),
@@ -83,14 +81,16 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       AppIcons.star.svg(),
                       RichText(
                         text: TextSpan(
-                          text: "4.5, ",
+                          text:
+                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
                           style: const TextStyle(
                             fontSize: 14,
                             color: dark,
                           ),
                           children: [
                             TextSpan(
-                              text: "25 ta izoh",
+                              text:
+                                  "${widget.model.comments?.length ?? 0} ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
                                 color: dark.withValues(alpha: .3),
@@ -103,62 +103,64 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                   )
                 ],
               ),
-              const Text(
-                "800 000 UZS",
-                style: TextStyle(
+              Text(
+                "${MyFunction.priceFormat(widget.model.price ?? 0)} UZS",
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                "CityRentCar kompaniyasi o‘z mijozlari uchun hamyonbop narxdagi Kia Sonetni taklif qiladi",
+                widget.model.note,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                   color: dark.withValues(alpha: .3),
                 ),
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 56,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: scaffoldSecondaryBackground,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "5 kunlik",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: dark.withValues(alpha: .3),
+              if (widget.model.details?.tariffs != null)
+                const SizedBox(height: 16),
+              if (widget.model.details?.tariffs != null)
+                SizedBox(
+                  height: 56,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: scaffoldSecondaryBackground,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${widget.model.details!.tariffs![index].day} kunlik",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: dark.withValues(alpha: .3),
+                            ),
                           ),
-                        ),
-                        Text(
-                          list2[index],
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                          Text(
+                            "${MyFunction.priceFormat(widget.model.details!.tariffs![index].price)} so'm",
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 8),
+                    itemCount: widget.model.details?.tariffs?.length ?? 0,
                   ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 8),
-                  itemCount: list2.length,
                 ),
-              ),
               const SizedBox(height: 24),
               Container(
                 decoration: BoxDecoration(
@@ -171,9 +173,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     height: 24,
                     width: 24,
                   ),
-                  title: const Text(
-                    "Toshkent, Yakkasaroy tumanihlar",
+                  title: Text(
+                    widget.model.fromLocation?.name ?? "Nomalum",
                     maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
@@ -218,10 +221,11 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "1.5 MPI",
-                        style: TextStyle(
+                        text:
+                            "${widget.model.details?.characteristics?.engineCapacity ?? 0} MPI",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -241,10 +245,14 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "Bor",
-                        style: TextStyle(
+                        text: widget.model.details?.characteristics
+                                    ?.hasInsurance ==
+                                true
+                            ? "Bor"
+                            : "Yo'q",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -287,10 +295,14 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "OSAGO",
-                        style: TextStyle(
+                        text: widget.model.details?.characteristics
+                                    ?.hasInsurance ==
+                                true
+                            ? "OSAGO"
+                            : "Yo'q",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -333,10 +345,11 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "5 ta",
-                        style: TextStyle(
+                        text:
+                            "${widget.model.details?.characteristics?.passengerCount ?? 0} ta",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -356,10 +369,11 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "200 km",
-                        style: TextStyle(
+                        text:
+                            "${widget.model.details?.characteristics?.dailyDistanceLimit ?? 0} km",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -379,10 +393,11 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: dark.withValues(alpha: .3),
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "2 000 000 so‘m",
-                        style: TextStyle(
+                        text:
+                            "${MyFunction.priceFormat(widget.model.details?.characteristics?.depositAmount ?? 0)} so‘m",
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: dark,
@@ -434,23 +449,25 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                   } else {
                     return Column(
                       children: [
-                        WButton(
-                          onTap: () {},
-                          text: "Qo‘ng‘iroq qilish",
-                        ),
-                        const SizedBox(height: 8),
-                        WButton(
-                          onTap: () {},
-                          color: blue,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppIcons.telegram.svg(),
-                              const SizedBox(width: 12),
-                              const Text("Telegram orqali bog‘lanish")
-                            ],
+                        if (widget.model.createdByPhone != null)
+                          WButton(
+                            onTap: () {},
+                            text: "Qo‘ng‘iroq qilish",
                           ),
-                        ),
+                        const SizedBox(height: 8),
+                        if (widget.model.createdByTgLink != null)
+                          WButton(
+                            onTap: () {},
+                            color: blue,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AppIcons.telegram.svg(),
+                                const SizedBox(width: 12),
+                                const Text("Telegram orqali bog‘lanish")
+                              ],
+                            ),
+                          ),
                         const SizedBox(height: 16),
                       ],
                     );

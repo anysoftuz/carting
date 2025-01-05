@@ -35,7 +35,13 @@ AdvertisementModel _$AdvertisementModelFromJson(Map<String, dynamic> json) =>
       createdByName: json['created_by_name'] as String?,
       createdByPhone: json['created_by_phone'] as String?,
       createdByTgLink: json['created_by_tg_link'] as String?,
-      grades: json['grades'],
+      workshopServices: (json['workshop_services'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      workshopCategories: (json['workshop_categories'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      carName: json['car_name'] as String?,
     );
 
 Map<String, dynamic> _$AdvertisementModelToJson(AdvertisementModel instance) =>
@@ -58,7 +64,9 @@ Map<String, dynamic> _$AdvertisementModelToJson(AdvertisementModel instance) =>
       'created_by_name': instance.createdByName,
       'created_by_phone': instance.createdByPhone,
       'created_by_tg_link': instance.createdByTgLink,
-      'grades': instance.grades,
+      'workshop_services': instance.workshopServices,
+      'workshop_categories': instance.workshopCategories,
+      'car_name': instance.carName,
     };
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(

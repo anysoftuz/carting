@@ -76,7 +76,7 @@ class AutoRepairView extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => BlocProvider.value(
                       value: bloc,
-                      child: const MastersTypeView(isCreate: true),
+                      child: MastersTypeView(isCreate: isCreate),
                     ),
                   ));
                 },

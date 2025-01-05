@@ -1,3 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -5,7 +8,8 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 
 class MastersIteam extends StatelessWidget {
-  const MastersIteam({super.key});
+  const MastersIteam({super.key, required this.model});
+  final AdvertisementModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +26,19 @@ class MastersIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.exp.imgAsset(
-              height: 196,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: model.images != null
+                ? CachedNetworkImage(
+                    imageUrl:
+                        'https://api.carting.uz/uploads/files/${model.images?.first}',
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : AppImages.exp.imgAsset(
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Expanded(
             child: Padding(
@@ -37,9 +49,9 @@ class MastersIteam extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Asqar Nurmatov",
-                    style: TextStyle(
+                  Text(
+                    "${model.details?.specialistFirstName ?? ""} ${model.details?.specialistLastName ?? ""}",
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
@@ -52,10 +64,10 @@ class MastersIteam extends StatelessWidget {
                         width: 16,
                       ),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Toshkent, Yakkasaroy tumani",
-                          style: TextStyle(
+                          model.fromLocation?.name ?? "Nomalum",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -68,10 +80,10 @@ class MastersIteam extends StatelessWidget {
                     children: [
                       AppIcons.star.svg(),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "4.5",
-                          style: TextStyle(
+                          "${MyFunction.calculateAverageRating(model.comments ?? [])}",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),

@@ -15,10 +15,14 @@ class GetAdvertisementsEvent extends AdvertisementEvent {
 class GetAdvertisementsFilterEvent extends AdvertisementEvent {
   final int? serviceId;
   final bool? isPROVIDE;
+  final int? specialistId;
+  final bool? status;
 
   GetAdvertisementsFilterEvent({
     this.serviceId,
     this.isPROVIDE,
+    this.specialistId,
+    this.status,
   });
 }
 

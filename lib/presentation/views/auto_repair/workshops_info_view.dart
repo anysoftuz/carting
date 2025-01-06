@@ -1,3 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/views/common/comments_view.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -6,27 +10,14 @@ import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 
 class WorkshopsInfoView extends StatefulWidget {
-  const WorkshopsInfoView({super.key});
+  const WorkshopsInfoView({super.key, required this.model});
+  final AdvertisementModel model;
 
   @override
   State<WorkshopsInfoView> createState() => _WorkshopsInfoViewState();
 }
 
 class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
-  List<String> list = [
-    AppImages.workshop,
-    AppImages.workshop,
-    AppImages.workshop,
-    AppImages.workshop,
-  ];
-
-  List<String> list2 = [
-    "Motorist",
-    "Avtoelektrika",
-    "Kuzovchi",
-    "Hodovik",
-    "Avtotuning",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,26 +39,33 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
             expandedHeight: 400,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: PageView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => Image.asset(
-                  list[index],
-                  fit: BoxFit.cover,
-                ),
-              ),
+              background: widget.model.images != null
+                  ? PageView.builder(
+                      itemCount: widget.model.images!.length,
+                      itemBuilder: (context, index) => CachedNetworkImage(
+                        imageUrl:
+                            'https://api.carting.uz/uploads/files/${widget.model.images![index]}',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : Image.asset(
+                      AppImages.workshop,
+                      fit: BoxFit.cover,
+                    ),
             ),
           )
         ],
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "AVTOritet",
-                    style: TextStyle(
+                  Text(
+                    widget.model.details?.companyName ?? "Nomalum",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
                     ),
@@ -77,14 +75,16 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                       AppIcons.star.svg(),
                       RichText(
                         text: TextSpan(
-                          text: "4.5, ",
+                          text:
+                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
                           style: const TextStyle(
                             fontSize: 14,
                             color: dark,
                           ),
                           children: [
                             TextSpan(
-                              text: "25 ta izoh",
+                              text:
+                                  "${widget.model.comments?.length ?? 0} ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
                                 color: dark.withValues(alpha: .3),
@@ -99,7 +99,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
               ),
               const SizedBox(height: 8),
               Text(
-                "Assalomu alaykum! man sizga barcha turdagi yuklarni tashish uchun mo‘ljallangan Furgonimni taklif qilaman, shanba yakshanba ham ishlayman.",
+                widget.model.note,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -132,7 +132,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   spacing: 8,
                   runSpacing: 8,
                   children: List.generate(
-                    list2.length,
+                    widget.model.workshopCategories?.length ?? 0,
                     (index) => Container(
                       decoration: BoxDecoration(
                         color: white,
@@ -143,7 +143,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                         horizontal: 16,
                       ),
                       child: Text(
-                        list2[index],
+                        widget.model.workshopCategories![index],
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -179,7 +179,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   spacing: 8,
                   runSpacing: 8,
                   children: List.generate(
-                    list2.length,
+                    widget.model.workshopServices?.length ?? 0,
                     (index) => Container(
                       decoration: BoxDecoration(
                         color: white,
@@ -190,7 +190,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                         horizontal: 16,
                       ),
                       child: Text(
-                        list2[index],
+                        widget.model.workshopServices![index],
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -212,9 +212,10 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     height: 24,
                     width: 24,
                   ),
-                  title: const Text(
-                    "Toshkent, Yakkasaroy tumanihlar",
+                  title: Text(
+                    widget.model.fromLocation?.name ?? "Nomalum",
                     maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
@@ -226,7 +227,13 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CommentsView(
+                        comments: widget.model.comments ?? [],
+                      ),
+                    ));
+                  },
                   leading: AppIcons.message.svg(),
                   title: const Text("Izohlar"),
                   trailing: AppIcons.arrowCircle.svg(),
@@ -252,18 +259,19 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                 ],
               ),
               const SizedBox(height: 8),
-              WButton(
-                onTap: () {},
-                color: blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppIcons.telegram.svg(),
-                    const SizedBox(width: 12),
-                    const Text("Telegram orqali bog‘lanish")
-                  ],
+              if (widget.model.createdByTgLink != null)
+                WButton(
+                  onTap: () {},
+                  color: blue,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppIcons.telegram.svg(),
+                      const SizedBox(width: 12),
+                      const Text("Telegram orqali bog‘lanish")
+                    ],
+                  ),
                 ),
-              ),
               const SizedBox(height: 16),
             ],
           ),

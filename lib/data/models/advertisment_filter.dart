@@ -2,12 +2,18 @@ class FilterModel {
   int? advId;
   int? serviceId;
   int? specialistId;
+  int? carId;
+  int? repairTypeId;
+  int? transportId;
   bool? status;
   String? advType;
 
   FilterModel({
     this.advId,
     this.serviceId,
+    this.carId,
+    this.repairTypeId,
+    this.transportId,
     this.advType,
     this.specialistId,
     this.status,

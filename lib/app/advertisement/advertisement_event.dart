@@ -17,12 +17,18 @@ class GetAdvertisementsFilterEvent extends AdvertisementEvent {
   final bool? isPROVIDE;
   final int? specialistId;
   final bool? status;
+  final int? carId; 
+  final int? repairTypeId;
+  final int? transportId;
 
   GetAdvertisementsFilterEvent({
     this.serviceId,
     this.isPROVIDE,
     this.specialistId,
     this.status,
+    this.carId,
+    this.repairTypeId,
+    this.transportId,
   });
 }
 

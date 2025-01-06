@@ -5,7 +5,6 @@ import 'package:formz/formz.dart';
 
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 
@@ -55,16 +54,15 @@ class _ShippingViewState extends State<ShippingView> {
             itemCount: state.transportationTypes.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => OrdersFilterView(
-                    title: state.transportationTypes[index].name,
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OrderDetailView(
-                          title: state.transportationTypes[index].name,
-                        ),
-                      ));
-                    },
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: OrdersFilterView(
+                      model: state.transportationTypes[index],
+                      onTap: () {},
+                      type: "Yuk tashish",
+                    ),
                   ),
                 ));
               },

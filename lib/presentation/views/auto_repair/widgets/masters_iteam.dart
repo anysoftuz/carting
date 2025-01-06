@@ -26,7 +26,7 @@ class MastersIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: model.images != null
+            child: (model.images != null && model.images!.isNotEmpty)
                 ? CachedNetworkImage(
                     imageUrl:
                         'https://api.carting.uz/uploads/files/${model.images?.first}',

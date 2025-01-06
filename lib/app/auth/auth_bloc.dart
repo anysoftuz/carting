@@ -151,8 +151,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await _repository.getMe();
       if (response.isRight) {
         Log.i("Salom Loginga kirdik");
+        emit(state.copyWith(status: AuthenticationStatus.authenticated));
         emit(state.copyWith(
-          status: AuthenticationStatus.authenticated,
           userModel: response.right.data,
           statusSms: FormzSubmissionStatus.initial,
         ));

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
             flexibleSpace: FlexibleSpaceBar(
               background: widget.model.images != null
                   ? PageView.builder(
-                      itemCount: widget.model.images!.length,
+                      itemCount: widget.model.images?.length ?? 0,
                       itemBuilder: (context, index) => CachedNetworkImage(
                         imageUrl:
                             'https://api.carting.uz/uploads/files/${widget.model.images![index]}',
@@ -167,7 +168,13 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CommentsView(
+                        comments: widget.model.comments ?? [],
+                      ),
+                    ));
+                  },
                   leading: AppIcons.message.svg(),
                   title: const Text("Izohlar"),
                   trailing: AppIcons.arrowCircle.svg(),

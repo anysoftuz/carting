@@ -194,6 +194,9 @@ class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
         serviceId: event.serviceId,
         specialistId: event.specialistId,
         status: event.status,
+        carId: event.carId,
+        transportId: event.transportId,
+        repairTypeId: event.repairTypeId,
         advType: event.isPROVIDE == null
             ? null
             : event.isPROVIDE == true

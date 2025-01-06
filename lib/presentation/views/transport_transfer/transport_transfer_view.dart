@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
-import 'package:carting/presentation/views/orders/order_detail_view.dart';
+// import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,14 +75,15 @@ class _TransportTransferViewState extends State<TransportTransferView> {
                     builder: (context) => BlocProvider.value(
                       value: bloc,
                       child: OrdersFilterView(
-                        title: state.transportationTypes[index].name,
+                        model: state.transportationTypes[index],
+                        type: "Transport transferi",
                         onTap: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .push(MaterialPageRoute(
-                            builder: (context) => OrderDetailView(
-                              title: state.transportationTypes[index].name,
-                            ),
-                          ));
+                          // Navigator.of(context, rootNavigator: true)
+                          //     .push(MaterialPageRoute(
+                          //   builder: (context) => OrderDetailView(
+                          //     title: state.transportationTypes[index].name,
+                          //   ),
+                          // ));
                         },
                       ),
                     ),

@@ -59,7 +59,7 @@ class AdvertisementModel {
     required this.price,
     required this.details,
     required this.images,
-    required this.note,
+    this.note = "",
     required this.comments,
     required this.transportName,
     required this.transportIcon,

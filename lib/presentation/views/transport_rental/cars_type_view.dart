@@ -59,7 +59,7 @@ class _CarsTypeViewState extends State<CarsTypeView> {
                     builder: (context) => BlocProvider.value(
                       value: bloc,
                       child: CarsRentalInfoView(
-                        title: state.carsModel[index].name,
+                        model: state.carsModel[index],
                       ),
                     ),
                   ));

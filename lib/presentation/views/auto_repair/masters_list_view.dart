@@ -21,9 +21,10 @@ class MastersListView extends StatefulWidget {
 class _MastersListViewState extends State<MastersListView> {
   @override
   void initState() {
-    context
-        .read<AdvertisementBloc>()
-        .add(GetAdvertisementsFilterEvent(specialistId: widget.id));
+    context.read<AdvertisementBloc>().add(GetAdvertisementsFilterEvent(
+          specialistId: widget.id,
+          status: true,
+        ));
     super.initState();
   }
 
@@ -56,20 +57,31 @@ class _MastersListViewState extends State<MastersListView> {
               itemCount: 12,
             );
           }
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => MasterInfoView(
-                    model: state.advertisementFilter[index],
-                  ),
-                ));
-              },
-              child: MastersIteam(model: state.advertisementFilter[index]),
+          return RefreshIndicator.adaptive(
+            onRefresh: () async {
+              context
+                  .read<AdvertisementBloc>()
+                  .add(GetAdvertisementsFilterEvent(
+                    specialistId: widget.id,
+                    status: true,
+                  ));
+              await Future.delayed(Duration.zero);
+            },
+            child: ListView.separated(
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => MasterInfoView(
+                      model: state.advertisementFilter[index],
+                    ),
+                  ));
+                },
+                child: MastersIteam(model: state.advertisementFilter[index]),
+              ),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemCount: state.advertisementFilter.length,
             ),
-            separatorBuilder: (context, index) => const SizedBox(height: 16),
-            itemCount: state.advertisementFilter.length,
           );
         },
       ),

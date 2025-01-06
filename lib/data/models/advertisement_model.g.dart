@@ -26,7 +26,7 @@ AdvertisementModel _$AdvertisementModelFromJson(Map<String, dynamic> json) =>
           : Details.fromJson(json['details'] as Map<String, dynamic>),
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      note: json['note'] as String,
+      note: json['note'] as String? ?? "",
       comments: (json['comments'] as List<dynamic>?)
           ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
-import 'package:carting/presentation/views/orders/order_detail_view.dart';
+// import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/orders_filter_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,15 +75,19 @@ class _SpecialTechniqueViewState extends State<SpecialTechniqueView> {
                   ));
                 } else {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OrdersFilterView(
-                      title: state.transportationTypes[index].name,
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => OrderDetailView(
-                            title: state.transportationTypes[index].name,
-                          ),
-                        ));
-                      },
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: OrdersFilterView(
+                        model: state.transportationTypes[index],
+                        type: "Maxsus texnika",
+                        onTap: () {
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //   builder: (context) => OrderDetailView(
+                          //     title: state.transportationTypes[index].name,
+                          //   ),
+                          // ));
+                        },
+                      ),
                     ),
                   ));
                 }

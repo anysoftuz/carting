@@ -3,7 +3,6 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
-import 'package:carting/presentation/views/orders/widgets/orders_iteam.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +58,12 @@ class _OrderViewState extends State<OrderView> {
           ),
         ),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) => const OrdersIteam(),
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
-        itemCount: 12,
-      ),
+      // body: ListView.separated(
+      //   padding: const EdgeInsets.all(16),
+      //   itemBuilder: (context, index) => const OrdersIteam(),
+      //   separatorBuilder: (context, index) => const SizedBox(height: 16),
+      //   itemCount: 12,
+      // ),
     );
   }
 }

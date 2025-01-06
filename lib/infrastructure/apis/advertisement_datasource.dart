@@ -62,6 +62,16 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
       queryParameters['status'] =
           model!.status == true ? "ACTIVE" : "IN_ACTIVE";
     }
+    if (model?.carId != null) {
+      queryParameters['car_id'] = model?.carId;
+    }
+    if (model?.repairTypeId != null) {
+      queryParameters['repair_type_id'] = model?.repairTypeId;
+    }
+
+    if (model?.transportId != null) {
+      queryParameters['transport_id'] = model?.transportId;
+    }
     return _handle.apiCantrol(
       request: () => dio.get(
         'advertisement',

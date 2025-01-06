@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/widgets/info_location_field.dart';
 import 'package:carting/utils/my_function.dart';
@@ -48,7 +49,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
             flexibleSpace: FlexibleSpaceBar(
               background: widget.model.images != null
                   ? PageView.builder(
-                      itemCount: widget.model.images!.length,
+                      itemCount: widget.model.images?.length ?? 0,
                       itemBuilder: (context, index) => CachedNetworkImage(
                         imageUrl:
                             'https://api.carting.uz/uploads/files/${widget.model.images![index]}',
@@ -611,7 +612,13 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CommentsView(
+                            comments: widget.model.comments ?? [],
+                          ),
+                        ));
+                      },
                       leading: AppIcons.message.svg(),
                       title: const Row(
                         children: [

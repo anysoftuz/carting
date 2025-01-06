@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
 class OrdersIteam extends StatelessWidget {
-  const OrdersIteam({super.key});
+  const OrdersIteam({super.key, required this.model, required this.type});
+  final AdvertisementModel model;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +26,23 @@ class OrdersIteam extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
-            child: AppImages.mask.imgAsset(
-              height: 196,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: (model.images != null && model.images!.isNotEmpty)
+                ? CachedNetworkImage(
+                    imageUrl:
+                        'https://api.carting.uz/uploads/files/${model.images!.first}',
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => const SizedBox(
+                      height: 196,
+                      width: double.infinity,
+                    ),
+                  )
+                : AppImages.workshop.imgAsset(
+                    height: 196,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Expanded(
             child: Padding(
@@ -36,9 +53,9 @@ class OrdersIteam extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Furgon",
-                    style: TextStyle(
+                  Text(
+                    model.transportName ?? "Nomalum",
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
@@ -51,10 +68,10 @@ class OrdersIteam extends StatelessWidget {
                         width: 16,
                       ),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Yuk tashish",
-                          style: TextStyle(
+                          type,
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -70,10 +87,12 @@ class OrdersIteam extends StatelessWidget {
                         width: 16,
                       ),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Toshkent, Yakkasaroy tumani",
-                          style: TextStyle(
+                          model.fromLocation?.name ?? "nomalum",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -86,10 +105,10 @@ class OrdersIteam extends StatelessWidget {
                     children: [
                       AppIcons.star.svg(),
                       const SizedBox(width: 4),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "4.5",
-                          style: TextStyle(
+                          "${MyFunction.calculateAverageRating(model.comments ?? [])}",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),

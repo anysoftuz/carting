@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -414,7 +415,13 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CommentsView(
+                        comments: widget.model.comments ?? [],
+                      ),
+                    ));
+                  },
                   leading: AppIcons.message.svg(),
                   title: const Text("Izohlar"),
                   trailing: AppIcons.arrowCircle.svg(),

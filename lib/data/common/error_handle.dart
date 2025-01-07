@@ -7,9 +7,10 @@ import 'package:carting/infrastructure/core/service_locator.dart';
 import 'package:carting/utils/log_service.dart';
 
 class ErrorHandle {
-  Future<R> apiCantrol<T, R>(
-      {required Future<Response<T>?> Function() request,
-      required R Function(T response) body}) async {
+  Future<R> apiCantrol<T, R>({
+    required Future<Response<T>?> Function() request,
+    required R Function(T response) body,
+  }) async {
     try {
       final response = await request();
       if (response!.statusCode! >= 200 && response.statusCode! < 300) {

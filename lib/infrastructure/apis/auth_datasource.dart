@@ -73,7 +73,7 @@ class AuthDataSourcheImpl implements AuthDatasourche {
   Future<ResponseModel<TokenModel>> verifyPost(VerifyBody body) {
     return _handle.apiCantrol(
       request: () {
-        return dio.post(
+        return dioAuth.post(
           'phone/verify',
           data: body.toJson(),
         );

@@ -12,7 +12,7 @@ class Formatters {
     type: MaskAutoCompletionType.lazy,
   );
   static final cardNumberFormatter = MaskTextInputFormatter(
-    mask: '#### #### #### ####',
+    mask: '#### #### #### ####', 
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy,
   );

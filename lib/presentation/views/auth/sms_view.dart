@@ -13,6 +13,7 @@ import 'package:carting/data/models/send_code_model.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/auth/identity_choose_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/my_function.dart';
 
 class SmsView extends StatefulWidget {
   const SmsView({
@@ -46,6 +47,13 @@ class _SmsViewState extends State<SmsView> {
         setState(() {});
       },
     );
+  }
+
+  void resetAndStartTimer() {
+    setState(() {
+      start.value = 60; // Boshlang'ich qiymatni qayta o'rnating
+    });
+    startTimer(); // Taymerni qayta ishga tushiring
   }
 
   @override
@@ -95,7 +103,7 @@ class _SmsViewState extends State<SmsView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Text(
-                "Tasdiqlash kodini +998******9763 raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting.",
+                "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting.",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -156,8 +164,8 @@ class _SmsViewState extends State<SmsView> {
                           onError: () {},
                           onSucces: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>  IdentityChooseView(
-                                phone:  widget.phone,
+                              builder: (context) => IdentityChooseView(
+                                phone: widget.phone,
                               ),
                             ));
                           },
@@ -188,12 +196,17 @@ class _SmsViewState extends State<SmsView> {
                 ValueListenableBuilder(
                   valueListenable: start,
                   builder: (context, value, __) {
-                    return Text(
-                      value == 0 ? "Qayta yuborish" : timerText,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: blue,
+                    return GestureDetector(
+                      onTap: () {
+                        resetAndStartTimer();
+                      },
+                      child: Text(
+                        value == 0 ? "Qayta yuborish" : timerText,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: blue,
+                        ),
                       ),
                     );
                   },

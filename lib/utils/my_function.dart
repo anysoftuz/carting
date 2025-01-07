@@ -6,6 +6,15 @@ import 'package:carting/utils/log_service.dart';
 import 'package:intl/intl.dart';
 
 class MyFunction {
+  static String maskPhoneNumber(String phoneNumber) {
+    if (phoneNumber.length != 12) {
+      throw ArgumentError('Telefon raqami noto\'g\'ri formatda.');
+    }
+    String prefix = phoneNumber.substring(0, 3); // 998
+    String suffix = phoneNumber.substring(8); // 5670
+    return '+$prefix*****$suffix';
+  }
+
   static double calculateAverageRating(List<Comment> comments) {
     if (comments.isEmpty) {
       return 0; // Agar ro'yxat bo'sh bo'lsa, 0 qaytariladi

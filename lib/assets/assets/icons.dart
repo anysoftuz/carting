@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
+  static const checkboxRadioA = "assets/icons/checkbox_radio_a.svg";
+  static const checkboxRadioD = "assets/icons/checkbox_radio_d.svg";
   static const add = "assets/icons/add.svg";
   static const calendar = "assets/icons/calendar.svg";
   static const editCir = "assets/icons/edit_cir.svg";

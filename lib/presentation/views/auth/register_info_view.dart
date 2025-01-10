@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:carting/assets/assets/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -57,57 +57,66 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: isActive,
-                  builder: (context, value, __) {
-                    return CupertinoCheckbox(
-                      activeColor: blue,
-                      value: value,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      onChanged: (value) {
-                        isActive.value = value!;
-                      },
-                    );
-                  },
-                ),
-                const Text(
-                  "Foydalanish shartlariga roziman",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: blue,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                spacing: 8,
+                children: [
+                  ValueListenableBuilder(
+                    valueListenable: isActive,
+                    builder: (context, value, __) {
+                      return GestureDetector(
+                        onTap: () {
+                          isActive.value = !value;
+                        },
+                        child: value
+                            ? AppIcons.checkboxRadioA.svg()
+                            : AppIcons.checkboxRadioD.svg(),
+                      );
+                    },
                   ),
-                )
-              ],
+                  const Text(
+                    "Foydalanish shartlariga roziman",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: blue,
+                    ),
+                  )
+                ],
+              ),
             ),
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
-                return WButton(
-                  onTap: () {
-                    if (controllerName.text.isNotEmpty &&
-                        controllerLastName.text.isNotEmpty) {
-                      context.read<AuthBloc>().add(RegisterUserEvent(
-                            name: controllerName.text,
-                            lastName: controllerLastName.text,
-                            phone: MyFunction.convertPhoneNumber(
-                              controllerPhone.text,
-                            ),
-                            isUser: widget.isLegal,
-                            onSucces: () {},
+                return ValueListenableBuilder(
+                  valueListenable: isActive,
+                  builder: (context, value, __) {
+                    return WButton(
+                      onTap: () {
+                        if (controllerName.text.isNotEmpty &&
+                            controllerLastName.text.isNotEmpty) {
+                          context.read<AuthBloc>().add(RegisterUserEvent(
+                                name: controllerName.text,
+                                lastName: controllerLastName.text,
+                                phone: MyFunction.convertPhoneNumber(
+                                  controllerPhone.text,
+                                ),
+                                isUser: widget.isLegal,
+                                onSucces: () {},
+                              ));
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Malumotlarni to'ldiring"),
                           ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Malumotlarni to'ldiring"),
-                      ));
-                    }
+                        }
+                      },
+                      isDisabled: !value,
+                      isLoading: state.statusSms.isInProgress,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      text: AppLocalizations.of(context)!.register,
+                    );
                   },
-                  isLoading: state.statusSms.isInProgress,
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  text: AppLocalizations.of(context)!.register,
                 );
               },
             ),

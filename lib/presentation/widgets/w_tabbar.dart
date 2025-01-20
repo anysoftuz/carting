@@ -26,7 +26,7 @@ class WTabBar extends StatelessWidget {
       ),
       child: TabBar(
         dividerColor: Colors.transparent,
-        tabAlignment: TabAlignment.start,
+        tabAlignment: isScrollable == true ? TabAlignment.start : null,
         padding: padding ?? const EdgeInsets.all(4),
         labelPadding: const EdgeInsets.symmetric(
           vertical: 12,

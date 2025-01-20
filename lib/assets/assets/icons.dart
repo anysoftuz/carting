@@ -81,6 +81,10 @@ class AppIcons {
       "assets/icons/transportation_of_passengers.svg";
   static const transportationTransfer =
       "assets/icons/transportation_transfer.svg";
+
+  static const chart = "assets/icons/chart.svg";
+  static const share = "assets/icons/share.svg";
+  static const copy = "assets/icons/copy.svg";
 }
 
 extension SvgExt on String {

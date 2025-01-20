@@ -7,6 +7,7 @@ import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/profile/call_view.dart';
 import 'package:carting/presentation/views/profile/info_view.dart';
 import 'package:carting/presentation/views/profile/quest_view.dart';
+import 'package:carting/presentation/views/profile/referral_program_view.dart';
 import 'package:carting/presentation/widgets/w_lenguage.dart';
 import 'package:carting/presentation/widgets/w_theme.dart';
 import 'package:carting/utils/my_function.dart';
@@ -262,6 +263,17 @@ class _ProfileViewState extends State<ProfileView> {
                   useRootNavigator: true,
                   builder: (context) => const WLenguage(),
                 );
+              },
+            ),
+            const SizedBox(height: 8),
+            WListTile(
+              title: 'Referal dastur',
+              leading: AppIcons.chart.svg(height: 28, width: 28),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(
+                  builder: (context) => const ReferralProgramView(),
+                ));
               },
             ),
             const SizedBox(height: 8),

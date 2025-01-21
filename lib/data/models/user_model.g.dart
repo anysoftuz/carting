@@ -16,6 +16,15 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       type: json['type'] as String? ?? '',
       tgLink: json['tg_link'] as String? ?? '',
       photo: json['photo'] as String? ?? '',
+      referralCode: json['referral_code'] as String?,
+      referralUsers: (json['referral_users'] as List<dynamic>?)
+              ?.map((e) => ReferralUser.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      referralCodes: (json['referral_codes'] as List<dynamic>?)
+              ?.map((e) => ReferralCode.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -27,5 +36,36 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'phone_number': instance.phoneNumber,
       'type': instance.type,
       'tg_link': instance.tgLink,
+      'photo': instance.photo,
+      'referral_code': instance.referralCode,
+      'referral_users': instance.referralUsers,
+      'referral_codes': instance.referralCodes,
+    };
+
+ReferralCode _$ReferralCodeFromJson(Map<String, dynamic> json) => ReferralCode(
+      code: json['code'] as String,
+      note: json['note'] as String,
+    );
+
+Map<String, dynamic> _$ReferralCodeToJson(ReferralCode instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'note': instance.note,
+    };
+
+ReferralUser _$ReferralUserFromJson(Map<String, dynamic> json) => ReferralUser(
+      id: (json['id'] as num).toInt(),
+      fullName: json['full_name'] as String,
+      clientType: json['client_type'] as String,
+      phoneNumber: json['phone_number'] as String,
+      photo: json['photo'] as String,
+    );
+
+Map<String, dynamic> _$ReferralUserToJson(ReferralUser instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'full_name': instance.fullName,
+      'client_type': instance.clientType,
+      'phone_number': instance.phoneNumber,
       'photo': instance.photo,
     };

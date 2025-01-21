@@ -1,18 +1,34 @@
 {
-  "adv_type": "PROVIDE",
-  "service_type_id": 5,
-  "from_location": {
-    "lat": 38.80717,
-    "lng": 65.6059717,
-    "name": "Toshkent shahri, Yunusobod tumani"
-  },
-  "price": 30000000,
-  "details": {
-    "repair_type_id": 2,
-    "services": [1, 2],
-    "transport_specialist_id": 1,
-    "specialist_first_name": "Tom",
-    "specialist_last_name": "Tom"
-  },
-  "note": "Test"
+  "id": 16,
+  "username": "998934343454",
+  "full_name": "Aziz Xolkazakov",
+  "first_name": "Aziz",
+  "last_name": "Xolkazakov",
+  "phone_number": "998934343454",
+  "type": "PHYSICAL",
+  "tg_link": "/test",
+  "photo": "ff808181aa294a8ea74e7162",
+  "referral_code": "IXMVSZVTMD",
+  "referral_users": [
+    {
+      "id": 57,
+      "full_name": "Асадбек Акрамов",
+      "client_type": "",
+      "phone_number": "998770036222",
+      "photo": "ff80818145afeb993ef472c6"
+    },
+    {
+      "id": 58,
+      "full_name": "Ahmad Asadov",
+      "client_type": "",
+      "phone_number": "998909779797",
+      "photo": "ff808181dc4d662affe4209c"
+    }
+  ],
+  "referral_codes": [
+    {
+      "code": "GZYAHCHFIQ",
+      "note": "test"
+    }
+  ]
 }

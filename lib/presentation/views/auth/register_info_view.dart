@@ -1,4 +1,5 @@
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/presentation/routes/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -9,6 +10,7 @@ import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterInfoView extends StatefulWidget {
   const RegisterInfoView(
@@ -102,7 +104,9 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                   controllerPhone.text,
                                 ),
                                 isUser: widget.isLegal,
-                                onSucces: () {},
+                                onSucces: () {
+                                  context.go(AppRouteName.home);
+                                },
                               ));
                         } else {
                           ScaffoldMessenger.of(context)

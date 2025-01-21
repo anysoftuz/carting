@@ -25,7 +25,12 @@ class DioSettings {
       baseUrl: "https://api.carting.uz/api/mobile/v1/",
       connectTimeout: const Duration(milliseconds: 35000),
       receiveTimeout: const Duration(milliseconds: 35000),
-      headers: <String, dynamic>{},
+      headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+          ? {
+              'Authorization':
+                  'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+            }
+          : {},
       followRedirects: false,
       validateStatus: (status) => status != null && status <= 500,
     );

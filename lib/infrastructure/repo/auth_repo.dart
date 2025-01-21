@@ -8,8 +8,10 @@ import 'package:carting/data/models/user_model.dart';
 import 'package:carting/data/models/user_update_model.dart';
 import 'package:carting/data/models/verify_body.dart';
 import 'package:carting/infrastructure/apis/auth_datasource.dart';
+import 'package:carting/infrastructure/core/dio_settings.dart';
 import 'package:carting/infrastructure/core/exceptions/exceptions.dart';
 import 'package:carting/infrastructure/core/exceptions/failures.dart';
+import 'package:carting/infrastructure/core/service_locator.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
 import 'package:carting/utils/either.dart';
 import 'package:dio/dio.dart';
@@ -69,6 +71,7 @@ class AuthRepo implements IAuthRepo {
         StorageKeys.REFRESH,
         result.data.refreshToken,
       );
+      serviceLocator<DioSettings>().setBaseOptions();
       return Right(result);
     } on DioException {
       return Left(DioFailure());
@@ -111,6 +114,7 @@ class AuthRepo implements IAuthRepo {
         StorageKeys.REFRESH,
         result.data.refreshToken,
       );
+      serviceLocator<DioSettings>().setBaseOptions();
       return Right(result);
     } on DioException {
       return Left(DioFailure());
@@ -138,6 +142,7 @@ class AuthRepo implements IAuthRepo {
         StorageKeys.REFRESH,
         result.data.refreshToken,
       );
+      serviceLocator<DioSettings>().setBaseOptions();
       return Right(result);
     } on DioException {
       return Left(DioFailure());

@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReferralProgramView extends StatefulWidget {
   const ReferralProgramView({super.key});
@@ -36,123 +40,99 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
             Expanded(
               child: TabBarView(
                 children: [
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            color: white,
-                          ),
-                          width: double.infinity,
-                          child: Column(
-                            children: [
-                              Row(
-                                spacing: 8,
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return SingleChildScrollView(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24),
+                                color: white,
+                              ),
+                              width: double.infinity,
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: Container(
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: const Color(0xFFF3F3F3),
-                                      ),
-                                      padding: const EdgeInsets.only(left: 16),
-                                      child: Row(
-                                        children: [
-                                          const Expanded(
-                                            child: Text(
-                                              'UHJGVnasbvgdILU',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xFF292D32),
-                                              ),
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: AppIcons.copy.svg(),
-                                          ),
-                                        ],
-                                      ),
+                                  ...List.generate(
+                                    state.userModel.referralCodes.length,
+                                    (index) => const ReferalIteam(),
+                                  ),
+                                  WButton(
+                                    onTap: () {},
+                                    width: 140,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        AppIcons.addCircle.svg(),
+                                        const SizedBox(width: 8),
+                                        const Text('Qo‘shish')
+                                      ],
                                     ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: AppIcons.share.svg(),
-                                  ),
+                                  )
                                 ],
                               ),
-                              const SizedBox(height: 16),
-                              const CustomTextField(
-                                maxLines: 5,
-                                minLines: 5,
-                                expands: false,
-                                noHeight: true,
-                                hintText: 'Buyurtma haqida izoh qoldiring!',
-                                title: 'Izoh',
-                              ),
-                              const SizedBox(height: 24),
-                              WButton(
-                                onTap: () {},
-                                width: 140,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                            ),
+                            const SizedBox(height: 32),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'Taklif qilinganlar',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF292D32),
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '${state.userModel.referralUsers.length} ta',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF292D32)
+                                        .withValues(alpha: .3),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            ...List.generate(
+                              state.userModel.referralUsers.length,
+                              (index) => ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                leading: CircleAvatar(
+                                  radius: 20,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                    'https://api.carting.uz/uploads/files/${state.userModel.referralUsers[index].photo}',
+                                  ),
+                                ),
+                                title: Text(state
+                                    .userModel.referralUsers[index].fullName),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    AppIcons.addCircle.svg(),
-                                    const SizedBox(width: 8),
-                                    const Text('Qo‘shish')
+                                    if (state.userModel.referralUsers[index]
+                                        .clientType.isNotEmpty)
+                                      Text(state.userModel.referralUsers[index]
+                                          .clientType),
+                                    Text(
+                                      MyFunction.formatPhoneNumber(
+                                        state.userModel.referralUsers[index]
+                                            .phoneNumber,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 32),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Text(
-                                'Taklif qilinganlar',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF292D32),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '3 ta',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF292D32)
-                                    .withValues(alpha: .3),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        ...List.generate(
-                          3,
-                          (index) => const ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: CircleAvatar(radius: 20),
-                            title: Text('Iskandar Nematov'),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Jismoniy shaxs'),
-                                Text('998 99 645 37 82'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
@@ -250,6 +230,65 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ReferalIteam extends StatelessWidget {
+  const ReferalIteam({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          spacing: 8,
+          children: [
+            Expanded(
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color(0xFFF3F3F3),
+                ),
+                padding: const EdgeInsets.only(left: 16),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'UHJGVnasbvgdILU',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF292D32),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: AppIcons.copy.svg(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: AppIcons.share.svg(),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        const CustomTextField(
+          maxLines: 5,
+          minLines: 5,
+          expands: false,
+          noHeight: true,
+          hintText: 'Buyurtma haqida izoh qoldiring!',
+          title: 'Izoh',
+        ),
+        const SizedBox(height: 24),
+      ],
     );
   }
 }

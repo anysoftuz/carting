@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final userModel = userModelFromJson(jsonString);
 
-import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
@@ -31,8 +33,14 @@ class UserModel {
   final String tgLink;
   @JsonKey(name: "photo")
   final String photo;
-  @JsonKey(name: "referral_code")
-  final String? referralCode;
+  @JsonKey(name: "total_profit")
+  final int totalProfit;
+  @JsonKey(name: "earned_profit")
+  final int earnedProfit;
+  @JsonKey(name: "withdrawn_profit")
+  final int withdrawnProfit;
+  @JsonKey(name: "referral_count")
+  final int referralCount;
   @JsonKey(name: "referral_users")
   final List<ReferralUser> referralUsers;
   @JsonKey(name: "referral_codes")
@@ -48,7 +56,10 @@ class UserModel {
     this.type = '',
     this.tgLink = '',
     this.photo = '',
-    this.referralCode,
+    this.totalProfit = 0,
+    this.earnedProfit = 0,
+    this.withdrawnProfit = 0,
+    this.referralCount = 0,
     this.referralUsers = const [],
     this.referralCodes = const [],
   });
@@ -57,6 +68,42 @@ class UserModel {
       _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  UserModel copyWith({
+    int? id,
+    String? username,
+    String? fullName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? type,
+    String? tgLink,
+    String? photo,
+    int? totalProfit,
+    int? earnedProfit,
+    int? withdrawnProfit,
+    int? referralCount,
+    List<ReferralUser>? referralUsers,
+    List<ReferralCode>? referralCodes,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      fullName: fullName ?? this.fullName,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      type: type ?? this.type,
+      tgLink: tgLink ?? this.tgLink,
+      photo: photo ?? this.photo,
+      totalProfit: totalProfit ?? this.totalProfit,
+      earnedProfit: earnedProfit ?? this.earnedProfit,
+      withdrawnProfit: withdrawnProfit ?? this.withdrawnProfit,
+      referralCount: referralCount ?? this.referralCount,
+      referralUsers: referralUsers ?? this.referralUsers,
+      referralCodes: referralCodes ?? this.referralCodes,
+    );
+  }
 }
 
 @JsonSerializable()

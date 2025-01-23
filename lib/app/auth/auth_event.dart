@@ -4,6 +4,16 @@ sealed class AuthEvent {}
 
 class GetMeEvent extends AuthEvent {}
 
+class UpdateCode extends AuthEvent {
+  final String code;
+  final String? note;
+
+  UpdateCode({
+    required this.code,
+    this.note,
+  });
+}
+
 class CheckUserEvent extends AuthEvent {}
 
 class RegisterUserEvent extends AuthEvent {

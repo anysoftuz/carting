@@ -1,16 +1,21 @@
-import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/presentation/routes/route_name.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
+import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
-import 'package:go_router/go_router.dart';
 
 class RegisterInfoView extends StatefulWidget {
   const RegisterInfoView(
@@ -45,6 +50,26 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
     controllerPhone.dispose();
   }
 
+  Future<void> _openDocxFromAssets(String fileName) async {
+    try {
+      // 1. Faylni assetsdan o'qish
+      ByteData data = await rootBundle.load('assets/documents/$fileName');
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      // 2. Faylni vaqtinchalik papkaga saqlash
+      Directory tempDir = await getTemporaryDirectory();
+      String tempPath = '${tempDir.path}/$fileName';
+      File tempFile = File(tempPath);
+      await tempFile.writeAsBytes(bytes);
+
+      // 3. Faylni ochish
+      await OpenFilex.open(tempPath);
+    } catch (e) {
+      print('Xatolik: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +95,9 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                       return GestureDetector(
                         onTap: () {
                           isActive.value = !value;
+                          if (isActive.value) {
+                            _openDocxFromAssets('carting.docx');
+                          }
                         },
                         child: value
                             ? AppIcons.checkboxRadioA.svg()
@@ -147,6 +175,14 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                   CustomTextField(
                     title: 'Telefon',
                     hintText: "+998",
+                    readOnly: true,
+                    controller: controllerPhone,
+                    onChanged: (value) {},
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    title: 'Referal kod',
+                    hintText: "Kodni kiriting",
                     onChanged: (value) {},
                   ),
                 ]
@@ -170,6 +206,12 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     hintText: "+998",
                     controller: controllerPhone,
                     readOnly: true,
+                    onChanged: (value) {},
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    title: 'Referal kod',
+                    hintText: "Kodni kiriting",
                     onChanged: (value) {},
                   ),
                 ],

@@ -38,6 +38,9 @@ abstract class AdvertisementDatasource {
   );
   Future<ResponseModel<List<ServisModel>>> getCategories();
   Future<ResponseModel<List<ServisModel>>> getServices();
+  Future<bool> postReferrealCde(String note);
+  Future<bool> putReferrealCde(String note, String code);
+  Future<bool> deleteReferrealCde(String code);
 }
 
 class AdvertisementDatasourceImpl implements AdvertisementDatasource {
@@ -362,6 +365,63 @@ class AdvertisementDatasourceImpl implements AdvertisementDatasource {
             .map((e) => ServisModel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
+    );
+  }
+
+  @override
+  Future<bool> deleteReferrealCde(String code) {
+    return _handle.apiCantrol(
+      request: () => dio.delete(
+        'referreal_code',
+        queryParameters: {'referreal_code': code},
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => true,
+    );
+  }
+
+  @override
+  Future<bool> postReferrealCde(String note) {
+    return _handle.apiCantrol(
+      request: () => dio.post(
+        'referreal_code',
+        data: {'note': note},
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => true,
+    );
+  }
+
+  @override
+  Future<bool> putReferrealCde(String note, String code) {
+    return _handle.apiCantrol(
+      request: () => dio.put(
+        'referreal_code',
+        data: {"note": note, "referral_code": code},
+        options: Options(
+          headers: StorageRepository.getString(StorageKeys.TOKEN).isNotEmpty
+              ? {
+                  'Authorization':
+                      'Bearer ${StorageRepository.getString(StorageKeys.TOKEN)}'
+                }
+              : {},
+        ),
+      ),
+      body: (response) => true,
     );
   }
 }

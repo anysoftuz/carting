@@ -12,6 +12,7 @@ class AdvertisementState extends Equatable {
   final FormzSubmissionStatus statusCars;
   final FormzSubmissionStatus statusCategory;
   final FormzSubmissionStatus statusServices;
+  final FormzSubmissionStatus statusChange;
   final List<AdvertisementModel> advertisement;
   final List<AdvertisementModel> advertisementFilter;
   final List<AdvertisementModel> advertisementRECEIVE;
@@ -33,6 +34,7 @@ class AdvertisementState extends Equatable {
     this.statusFilter = FormzSubmissionStatus.initial,
     this.statusCategory = FormzSubmissionStatus.initial,
     this.statusServices = FormzSubmissionStatus.initial,
+    this.statusChange = FormzSubmissionStatus.initial,
     this.fuelsModel = const [],
     this.advertisementFilter = const [],
     this.transportationTypes = const [],
@@ -55,6 +57,7 @@ class AdvertisementState extends Equatable {
         statusTrTypes,
         statusCreate,
         statusFuels,
+        statusChange,
         statusCars,
         fuelsModel,
         transportationTypes,
@@ -80,6 +83,7 @@ class AdvertisementState extends Equatable {
     FormzSubmissionStatus? statusCars,
     FormzSubmissionStatus? statusCategory,
     FormzSubmissionStatus? statusServices,
+    FormzSubmissionStatus? statusChange,
     List<AdvertisementModel>? advertisement,
     List<AdvertisementModel>? advertisementFilter,
     List<AdvertisementModel>? advertisementRECEIVE,
@@ -102,6 +106,7 @@ class AdvertisementState extends Equatable {
       statusCars: statusCars ?? this.statusCars,
       statusCategory: statusCategory ?? this.statusCategory,
       statusServices: statusServices ?? this.statusServices,
+      statusChange: statusChange ?? this.statusChange,
       advertisement: advertisement ?? this.advertisement,
       advertisementFilter: advertisementFilter ?? this.advertisementFilter,
       advertisementRECEIVE: advertisementRECEIVE ?? this.advertisementRECEIVE,

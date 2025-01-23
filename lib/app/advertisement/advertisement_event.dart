@@ -17,7 +17,7 @@ class GetAdvertisementsFilterEvent extends AdvertisementEvent {
   final bool? isPROVIDE;
   final int? specialistId;
   final bool? status;
-  final int? carId; 
+  final int? carId;
   final int? repairTypeId;
   final int? transportId;
 
@@ -97,3 +97,29 @@ class GetAdvertisementsIdEvent extends AdvertisementEvent {
 class GetCategoriesEvent extends AdvertisementEvent {}
 
 class GetServicesEvent extends AdvertisementEvent {}
+
+class DelRefCodeEvent extends AdvertisementEvent {
+  final String code;
+  final VoidCallback onSucces;
+
+  DelRefCodeEvent({required this.code, required this.onSucces});
+}
+
+class PutRefCodeEvent extends AdvertisementEvent {
+  final String code;
+  final String note;
+  final VoidCallback onSucces;
+
+  PutRefCodeEvent({
+    required this.code,
+    required this.note,
+    required this.onSucces,
+  });
+}
+
+class PostRefCodeEvent extends AdvertisementEvent {
+  final String note;
+  final VoidCallback onSucces;
+
+  PostRefCodeEvent({required this.note, required this.onSucces});
+}

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
@@ -270,9 +271,13 @@ class _ProfileViewState extends State<ProfileView> {
               title: 'Referal dastur',
               leading: AppIcons.chart.svg(height: 28, width: 28),
               onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
                 Navigator.of(context, rootNavigator: true)
                     .push(MaterialPageRoute(
-                  builder: (context) => const ReferralProgramView(),
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: const ReferralProgramView(),
+                  ),
                 ));
               },
             ),

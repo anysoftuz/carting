@@ -22,6 +22,36 @@ part 'advertisement_state.dart';
 class AdvertisementBloc extends Bloc<AdvertisementEvent, AdvertisementState> {
   final AdvertisementRepo _repo;
   AdvertisementBloc(this._repo) : super(const AdvertisementState()) {
+    on<PutRefCodeEvent>((event, emit) async {
+      emit(state.copyWith(statusChange: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.putReferrealCde(event.note, event.code);
+      if (respons.isRight) {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.success));
+        event.onSucces();
+      } else {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.failure));
+      }
+    });
+    on<PostRefCodeEvent>((event, emit) async {
+      emit(state.copyWith(statusChange: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.postReferrealCde(event.note);
+      if (respons.isRight) {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.success));
+        event.onSucces();
+      } else {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.failure));
+      }
+    });
+    on<DelRefCodeEvent>((event, emit) async {
+      emit(state.copyWith(statusChange: FormzSubmissionStatus.inProgress));
+      final respons = await _repo.deleteReferrealCde(event.code);
+      if (respons.isRight) {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.success));
+        event.onSucces();
+      } else {
+        emit(state.copyWith(statusChange: FormzSubmissionStatus.failure));
+      }
+    });
     on<GetCategoriesEvent>((event, emit) async {
       emit(state.copyWith(statusCategory: FormzSubmissionStatus.inProgress));
       final respons = await _repo.getCategories();

@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/presentation/widgets/custom_text_field.dart';
+import 'package:carting/data/models/user_model.dart';
+import 'package:carting/presentation/views/profile/referal_edit_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/presentation/widgets/w_scale_animation.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +49,52 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           children: [
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'Referal link',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF292D32),
+                                    ),
+                                  ),
+                                ),
+                                WScaleAnimation(
+                                  onTap: () {
+                                    final bloc =
+                                        context.read<AdvertisementBloc>();
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => BlocProvider.value(
+                                        value: bloc,
+                                        child: ReferalEditView(
+                                          referralCodes:
+                                              state.userModel.referralCodes,
+                                        ),
+                                      ),
+                                    ));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      AppIcons.edit.svg(),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'Tahrirlash',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF292D32)
+                                              .withValues(alpha: .3),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
                             Container(
                               padding:
                                   const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -58,10 +107,25 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                 children: [
                                   ...List.generate(
                                     state.userModel.referralCodes.length,
-                                    (index) => const ReferalIteam(),
+                                    (index) => ReferalIteam(
+                                      model:
+                                          state.userModel.referralCodes[index],
+                                    ),
                                   ),
                                   WButton(
-                                    onTap: () {},
+                                    onTap: () {
+                                      context
+                                          .read<AdvertisementBloc>()
+                                          .add(PostRefCodeEvent(
+                                            note: 'Test',
+                                            onSucces: () {
+                                              context
+                                                  .read<AuthBloc>()
+                                                  .add(GetMeEvent());
+                                              Navigator.pop(context);
+                                            },
+                                          ));
+                                    },
                                     width: 140,
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
@@ -139,43 +203,55 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                     child: Column(
                       spacing: 16,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            color: white,
-                          ),
-                          child: const Column(
-                            spacing: 16,
-                            children: [
-                              InfoColum(
-                                title: 'Umumiy foyda',
-                                subtitle: '\$25.00',
-                                colorText: Color(0xFF292D32),
-                                fontSize: 24,
+                        BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            return Container(
+                              padding: const EdgeInsets.fromLTRB(
+                                16,
+                                16,
+                                16,
+                                24,
                               ),
-                              Row(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24),
+                                color: white,
+                              ),
+                              child: Column(
+                                spacing: 16,
                                 children: [
-                                  Expanded(
-                                    child: InfoColum(
-                                      title: 'Topilgan foyda',
-                                      subtitle: '\$25.00',
-                                      colorText: green,
-                                      fontSize: 16,
-                                    ),
+                                  InfoColum(
+                                    title: 'Umumiy foyda',
+                                    subtitle:
+                                        '\$${state.userModel.totalProfit}',
+                                    colorText: const Color(0xFF292D32),
+                                    fontSize: 24,
                                   ),
-                                  Expanded(
-                                    child: InfoColum(
-                                      title: 'Chiqarib olingan foyda',
-                                      subtitle: '\$25.00',
-                                      colorText: blue,
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: InfoColum(
+                                          title: 'Topilgan foyda',
+                                          subtitle:
+                                              '\$${state.userModel.withdrawnProfit}',
+                                          colorText: green,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: InfoColum(
+                                          title: 'Chiqarib olingan foyda',
+                                          subtitle:
+                                              '\$${state.userModel.earnedProfit}',
+                                          colorText: blue,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            );
+                          },
                         ),
                         Container(
                           padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
@@ -194,29 +270,34 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                       .withValues(alpha: .3),
                                 ),
                               ),
-                              Expanded(
-                                child: RichText(
-                                  textAlign: TextAlign.end,
-                                  text: TextSpan(
-                                    text: '45',
-                                    style: const TextStyle(
-                                      color: Color(0xFF292D32),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: ' ta',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: const Color(0xFF292D32)
-                                              .withValues(alpha: .3),
+                              BlocBuilder<AuthBloc, AuthState>(
+                                builder: (context, state) {
+                                  return Expanded(
+                                    child: RichText(
+                                      textAlign: TextAlign.end,
+                                      text: TextSpan(
+                                        text:
+                                            '${state.userModel.referralCount}',
+                                        style: const TextStyle(
+                                          color: Color(0xFF292D32),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
                                         ),
+                                        children: [
+                                          TextSpan(
+                                            text: ' ta',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: const Color(0xFF292D32)
+                                                  .withValues(alpha: .3),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -235,7 +316,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
 }
 
 class ReferalIteam extends StatelessWidget {
-  const ReferalIteam({super.key});
+  final ReferralCode model;
+  const ReferalIteam({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -254,10 +336,10 @@ class ReferalIteam extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'UHJGVnasbvgdILU',
-                        style: TextStyle(
+                        model.code,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: Color(0xFF292D32),
@@ -279,13 +361,14 @@ class ReferalIteam extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        const CustomTextField(
-          maxLines: 5,
-          minLines: 5,
-          expands: false,
-          noHeight: true,
-          hintText: 'Buyurtma haqida izoh qoldiring!',
-          title: 'Izoh',
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: const Color(0xFFF3F3F3),
+          ),
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          child: Text(model.note),
         ),
         const SizedBox(height: 24),
       ],

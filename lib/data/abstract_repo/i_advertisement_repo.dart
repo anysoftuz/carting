@@ -38,4 +38,7 @@ abstract class IAdvertisementRepo {
   );
   Future<Either<Failure, ResponseModel<List<ServisModel>>>> getCategories();
   Future<Either<Failure, ResponseModel<List<ServisModel>>>> getServices();
+  Future<Either<Failure, bool>> postReferrealCde(String note);
+  Future<Either<Failure, bool>> putReferrealCde(String note, String code);
+  Future<Either<Failure, bool>> deleteReferrealCde(String code);
 }

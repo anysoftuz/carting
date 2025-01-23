@@ -146,6 +146,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
+    on<UpdateCode>((event, emit) async {
+      List<ReferralCode> data =
+          List<ReferralCode>.from(state.userModel.referralCodes);
+      final index = data.indexWhere((element) => element.code == event.code);
+      if (event.note != null) {
+        data[index] = ReferralCode(
+          code: event.code,
+          note: event.note ?? "",
+        );
+      } else {
+        data.removeAt(index);
+      }
+      final userModel = state.userModel.copyWith(referralCodes: data);
+      emit(state.copyWith(
+        userModel: userModel,
+        statusSms: FormzSubmissionStatus.initial,
+      ));
+    });
+
     on<GetMeEvent>((event, emit) async {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.getMe();

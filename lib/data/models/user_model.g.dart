@@ -16,7 +16,10 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       type: json['type'] as String? ?? '',
       tgLink: json['tg_link'] as String? ?? '',
       photo: json['photo'] as String? ?? '',
-      referralCode: json['referral_code'] as String?,
+      totalProfit: (json['total_profit'] as num?)?.toInt() ?? 0,
+      earnedProfit: (json['earned_profit'] as num?)?.toInt() ?? 0,
+      withdrawnProfit: (json['withdrawn_profit'] as num?)?.toInt() ?? 0,
+      referralCount: (json['referral_count'] as num?)?.toInt() ?? 0,
       referralUsers: (json['referral_users'] as List<dynamic>?)
               ?.map((e) => ReferralUser.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -37,7 +40,10 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'type': instance.type,
       'tg_link': instance.tgLink,
       'photo': instance.photo,
-      'referral_code': instance.referralCode,
+      'total_profit': instance.totalProfit,
+      'earned_profit': instance.earnedProfit,
+      'withdrawn_profit': instance.withdrawnProfit,
+      'referral_count': instance.referralCount,
       'referral_users': instance.referralUsers,
       'referral_codes': instance.referralCodes,
     };

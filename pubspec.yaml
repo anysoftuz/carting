@@ -46,6 +46,8 @@ dependencies:
   http: ^1.2.2
   flex_dropdown: ^0.2.0
   animated_rating_bar: ^0.0.8
+  path_provider: ^2.1.5
+  open_filex: ^4.6.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +66,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/anims/
+    - assets/documents/
     - assets/fonts/Lufga-Medium.ttf
     - assets/fonts/Lufga-Regular.ttf
 

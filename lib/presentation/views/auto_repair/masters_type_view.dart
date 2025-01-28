@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/data.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/auto_repair/masters_list_view.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,9 @@ class _MastersTypeViewState extends State<MastersTypeView> {
               ),
               itemCount: AppData.mastersType.length,
             );
+          }
+          if (state.transportSpecialists.isEmpty) {
+            return const EmptyScreen();
           }
           return ListView.separated(
             itemBuilder: (context, index) => ListTile(

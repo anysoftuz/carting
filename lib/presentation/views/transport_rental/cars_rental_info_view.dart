@@ -1,5 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/cars_model.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/views/transport_rental/cars_renatl_diteals_view.dart';
 import 'package:carting/presentation/views/transport_rental/widgets/cars_rental_iteam.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
@@ -41,6 +42,9 @@ class _CarsRentalInfoViewState extends State<CarsRentalInfoView> {
               separatorBuilder: (context, index) => const SizedBox(height: 12),
               itemCount: 12,
             );
+          }
+          if (state.advertisementFilter.isEmpty) {
+            return const EmptyScreen();
           }
           return RefreshIndicator.adaptive(
             onRefresh: () async {

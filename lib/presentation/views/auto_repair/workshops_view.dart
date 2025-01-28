@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,9 @@ class _WorkshopsViewState extends State<WorkshopsView> {
               separatorBuilder: (context, index) => const SizedBox(height: 12),
               itemCount: 12,
             );
+          }
+          if (state.advertisementFilter.isEmpty) {
+            return const EmptyScreen();
           }
           return RefreshIndicator.adaptive(
             onRefresh: () async {

@@ -1,5 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_info_view.dart';
 import 'package:carting/presentation/views/storage_service/widgets/storage_service_iteam.dart';
@@ -52,6 +53,9 @@ class _StorageServiceViewState extends State<StorageServiceView> {
               separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemCount: 12,
             );
+          }
+          if (state.advertisementFilter.isEmpty) {
+            return const EmptyScreen();
           }
           return RefreshIndicator.adaptive(
             onRefresh: () async {

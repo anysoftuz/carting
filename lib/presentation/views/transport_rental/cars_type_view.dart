@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,9 @@ class _CarsTypeViewState extends State<CarsTypeView> {
               separatorBuilder: (context, index) => const Divider(),
               itemCount: 12,
             );
+          }
+          if (state.carsModel.isEmpty) {
+            return const EmptyScreen();
           }
           return RefreshIndicator.adaptive(
             onRefresh: () async {

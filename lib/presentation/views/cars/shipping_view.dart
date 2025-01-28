@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -42,6 +43,9 @@ class _ShippingViewState extends State<ShippingView> {
               itemCount: 6,
               itemBuilder: (context, index) => const WShimmer(),
             );
+          }
+          if (state.transportationTypes.isEmpty) {
+            return const EmptyScreen();
           }
           return GridView.builder(
             padding: const EdgeInsets.all(16),

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
+import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -22,17 +24,25 @@ class AuthView extends StatefulWidget {
   State<AuthView> createState() => _AuthViewState();
 }
 
-class _AuthViewState extends State<AuthView> {
+class _AuthViewState extends State<AuthView>
+    with SingleTickerProviderStateMixin {
   late TextEditingController controller;
+  late TextEditingController controllerEmail;
+
+  late TabController _tabController;
   @override
   void initState() {
     controller = TextEditingController();
+    controllerEmail = TextEditingController();
     super.initState();
+    _tabController = TabController(vsync: this, length: 2);
   }
 
   @override
   void dispose() {
     controller.dispose();
+    controllerEmail.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -70,18 +80,63 @@ class _AuthViewState extends State<AuthView> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            CustomTextField(
-              title: "Telefon",
-              hintText: "+998",
-              controller: controller,
-              formatter: [Formatters.phoneFormatter],
-              keyboardType: TextInputType.phone,
-              onChanged: (value) {
-                Log.i(value.length);
-                if (value.length >= 18) {
-                  setState(() {});
-                }
+            WTabBar(
+              color: white,
+              labelColor: const Color(0xFF292D32),
+              tabController: _tabController,
+              onTap: (p0) {
+                setState(() {});
               },
+              tabs: const [
+                Text(
+                  'Telefon raqam orqali',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  'Email pochta orqali',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              height: 90,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  CustomTextField(
+                    title: "Telefon",
+                    hintText: "+998",
+                    controller: controller,
+                    formatter: [Formatters.phoneFormatter],
+                    keyboardType: TextInputType.phone,
+                    onChanged: (value) {
+                      Log.i(value.length);
+                      if (value.length >= 18) {
+                        setState(() {});
+                      }
+                    },
+                  ),
+                  CustomTextField(
+                    title: "Email",
+                    hintText: "namuna@mail.com",
+                    controller: controllerEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      Log.i(value.length);
+                      if (value.length >= 12) {
+                        setState(() {});
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 32),
             BlocBuilder<AuthBloc, AuthState>(
@@ -90,13 +145,18 @@ class _AuthViewState extends State<AuthView> {
                   isLoading: state.statusSms.isInProgress,
                   onTap: () {
                     context.read<AuthBloc>().add(SendCodeEvent(
-                          phone: MyFunction.convertPhoneNumber(controller.text),
-                          onError: () {},
+                          phone: _tabController.index == 0
+                              ? MyFunction.convertPhoneNumber(controller.text)
+                              : controller.text,
+                          onError: () {
+                            CustomSnackbar.show(context, "Malumot topilmadi");
+                          },
                           onSucces: (model) {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SmsView(
                                 isRegister: false,
                                 model: model,
+                                isPhone: _tabController.index == 0,
                                 phone: MyFunction.convertPhoneNumber(
                                   controller.text,
                                 ),
@@ -106,8 +166,9 @@ class _AuthViewState extends State<AuthView> {
                           isLogin: true,
                         ));
                   },
-                  isDisabled:
-                      controller.text.isEmpty || controller.text.length < 19,
+                  isDisabled: _tabController.index == 0
+                      ? controller.text.isEmpty || controller.text.length < 19
+                      : controllerEmail.text.length < 12,
                   text: "Kirish",
                 );
               },

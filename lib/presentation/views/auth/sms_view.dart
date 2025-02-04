@@ -21,10 +21,12 @@ class SmsView extends StatefulWidget {
     required this.isRegister,
     required this.model,
     required this.phone,
+    required this.isPhone,
   });
   final bool isRegister;
   final SendCodeModel model;
   final String phone;
+  final bool isPhone;
 
   @override
   State<SmsView> createState() => _SmsViewState();
@@ -103,7 +105,9 @@ class _SmsViewState extends State<SmsView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Text(
-                "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting.",
+                widget.isPhone
+                    ? "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting."
+                    : "Tasdiqlash kodini ${MyFunction.maskEmail(widget.phone)} ga yubordik. Quyidagi maydonga email kodingizni kiriting.",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

@@ -7,6 +7,8 @@ class WTabBar extends StatelessWidget {
   final Function(int)? onTap;
   final bool? isScrollable;
   final EdgeInsetsGeometry? padding;
+  final Color color;
+  final Color? labelColor;
 
   const WTabBar({
     this.tabController,
@@ -15,6 +17,8 @@ class WTabBar extends StatelessWidget {
     this.onTap,
     this.padding,
     this.isScrollable,
+    this.color = const Color(0xFF1A1F23),
+    this.labelColor,
   });
 
   @override
@@ -51,7 +55,7 @@ class WTabBar extends StatelessWidget {
             side: BorderSide(color: black.withValues(alpha: 0.04)),
             borderRadius: BorderRadius.circular(16),
           ),
-          color: const Color(0xFF1A1F23),
+          color: color,
         ),
         controller: tabController,
         indicatorSize: TabBarIndicatorSize.tab,
@@ -67,7 +71,7 @@ class WTabBar extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
         unselectedLabelColor: shuttleGrey,
-        labelColor: white,
+        labelColor: labelColor ?? white,
         tabs: tabs,
       ),
     );

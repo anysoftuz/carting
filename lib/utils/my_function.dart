@@ -15,6 +15,17 @@ class MyFunction {
     return '+$prefix*****$suffix';
   }
 
+  static String maskEmail(String email) {
+    int atIndex = email.indexOf('@');
+    if (atIndex <= 1) {
+      return email; // Agar @ belgisidan oldin faqat bitta harf bo'lsa, emailni o'zgartirmaymiz
+    }
+    return email[0] +
+        '*' * (atIndex - 2) +
+        email[atIndex - 1] +
+        email.substring(atIndex);
+  }
+
   static double calculateAverageRating(List<Comment> comments) {
     if (comments.isEmpty) {
       return 0; // Agar ro'yxat bo'sh bo'lsa, 0 qaytariladi

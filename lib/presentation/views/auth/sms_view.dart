@@ -165,6 +165,7 @@ class _SmsViewState extends State<SmsView> {
                   onTap: () {
                     context.read<AuthBloc>().add(VerifyEvent(
                           phone: widget.phone,
+                          isPhone: widget.isPhone,
                           onError: () {},
                           onSucces: () {
                             Navigator.of(context).push(MaterialPageRoute(

@@ -7,26 +7,31 @@ import 'dart:convert';
 
 part 'verify_body.g.dart';
 
-VerifyBody verifyBodyFromJson(String str) => VerifyBody.fromJson(json.decode(str));
+VerifyBody verifyBodyFromJson(String str) =>
+    VerifyBody.fromJson(json.decode(str));
 
 String verifyBodyToJson(VerifyBody data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class VerifyBody {
-    @JsonKey(name: "phone_number")
-    final String phoneNumber;
-    @JsonKey(name: "session_token")
-    final String sessionToken;
-    @JsonKey(name: "security_code")
-    final String securityCode;
+  @JsonKey(name: "username")
+  final String username;
+  @JsonKey(name: "sms_type")
+  final String smsType;
+  @JsonKey(name: "session_token")
+  final String sessionToken;
+  @JsonKey(name: "security_code")
+  final String securityCode;
 
-    VerifyBody({
-        required this.phoneNumber,
-        required this.sessionToken,
-        required this.securityCode,
-    });
+  VerifyBody({
+    required this.username,
+    required this.smsType,
+    required this.sessionToken,
+    required this.securityCode,
+  });
 
-    factory VerifyBody.fromJson(Map<String, dynamic> json) => _$VerifyBodyFromJson(json);
+  factory VerifyBody.fromJson(Map<String, dynamic> json) =>
+      _$VerifyBodyFromJson(json);
 
-    Map<String, dynamic> toJson() => _$VerifyBodyToJson(this);
+  Map<String, dynamic> toJson() => _$VerifyBodyToJson(this);
 }

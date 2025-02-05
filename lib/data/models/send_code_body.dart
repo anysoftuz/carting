@@ -7,23 +7,28 @@ import 'dart:convert';
 
 part 'send_code_body.g.dart';
 
-SendCodeBody sendCodeBodyFromJson(String str) => SendCodeBody.fromJson(json.decode(str));
+SendCodeBody sendCodeBodyFromJson(String str) =>
+    SendCodeBody.fromJson(json.decode(str));
 
 String sendCodeBodyToJson(SendCodeBody data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class SendCodeBody {
-    @JsonKey(name: "phone_number")
-    final String phoneNumber;
-    @JsonKey(name: "type")
-    final int type;
+  @JsonKey(name: "username")
+  final String username;
+  @JsonKey(name: "sms_type")
+  final String smsType;
+  @JsonKey(name: "type")
+  final int type;
 
-    SendCodeBody({
-        required this.phoneNumber,
-        required this.type,
-    });
+  SendCodeBody({
+    required this.username,
+    required this.smsType,
+    required this.type,
+  });
 
-    factory SendCodeBody.fromJson(Map<String, dynamic> json) => _$SendCodeBodyFromJson(json);
+  factory SendCodeBody.fromJson(Map<String, dynamic> json) =>
+      _$SendCodeBodyFromJson(json);
 
-    Map<String, dynamic> toJson() => _$SendCodeBodyToJson(this);
+  Map<String, dynamic> toJson() => _$SendCodeBodyToJson(this);
 }

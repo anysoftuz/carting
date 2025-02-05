@@ -43,7 +43,15 @@ sealed class AppRouts {
       ),
       GoRoute(
         path: AppRouteName.auth,
-        builder: (context, state) => const AuthView(),
+        builder: (context, state) {
+          bool isFull = true;
+          try {
+            isFull = state.extra as bool;
+          } catch (e) {
+            isFull = false;
+          }
+          return AuthView(isFull: isFull);
+        },
       ),
       GoRoute(
         path: AppRouteName.register,

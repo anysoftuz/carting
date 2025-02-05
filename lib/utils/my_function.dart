@@ -1,11 +1,65 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/presentation/routes/route_name.dart';
+import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/log_service.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class MyFunction {
+  static authChek({
+    required BuildContext context,
+    required Function() onTap,
+    bool isFull = false,
+  }) {
+    Log.i(isFull);
+    if (context.read<AuthBloc>().state.status ==
+        AuthenticationStatus.unauthenticated) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: const Text(
+            "Bu hizmatdan foydalanish uchun tizimga kirishingiz kerak",
+          ),
+          actions: [
+            WButton(
+              onTap: () {
+                context.go(AppRouteName.auth, extra: isFull);
+              },
+              text: "Tizimga kirish",
+            )
+          ],
+        ),
+      );
+    } else if (context.read<AuthBloc>().state.userModel.phoneNumber.isEmpty &&
+        isFull) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: const Text(
+            "Bu hizmatdan foydalanish uchun malumotni to'liq kirgaizshingiz kerak",
+          ),
+          actions: [
+            WButton(
+              onTap: () {
+                Navigator.pop(context);
+                context.push(AppRouteName.profileInfo);
+              },
+              text: "Malumotni kiritish",
+            )
+          ],
+        ),
+      );
+    } else {
+      onTap();
+    }
+  }
+
   static String maskPhoneNumber(String phoneNumber) {
     if (phoneNumber.length != 12) {
       throw ArgumentError('Telefon raqami noto\'g\'ri formatda.');
@@ -112,7 +166,7 @@ class MyFunction {
       return "+${phoneNumber.substring(0, 3)} (${phoneNumber.substring(3, 5)}) "
           "${phoneNumber.substring(5, 8)}-${phoneNumber.substring(8, 10)}-${phoneNumber.substring(10, 12)}";
     } else {
-      throw Exception("Telefon raqami noto'g'ri uzunlikda");
+      return 'Nomalum';
     }
   }
 

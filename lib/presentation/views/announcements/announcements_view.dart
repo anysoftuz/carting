@@ -1,5 +1,7 @@
+import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/create_info_view.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -80,13 +82,19 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                 firstChild: WButton(
                   onTap: () {
                     if (value == 2) {
-                      final bloc = context.read<AdvertisementBloc>();
-                      Navigator.of(context, rootNavigator: true)
-                          .push(MaterialPageRoute(
-                        builder: (context) => AnnouncementsTypeView(
-                          bloc: bloc,
-                        ),
-                      ));
+                      MyFunction.authChek(
+                        context: context,
+                        onTap: () {
+                          final bloc = context.read<AdvertisementBloc>();
+                          Navigator.of(context, rootNavigator: true)
+                              .push(MaterialPageRoute(
+                            builder: (context) => AnnouncementsTypeView(
+                              bloc: bloc,
+                            ),
+                          ));
+                        },
+                        isFull: true,
+                      );
                     } else if (value == 1) {
                       context.go(AppRouteName.home);
                     }
@@ -130,152 +138,176 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
             ),
           ),
         ],
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            BlocBuilder<AdvertisementBloc, AdvertisementState>(
-              builder: (context, state) {
-                if (state.status.isInProgress) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => const WShimmer(
-                      height: 152,
-                      width: double.infinity,
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: 12,
-                  );
-                }
-                return RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    context
-                        .read<AdvertisementBloc>()
-                        .add(GetAdvertisementsEvent());
-                    Future.delayed(Duration.zero);
-                  },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => GestureDetector(
+        body: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state.status == AuthenticationStatus.unauthenticated) {
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  spacing: 16,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppIcons.emptyFile.svg(),
+                    const Text("Ro'yxatdan o'ting"),
+                    WButton(
                       onTap: () {
-                        final bloc = context.read<AdvertisementBloc>();
-                        Navigator.of(context, rootNavigator: true)
-                            .push(MaterialPageRoute(
-                          builder: (context) => BlocProvider.value(
-                            value: bloc,
-                            child: DeliverInfoView(
-                              model: state.advertisement[index],
-                            ),
-                          ),
-                        ));
+                        context.go(AppRouteName.auth);
                       },
-                      child: AnnouncementsIteam(
-                        isPrice: true,
-                        model: state.advertisement[index],
+                      text: "Ro'yxatdan o'tish",
+                    ),
+                    const SizedBox(height: 60)
+                  ],
+                ),
+              );
+            }
+            return TabBarView(
+              controller: _tabController,
+              children: [
+                BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                  builder: (context, state) {
+                    if (state.status.isInProgress) {
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => const WShimmer(
+                          height: 152,
+                          width: double.infinity,
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: 12,
+                      );
+                    }
+                    return RefreshIndicator.adaptive(
+                      onRefresh: () async {
+                        context
+                            .read<AdvertisementBloc>()
+                            .add(GetAdvertisementsEvent());
+                        Future.delayed(Duration.zero);
+                      },
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            final bloc = context.read<AdvertisementBloc>();
+                            Navigator.of(context, rootNavigator: true)
+                                .push(MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: bloc,
+                                child: DeliverInfoView(
+                                  model: state.advertisement[index],
+                                ),
+                              ),
+                            ));
+                          },
+                          child: AnnouncementsIteam(
+                            isPrice: true,
+                            model: state.advertisement[index],
+                          ),
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: state.advertisement.length,
                       ),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: state.advertisement.length,
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<AdvertisementBloc, AdvertisementState>(
-              builder: (context, state) {
-                if (state.statusRECEIVE.isInProgress) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => const WShimmer(
-                      height: 152,
-                      width: double.infinity,
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: 12,
-                  );
-                }
-                return RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    context
-                        .read<AdvertisementBloc>()
-                        .add(GetAdvertisementsReceiveEvent());
-                    Future.delayed(Duration.zero);
+                    );
                   },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        final bloc = context.read<AdvertisementBloc>();
-                        Navigator.of(context, rootNavigator: true)
-                            .push(MaterialPageRoute(
-                          builder: (context) => BlocProvider.value(
-                            value: bloc,
-                            child: DeliverInfoView(
-                              model: state.advertisementRECEIVE[index],
-                            ),
-                          ),
-                        ));
+                ),
+                BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                  builder: (context, state) {
+                    if (state.statusRECEIVE.isInProgress) {
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => const WShimmer(
+                          height: 152,
+                          width: double.infinity,
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: 12,
+                      );
+                    }
+                    return RefreshIndicator.adaptive(
+                      onRefresh: () async {
+                        context
+                            .read<AdvertisementBloc>()
+                            .add(GetAdvertisementsReceiveEvent());
+                        Future.delayed(Duration.zero);
                       },
-                      child: AnnouncementsIteam(
-                        model: state.advertisementRECEIVE[index],
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            final bloc = context.read<AdvertisementBloc>();
+                            Navigator.of(context, rootNavigator: true)
+                                .push(MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: bloc,
+                                child: DeliverInfoView(
+                                  model: state.advertisementRECEIVE[index],
+                                ),
+                              ),
+                            ));
+                          },
+                          child: AnnouncementsIteam(
+                            model: state.advertisementRECEIVE[index],
+                          ),
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: state.advertisementRECEIVE.length,
                       ),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: state.advertisementRECEIVE.length,
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<AdvertisementBloc, AdvertisementState>(
-              builder: (context, state) {
-                if (state.statusPROVIDE.isInProgress) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => const WShimmer(
-                      height: 152,
-                      width: double.infinity,
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: 12,
-                  );
-                }
-                return RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    context
-                        .read<AdvertisementBloc>()
-                        .add(GetAdvertisementsProvideEvent());
-                    Future.delayed(Duration.zero);
+                    );
                   },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        final bloc = context.read<AdvertisementBloc>();
-                        Navigator.of(context, rootNavigator: true)
-                            .push(MaterialPageRoute(
-                          builder: (context) => BlocProvider.value(
-                            value: bloc,
-                            child: CreateInfoView(
-                              model: state.advertisementPROVIDE[index],
-                            ),
-                          ),
-                        ));
+                ),
+                BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                  builder: (context, state) {
+                    if (state.statusPROVIDE.isInProgress) {
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => const WShimmer(
+                          height: 152,
+                          width: double.infinity,
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: 12,
+                      );
+                    }
+                    return RefreshIndicator.adaptive(
+                      onRefresh: () async {
+                        context
+                            .read<AdvertisementBloc>()
+                            .add(GetAdvertisementsProvideEvent());
+                        Future.delayed(Duration.zero);
                       },
-                      child: AnnouncementsIteam(
-                        model: state.advertisementPROVIDE[index],
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            final bloc = context.read<AdvertisementBloc>();
+                            Navigator.of(context, rootNavigator: true)
+                                .push(MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: bloc,
+                                child: CreateInfoView(
+                                  model: state.advertisementPROVIDE[index],
+                                ),
+                              ),
+                            ));
+                          },
+                          child: AnnouncementsIteam(
+                            model: state.advertisementPROVIDE[index],
+                          ),
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemCount: state.advertisementPROVIDE.length,
                       ),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: state.advertisementPROVIDE.length,
-                  ),
-                );
-              },
-            ),
-          ],
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

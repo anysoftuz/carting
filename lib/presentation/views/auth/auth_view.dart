@@ -9,7 +9,6 @@ import 'package:formz/formz.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/presentation/views/auth/register_view.dart';
 import 'package:carting/presentation/views/auth/sms_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -18,7 +17,8 @@ import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/my_function.dart';
 
 class AuthView extends StatefulWidget {
-  const AuthView({super.key});
+  const AuthView({super.key, required this.isFull});
+  final bool isFull;
 
   @override
   State<AuthView> createState() => _AuthViewState();
@@ -28,7 +28,6 @@ class _AuthViewState extends State<AuthView>
     with SingleTickerProviderStateMixin {
   late TextEditingController controller;
   late TextEditingController controllerEmail;
-
   late TabController _tabController;
   @override
   void initState() {
@@ -148,6 +147,7 @@ class _AuthViewState extends State<AuthView>
                           phone: _tabController.index == 0
                               ? MyFunction.convertPhoneNumber(controller.text)
                               : controller.text,
+                          isPhone: _tabController.index == 0,
                           onError: () {
                             CustomSnackbar.show(context, "Malumot topilmadi");
                           },
@@ -174,35 +174,35 @@ class _AuthViewState extends State<AuthView>
               },
             ),
             const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Platformamizda yangimisiz? ",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // context.go(AppRouteName.register);
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const RegisterView(),
-                    ));
-                  },
-                  child: const Text(
-                    " Ro‘yhatdan o‘tish",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: blue,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       "Platformamizda yangimisiz? ",
+            //       style: TextStyle(
+            //         fontSize: 14,
+            //         fontWeight: FontWeight.w400,
+            //         color: dark.withValues(alpha: .3),
+            //       ),
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {
+            //         // context.go(AppRouteName.register);
+            //         Navigator.of(context).push(MaterialPageRoute(
+            //           builder: (context) => const RegisterView(),
+            //         ));
+            //       },
+            //       child: const Text(
+            //         " Ro‘yhatdan o‘tish",
+            //         style: TextStyle(
+            //           fontSize: 14,
+            //           fontWeight: FontWeight.w400,
+            //           color: blue,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -151,16 +152,22 @@ class _HomeViewState extends State<HomeView> {
               itemCount: list.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  final bloc = context.read<AdvertisementBloc>();
-                  bloc.add(GetTransportationTypesEvent(
-                      serviceId: list[index].serviceId));
-                  Navigator.of(context, rootNavigator: true)
-                      .push(MaterialPageRoute(
-                    builder: (context) => BlocProvider.value(
-                      value: bloc,
-                      child: list[index].screen,
-                    ),
-                  ));
+                  MyFunction.authChek(
+                    context: context,
+                    onTap: () {
+                      final bloc = context.read<AdvertisementBloc>();
+                      bloc.add(GetTransportationTypesEvent(
+                          serviceId: list[index].serviceId));
+                      Navigator.of(context, rootNavigator: true)
+                          .push(MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: list[index].screen,
+                        ),
+                      ));
+                    },
+                    isFull: (index != 5 && index != 7 && index != 9),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

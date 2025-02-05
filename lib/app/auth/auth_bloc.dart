@@ -105,7 +105,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ));
       final response = await _repository.sendCode(
         SendCodeBody(
-          phoneNumber: event.phone,
+          username: event.phone,
+          smsType: event.isPhone ? "phone" : "email",
           type: event.isLogin ? 1 : 2,
         ),
       );
@@ -128,7 +129,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.verifyPost(
         VerifyBody(
-          phoneNumber: event.phone,
+          username: event.phone,
+          smsType: event.isPhone ? "phone" : "email",
           sessionToken: event.sessionToken,
           securityCode: event.securityCode,
         ),

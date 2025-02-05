@@ -1,5 +1,8 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
+import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -11,6 +14,7 @@ import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/views/transport_transfer/transport_transfer_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CarsView extends StatefulWidget {
   const CarsView({super.key});
@@ -81,49 +85,74 @@ class _CarsViewState extends State<CarsView> {
           ),
         ),
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          mainAxisExtent: 120,
-        ),
-        itemCount: list.length,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            final bloc = context.read<AdvertisementBloc>();
-            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => BlocProvider.value(
-                value: bloc,
-                child: list[index].screen,
+      body: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state.status == AuthenticationStatus.unauthenticated) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                spacing: 16,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppIcons.emptyFile.svg(),
+                  const Text("Ro'yxatdan o'ting"),
+                  WButton(
+                    onTap: () {
+                      context.go(AppRouteName.auth);
+                    },
+                    text: "Ro'yxatdan o'tish",
+                  ),
+                  const SizedBox(height: 60)
+                ],
               ),
-            ));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: white,
-              boxShadow: wboxShadow,
+            );
+          }
+          return GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              mainAxisExtent: 120,
             ),
-            padding: EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: MediaQuery.sizeOf(context).width / 8,
+            itemCount: list.length,
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () {
+                final bloc = context.read<AdvertisementBloc>();
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: list[index].screen,
+                  ),
+                ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: white,
+                  boxShadow: wboxShadow,
+                ),
+                padding: EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: MediaQuery.sizeOf(context).width / 8,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    list[index].icon,
+                    const SizedBox(height: 4),
+                    Text(
+                      list[index].text,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    )
+                  ],
+                ),
+              ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                list[index].icon,
-                const SizedBox(height: 4),
-                Text(
-                  list[index].text,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                )
-              ],
-            ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

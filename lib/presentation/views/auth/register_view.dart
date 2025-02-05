@@ -147,6 +147,7 @@ class _RegisterViewState extends State<RegisterView>
                           phone: _tabController.index == 0
                               ? MyFunction.convertPhoneNumber(controller.text)
                               : controller.text,
+                          isPhone: _tabController.index == 0,
                           onError: () {
                             CustomSnackbar.show(context, "Malumot topilmadi");
                           },

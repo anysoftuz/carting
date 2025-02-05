@@ -74,7 +74,8 @@ class MyApp extends StatelessWidget {
                 debugPrint('STATE LISTENER ============> ${state.status}');
                 switch (state.status) {
                   case AuthenticationStatus.unauthenticated:
-                    AppRouts.router.pushReplacement(AppRouteName.auth);
+                    // AppRouts.router.pushReplacement(AppRouteName.auth);
+                    AppRouts.router.go(AppRouteName.home);
                     break;
                   case AuthenticationStatus.authenticated:
                     AppRouts.router.go(AppRouteName.home);

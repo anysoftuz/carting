@@ -54,6 +54,7 @@ class SendCodeEvent extends AuthEvent {
   final String phone;
   final VoidCallback onError;
   final bool isLogin;
+  final bool isPhone;
   final Function(SendCodeModel model) onSucces;
 
   SendCodeEvent({
@@ -61,6 +62,7 @@ class SendCodeEvent extends AuthEvent {
     required this.onError,
     required this.onSucces,
     required this.isLogin,
+    required this.isPhone,
   });
 }
 
@@ -69,6 +71,7 @@ class VerifyEvent extends AuthEvent {
   final String sessionToken;
   final String securityCode;
   final bool isLogin;
+  final bool isPhone;
   final VoidCallback onError;
   final Function() onSucces;
 
@@ -79,6 +82,7 @@ class VerifyEvent extends AuthEvent {
     required this.sessionToken,
     required this.securityCode,
     required this.isLogin,
+    required this.isPhone,
   });
 }
 

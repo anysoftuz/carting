@@ -108,7 +108,7 @@ class _AuthViewState extends State<AuthView> {
                   },
                   isDisabled:
                       controller.text.isEmpty || controller.text.length < 19,
-                  text: "Kirish",
+                  text: "Kirsh",
                 );
               },
             ),

@@ -1,34 +1,13 @@
 {
-  "id": 16,
-  "username": "998934343454",
-  "full_name": "Aziz Xolkazakov",
-  "first_name": "Aziz",
-  "last_name": "Xolkazakov",
-  "phone_number": "998934343454",
-  "type": "PHYSICAL",
-  "tg_link": "/test",
-  "photo": "ff808181aa294a8ea74e7162",
-  "referral_code": "IXMVSZVTMD",
-  "referral_users": [
-    {
-      "id": 57,
-      "full_name": "Асадбек Акрамов",
-      "client_type": "",
-      "phone_number": "998770036222",
-      "photo": "ff80818145afeb993ef472c6"
-    },
-    {
-      "id": 58,
-      "full_name": "Ahmad Asadov",
-      "client_type": "",
-      "phone_number": "998909779797",
-      "photo": "ff808181dc4d662affe4209c"
-    }
-  ],
-  "referral_codes": [
-    {
-      "code": "GZYAHCHFIQ",
-      "note": "test"
-    }
-  ]
+  "error": null,
+  "message": null,
+  "timestamp": "2025-02-06 04:06:36",
+  "status": 200,
+  "path": null,
+  "data": {
+    "token": "26b91a3c-9647-4ef5-9b91-a8b3b921f55f",
+    "refreshToken": "0ff67da8-e459-4330-86ad-b220a52f5a28"
+  },
+  "response": null
 }
+

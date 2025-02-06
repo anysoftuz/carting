@@ -34,6 +34,7 @@ class SmsView extends StatefulWidget {
 }
 
 class _SmsViewState extends State<SmsView> {
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController controller;
   ValueNotifier<int> start = ValueNotifier(60);
   late Timer _timer;
@@ -61,7 +62,7 @@ class _SmsViewState extends State<SmsView> {
 
   @override
   void initState() {
-    controller = TextEditingController(text: widget.model.securityCode);
+    controller = TextEditingController();
     super.initState();
     startTimer();
   }
@@ -89,164 +90,174 @@ class _SmsViewState extends State<SmsView> {
           child: AppImages.logoTextDark.imgAsset(height: 24),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Kirish",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Text(
-                widget.isPhone
-                    ? "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting."
-                    : "Tasdiqlash kodini ${MyFunction.maskEmail(widget.phone)} ga yubordik. Quyidagi maydonga email kodingizni kiriting.",
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Kirish",
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 24),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: Pinput(
-                controller: controller,
-                separatorBuilder: (index) => const SizedBox(width: 8),
-                defaultPinTheme: PinTheme(
-                  height: 56,
-                  width: 64,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: white,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                ),
-                validator: (value) {
-                  return value == widget.model.securityCode
-                      ? null
-                      : 'Pin is incorrect';
-                },
-                hapticFeedbackType: HapticFeedbackType.lightImpact,
-                onCompleted: (pin) {
-                  debugPrint('onCompleted: $pin');
-                },
-                onChanged: (value) {
-                  debugPrint('onChanged: $value');
-                  if (value.length > 2) {
-                    setState(() {});
-                  }
-                },
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 9),
-                      width: 22,
-                      height: 1,
-                    ),
-                  ],
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-            const SizedBox(height: 40),
-            BlocBuilder<AuthBloc, AuthState>(
-              builder: (context, state) {
-                return WButton(
-                  onTap: () {
-                    context.read<AuthBloc>().add(VerifyEvent(
-                          phone: widget.phone,
-                          isPhone: widget.isPhone,
-                          onError: () {
-                            CustomSnackbar.show(context, 'Malumot topilmadi');
-                          },
-                          onSucces: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => IdentityChooseView(
-                                phone: widget.phone,
-                              ),
-                            ));
-                          },
-                          sessionToken: widget.model.sessionToken,
-                          securityCode: widget.model.securityCode,
-                          isLogin: !widget.isRegister,
-                        ));
-                  },
-                  isLoading: state.statusSms.isInProgress,
-                  isDisabled:
-                      controller.text.isEmpty || controller.text.length < 4,
-                  text: AppLocalizations.of(context)!.confirm,
-                );
-              },
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Kod olmadingizmi? ",
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Text(
+                  widget.isPhone
+                      ? "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting."
+                      : "Tasdiqlash kodini ${MyFunction.maskEmail(widget.phone)} ga yubordik. Quyidagi maydonga email kodingizni kiriting.",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: dark.withValues(alpha: .3),
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                ValueListenableBuilder(
-                  valueListenable: start,
-                  builder: (context, value, __) {
-                    return GestureDetector(
-                      onTap: () {
-                        resetAndStartTimer();
-                      },
-                      child: Text(
-                        value == 0 ? "Qayta yuborish" : timerText,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: blue,
-                        ),
-                      ),
-                    );
+              ),
+              const SizedBox(height: 24),
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: Pinput(
+                  controller: controller,
+                  separatorBuilder: (index) => const SizedBox(width: 8),
+                  defaultPinTheme: PinTheme(
+                    height: 56,
+                    width: 64,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: white,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                  ),
+                  validator: (value) {
+                    return value == widget.model.securityCode
+                        ? null
+                        : 'Kod hato kiritildi';
                   },
-                )
-              ],
-            )
-            // ValueListenableBuilder(
-            //   valueListenable: start,
-            //   builder: (context, value, __) {
-            //     return RichText(
-            //       text: TextSpan(
-            //         text: "SMS ko’dni olmadingizmi? Qaytadan yuborish  ",
-            //         style: const TextStyle(
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w400,
-            //           color: black,
-            //         ),
-            //         children: <TextSpan>[
-            //           TextSpan(
-            //             text: timerText,
-            //             style: const TextStyle(
-            //               fontSize: 16,
-            //               fontWeight: FontWeight.w400,
-            //               color: green,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     );
-            //   },
-            // ),
-          ],
+                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                  onCompleted: (pin) {
+                    debugPrint('onCompleted: $pin');
+                  },
+                  onChanged: (value) {
+                    debugPrint('onChanged: $value');
+                    if (value.length > 2) {
+                      setState(() {});
+                    }
+                  },
+                  cursor: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 9),
+                        width: 22,
+                        height: 1,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  return WButton(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(VerifyEvent(
+                              phone: widget.phone,
+                              isPhone: widget.isPhone,
+                              onError: () {
+                                CustomSnackbar.show(
+                                  context,
+                                  'Malumot topilmadi',
+                                );
+                              },
+                              onSucces: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => IdentityChooseView(
+                                    phone: widget.phone,
+                                  ),
+                                ));
+                              },
+                              sessionToken: widget.model.sessionToken,
+                              securityCode: widget.model.securityCode,
+                              isLogin: !widget.isRegister,
+                            ));
+                      } else {
+                        CustomSnackbar.show(context, 'Kod hato kiritildi');
+                      }
+                    },
+                    isLoading: state.statusSms.isInProgress,
+                    isDisabled:
+                        controller.text.isEmpty || controller.text.length < 4,
+                    text: AppLocalizations.of(context)!.confirm,
+                  );
+                },
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Kod olmadingizmi? ",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: dark.withValues(alpha: .3),
+                    ),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: start,
+                    builder: (context, value, __) {
+                      return GestureDetector(
+                        onTap: () {
+                          resetAndStartTimer();
+                        },
+                        child: Text(
+                          value == 0 ? "Qayta yuborish" : timerText,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: blue,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              )
+              // ValueListenableBuilder(
+              //   valueListenable: start,
+              //   builder: (context, value, __) {
+              //     return RichText(
+              //       text: TextSpan(
+              //         text: "SMS ko’dni olmadingizmi? Qaytadan yuborish  ",
+              //         style: const TextStyle(
+              //           fontSize: 16,
+              //           fontWeight: FontWeight.w400,
+              //           color: black,
+              //         ),
+              //         children: <TextSpan>[
+              //           TextSpan(
+              //             text: timerText,
+              //             style: const TextStyle(
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w400,
+              //               color: green,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // ),
+            ],
+          ),
         ),
       ),
       // bottomNavigationBar: WButton(

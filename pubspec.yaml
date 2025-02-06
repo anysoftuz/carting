@@ -65,7 +65,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/anims/
     - assets/documents/
     - assets/fonts/Lufga-Medium.ttf
     - assets/fonts/Lufga-Regular.ttf

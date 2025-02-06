@@ -149,7 +149,10 @@ class _AuthViewState extends State<AuthView>
                               : controllerEmail.text,
                           isPhone: _tabController.index == 0,
                           onError: () {
-                            CustomSnackbar.show(context, "Malumot topilmadi");
+                            CustomSnackbar.show(
+                              context,
+                              "Malumot topilmadi",
+                            );
                           },
                           onSucces: (model) {
                             Navigator.of(context).push(MaterialPageRoute(

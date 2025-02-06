@@ -153,7 +153,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                       onTap: () {
                         context.go(AppRouteName.auth);
                       },
-                      text: "Ro'yxatdan o'tish",
+                      text: "Kirish",
                     ),
                     const SizedBox(height: 60)
                   ],

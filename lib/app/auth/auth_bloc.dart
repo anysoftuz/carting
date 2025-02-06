@@ -106,7 +106,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await _repository.sendCode(
         SendCodeBody(
           username: event.phone,
-          smsType: event.isPhone ? "phone" : "email",
+          smsType: event.isPhone ? "phone" : "mail",
           type: event.isLogin ? 1 : 2,
         ),
       );
@@ -130,7 +130,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await _repository.verifyPost(
         VerifyBody(
           username: event.phone,
-          smsType: event.isPhone ? "phone" : "email",
+          smsType: event.isPhone ? "phone" : "mail",
           sessionToken: event.sessionToken,
           securityCode: event.securityCode,
         ),

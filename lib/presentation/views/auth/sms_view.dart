@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -166,7 +167,9 @@ class _SmsViewState extends State<SmsView> {
                     context.read<AuthBloc>().add(VerifyEvent(
                           phone: widget.phone,
                           isPhone: widget.isPhone,
-                          onError: () {},
+                          onError: () {
+                            CustomSnackbar.show(context, 'Malumot topilmadi');
+                          },
                           onSucces: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => IdentityChooseView(

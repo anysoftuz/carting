@@ -146,7 +146,7 @@ class _AuthViewState extends State<AuthView>
                     context.read<AuthBloc>().add(SendCodeEvent(
                           phone: _tabController.index == 0
                               ? MyFunction.convertPhoneNumber(controller.text)
-                              : controller.text,
+                              : controllerEmail.text,
                           isPhone: _tabController.index == 0,
                           onError: () {
                             CustomSnackbar.show(context, "Malumot topilmadi");
@@ -157,9 +157,11 @@ class _AuthViewState extends State<AuthView>
                                 isRegister: false,
                                 model: model,
                                 isPhone: _tabController.index == 0,
-                                phone: MyFunction.convertPhoneNumber(
-                                  controller.text,
-                                ),
+                                phone: _tabController.index == 0
+                                    ? MyFunction.convertPhoneNumber(
+                                        controller.text,
+                                      )
+                                    : controllerEmail.text,
                               ),
                             ));
                           },

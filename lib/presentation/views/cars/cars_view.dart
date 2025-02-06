@@ -100,7 +100,7 @@ class _CarsViewState extends State<CarsView> {
                     onTap: () {
                       context.go(AppRouteName.auth);
                     },
-                    text: "Ro'yxatdan o'tish",
+                    text: "Kirish",
                   ),
                   const SizedBox(height: 60)
                 ],

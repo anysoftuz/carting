@@ -44,7 +44,7 @@ class _ProfileViewState extends State<ProfileView> {
                       onTap: () {
                         context.go(AppRouteName.auth);
                       },
-                      text: "Ro'yxatdan o'tish",
+                      text: "Kirish",
                     ),
                   ],
                 ),

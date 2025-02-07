@@ -31,6 +31,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   late TextEditingController controllerFullName;
   late TextEditingController controllerPhone;
   late TextEditingController controllerTG;
+  late TextEditingController controllerReferal;
   File? images;
 
   void imagesFile() async {
@@ -59,12 +60,16 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
       text: context.read<AuthBloc>().state.userModel.lastName,
     );
     controllerPhone = TextEditingController(
-      text: MyFunction.formatPhoneNumber(
-        context.read<AuthBloc>().state.userModel.phoneNumber,
-      ),
+      text: context.read<AuthBloc>().state.userModel.phoneNumber.isNotEmpty
+          ? MyFunction.formatPhoneNumber(
+              context.read<AuthBloc>().state.userModel.phoneNumber,
+            )
+          : '',
     );
-    controllerTG = TextEditingController();
-
+    controllerTG = TextEditingController(
+      text: 't.me/${context.read<AuthBloc>().state.userModel.tgLink}',
+    );
+    controllerReferal = TextEditingController();
     // controllerName = TextEditingController(text: context.read<AuthBloc>().state.userModel.lastName);
     super.initState();
   }
@@ -158,7 +163,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           const SizedBox(height: 16),
           CustomTextField(
             title: "Telefon raqam",
-            hintText: "Telefon raqam",
+            hintText: "+998 (__) ___-__-__",
             controller: controllerPhone,
             keyboardType: TextInputType.phone,
             formatter: [Formatters.phoneFormatter],
@@ -173,6 +178,13 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             title: "Telegram",
             hintText: "t.me/",
             controller: controllerTG,
+          ),
+          const SizedBox(height: 16),
+          CustomTextField(
+            title: 'Referal kod',
+            hintText: "Kodni kiriting",
+            controller: controllerReferal,
+            onChanged: (value) {},
           ),
         ],
       ),

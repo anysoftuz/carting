@@ -1,3 +1,4 @@
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -27,83 +28,74 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<TypeOfService> list = [
-    TypeOfService(
-      icon: AppIcons.delivery.svg(
-        height: 40,
-        width: 40,
+  late List<TypeOfService> list;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      TypeOfService(
+        icon: AppIcons.delivery.svg(height: 40, width: 40),
+        text: AppLocalizations.of(context)!.delivery,
+        screen: const DeliveryView(),
+        serviceId: 9,
       ),
-      text: "Yetkazib\nberish",
-      screen: const DeliveryView(),
-      serviceId: 9,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportRental.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportRental.svg(height: 40, width: 40),
+        text: AppLocalizations.of(context)!.peregonService,
+        screen: const PeregonServiceView(),
+        serviceId: 10,
       ),
-      text: "Peregon xizmati",
-      screen: const PeregonServiceView(),
-      serviceId: 10,
-    ),
-    TypeOfService(
-      icon: AppIcons.shipping.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.shipping.svg(height: 40, width: 40),
+        text: AppLocalizations.of(context)!.shipping,
+        screen: const ShippingCreateView(),
+        serviceId: 1,
       ),
-      text: "Yuk \ntashish",
-      screen: const ShippingCreateView(),
-      serviceId: 1,
-    ),
-    TypeOfService(
-      icon: AppIcons.fuelDeliver.svg(),
-      text: "Yoqilg‘i yetkazish",
-      screen: const FuelDeliveryView(),
-      serviceId: 8,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationOfPassengers.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.fuelDeliver.svg(),
+        text: AppLocalizations.of(context)!.fuelDelivery,
+        screen: const FuelDeliveryView(),
+        serviceId: 8,
       ),
-      text: "Yo'lovchilarni tashish",
-      screen: const PassengersTransportView(),
-      serviceId: 2,
-    ),
-    TypeOfService(
-      icon: AppIcons.car_3.svg(),
-      text: "Transport ijarasi",
-      screen: const CarsTypeView(),
-      serviceId: 4,
-    ),
-    TypeOfService(
-      icon: AppIcons.specialTechnique.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportationOfPassengers.svg(height: 40, width: 40),
+        text: AppLocalizations.of(context)!.passengerTransport,
+        screen: const PassengersTransportView(),
+        serviceId: 2,
       ),
-      text: "Maxsus texnika xizmatlari",
-      screen: const SpecialTechnicalServicesView(),
-      serviceId: 3,
-    ),
-    TypeOfService(
-      icon: AppIcons.autoRepair.svg(),
-      text: "Avto ta'mirlash",
-      screen: const AutoRepairView(),
-      serviceId: 5,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationTransfer.svg(),
-      text: "Transport transferi",
-      screen: const TransportTransferCreateView(),
-      serviceId: 6,
-    ),
-    TypeOfService(
-      icon: AppIcons.inTheWarehouseStorage.svg(),
-      text: "Omborda saqlash",
-      screen: const StorageServiceView(),
-      serviceId: 7,
-    ),
-  ];
+      TypeOfService(
+        icon: AppIcons.car_3.svg(),
+        text: AppLocalizations.of(context)!.carRental,
+        screen: const CarsTypeView(),
+        serviceId: 4,
+      ),
+      TypeOfService(
+        icon: AppIcons.specialTechnique.svg(height: 40, width: 40),
+        text: AppLocalizations.of(context)!.specialTechServices,
+        screen: const SpecialTechnicalServicesView(),
+        serviceId: 3,
+      ),
+      TypeOfService(
+        icon: AppIcons.autoRepair.svg(),
+        text: AppLocalizations.of(context)!.autoRepair,
+        screen: const AutoRepairView(),
+        serviceId: 5,
+      ),
+      TypeOfService(
+        icon: AppIcons.transportationTransfer.svg(),
+        text: AppLocalizations.of(context)!.transportTransfer,
+        screen: const TransportTransferCreateView(),
+        serviceId: 6,
+      ),
+      TypeOfService(
+        icon: AppIcons.inTheWarehouseStorage.svg(),
+        text: AppLocalizations.of(context)!.warehouseStorage,
+        screen: const StorageServiceView(),
+        serviceId: 7,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +112,7 @@ class _HomeViewState extends State<HomeView> {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: CustomTextField(
               prefixIcon: AppIcons.searchNormal.svg(),
-              hintText: "Kerakli transportni qidiring",
+              hintText: AppLocalizations.of(context)!.searchTransport,
             ),
           ),
         ),
@@ -132,9 +124,9 @@ class _HomeViewState extends State<HomeView> {
             padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
               bottom: 8,
             ),
-            child: const Text(
-              "Xizmatlar",
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)!.services,
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w400,
               ),

@@ -39,12 +39,12 @@ class _ProfileViewState extends State<ProfileView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppIcons.emptyFile.svg(),
-                    const Text("Ro'yxatdan o'ting"),
+                    Text(AppLocalizations.of(context)!.register),
                     WButton(
                       onTap: () {
                         context.go(AppRouteName.auth);
                       },
-                      text: "Kirish",
+                      text: AppLocalizations.of(context)!.enter,
                     ),
                   ],
                 ),
@@ -301,7 +301,7 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 const SizedBox(height: 8),
                 WListTile(
-                  title: 'Referal dastur',
+                  title: AppLocalizations.of(context)!.referralProgram,
                   leading: AppIcons.chart.svg(height: 28, width: 28),
                   onTap: () {
                     final bloc = context.read<AdvertisementBloc>();

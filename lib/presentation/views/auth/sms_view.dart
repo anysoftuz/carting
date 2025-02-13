@@ -97,9 +97,9 @@ class _SmsViewState extends State<SmsView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Kirish",
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.enter,
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w600,
                 ),
@@ -170,7 +170,7 @@ class _SmsViewState extends State<SmsView> {
                               onError: () {
                                 CustomSnackbar.show(
                                   context,
-                                  'Malumot topilmadi',
+                                 AppLocalizations.of(context)!.infoNotFound,
                                 );
                               },
                               onSucces: () {},

@@ -43,7 +43,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yoqilg‘i yetkazish")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.fuelDelivery)),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
           builder: (context, state) {

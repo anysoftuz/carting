@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,8 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.model.serviceName ?? "Nomalum",
+                    widget.model.serviceName ??
+                        AppLocalizations.of(context)!.unknown,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -111,7 +113,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                 Column(
                   children: [
                     const SizedBox(height: 12),
-                    const WTitle(title: "Xizmatlar"),
+                    WTitle(title: AppLocalizations.of(context)!.services),
                     const SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
@@ -155,7 +157,8 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     width: 24,
                   ),
                   title: Text(
-                    widget.model.fromLocation?.name ?? "Nomalum",
+                    widget.model.fromLocation?.name ??
+                        AppLocalizations.of(context)!.unknown,
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
@@ -176,7 +179,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     ));
                   },
                   leading: AppIcons.message.svg(),
-                  title: const Text("Izohlar"),
+                  title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
               ),
@@ -187,7 +190,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     child: WButton(
                       onTap: () {},
                       color: const Color(0xFFD4D5D6),
-                      text: "Navbatga yozilish",
+                      text: AppLocalizations.of(context)!.queueRegistration,
                     ),
                   ),
                   if (widget.model.createdByPhone != null)
@@ -196,7 +199,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     Expanded(
                       child: WButton(
                         onTap: () {},
-                        text: "Qo‘ng‘iroq qilish",
+                        text: AppLocalizations.of(context)!.call,
                       ),
                     ),
                 ],
@@ -212,7 +215,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                     children: [
                       AppIcons.telegram.svg(),
                       const SizedBox(width: 12),
-                      const Text("Telegram orqali bog‘lanish")
+                      Text(AppLocalizations.of(context)!.contactViaTelegram)
                     ],
                   ),
                 ),

@@ -154,7 +154,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                               onError: () {
                                 CustomSnackbar.show(
                                   context,
-                                  'Malumot topilmadi',
+                                  AppLocalizations.of(context)!.infoNotFound,
                                 );
                               },
                               onSucces: () {},

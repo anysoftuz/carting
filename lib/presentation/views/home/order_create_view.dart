@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/price_formatters.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,43 +24,7 @@ class OrderCreateView extends StatefulWidget {
 }
 
 class _OrderCreateViewState extends State<OrderCreateView> {
-  List<CarModel> list = [
-    CarModel(
-      title: "Bir nechta quti sig’imi",
-      images: AppImages.trucks2,
-      height: 100,
-      width: 100,
-      kg: 300,
-    ),
-    CarModel(
-      title: "Kir yuvish mashinasi v.b.",
-      images: AppImages.trucks3,
-      height: 100,
-      width: 100,
-      kg: 700,
-    ),
-    CarModel(
-      title: "Kir yuvish mashinasi v.b.",
-      images: AppImages.trucks4,
-      height: 100,
-      width: 100,
-      kg: 1400,
-    ),
-    CarModel(
-      title: "Uy jihozlari va texnikalari",
-      images: AppImages.trucks5,
-      height: 100,
-      width: 100,
-      kg: 3100,
-    ),
-    CarModel(
-      title: "Ko’p miqdordagi mahsulot",
-      images: AppImages.trucks6,
-      height: 100,
-      width: 100,
-      kg: 16000,
-    ),
-  ];
+  late List<CarModel> list;
 
   ValueNotifier<int> selIndex = ValueNotifier(0);
   ValueNotifier<bool> check = ValueNotifier(false);
@@ -82,49 +47,91 @@ class _OrderCreateViewState extends State<OrderCreateView> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      CarModel(
+        title: AppLocalizations.of(context)!.multipleBoxCapacity,
+        images: AppImages.trucks2,
+        height: 100,
+        width: 100,
+        kg: 300,
+      ),
+      CarModel(
+        title: AppLocalizations.of(context)!.washingMachineEtc,
+        images: AppImages.trucks3,
+        height: 100,
+        width: 100,
+        kg: 700,
+      ),
+      CarModel(
+        title: AppLocalizations.of(context)!.washingMachineEtc,
+        images: AppImages.trucks4,
+        height: 100,
+        width: 100,
+        kg: 1400,
+      ),
+      CarModel(
+        title: AppLocalizations.of(context)!.homeAppliances,
+        images: AppImages.trucks5,
+        height: 100,
+        width: 100,
+        kg: 3100,
+      ),
+      CarModel(
+        title: AppLocalizations.of(context)!.largeQuantityGoods,
+        images: AppImages.trucks6,
+        height: 100,
+        width: 100,
+        kg: 16000,
+      ),
+    ];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Buyurtma haqida")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.aboutOrder)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            "Yuk haqida",
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+          Text(
+            AppLocalizations.of(context)!.aboutCargo,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           const SizedBox(height: 12),
           CustomTextField(
-            title: "Yuk turi",
-            hintText: "Tanlang",
+            title: AppLocalizations.of(context)!.cargoType,
+            hintText: AppLocalizations.of(context)!.select,
             suffixIcon: AppIcons.arrowBottom.svg(),
           ),
           const SizedBox(height: 16),
           Text(
-            "Yuk hajmi",
+            AppLocalizations.of(context)!.cargoVolume,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 8),
-          const SizedBox(
+          SizedBox(
             height: 58,
             child: Row(
               children: [
                 Expanded(
                   child: CustomTextField(
-                    hintText: "Bo’yi",
+                    hintText: AppLocalizations.of(context)!.height,
                     keyboardType: TextInputType.number,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: CustomTextField(
-                    hintText: "Eni",
+                    hintText: AppLocalizations.of(context)!.width,
                     keyboardType: TextInputType.number,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: CustomTextField(
-                    hintText: "Uzunligi",
+                    hintText: AppLocalizations.of(context)!.length,
                     keyboardType: TextInputType.number,
                   ),
                 ),
@@ -133,7 +140,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
           ),
           const SizedBox(height: 16),
           Text(
-            "Yuk rasmlari",
+            AppLocalizations.of(context)!.cargoImages,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 8),
@@ -175,7 +182,7 @@ class _OrderCreateViewState extends State<OrderCreateView> {
             },
           ),
           Text(
-            "Yuk mashina turi",
+            AppLocalizations.of(context)!.truckType,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 8),
@@ -265,8 +272,8 @@ class _OrderCreateViewState extends State<OrderCreateView> {
           ),
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Yuklash xizmati",
-            hintText: "Yuklash xizmati",
+            title: AppLocalizations.of(context)!.loadingService,
+            hintText: AppLocalizations.of(context)!.loadingService,
             suffixIcon: ValueListenableBuilder(
               valueListenable: check,
               builder: (context, valu, __) {
@@ -281,17 +288,18 @@ class _OrderCreateViewState extends State<OrderCreateView> {
             ),
           ),
           const SizedBox(height: 8),
-          const CustomTextField(
-            hintText: "Nechta yuklovchi kerak?",
+          CustomTextField(
+            hintText: AppLocalizations.of(context)!.howManyLoaders,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  "QABUL QILUVCHI",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                  AppLocalizations.of(context)!.recipient,
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w400),
                 ),
               ),
               AppIcons.orderHistory.svg(
@@ -299,27 +307,28 @@ class _OrderCreateViewState extends State<OrderCreateView> {
                 width: 20,
               ),
               const SizedBox(width: 4),
-              const Text(
-                "Tarix",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              Text(
+                AppLocalizations.of(context)!.date,
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          const CustomTextField(
-            title: "Ism va familiyasi",
-            hintText: "Ism va familiyasi",
+          CustomTextField(
+            title: AppLocalizations.of(context)!.nameAndSurname,
+            hintText: AppLocalizations.of(context)!.nameAndSurname,
           ),
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Telefon raqami",
-            hintText: "Telefon raqami",
+            title: AppLocalizations.of(context)!.phoneNumber,
+            hintText: AppLocalizations.of(context)!.phoneNumber,
             suffixIcon: AppIcons.contact.svg(),
             keyboardType: TextInputType.phone,
           ),
           const SizedBox(height: 16),
           Text(
-            "Izoh",
+            AppLocalizations.of(context)!.note,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 8),
@@ -329,8 +338,8 @@ class _OrderCreateViewState extends State<OrderCreateView> {
               color: whiteSmoke,
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: const CustomTextField(
-              hintText: "Yuk bor",
+            child: CustomTextField(
+              hintText: AppLocalizations.of(context)!.cargo,
               fillColor: whiteSmoke,
               noHeight: true,
               expands: false,
@@ -339,27 +348,27 @@ class _OrderCreateViewState extends State<OrderCreateView> {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            "TO'LOV HAQIDA",
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+          Text(
+            AppLocalizations.of(context)!.paymentInfo,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           const SizedBox(height: 12),
           CustomTextField(
-            title: "To’lov turi",
-            hintText: "Tanlang",
+            title: AppLocalizations.of(context)!.paymentType,
+            hintText: AppLocalizations.of(context)!.select,
             suffixIcon: AppIcons.arrowBottom.svg(),
           ),
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Narx (so’m)",
-            hintText: "450 000 - 630 000",
+            title: AppLocalizations.of(context)!.price,
+            hintText: AppLocalizations.of(context)!.priceRange,
             keyboardType: TextInputType.number,
             formatter: [PriceFormatter()],
           ),
           const SizedBox(height: 16),
           WButton(
             onTap: () {},
-            text: "Buyurtmani yaratish",
+            text: AppLocalizations.of(context)!.createOrder,
           ),
           const SizedBox(height: 16),
         ],

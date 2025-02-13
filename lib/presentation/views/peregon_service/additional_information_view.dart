@@ -91,7 +91,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
-        title: const Text("Qo‘shimcha ma’lumotlar"),
+        title: Text(AppLocalizations.of(context)!.additionalInfo),
         backgroundColor: white,
       ),
       bottomNavigationBar: SafeArea(
@@ -118,7 +118,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
         child: Column(
           children: [
             if (widget.isDelivery) ...[
-              const WTitle(title: "Yuk turi"),
+              WTitle(title: AppLocalizations.of(context)!.cargoType),
               ValueListenableBuilder(
                 valueListenable: loadTypeId,
                 builder: (context, value, __) {
@@ -153,7 +153,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                   );
                 },
               ),
-              const WTitle(title: "Yuklash xizmati"),
+              WTitle(title: AppLocalizations.of(context)!.cargoLoadingService),
               ValueListenableBuilder(
                 valueListenable: loadServiceId,
                 builder: (context, value, __) {
@@ -188,7 +188,10 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                   );
                 },
               ),
-              const WTitle(title: "Yuk rasmlari (10 tagacha)"),
+              WTitle(
+                title:
+                    "${AppLocalizations.of(context)!.cargoImages} (10 tagacha)",
+              ),
               const SizedBox(height: 12),
               GridView.builder(
                 itemCount: images.length + 1,
@@ -230,8 +233,8 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
               const SizedBox(height: 24),
             ],
             CustomTextField(
-              title: "Izoh",
-              hintText: "Buyurtma haqida izoh qoldiring!",
+              title: AppLocalizations.of(context)!.description,
+              hintText: AppLocalizations.of(context)!.leaveOrderComment,
               minLines: 4,
               maxLines: 5,
               noHeight: true,
@@ -240,7 +243,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
               onChanged: (value) {},
             ),
             const SizedBox(height: 12),
-            const WTitle(title: "To‘lov"),
+            WTitle(title: AppLocalizations.of(context)!.payment),
             const SizedBox(height: 12),
             ValueListenableBuilder(
               valueListenable: payDate,
@@ -251,7 +254,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                       payDate.value = true;
                     },
                     leading: AppIcons.cash.svg(),
-                    title: const Text("Naqd"),
+                    title: Text(AppLocalizations.of(context)!.cash),
                     trailing: value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -262,7 +265,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                       payDate.value = false;
                     },
                     leading: AppIcons.card.svg(),
-                    title: const Text("Karta"),
+                    title: Text(AppLocalizations.of(context)!.card),
                     trailing: !value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -273,8 +276,8 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
             const Divider(height: 1),
             const SizedBox(height: 12),
             CustomTextField(
-              title: "Narx",
-              hintText: "Narxni kiriting",
+              title: AppLocalizations.of(context)!.price,
+              hintText: AppLocalizations.of(context)!.enterPrice,
               keyboardType: TextInputType.number,
               controller: widget.controllerPrice,
               formatter: [PriceFormatter()],

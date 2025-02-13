@@ -22,7 +22,6 @@ class _MainViewState extends State<MainView> {
     AppIcons.profile,
   ];
   void _onTap(BuildContext context, int index) {
-    debugPrint("NIma gap $index");
     widget.navigationShell.goBranch(
       index,
       initialLocation: index == widget.navigationShell.currentIndex,
@@ -71,37 +70,6 @@ class _MainViewState extends State<MainView> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: white,
-      //   elevation: 1,
-      //   selectedItemColor: green,
-      //   unselectedItemColor: darkIcon,
-      //   currentIndex: widget.navigationShell.currentIndex,
-      //   onTap: (index) => _onTap(context, index),
-      //   type: BottomNavigationBarType.fixed,
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: AppIcons.home.svg(color: darkIcon),
-      //       activeIcon: AppIcons.home.svg(color: green),
-      //       label: "Asosiy",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: AppIcons.box.svg(color: darkIcon),
-      //       activeIcon: AppIcons.box.svg(color: green),
-      //       label: "E’lonlar",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: AppIcons.car.svg(color: darkIcon),
-      //       activeIcon: AppIcons.car.svg(color: green),
-      //       label: "Transport",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: AppIcons.profile.svg(color: darkIcon),
-      //       activeIcon: AppIcons.profile.svg(color: green),
-      //       label: "Profil",
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

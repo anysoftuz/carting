@@ -24,7 +24,8 @@ class PeregonServiceView extends StatefulWidget {
   State<PeregonServiceView> createState() => _PeregonServiceViewState();
 }
 
-class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> images = [];
+class _PeregonServiceViewState extends State<PeregonServiceView> {
+  List<File> images = [];
   late TextEditingController controller;
   late TextEditingController controllerCommet;
   late TextEditingController controllerPrice;
@@ -52,7 +53,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Peregon xizmati")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.peregonService)),
       bottomNavigationBar: SafeArea(
         child: WButton(
           onTap: () {
@@ -81,7 +82,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
                     int.tryParse(controllerPrice.text.replaceAll(' ', '')) ?? 0,
               ).toJson();
               context.read<AdvertisementBloc>().add(CreateDeliveryEvent(
-                    model: model,   images: images,
+                    model: model,
+                    images: images,
                     onSucces: (id) {
                       Navigator.pop(context);
                     },
@@ -111,7 +113,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Jo‘natish sanasi",
+              text: AppLocalizations.of(context)!.departureDate,
               hintText: "",
               controller: controller,
               keyboardType: TextInputType.datetime,
@@ -150,7 +152,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
                     builder: (context) => AdditionalInformationView(
                       controllerCommet: controllerCommet,
                       controllerPrice: controllerPrice,
-                      payDate: payDate,images: images,
+                      payDate: payDate,
+                      images: images,
                       onSave: (list) {
                         setState(() {
                           images = list;
@@ -159,7 +162,7 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
                     ),
                   ));
                 },
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -171,7 +174,8 @@ class _PeregonServiceViewState extends State<PeregonServiceView> { List<File> im
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text("Izoh, to‘lov turi, narx"),
+                subtitle: Text(
+                    "${AppLocalizations.of(context)!.description}, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

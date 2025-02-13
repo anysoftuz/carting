@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -14,19 +15,19 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Buyurtmalar tarixi")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.orderHistory)),
       body: DefaultTabController(
         length: 2,
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 44,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: WTabBar(
                   tabs: [
-                    Text("Tugallangan"),
-                    Text("Bekor qilingan"),
+                    Text(AppLocalizations.of(context)!.completed),
+                    Text(AppLocalizations.of(context)!.cancelled),
                   ],
                 ),
               ),
@@ -96,9 +97,9 @@ class OrderHistoryIteam extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: const Text(
-            "Tashkent → Andijan",
-            style: TextStyle(
+          title: Text(
+            AppLocalizations.of(context)!.tashkentToAndijan,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
             ),
@@ -120,18 +121,18 @@ class OrderHistoryIteam extends StatelessWidget {
           ),
         ),
         const Divider(height: 1),
-        const ListTile(
+        ListTile(
           title: Text(
-            "Mebel",
-            style: TextStyle(
+            AppLocalizations.of(context)!.furniture,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: gray,
             ),
           ),
           subtitle: Text(
-            "2 х 3 х 2 m²",
-            style: TextStyle(
+            AppLocalizations.of(context)!.dimensions,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: gray,
@@ -139,7 +140,7 @@ class OrderHistoryIteam extends StatelessWidget {
           ),
           trailing: Text(
             "500 000 so’m",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: black,
@@ -153,7 +154,7 @@ class OrderHistoryIteam extends StatelessWidget {
           color: white,
           textColor: isFinsh ? red : green,
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          text: "Tugallangan",
+          text: AppLocalizations.of(context)!.completed,
         )
       ],
     );

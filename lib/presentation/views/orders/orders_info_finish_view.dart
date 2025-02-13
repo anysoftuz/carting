@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/orders/orders_info_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -148,9 +149,9 @@ class _OrdersInfoFinshViewState extends State<OrdersInfoFinshView> {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            "Izoh",
-            style: TextStyle(
+           Text(
+            AppLocalizations.of(context)!.description,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -183,35 +184,35 @@ class _OrdersInfoFinshViewState extends State<OrdersInfoFinshView> {
               color: whiteSmoke,
             ),
             padding: const EdgeInsets.all(20),
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 OrdersInfoTile(
-                  title: 'Yuk turi',
+                  title: AppLocalizations.of(context)!.cargoType,
                   subtitle: 'Mebel',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yuk hajmi (m²)',
                   subtitle: '2 x 3 x 2',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yukni olib ketish vaqti',
                   subtitle: '18.07.2024 16:00',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yuk yetkazilgan vaqti',
                   subtitle: '19.07.2024 12:00',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                 OrdersInfoTile(
                   title: 'To’lov turi',
-                  subtitle: 'Naqd',
+                  subtitle: AppLocalizations.of(context)!.cash,
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yetkazib berish narxi',
                   subtitle: '500 000',
                 ),

@@ -179,7 +179,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                 onError: () {
                                   CustomSnackbar.show(
                                     context,
-                                    'Malumot topilmadi',
+                                   AppLocalizations.of(context)!.infoNotFound,
                                   );
                                 },
                               ));

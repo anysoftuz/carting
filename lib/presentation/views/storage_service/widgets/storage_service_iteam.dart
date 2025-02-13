@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,7 @@ class StorageServiceIteam extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Maydon: ${model.details?.area ?? "Nomalum"} m2",
+                    "Maydon: ${model.details?.area ?? AppLocalizations.of(context)!.unknown} m2",
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -86,7 +87,8 @@ class StorageServiceIteam extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          model.toLocation?.name ?? "Nomalum",
+                          model.toLocation?.name ??
+                              AppLocalizations.of(context)!.unknown,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

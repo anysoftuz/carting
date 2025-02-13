@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 class QuestView extends StatefulWidget {
@@ -9,15 +10,22 @@ class QuestView extends StatefulWidget {
 }
 
 class _QuestViewState extends State<QuestView> {
-  List<String> list = [
-    "Buyrtmani bekor qilsam bo’ladimi?",
-    "Qanday buyurtma qabul qilaman?",
-    "Nima qilsam bo’ladi?",
-  ];
+  late List<String> list;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      AppLocalizations.of(context)!.canICancelOrder,
+      AppLocalizations.of(context)!.howToAcceptOrder,
+      AppLocalizations.of(context)!.whatCanIDo,
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Ko’p so’raladigan savollar")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.faq)),
       body: Theme(
         data: Theme.of(context).copyWith(
           dividerColor: Colors.transparent,
@@ -31,13 +39,13 @@ class _QuestViewState extends State<QuestView> {
             ),
             child: ExpansionTile(
               title: Text(list[index]),
-              children: const [
-                Divider(color: Color(0xFFEAEEF2), height: 1),
+              children: [
+                const Divider(color: Color(0xFFEAEEF2), height: 1),
                 Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Text(
-                    "Ha albatta bo’ladi. Qachonki sizga yangi kliyentlar kelsa sizga xabar beradi",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.yesYouCan,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                     ),

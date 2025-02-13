@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class _CallViewState extends State<CallView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Qo’llab-quvvatlash markazi")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.supportCenter)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Container(
@@ -23,8 +24,8 @@ class _CallViewState extends State<CallView> {
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.symmetric(vertical: 4),
-          child: const CustomTextField(
-            hintText: "Muammo haqida yozing",
+          child: CustomTextField(
+            hintText: AppLocalizations.of(context)!.describeProblem,
             expands: false,
             minLines: 4,
             noHeight: true,
@@ -37,7 +38,7 @@ class _CallViewState extends State<CallView> {
         child: WButton(
           margin: const EdgeInsets.all(16),
           onTap: () {},
-          text: "Yuborish",
+          text: AppLocalizations.of(context)!.send,
         ),
       ),
     );

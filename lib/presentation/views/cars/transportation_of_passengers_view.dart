@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,8 @@ class _TransportationOfPassengersViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yo‘lovchilarni tashish")),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context)!.passengerTransport)),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {
           if (state.statusTrTypes.isInProgress) {

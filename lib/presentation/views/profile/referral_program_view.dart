@@ -4,6 +4,7 @@ import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/user_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/profile/referal_edit_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_scale_animation.dart';
@@ -23,19 +24,21 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Referal dastur")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.referralProgram),
+      ),
       body: DefaultTabController(
         length: 2,
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 48,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: WTabBar(
                   tabs: [
-                    Text("Taklif qilish"),
-                    Text("Statistika"),
+                    Text(AppLocalizations.of(context)!.invite),
+                    Text(AppLocalizations.of(context)!.statistics),
                   ],
                 ),
               ),
@@ -81,7 +84,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                       AppIcons.edit.svg(),
                                       const SizedBox(width: 4),
                                       Text(
-                                        'Tahrirlash',
+                                        AppLocalizations.of(context)!.edit,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
@@ -132,7 +135,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                       children: [
                                         AppIcons.addCircle.svg(),
                                         const SizedBox(width: 8),
-                                        const Text('Qo‘shish')
+                                        Text(AppLocalizations.of(context)!.add)
                                       ],
                                     ),
                                   )
@@ -142,10 +145,10 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                             const SizedBox(height: 32),
                             Row(
                               children: [
-                                const Expanded(
+                                Expanded(
                                   child: Text(
-                                    'Taklif qilinganlar',
-                                    style: TextStyle(
+                                    AppLocalizations.of(context)!.invitedUsers,
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xFF292D32),
@@ -220,7 +223,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                 spacing: 16,
                                 children: [
                                   InfoColum(
-                                    title: 'Umumiy foyda',
+                                    title: AppLocalizations.of(context)!
+                                        .totalProfit,
                                     subtitle:
                                         '\$${state.userModel.totalProfit}',
                                     colorText: const Color(0xFF292D32),
@@ -230,7 +234,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                     children: [
                                       Expanded(
                                         child: InfoColum(
-                                          title: 'Topilgan foyda',
+                                          title: AppLocalizations.of(context)!
+                                              .earnedProfit,
                                           subtitle:
                                               '\$${state.userModel.withdrawnProfit}',
                                           colorText: green,
@@ -239,7 +244,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                       ),
                                       Expanded(
                                         child: InfoColum(
-                                          title: 'Chiqarib olingan foyda',
+                                          title: AppLocalizations.of(context)!
+                                              .withdrawnProfit,
                                           subtitle:
                                               '\$${state.userModel.earnedProfit}',
                                           colorText: blue,
@@ -262,7 +268,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                           child: Row(
                             children: [
                               Text(
-                                'Taklif qilinganlar',
+                                AppLocalizations.of(context)!.invitedUsers,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,

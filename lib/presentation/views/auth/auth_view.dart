@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -61,16 +62,16 @@ class _AuthViewState extends State<AuthView>
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Kirish",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.enter,
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              "Profilingizga kirish uchun ro’yxatdan o’tgan raqamingizni kiriting!",
+              AppLocalizations.of(context)!.enterRegisteredNumber,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -110,7 +111,7 @@ class _AuthViewState extends State<AuthView>
                 controller: _tabController,
                 children: [
                   CustomTextField(
-                    title: "Telefon",
+                    title: AppLocalizations.of(context)!.phone,
                     hintText: "+998",
                     controller: controller,
                     formatter: [Formatters.phoneFormatter],
@@ -151,7 +152,7 @@ class _AuthViewState extends State<AuthView>
                           onError: () {
                             CustomSnackbar.show(
                               context,
-                              "Malumot topilmadi",
+                              AppLocalizations.of(context)!.infoNotFound,
                             );
                           },
                           onSucces: (model) {
@@ -174,7 +175,7 @@ class _AuthViewState extends State<AuthView>
                   isDisabled: _tabController.index == 0
                       ? controller.text.isEmpty || controller.text.length < 19
                       : controllerEmail.text.length < 12,
-                  text: "Kirish",
+                  text: AppLocalizations.of(context)!.enter,
                 );
               },
             ),

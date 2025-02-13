@@ -68,7 +68,7 @@ class _RegisterViewState extends State<RegisterView>
             ),
             const SizedBox(height: 8),
             Text(
-              "Ro‘yxatdan o‘tish uchun telefon \n raqamingizni kiriting!",
+              AppLocalizations.of(context)!.enterPhoneNumberToRegister,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -108,7 +108,7 @@ class _RegisterViewState extends State<RegisterView>
                 controller: _tabController,
                 children: [
                   CustomTextField(
-                    title: "Telefon",
+                    title: AppLocalizations.of(context)!.phone,
                     hintText: "+998",
                     controller: controller,
                     formatter: [Formatters.phoneFormatter],
@@ -149,7 +149,10 @@ class _RegisterViewState extends State<RegisterView>
                               : controller.text,
                           isPhone: _tabController.index == 0,
                           onError: () {
-                            CustomSnackbar.show(context, "Malumot topilmadi");
+                            CustomSnackbar.show(
+                              context,
+                              AppLocalizations.of(context)!.infoNotFound,
+                            );
                           },
                           onSucces: (model) {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -166,7 +169,7 @@ class _RegisterViewState extends State<RegisterView>
                           isLogin: false,
                         ));
                   },
-                  text: "Kirish",
+                  text: AppLocalizations.of(context)!.enter,
                 );
               },
             ),
@@ -175,7 +178,7 @@ class _RegisterViewState extends State<RegisterView>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Avval ro‘yhatdan o‘tganmisiz? ",
+                  AppLocalizations.of(context)!.haveRegisteredBefore,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -186,9 +189,9 @@ class _RegisterViewState extends State<RegisterView>
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
-                    " Kirish",
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.enter,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: blue,

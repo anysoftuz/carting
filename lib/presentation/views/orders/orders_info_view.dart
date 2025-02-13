@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/orders/order_chat_view.dart';
 import 'package:carting/presentation/views/orders/order_map_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -21,7 +22,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Buyurtma haqida")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.orderDetails)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -37,10 +38,10 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                 children: [
                   AppIcons.truck.svg(),
                   const SizedBox(width: 8),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      "Yukinggiz allaqachon yo’lda!",
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.yourCargoIsOnTheWay,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: green,
@@ -56,30 +57,30 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
               color: whiteSmoke,
             ),
             padding: const EdgeInsets.all(20),
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrdersInfoTile(
+                const OrdersInfoTile(
                   title: 'Yuk turi',
                   subtitle: 'Mebel',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yuk hajmi (m²)',
                   subtitle: '2 x 3 x 2',
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yukni olib ketish vaqti',
                   subtitle: '18.07.2024 16:00',
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 OrdersInfoTile(
                   title: 'To’lov turi',
-                  subtitle: 'Naqd',
+                  subtitle: AppLocalizations.of(context)!.cash,
                 ),
-                SizedBox(height: 16),
-                OrdersInfoTile(
+                const SizedBox(height: 16),
+                const OrdersInfoTile(
                   title: 'Yetkazib berish narxi',
                   subtitle: '500 000',
                 ),
@@ -93,16 +94,16 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
               color: whiteSmoke,
             ),
             padding: const EdgeInsets.all(20),
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrdersInfoTile(
+                const OrdersInfoTile(
                   title: 'Qabul qiluvchining ism va familiyasi',
                   subtitle: 'Rustamjon Abdullaev',
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 OrdersInfoTile(
-                  title: 'Telefon raqami',
+                  title:AppLocalizations.of(context)!.phoneNumer,
                   subtitle: '+998 91 008 43 48',
                 ),
               ],
@@ -130,14 +131,14 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
               },
               color: whiteSmoke,
               textColor: dark,
-              text: "Jonli kuzatish",
+              text: AppLocalizations.of(context)!.liveTracking,
             ),
             const SizedBox(height: 16),
             WButton(
               onTap: () {},
               color: red.withValues(alpha: .2),
               textColor: red,
-              text: "Buyurtmani bekor qilish",
+              text: AppLocalizations.of(context)!.cancelOrder,
             ),
             const SizedBox(height: 16),
             Row(
@@ -156,7 +157,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                       children: [
                         AppIcons.messagesChat.svg(),
                         const SizedBox(width: 4),
-                        const Text("Xabar")
+                        Text(AppLocalizations.of(context)!.message)
                       ],
                     ),
                   ),
@@ -171,7 +172,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                       children: [
                         AppIcons.phone.svg(),
                         const SizedBox(width: 4),
-                        const Text("Qo’ng’iroq")
+                        Text(AppLocalizations.of(context)!.call)
                       ],
                     ),
                   ),
@@ -180,9 +181,9 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
             ),
             const SizedBox(height: 32),
           ] else ...[
-            const Text(
-              "Yuk rasmlari",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.cargoImages,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -212,7 +213,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                     onTap: () {},
                     color: red.withValues(alpha: .2),
                     textColor: red,
-                    text: "Bekor qilish",
+                    text: AppLocalizations.of(context)!.cancel,
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -221,7 +222,7 @@ class _OrdersInfoViewState extends State<OrdersInfoView> {
                     onTap: () {},
                     color: whiteSmoke,
                     textColor: dark,
-                    text: "O’zgartirish",
+                    text: AppLocalizations.of(context)!.edit,
                   ),
                 ),
               ],

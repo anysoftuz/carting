@@ -48,10 +48,12 @@ class _LocationViewState extends State<LocationView> {
   @override
   void initState() {
     getMerk();
-    controllerLat =
-        TextEditingController(text: widget.point1?.name ?? "Nomalum");
-    controllerLong =
-        TextEditingController(text: widget.point2?.name ?? "Nomalum");
+    controllerLat = TextEditingController(
+      text: widget.point1?.name ?? 'Nomalum',
+    );
+    controllerLong = TextEditingController(
+      text: widget.point2?.name ?? 'Nomalum',
+    );
 
     super.initState();
     AndroidYandexMap.useAndroidViewSurface = true;
@@ -209,28 +211,26 @@ class _LocationViewState extends State<LocationView> {
               ),
               child: Column(
                 children: [
-                 
                   if (!widget.isOne) ...[
-                     TextField(
-                    controller: controllerLat,
-                    decoration: const InputDecoration(
-                      labelText: 'Qayerdan',
-                      hintText: 'Toshkent, Yakkasaroy tumani',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                    const Divider(height: 1),
-                    // To Location
-                   
-                  ],
-                   TextField(
-                      controller: controllerLong,
-                      decoration: const InputDecoration(
-                        labelText: 'Qayerga',
-                        hintText: 'Manzilni tanlang',
+                    TextField(
+                      controller: controllerLat,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.from,
+                        hintText: 'Toshkent, Yakkasaroy tumani',
                         border: InputBorder.none,
                       ),
                     ),
+                    const Divider(height: 1),
+                    // To Location
+                  ],
+                  TextField(
+                    controller: controllerLong,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.to,
+                      hintText: 'Manzilni tanlang',
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -31,7 +32,7 @@ class _AnnouncementsShippingTypeViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yuk tashish")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.shipping)),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {
           if (state.statusTrTypes.isInProgress) {

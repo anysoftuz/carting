@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -20,7 +21,7 @@ class AutoRepairView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Avto ta’mirlash")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.autoRepair)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

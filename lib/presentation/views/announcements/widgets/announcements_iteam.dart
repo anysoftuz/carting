@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -88,7 +89,8 @@ class AnnouncementsIteam extends StatelessWidget {
                     }),
                     const SizedBox(height: 8),
                     Text(
-                      model.serviceName ?? "Nomalum",
+                      model.serviceName ??
+                          AppLocalizations.of(context)!.unknown,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -112,10 +114,16 @@ class AnnouncementsIteam extends StatelessWidget {
             children: [
               if (model.fromLocation != null)
                 Text(
-                  (model.fromLocation?.name ?? "Nomalum").split(' ').first ==
+                  (model.fromLocation?.name ??
+                                  AppLocalizations.of(context)!.unknown)
+                              .split(' ')
+                              .first ==
                           "Oʻzbekiston,"
-                      ? (model.fromLocation?.name ?? "Nomalum").split(' ')[1]
-                      : (model.fromLocation?.name ?? "Nomalum")
+                      ? (model.fromLocation?.name ??
+                              AppLocalizations.of(context)!.unknown)
+                          .split(' ')[1]
+                      : (model.fromLocation?.name ??
+                              AppLocalizations.of(context)!.unknown)
                           .split(' ')
                           .first,
                   style: const TextStyle(
@@ -130,10 +138,18 @@ class AnnouncementsIteam extends StatelessWidget {
                   child: AppIcons.swap.svg(),
                 ),
               Text(
-                (model.toLocation?.name ?? "Nomalum").split(' ').first ==
+                (model.toLocation?.name ??
+                                AppLocalizations.of(context)!.unknown)
+                            .split(' ')
+                            .first ==
                         "Oʻzbekiston,"
-                    ? (model.toLocation?.name ?? "Nomalum").split(' ')[1]
-                    : (model.toLocation?.name ?? "Nomalum").split(' ').first,
+                    ? (model.toLocation?.name ??
+                            AppLocalizations.of(context)!.unknown)
+                        .split(' ')[1]
+                    : (model.toLocation?.name ??
+                            AppLocalizations.of(context)!.unknown)
+                        .split(' ')
+                        .first,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -144,7 +160,7 @@ class AnnouncementsIteam extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            model.shipmentDate ?? "Nomalum",
+            model.shipmentDate ?? AppLocalizations.of(context)!.unknown,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,

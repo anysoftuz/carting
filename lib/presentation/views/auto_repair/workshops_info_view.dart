@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,8 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.model.details?.companyName ?? "Nomalum",
+                    widget.model.details?.companyName ??
+                        AppLocalizations.of(context)!.unknown,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -213,7 +215,8 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     width: 24,
                   ),
                   title: Text(
-                    widget.model.fromLocation?.name ?? "Nomalum",
+                    widget.model.fromLocation?.name ??
+                        AppLocalizations.of(context)!.unknown,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -235,7 +238,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     ));
                   },
                   leading: AppIcons.message.svg(),
-                  title: const Text("Izohlar"),
+                  title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
               ),
@@ -246,14 +249,14 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     child: WButton(
                       onTap: () {},
                       color: const Color(0xFFD4D5D6),
-                      text: "Navbatga yozilish",
+                      text: AppLocalizations.of(context)!.queueRegistration,
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: WButton(
                       onTap: () {},
-                      text: "Qo‘ng‘iroq qilish",
+                      text: AppLocalizations.of(context)!.call,
                     ),
                   ),
                 ],
@@ -268,7 +271,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     children: [
                       AppIcons.telegram.svg(),
                       const SizedBox(width: 12),
-                      const Text("Telegram orqali bog‘lanish")
+                      Text(AppLocalizations.of(context)!.contactViaTelegram)
                     ],
                   ),
                 ),

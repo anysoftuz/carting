@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -23,76 +24,82 @@ class AnnouncementsTypeView extends StatefulWidget {
 }
 
 class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
-  List<TypeOfService> list = [
-    TypeOfService(
-      icon: AppIcons.shipping.svg(
-        height: 40,
-        width: 40,
+  late List<TypeOfService> list;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      TypeOfService(
+        icon: AppIcons.shipping.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.shipping,
+        screen: const AnnouncementsShippingTypeView(),
+        serviceId: 1,
       ),
-      text: "Yuk \ntashish",
-      screen: const AnnouncementsShippingTypeView(),
-      serviceId: 1,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationOfPassengers.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportationOfPassengers.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.passengerTransport,
+        screen: const AnnouncementsTransportationOfPassengersView(),
+        serviceId: 2,
       ),
-      text: "Yo'lovchilarni tashish",
-      screen: const AnnouncementsTransportationOfPassengersView(),
-      serviceId: 2,
-    ),
-    TypeOfService(
-      icon: AppIcons.car_3.svg(),
-      text: "Transport ijarasi",
-      screen: const AnnouncementsTransportRentalView(),
-      serviceId: 3,
-    ),
-    TypeOfService(
-      icon: AppIcons.specialTechnique.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.car_3.svg(),
+        text: AppLocalizations.of(context)!.carRental,
+        screen: const AnnouncementsTransportRentalView(),
+        serviceId: 3,
       ),
-      text: "Maxsus texnika xizmatlari",
-      screen: const SpecialTechniqueView(isCreate: true),
-      serviceId: 3,
-    ),
-    TypeOfService(
-      icon: AppIcons.autoRepair.svg(),
-      text: "Avto ta'mirlash",
-      screen: const AutoRepairView(isCreate: true),
-      serviceId: 5,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationTransfer.svg(),
-      text: "Transport transferi",
-      screen: const TransportTransferView(isCreate: true),
-      serviceId: 6,
-    ),
-    TypeOfService(
-      icon: AppIcons.inTheWarehouseStorage.svg(),
-      text: "Omborda saqlash",
-      screen: const AnnouncementCreateView(
-        filter: TypeOfServiceEnum.storageInWarehouse,
-        carId: 0,
+      TypeOfService(
+        icon: AppIcons.specialTechnique.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.specialTechServices,
+        screen: const SpecialTechniqueView(isCreate: true),
+        serviceId: 3,
       ),
-      serviceId: 7,
-    ),
-    TypeOfService(
-      icon: AppIcons.fuelDeliver.svg(),
-      text: "Yoqilg‘i yetkazish",
-      screen: const AnnouncementCreateView(
-        filter: TypeOfServiceEnum.fuelDelivery,
-        carId: 0,
+      TypeOfService(
+        icon: AppIcons.autoRepair.svg(),
+        text: AppLocalizations.of(context)!.autoRepair,
+        screen: const AutoRepairView(isCreate: true),
+        serviceId: 5,
       ),
-      serviceId: 8,
-    ),
-  ];
+      TypeOfService(
+        icon: AppIcons.transportationTransfer.svg(),
+        text: AppLocalizations.of(context)!.transportTransfer,
+        screen: const TransportTransferView(isCreate: true),
+        serviceId: 6,
+      ),
+      TypeOfService(
+        icon: AppIcons.inTheWarehouseStorage.svg(),
+        text: AppLocalizations.of(context)!.warehouseStorage,
+        screen: const AnnouncementCreateView(
+          filter: TypeOfServiceEnum.storageInWarehouse,
+          carId: 0,
+        ),
+        serviceId: 7,
+      ),
+      TypeOfService(
+        icon: AppIcons.fuelDeliver.svg(),
+        text: AppLocalizations.of(context)!.fuelDelivery,
+        screen: const AnnouncementCreateView(
+          filter: TypeOfServiceEnum.fuelDelivery,
+          carId: 0,
+        ),
+        serviceId: 8,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Xizmat turi")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.serviceType)),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/widgets/info_location_field.dart';
@@ -78,7 +79,8 @@ class _AnnouncementsCreateInfoViewState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.model.transportName ?? "Nomalum",
+                        widget.model.transportName ??
+                            AppLocalizations.of(context)!.unknown,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
@@ -188,7 +190,9 @@ class _AnnouncementsCreateInfoViewState
                                         ),
                                       ),
                                       subtitle: Text(
-                                        widget.model.details?.area ?? "Nomalum",
+                                        widget.model.details?.area ??
+                                            AppLocalizations.of(context)!
+                                                .unknown,
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -220,7 +224,7 @@ class _AnnouncementsCreateInfoViewState
                                         ),
                                       ),
                                       subtitle: Text(
-                                        "${widget.model.details?.transportCount ?? "Nomalum"}",
+                                        "${widget.model.details?.transportCount ?? AppLocalizations.of(context)!.unknown}",
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -246,7 +250,7 @@ class _AnnouncementsCreateInfoViewState
                                         ),
                                       ),
                                       subtitle: Text(
-                                        "${widget.model.details?.passengerCount ?? "Nomalum"}",
+                                        "${widget.model.details?.passengerCount ?? AppLocalizations.of(context)!.unknown}",
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -435,7 +439,11 @@ class _AnnouncementsCreateInfoViewState
                       leading: AppIcons.message.svg(),
                       title: Row(
                         children: [
-                          const Expanded(child: Text("Izohlar")),
+                          Expanded(
+                            child: Text(
+                              AppLocalizations.of(context)!.comments,
+                            ),
+                          ),
                           if (widget.model.comments != null)
                             SizedBox(
                               width: 72,
@@ -614,7 +622,7 @@ class _AnnouncementsCreateInfoViewState
                   const SizedBox(height: 32),
                   Center(
                     child: Text(
-                      "E’lon vaqti: ${widget.model.shipmentDate ?? 'Nomalum'}",
+                      "E’lon vaqti: ${widget.model.shipmentDate ?? AppLocalizations.of(context)!.unknown}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w300,

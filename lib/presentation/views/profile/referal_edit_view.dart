@@ -3,6 +3,7 @@ import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/user_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +95,8 @@ class _ReferalEditViewState extends State<ReferalEditView> {
                 expands: false,
                 noHeight: true,
                 controller: list[index],
-                hintText: 'Buyurtma haqida izoh qoldiring!',
-                title: 'Izoh',
+                hintText: AppLocalizations.of(context)!.leaveOrderComment,
+                title: AppLocalizations.of(context)!.description,
               ),
               Row(
                 spacing: 16,
@@ -136,9 +137,9 @@ class _ReferalEditViewState extends State<ReferalEditView> {
                                 note: list[index].text,
                                 onSucces: () {
                                   context.read<AuthBloc>().add(UpdateCode(
-                                      code: widget.referralCodes[index].code,
-                                      note: widget.referralCodes[index].note,
-                                    ));
+                                        code: widget.referralCodes[index].code,
+                                        note: widget.referralCodes[index].note,
+                                      ));
                                   Navigator.pop(context);
                                 },
                               ));

@@ -183,12 +183,12 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ),
           const SizedBox(height: 24),
           CustomTextField(
-            title: "Shaxsi",
+            title: AppLocalizations.of(context)!.personal,
             hintText: "",
             controller: TextEditingController(
               text: context.read<AuthBloc>().state.userModel.type != 'PHYSICAL'
-                  ? "Jismoniy"
-                  : "Yuridik",
+                  ? AppLocalizations.of(context)!.physical
+                  : AppLocalizations.of(context)!.legal,
             ),
             suffixIcon: AppIcons.edit.svg(),
             readOnly: true,
@@ -204,8 +204,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           if (context.read<AuthBloc>().state.userModel.type == 'PHYSICAL') ...[
             const SizedBox(height: 16),
             CustomTextField(
-              title: "STIR",
-              hintText: "STIR",
+              title: AppLocalizations.of(context)!.stir,
+              hintText: AppLocalizations.of(context)!.stir,
               controller: controllerTin,
               onChanged: (value) {
                 isChange.value = true;
@@ -213,8 +213,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              title: "Kompaniya nomi",
-              hintText: "Kompaniya nomi",
+              title: AppLocalizations.of(context)!.companyName,
+              hintText: AppLocalizations.of(context)!.companyName,
               controller: controllerOrgName,
               onChanged: (value) {
                 isChange.value = true;
@@ -222,7 +222,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              title: "Номер колл-центра",
+              title: AppLocalizations.of(context)!.callCenterNumber,
               hintText: "+998 (__) ___-__-__",
               controller: controllerCallPhone,
               keyboardType: TextInputType.phone,
@@ -234,8 +234,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ] else ...[
             const SizedBox(height: 16),
             CustomTextField(
-              title: "Ismingiz",
-              hintText: "Ismingiz",
+              title: AppLocalizations.of(context)!.yourName,
+              hintText: AppLocalizations.of(context)!.yourName,
               controller: controllerName,
               onChanged: (value) {
                 isChange.value = true;
@@ -243,8 +243,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              title: "Familyangiz",
-              hintText: "Familyangiz",
+              title: AppLocalizations.of(context)!.yourSurname,
+              hintText: AppLocalizations.of(context)!.yourSurname,
               controller: controllerLastName,
               onChanged: (value) {
                 isChange.value = true;
@@ -253,7 +253,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ],
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Telefon raqam",
+            title: AppLocalizations.of(context)!.phoneNumber,
             hintText: "+998 (__) ___-__-__",
             controller: controllerPhone,
             keyboardType: TextInputType.phone,
@@ -268,7 +268,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ),
           const SizedBox(height: 16),
           CustomTextField(
-            title: "Telegram",
+            title: AppLocalizations.of(context)!.telegram,
             hintText: "t.me/",
             controller: controllerTG,
             onChanged: (value) {
@@ -283,8 +283,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
               .username
               .contains('@')) ...[
             CustomTextField(
-              title: "Email",
-              hintText: "Email",
+              title: AppLocalizations.of(context)!.email,
+              hintText: AppLocalizations.of(context)!.email,
               readOnly: true,
               controller: TextEditingController(
                 text: context
@@ -300,8 +300,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             const SizedBox(height: 16),
           ],
           CustomTextField(
-            title: 'Referal kod',
-            hintText: "Kodni kiriting",
+            title: AppLocalizations.of(context)!.referalCode,
+            hintText: AppLocalizations.of(context)!.enterCode,
             controller: controllerReferal,
             onChanged: (value) {
               isChange.value = true;

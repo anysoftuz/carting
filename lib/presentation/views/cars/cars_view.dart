@@ -1,5 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -24,63 +25,69 @@ class CarsView extends StatefulWidget {
 }
 
 class _CarsViewState extends State<CarsView> {
-  List<TypeOfService> list = [
-    TypeOfService(
-      icon: AppIcons.shipping.svg(
-        height: 40,
-        width: 40,
+  late List<TypeOfService> list;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      TypeOfService(
+        icon: AppIcons.shipping.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.shipping,
+        screen: const ShippingView(),
+        serviceId: 1,
       ),
-      text: "Yuk \ntashish",
-      screen: const ShippingView(),
-      serviceId: 1,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationOfPassengers.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportationOfPassengers.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.passengerTransport,
+        screen: const TransportationOfPassengersView(),
+        serviceId: 2,
       ),
-      text: "Yo'lovchilarni tashish",
-      screen: const TransportationOfPassengersView(),
-      serviceId: 2,
-    ),
-    TypeOfService(
-      icon: AppIcons.specialTechnique.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.specialTechnique.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.specialTechServices,
+        screen: const SpecialTechniqueView(),
+        serviceId: 3,
       ),
-      text: "Maxsus texnika xizmatlari",
-      screen: const SpecialTechniqueView(),
-      serviceId: 3,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportRental.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportRental.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.peregonService,
+        screen: const CarsTypeView(),
+        serviceId: 4,
       ),
-      text: "Transport ijarasi",
-      screen: const CarsTypeView(),
-      serviceId: 4,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationTransfer.svg(),
-      text: "Transport transferi",
-      screen: const TransportTransferView(),
-      serviceId: 6,
-    ),
-  ];
+      TypeOfService(
+        icon: AppIcons.transportationTransfer.svg(),
+        text: AppLocalizations.of(context)!.transportTransfer,
+        screen: const TransportTransferView(),
+        serviceId: 6,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Transport e'lonlari"),
+        title: Text(AppLocalizations.of(context)!.transportAnnouncements),
         bottom: PreferredSize(
           preferredSize: const Size(double.infinity, 64),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: CustomTextField(
               prefixIcon: AppIcons.searchNormal.svg(),
-              hintText: "Kerakli transportni qidiring",
+              hintText: AppLocalizations.of(context)!.searchTransport,
             ),
           ),
         ),
@@ -95,12 +102,12 @@ class _CarsViewState extends State<CarsView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppIcons.emptyFile.svg(),
-                  const Text("Ro'yxatdan o'ting"),
+                  Text(AppLocalizations.of(context)!.register),
                   WButton(
                     onTap: () {
                       context.go(AppRouteName.auth);
                     },
-                    text: "Kirish",
+                    text: AppLocalizations.of(context)!.enter,
                   ),
                   const SizedBox(height: 60)
                 ],

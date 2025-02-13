@@ -66,7 +66,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yuk tashish")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.shipping)),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
           builder: (context, state) {
@@ -142,7 +142,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Yuk vazni",
+              text: AppLocalizations.of(context)!.loadWeight,
               hintText: "0",
               keyboardType: TextInputType.number,
               formatter: [Formatters.numberFormat],
@@ -231,7 +231,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Jo‘natish sanasi",
+              text: AppLocalizations.of(context)!.departureDate,
               hintText: "",
               keyboardType: TextInputType.datetime,
               controller: controller,
@@ -283,7 +283,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                     ),
                   ));
                 },
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title:  Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -295,8 +295,8 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov",
+                subtitle:  Text(
+                  "${AppLocalizations.of(context)!.cargoType}, rasmi, ${AppLocalizations.of(context)!.cargoLoadingService}, to‘lov",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/auto_repair/auto_repair_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,73 +12,79 @@ class TypeOfServiceView extends StatefulWidget {
 }
 
 class _TypeOfServiceViewState extends State<TypeOfServiceView> {
-  List<TypeOfService> list = [
-    TypeOfService(
-      icon: AppIcons.shipping.svg(
-        height: 40,
-        width: 40,
+  late List<TypeOfService> list;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      TypeOfService(
+        icon: AppIcons.shipping.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.shipping,
+        screen: const SizedBox(),
+        serviceId: 1,
       ),
-      text: "Yuk \ntashish",
-      screen: const SizedBox(),
-      serviceId: 1,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationOfPassengers.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportationOfPassengers.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.passengerTransport,
+        screen: const SizedBox(),
+        serviceId: 2,
       ),
-      text: "Yo'lovchilarni tashish",
-      screen: const SizedBox(),
-      serviceId: 2,
-    ),
-    TypeOfService(
-      icon: AppIcons.specialTechnique.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.specialTechnique.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.specialTechServices,
+        screen: const SizedBox(),
+        serviceId: 3,
       ),
-      text: "Maxsus texnika xizmatlari",
-      screen: const SizedBox(),
-      serviceId: 3,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportRental.svg(
-        height: 40,
-        width: 40,
+      TypeOfService(
+        icon: AppIcons.transportRental.svg(
+          height: 40,
+          width: 40,
+        ),
+        text: AppLocalizations.of(context)!.carRental,
+        screen: const SizedBox(),
+        serviceId: 4,
       ),
-      text: "Transport ijarasi",
-      screen: const SizedBox(),
-      serviceId: 4,
-    ),
-    TypeOfService(
-      icon: AppIcons.autoRepair.svg(),
-      text: "Avto ta'mirlash",
-      screen: const AutoRepairView(),
-      serviceId: 5,
-    ),
-    TypeOfService(
-      icon: AppIcons.transportationTransfer.svg(),
-      text: "Transport transferi",
-      screen: const SizedBox(),
-      serviceId: 6,
-    ),
-    TypeOfService(
-      icon: AppIcons.inTheWarehouseStorage.svg(),
-      text: "Omborda saqlash",
-      screen: const SizedBox(),
-      serviceId: 7,
-    ),
-    TypeOfService(
-      icon: AppIcons.fuelDeliver.svg(),
-      text: "Yoqilg‘i yetkazish",
-      screen: const SizedBox(),
-      serviceId: 8,
-    ),
-  ];
+      TypeOfService(
+        icon: AppIcons.autoRepair.svg(),
+        text: AppLocalizations.of(context)!.autoRepair,
+        screen: const AutoRepairView(),
+        serviceId: 5,
+      ),
+      TypeOfService(
+        icon: AppIcons.transportationTransfer.svg(),
+        text: AppLocalizations.of(context)!.transportTransfer,
+        screen: const SizedBox(),
+        serviceId: 6,
+      ),
+      TypeOfService(
+        icon: AppIcons.inTheWarehouseStorage.svg(),
+        text: AppLocalizations.of(context)!.warehouseStorage,
+        screen: const SizedBox(),
+        serviceId: 7,
+      ),
+      TypeOfService(
+        icon: AppIcons.fuelDeliver.svg(),
+        text: AppLocalizations.of(context)!.fuelDelivery,
+        screen: const SizedBox(),
+        serviceId: 8,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Xizmat turi")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.serviceType)),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

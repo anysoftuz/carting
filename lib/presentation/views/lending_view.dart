@@ -1,3 +1,4 @@
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,6 +6,7 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+
 
 class LendingView extends StatefulWidget {
   const LendingView({super.key});
@@ -35,9 +37,9 @@ class _LendingViewState extends State<LendingView> {
               width: double.infinity,
             ),
           ),
-          const Text(
-            "Xush kelibsiz",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.welcome,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
             ),
@@ -46,7 +48,7 @@ class _LendingViewState extends State<LendingView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              "Barcha transport xizmatlari bitta ilovada tez, qulay, arzon!",
+              AppLocalizations.of(context)!.transportServices,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -62,7 +64,7 @@ class _LendingViewState extends State<LendingView> {
               onTap: () {
                 context.go(AppRouteName.auth);
               },
-              text: "Boshlash",
+              text: AppLocalizations.of(context)!.start, 
             ),
           )
         ],

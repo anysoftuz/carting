@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,8 @@ class OrdersIteam extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.transportName ?? "Nomalum",
+                    model.transportName ??
+                        AppLocalizations.of(context)!.unknown,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -89,7 +91,8 @@ class OrdersIteam extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          model.fromLocation?.name ?? "nomalum",
+                          model.fromLocation?.name ??
+                              AppLocalizations.of(context)!.unknown,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(

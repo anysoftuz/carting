@@ -2,6 +2,7 @@ import 'package:animated_rating_bar/widgets/animated_rating_bar.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _CommentsViewState extends State<CommentsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Izohlar')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.comments)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: NestedScrollView(
@@ -49,7 +50,7 @@ class _CommentsViewState extends State<CommentsView> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    title: 'Izoh',
+                    title: AppLocalizations.of(context)!.description,
                     hintText: 'O‘z fikringizni yozib qoldiring!',
                     noHeight: true,
                     minLines: 5,

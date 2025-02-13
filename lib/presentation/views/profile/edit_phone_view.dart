@@ -1,5 +1,6 @@
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/profile/edit_phone_verif_view.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
@@ -63,7 +64,7 @@ class _EditPhoneViewState extends State<EditPhoneView> {
             ),
             const SizedBox(height: 24),
             CustomTextField(
-              title: "Telefon",
+              title: AppLocalizations.of(context)!.phone,
               hintText: "+998",
               controller: controller,
               formatter: [Formatters.phoneFormatter],
@@ -87,7 +88,7 @@ class _EditPhoneViewState extends State<EditPhoneView> {
                           onError: () {
                             CustomSnackbar.show(
                               context,
-                              "Malumot topilmadi",
+                           AppLocalizations.of(context)!.infoNotFound,
                             );
                           },
                           onSucces: (model) {
@@ -105,7 +106,7 @@ class _EditPhoneViewState extends State<EditPhoneView> {
                   },
                   isDisabled:
                       controller.text.isEmpty || controller.text.length < 19,
-                  text: "Kirish",
+                  text: AppLocalizations.of(context)!.enter,
                 );
               },
             ),

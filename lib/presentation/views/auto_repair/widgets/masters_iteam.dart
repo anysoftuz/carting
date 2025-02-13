@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +67,8 @@ class MastersIteam extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          model.fromLocation?.name ?? "Nomalum",
+                          model.fromLocation?.name ??
+                              AppLocalizations.of(context)!.unknown,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

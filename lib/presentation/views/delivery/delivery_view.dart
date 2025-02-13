@@ -66,7 +66,7 @@ class _DeliveryViewState extends State<DeliveryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yetkazib berish")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.delivery)),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
           builder: (context, state) {
@@ -143,7 +143,7 @@ class _DeliveryViewState extends State<DeliveryView> {
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Yuk vazni",
+              text: AppLocalizations.of(context)!.loadWeight,
               hintText: "0",
               controller: controllerCount,
               keyboardType: TextInputType.number,
@@ -231,7 +231,7 @@ class _DeliveryViewState extends State<DeliveryView> {
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Jo‘natish sanasi",
+              text: AppLocalizations.of(context)!.departureDate,
               hintText: "",
               keyboardType: TextInputType.datetime,
               controller: controller,
@@ -266,7 +266,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => AdditionalInformationView(
@@ -275,7 +275,8 @@ class _DeliveryViewState extends State<DeliveryView> {
                       controllerPrice: controllerPrice,
                       loadServiceId: loadServiceId,
                       loadTypeId: loadTypeId,
-                      payDate: payDate,images: images,
+                      payDate: payDate,
+                      images: images,
                       onSave: (list) {
                         setState(() {
                           images = list;
@@ -295,8 +296,8 @@ class _DeliveryViewState extends State<DeliveryView> {
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov",
+                subtitle: Text(
+                  "${AppLocalizations.of(context)!.cargoType}, rasmi, ${AppLocalizations.of(context)!.cargoLoadingService}, to‘lov",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

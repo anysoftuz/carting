@@ -1,4 +1,5 @@
 import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/create_info_view.dart';
 import 'package:carting/utils/my_function.dart';
@@ -63,14 +64,14 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
           },
           icon: AppIcons.filter.svg(),
         ),
-        title: const Text("E’lonlar"),
+        title: Text(AppLocalizations.of(context)!.announcements),
         bottom: PreferredSize(
           preferredSize: const Size(double.infinity, 72),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
             child: CustomTextField(
               prefixIcon: AppIcons.searchNormal.svg(),
-              hintText: "Kerakli e’lonni qidiring",
+              hintText: AppLocalizations.of(context)!.searchAnnouncement,
             ),
           ),
         ),
@@ -127,10 +128,10 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                   WTabBar(
                     isScrollable: true,
                     tabController: _tabController,
-                    tabs: const [
-                      Text("Barchasi"),
-                      Text("Buyurtmalarim"),
-                      Text("Xizmatlarim"),
+                    tabs: [
+                      Text(AppLocalizations.of(context)!.all),
+                      Text(AppLocalizations.of(context)!.myOrders),
+                      Text(AppLocalizations.of(context)!.myServices),
                     ],
                   ),
                 ],
@@ -148,12 +149,12 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppIcons.emptyFile.svg(),
-                    const Text("Ro'yxatdan o'ting"),
+                    Text(AppLocalizations.of(context)!.register),
                     WButton(
                       onTap: () {
                         context.go(AppRouteName.auth);
                       },
-                      text: "Kirish",
+                      text: AppLocalizations.of(context)!.enter,
                     ),
                     const SizedBox(height: 60)
                   ],

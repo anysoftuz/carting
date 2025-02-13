@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
@@ -71,7 +72,8 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.model.carName ?? "Nomalum",
+                    widget.model.carName ??
+                        AppLocalizations.of(context)!.unknown,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -175,7 +177,8 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     width: 24,
                   ),
                   title: Text(
-                    widget.model.fromLocation?.name ?? "Nomalum",
+                    widget.model.fromLocation?.name ??
+                        AppLocalizations.of(context)!.unknown,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -423,7 +426,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     ));
                   },
                   leading: AppIcons.message.svg(),
-                  title: const Text("Izohlar"),
+                  title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
               ),
@@ -459,7 +462,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                         if (widget.model.createdByPhone != null)
                           WButton(
                             onTap: () {},
-                            text: "Qo‘ng‘iroq qilish",
+                            text: AppLocalizations.of(context)!.call,
                           ),
                         const SizedBox(height: 8),
                         if (widget.model.createdByTgLink != null)
@@ -471,7 +474,8 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                               children: [
                                 AppIcons.telegram.svg(),
                                 const SizedBox(width: 12),
-                                const Text("Telegram orqali bog‘lanish")
+                                Text(AppLocalizations.of(context)!
+                                    .contactViaTelegram)
                               ],
                             ),
                           ),

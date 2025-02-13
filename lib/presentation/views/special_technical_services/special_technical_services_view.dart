@@ -205,7 +205,7 @@ class _SpecialTechnicalServicesViewState
                     ),
                   ));
                 },
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -217,7 +217,7 @@ class _SpecialTechnicalServicesViewState
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text("Izoh, to‘lov turi, narx"),
+                subtitle:  Text("${AppLocalizations.of(context)!.description}, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

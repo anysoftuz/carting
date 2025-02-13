@@ -10,6 +10,7 @@ import 'package:carting/data/models/special_equipment_create_model.dart';
 import 'package:carting/data/models/transport_transfer_model.dart';
 import 'package:carting/data/models/warehouse_model.dart';
 import 'package:carting/data/models/workshop_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:carting/utils/price_formatters.dart';
@@ -482,7 +483,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         const SizedBox(height: 16),
                         WTextField(
                           title: '1 sutkalik narx',
-                          hintText: 'Narxni kiriting',
+                          hintText: AppLocalizations.of(context)!.enterPrice,
                           keyboardType: TextInputType.number,
                           formatter: [PriceFormatter()],
                           onChanged: (value) {},
@@ -500,7 +501,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: WTextField(
-                                title: 'Narx',
+                                title: AppLocalizations.of(context)!.price,
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
                                 formatter: [PriceFormatter()],
@@ -522,7 +523,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: WTextField(
-                                title: 'Narx',
+                                title: AppLocalizations.of(context)!.price,
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
                                 formatter: [PriceFormatter()],
@@ -544,7 +545,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: WTextField(
-                                title: 'Narx',
+                                title: AppLocalizations.of(context)!.price,
                                 hintText: 'Miqdorni kiriting!',
                                 keyboardType: TextInputType.number,
                                 formatter: [PriceFormatter()],
@@ -555,7 +556,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         ),
                         const SizedBox(height: 16),
                         WTextField(
-                          title: 'Izoh',
+                          title: AppLocalizations.of(context)!.description,
                           controller: controllerCommet,
                           hintText: 'Yuk haqida izoh qoldiring!',
                           expands: false,
@@ -971,7 +972,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                         const SizedBox(width: 12),
                                         Expanded(
                                           child: WTextField(
-                                            title: 'Narx',
+                                            title: AppLocalizations.of(context)!
+                                                .price,
                                             hintText: 'Miqdorni kiriting!',
                                             keyboardType: TextInputType.number,
                                             controller:
@@ -1019,7 +1021,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         }),
                         const SizedBox(height: 8),
                         WTextField(
-                          title: 'Izoh',
+                          title: AppLocalizations.of(context)!.description,
                           hintText: 'Yuk haqida izoh qoldiring!',
                           noHeight: true,
                           minLines: 5,
@@ -1030,8 +1032,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                         ),
                         const SizedBox(height: 8),
                         WTextField(
-                          title: 'Narx',
-                          hintText: 'Narxni kiriting',
+                          title: AppLocalizations.of(context)!.price,
+                          hintText: AppLocalizations.of(context)!.enterPrice,
                           controller: controllerPrice,
                           keyboardType: TextInputType.number,
                           formatter: [PriceFormatter()],

@@ -62,7 +62,9 @@ class _TransportTransferCreateViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Transport transferi")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.transportTransfer),
+      ),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
           builder: (context, state) {
@@ -142,7 +144,7 @@ class _TransportTransferCreateViewState
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Jo‘natish sanasi",
+              text: AppLocalizations.of(context)!.departureDate,
               hintText: "",
               controller: controller,
               keyboardType: TextInputType.datetime,
@@ -191,7 +193,7 @@ class _TransportTransferCreateViewState
                     ),
                   ));
                 },
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -203,7 +205,8 @@ class _TransportTransferCreateViewState
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text("Izoh, to‘lov turi, narx"),
+                subtitle: Text(
+                    "${AppLocalizations.of(context)!.description}, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

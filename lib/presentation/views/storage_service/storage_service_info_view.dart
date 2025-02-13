@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
@@ -123,7 +124,8 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   ),
                   children: [
                     TextSpan(
-                      text: "${widget.model.details?.area ?? "Nomalum"} m2",
+                      text:
+                          "${widget.model.details?.area ?? AppLocalizations.of(context)!.unknown} m2",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -146,7 +148,8 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     width: 24,
                   ),
                   title: Text(
-                    widget.model.toLocation?.name ?? "Nomalum",
+                    widget.model.toLocation?.name ??
+                        AppLocalizations.of(context)!.unknown,
                     maxLines: 1,
                   ),
                   trailing: AppIcons.arrowCircle.svg(),
@@ -167,7 +170,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     ));
                   },
                   leading: AppIcons.message.svg(),
-                  title: const Text("Izohlar"),
+                  title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),
               ),
@@ -179,14 +182,14 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                       onTap: () {},
                       isDisabled: true,
                       disabledColor: const Color(0xFFD4D5D6),
-                      text: "Navbatga yozilish",
+                      text: AppLocalizations.of(context)!.queueRegistration,
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: WButton(
                       onTap: () {},
-                      text: "Qo‘ng‘iroq qilish",
+                      text: AppLocalizations.of(context)!.call,
                     ),
                   ),
                 ],
@@ -200,7 +203,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   children: [
                     AppIcons.telegram.svg(),
                     const SizedBox(width: 12),
-                    const Text("Telegram orqali bog‘lanish")
+                    Text(AppLocalizations.of(context)!.contactViaTelegram)
                   ],
                 ),
               ),

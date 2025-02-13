@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/widgets/info_location_field.dart';
@@ -153,7 +154,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                             ),
                           ),
                           subtitle: Text(
-                            "${widget.model.details?.area ?? "Nomalum"} m2",
+                            "${widget.model.details?.area ?? AppLocalizations.of(context)!.unknown} m2",
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -620,10 +621,12 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                         ));
                       },
                       leading: AppIcons.message.svg(),
-                      title: const Row(
+                      title: Row(
                         children: [
-                          Expanded(child: Text("Izohlar")),
-                          SizedBox(
+                          Expanded(
+                              child:
+                                  Text(AppLocalizations.of(context)!.comments)),
+                          const SizedBox(
                             width: 72,
                             height: 24,
                             child: Stack(

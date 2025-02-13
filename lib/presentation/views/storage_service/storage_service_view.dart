@@ -1,5 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_info_view.dart';
@@ -29,7 +30,7 @@ class _StorageServiceViewState extends State<StorageServiceView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Saqlash xizmati"),
+        title: Text(AppLocalizations.of(context)!.warehouseStorage),
         actions: [
           IconButton(
             onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -16,7 +17,7 @@ class DeliverInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yuk tashish")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.cargoTransport)),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -25,7 +26,7 @@ class DeliverInfoView extends StatelessWidget {
             spacing: 16,
             children: [
               Text(
-                'E’lon vaqti: ${model.shipmentDate ?? 'Nomalum'}',
+                'E’lon vaqti: ${model.shipmentDate ?? AppLocalizations.of(context)!.unknown}',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
@@ -68,7 +69,7 @@ class DeliverInfoView extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      "Haqiqatdan ham e’lonni bekor qilmoqchimisiz?",
+                                      AppLocalizations.of(context)!.cancelAnnouncement,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
@@ -83,7 +84,7 @@ class DeliverInfoView extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            text: "Yo‘q",
+                                            text: AppLocalizations.of(context)!.no,
                                             textColor: darkText,
                                             color: const Color(0xFFF3F3F3),
                                           ),
@@ -97,7 +98,7 @@ class DeliverInfoView extends StatelessWidget {
                                                   DeactivetEvent(id: model.id));
                                               Navigator.pop(context);
                                             },
-                                            text: "Ha",
+                                            text: AppLocalizations.of(context)!.yes,
                                             textColor: darkText,
                                             color: const Color(0xFFF3F3F3),
                                           ),
@@ -112,7 +113,7 @@ class DeliverInfoView extends StatelessWidget {
                           ),
                         );
                       },
-                      text: "Faolsizlantirish",
+                      text: AppLocalizations.of(context)!.deactivate,
                       textColor: red,
                       isLoading: state.statusCreate.isInProgress,
                       color: red.withValues(alpha: .2),
@@ -134,13 +135,15 @@ class DeliverInfoView extends StatelessWidget {
                   : red.withValues(alpha: .2),
               textColor: model.status == 'ACTIVE' ? green : red,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              text: model.status == 'ACTIVE' ? '' : 'Faol emas',
+              text: model.status == 'ACTIVE'
+                  ? AppLocalizations.of(context)!.active
+                  : AppLocalizations.of(context)!.notActive,
               child: model.status == 'ACTIVE'
                   ? Row(
                       children: [
-                        const Expanded(
+                         Expanded(
                           child: Text(
-                            "Faol",
+                            AppLocalizations.of(context)!.active,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -160,7 +163,7 @@ class DeliverInfoView extends StatelessWidget {
                   if (model.fromLocation != null)
                     ListTile(
                       title: Text(
-                        "Qayerdan",
+                        AppLocalizations.of(context)!.from,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -168,7 +171,7 @@ class DeliverInfoView extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        model.fromLocation?.name ?? "Nomalum",
+                        model.fromLocation?.name ?? AppLocalizations.of(context)!.unknown,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -198,7 +201,7 @@ class DeliverInfoView extends StatelessWidget {
                   if (model.toLocation != null)
                     ListTile(
                       title: Text(
-                        "Qayerga",
+                        AppLocalizations.of(context)!.to,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -206,7 +209,7 @@ class DeliverInfoView extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        model.toLocation?.name ?? "Nomalum",
+                        model.toLocation?.name ?? AppLocalizations.of(context)!.unknown,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -250,7 +253,7 @@ class DeliverInfoView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Yuk vazni",
+                            AppLocalizations.of(context)!.loadWeight,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -258,7 +261,7 @@ class DeliverInfoView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${model.details?.loadWeight?.amount ?? "Nomalum"} ${model.details?.loadWeight?.name ?? ""}",
+                            "${model.details?.loadWeight?.amount ?? AppLocalizations.of(context)!.unknown} ${model.details?.loadWeight?.name ?? ""}",
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -284,7 +287,7 @@ class DeliverInfoView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Yo‘lovchi soni",
+                            AppLocalizations.of(context)!.passengerCount,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -318,7 +321,7 @@ class DeliverInfoView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Transport soni",
+                            AppLocalizations.of(context)!.transportCount,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -351,7 +354,7 @@ class DeliverInfoView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Jo‘natish sanasi",
+                          AppLocalizations.of(context)!.departureDate,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -363,7 +366,7 @@ class DeliverInfoView extends StatelessWidget {
                             AppIcons.calendar.svg(),
                             const SizedBox(width: 4),
                             Text(
-                              model.shipmentDate ?? 'Nomalum',
+                              model.shipmentDate ?? AppLocalizations.of(context)!.unknown,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -385,7 +388,7 @@ class DeliverInfoView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -397,8 +400,8 @@ class DeliverInfoView extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text(
-                  "Yuk turi, rasmi, yuklash xizmati, to‘lov",
+                subtitle: Text(
+                  AppLocalizations.of(context)!.cargoType,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -412,8 +415,8 @@ class DeliverInfoView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
-                title: const Text("Transport turi"),
-                subtitle: Text(model.transportName ?? "Nomalum"),
+                title: Text(AppLocalizations.of(context)!.transportType),
+                subtitle: Text(model.transportName ?? AppLocalizations.of(context)!.unknown),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,

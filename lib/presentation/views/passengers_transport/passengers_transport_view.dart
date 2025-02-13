@@ -61,7 +61,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yo‘lovchilarni tashish")),
+      appBar: AppBar(title: Text( AppLocalizations.of(context)!.delivery)),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AdvertisementBloc, AdvertisementState>(
           builder: (context, state) {
@@ -142,7 +142,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
             ),
             const SizedBox(height: 8),
             MinTextField(
-              text: "Jo‘natish sanasi",
+              text: AppLocalizations.of(context)!.departureDate,
               hintText: "",
               keyboardType: TextInputType.datetime,
               controller: controller,
@@ -190,7 +190,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                     ),
                   ));
                 },
-                title: const Text("Qo‘shimcha ma’lumotlar"),
+                title:   Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
@@ -202,7 +202,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle: const Text("Izoh, to‘lov turi, narx"),
+                subtitle:  Text("${AppLocalizations.of(context)!.description}, to‘lov turi, narx"),
                 trailing: AppIcons.arrowForward.svg(),
               ),
             ),

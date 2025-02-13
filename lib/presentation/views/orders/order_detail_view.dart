@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
@@ -63,7 +64,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                   //   bottom: 16,
                   //   right: 16,
                   //   child: Text(
-                  //     "1/8",
+                  //     AppLocalizations.of(context)!.pageInfo,
                   //     style: TextStyle(color: white),
                   //   ),
                   // ),
@@ -81,7 +82,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.model.transportName ?? "Nomalum",
+                      widget.model.transportName ?? AppLocalizations.of(context)!.unknown,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
@@ -136,7 +137,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       width: 24,
                     ),
                     title: Text(
-                      widget.model.fromLocation?.name ?? "Nomaulum",
+                      widget.model.fromLocation?.name ?? AppLocalizations.of(context)!.unknown,
                       maxLines: 1,
                     ),
                     trailing: AppIcons.arrowCircle.svg(),
@@ -157,7 +158,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       ));
                     },
                     leading: AppIcons.message.svg(),
-                    title: const Text("Izohlar"),
+                    title: Text(AppLocalizations.of(context)!.comments),
                     trailing: AppIcons.arrowCircle.svg(),
                   ),
                 ),
@@ -179,7 +180,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       children: [
                         AppIcons.telegram.svg(),
                         const SizedBox(width: 12),
-                        const Text("Telegram orqali bog‘lanish")
+                        Text(AppLocalizations.of(context)!.contactViaTelegram)
                       ],
                     ),
                   ),

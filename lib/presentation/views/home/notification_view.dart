@@ -1,8 +1,10 @@
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
+
 
 class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
@@ -16,7 +18,7 @@ class _NotificationViewState extends State<NotificationView> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: false,
-      appBar: AppBar(title: const Text('Bildirishnomalar')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.notifications)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -26,7 +28,7 @@ class _NotificationViewState extends State<NotificationView> {
               borderRadius: BorderRadius.circular(20),
               color: whiteSmoke,
             ),
-            child: const Text("Yukinggiz allaqachon yo’lda!"),
+            child: Text(AppLocalizations.of(context)!.yourCargoIsOnTheWay),
           ),
           const SizedBox(height: 16),
           Container(
@@ -38,8 +40,7 @@ class _NotificationViewState extends State<NotificationView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                    "Haydovchi yuklaringizni manzilga yetkazdi. Buni tasdiqlaysizmi?"),
+                Text(AppLocalizations.of(context)!.driverDeliveredCargo),
                 const SizedBox(height: 12),
                 WButton(
                   onTap: () {},
@@ -52,7 +53,7 @@ class _NotificationViewState extends State<NotificationView> {
                     children: [
                       AppIcons.phone.svg(color: red),
                       const SizedBox(width: 8),
-                      const Text("Biz bilan bog’lanish")
+                      Text(AppLocalizations.of(context)!.contactUs)
                     ],
                   ),
                 )
@@ -67,7 +68,7 @@ class _NotificationViewState extends State<NotificationView> {
           onTap: () {},
           textColor: green,
           color: green.withValues(alpha: .2),
-          text: "O’qilgan sifatida belgilash",
+          text: AppLocalizations.of(context)!.markAsRead,
         ),
       ),
     );

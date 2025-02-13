@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class _AnnouncementsTransportRentalViewState
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
-        title: const Text("Transport ijarasi"),
+        title: Text(AppLocalizations.of(context)!.carRental),
         backgroundColor: white,
       ),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(

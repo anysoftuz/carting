@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
           if (widget.point1 != null)
             ListTile(
               title: Text(
-                "Qayerdan",
+                AppLocalizations.of(context)!.from,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -38,7 +39,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
                 ),
               ),
               subtitle: Text(
-                widget.point1?.name ?? 'Nomalum',
+                widget.point1?.name ?? AppLocalizations.of(context)!.unknown,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -80,7 +81,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
           if (widget.point2 != null)
             ListTile(
               title: Text(
-                "Qayerga",
+                AppLocalizations.of(context)!.to,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -88,7 +89,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
                 ),
               ),
               subtitle: Text(
-                widget.point2?.name ?? 'Nomalum',
+                widget.point2?.name ?? AppLocalizations.of(context)!.unknown,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

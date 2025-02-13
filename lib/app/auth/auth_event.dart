@@ -33,20 +33,38 @@ class RegisterUserEvent extends AuthEvent {
 }
 
 class UpdateUserEvent extends AuthEvent {
-  final String name;
-  final String lastName;
+  final String? name;
+  final String? lastName;
   final String phone;
   final String? images;
   final String? tgName;
+  final String? smsType;
+  final String? sessionToken;
+  final String? securityCode;
+  final String? orgName;
+  final String? callPhone;
+  final String? referredBy;
+  final String? tin;
+  final String? userType;
   final VoidCallback onSucces;
+  final VoidCallback onError;
 
   UpdateUserEvent({
-    required this.name,
-    required this.lastName,
+    this.name,
+    this.lastName,
     required this.phone,
     required this.onSucces,
+    required this.onError,
     this.images,
     this.tgName,
+    this.smsType,
+    this.userType,
+    this.sessionToken,
+    this.securityCode,
+    this.orgName,
+    this.callPhone,
+    this.referredBy,
+    this.tin,
   });
 }
 

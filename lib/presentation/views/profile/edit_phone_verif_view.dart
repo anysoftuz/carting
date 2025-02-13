@@ -1,38 +1,31 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/data/models/send_code_model.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
+import 'package:carting/presentation/widgets/w_button.dart';
+import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pinput/pinput.dart';
 
-import 'package:carting/app/auth/auth_bloc.dart';
-import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
-import 'package:carting/data/models/send_code_model.dart';
-import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/widgets/w_button.dart';
-import 'package:carting/utils/my_function.dart';
-
-class SmsView extends StatefulWidget {
-  const SmsView({
+class EditPhoneVerifView extends StatefulWidget {
+  const EditPhoneVerifView({
     super.key,
-    required this.isRegister,
-    required this.model,
     required this.phone,
-    required this.isPhone,
+    required this.model,
   });
-  final bool isRegister;
-  final SendCodeModel model;
   final String phone;
-  final bool isPhone;
+  final SendCodeModel model;
 
   @override
-  State<SmsView> createState() => _SmsViewState();
+  State<EditPhoneVerifView> createState() => _EditPhoneVerifViewState();
 }
 
-class _SmsViewState extends State<SmsView> {
+class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController controller;
   ValueNotifier<int> start = ValueNotifier(60);
@@ -83,12 +76,6 @@ class _SmsViewState extends State<SmsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
-          child: AppImages.logoTextDark.imgAsset(height: 24),
-        ),
-      ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -98,7 +85,7 @@ class _SmsViewState extends State<SmsView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Kirish",
+                "Kodni kiriting!",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w600,
@@ -106,9 +93,7 @@ class _SmsViewState extends State<SmsView> {
               ),
               const SizedBox(height: 8),
               Text(
-                widget.isPhone
-                    ? "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting."
-                    : "Tasdiqlash kodini ${MyFunction.maskEmail(widget.phone)} ga yubordik. Quyidagi maydonga email kodingizni kiriting.",
+                "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting.",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -164,9 +149,8 @@ class _SmsViewState extends State<SmsView> {
                   return WButton(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        context.read<AuthBloc>().add(VerifyEvent(
+                        context.read<AuthBloc>().add(UpdateUserEvent(
                               phone: widget.phone,
-                              isPhone: widget.isPhone,
                               onError: () {
                                 CustomSnackbar.show(
                                   context,
@@ -176,7 +160,6 @@ class _SmsViewState extends State<SmsView> {
                               onSucces: () {},
                               sessionToken: widget.model.sessionToken,
                               securityCode: widget.model.securityCode,
-                              isLogin: !widget.isRegister,
                             ));
                       } else {
                         CustomSnackbar.show(context, 'Kod hato kiritildi');
@@ -221,49 +204,10 @@ class _SmsViewState extends State<SmsView> {
                   )
                 ],
               )
-              // ValueListenableBuilder(
-              //   valueListenable: start,
-              //   builder: (context, value, __) {
-              //     return RichText(
-              //       text: TextSpan(
-              //         text: "SMS ko’dni olmadingizmi? Qaytadan yuborish  ",
-              //         style: const TextStyle(
-              //           fontSize: 16,
-              //           fontWeight: FontWeight.w400,
-              //           color: black,
-              //         ),
-              //         children: <TextSpan>[
-              //           TextSpan(
-              //             text: timerText,
-              //             style: const TextStyle(
-              //               fontSize: 16,
-              //               fontWeight: FontWeight.w400,
-              //               color: green,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // ),
             ],
           ),
         ),
       ),
-      // bottomNavigationBar: WButton(
-      //   onTap: () {
-      //     Navigator.of(context).push(MaterialPageRoute(
-      //       builder: (context) => const RegisterView(),
-      //     ));
-      //   },
-      //   margin: EdgeInsets.fromLTRB(
-      //     16,
-      //     12,
-      //     16,
-      //     MediaQuery.of(context).viewPadding.bottom + 16,
-      //   ),
-      //   text: "Davom etish",
-      // ),
     );
   }
 }

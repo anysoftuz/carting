@@ -9,8 +9,8 @@ import 'package:carting/presentation/views/auth/register_info_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 
 class IdentityChooseView extends StatefulWidget {
-  const IdentityChooseView({super.key, required this.phone});
-  final String phone;
+  const IdentityChooseView({super.key, required this.isLegal});
+  final bool isLegal;
 
   @override
   State<IdentityChooseView> createState() => _IdentityChooseViewState();
@@ -20,7 +20,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
   late ValueNotifier<bool> isLegal;
   @override
   void initState() {
-    isLegal = ValueNotifier(true);
+    isLegal = ValueNotifier(widget.isLegal);
     super.initState();
   }
 
@@ -106,10 +106,8 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
             WButton(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RegisterInfoView(
-                    isLegal: isLegal.value,
-                    phone: widget.phone,
-                  ),
+                  builder: (context) =>
+                      RegisterInfoView(isLegal: isLegal.value),
                 ));
               },
               text: "Davom etish",

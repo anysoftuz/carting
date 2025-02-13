@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
+import 'package:carting/utils/formatters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:go_router/go_router.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -12,16 +13,16 @@ import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
-import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/my_function.dart';
 
 class RegisterInfoView extends StatefulWidget {
-  const RegisterInfoView(
-      {super.key, required this.isLegal, required this.phone});
+  const RegisterInfoView({
+    super.key,
+    required this.isLegal,
+  });
   final bool isLegal;
-  final String phone;
 
   @override
   State<RegisterInfoView> createState() => _RegisterInfoViewState();
@@ -32,13 +33,40 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
   late TextEditingController controllerName;
   late TextEditingController controllerLastName;
   late TextEditingController controllerPhone;
+  late TextEditingController controllerTin;
+  late TextEditingController controllerOrgName;
+  late TextEditingController controllerCallPhone;
+  late TextEditingController controllerReferal;
   @override
   void initState() {
     isActive = ValueNotifier(false);
-    controllerName = TextEditingController();
-    controllerLastName = TextEditingController();
-    controllerPhone =
-        TextEditingController(text: MyFunction.formatPhoneNumber(widget.phone));
+    controllerName = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.firstName,
+    );
+    controllerLastName = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.lastName,
+    );
+    controllerPhone = TextEditingController(
+      text: MyFunction.formatPhoneNumber(
+        context.read<AuthBloc>().state.userModel.phoneNumber,
+      ),
+    );
+    controllerCallPhone = TextEditingController(
+      text: MyFunction.formatPhoneNumber(
+        context.read<AuthBloc>().state.userModel.callPhone,
+      ),
+    );
+    controllerOrgName = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.fullName,
+    );
+    controllerTin = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.tin == null
+          ? ''
+          : context.read<AuthBloc>().state.userModel.tin.toString(),
+    );
+    controllerReferal = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.referredBy,
+    );
     super.initState();
   }
 
@@ -67,6 +95,17 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
       await OpenFilex.open(tempPath);
     } catch (e) {
       print('Xatolik: $e');
+    }
+  }
+
+  bool checkInfo() {
+    if (widget.isLegal) {
+      return controllerCallPhone.text.isNotEmpty &&
+          controllerOrgName.text.isNotEmpty &&
+          controllerTin.text.isNotEmpty;
+    } else {
+      return controllerName.text.isNotEmpty &&
+          controllerLastName.text.isNotEmpty;
     }
   }
 
@@ -123,17 +162,25 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                   builder: (context, value, __) {
                     return WButton(
                       onTap: () {
-                        if (controllerName.text.isNotEmpty &&
-                            controllerLastName.text.isNotEmpty) {
-                          context.read<AuthBloc>().add(RegisterUserEvent(
+                        if (checkInfo()) {
+                          context.read<AuthBloc>().add(UpdateUserEvent(
                                 name: controllerName.text,
                                 lastName: controllerLastName.text,
-                                phone: MyFunction.convertPhoneNumber(
-                                  controllerPhone.text,
+                                phone: controllerPhone.text,
+                                orgName: controllerOrgName.text,
+                                tin: controllerTin.text,
+                                referredBy: controllerReferal.text,
+                                callPhone: MyFunction.convertPhoneNumber(
+                                  controllerCallPhone.text,
                                 ),
-                                isUser: widget.isLegal,
-                                onSucces: () {
-                                  context.go(AppRouteName.home);
+                                userType:
+                                    widget.isLegal ? 'PHYSICAL' : 'CLIENT',
+                                onSucces: () {},
+                                onError: () {
+                                  CustomSnackbar.show(
+                                    context,
+                                    'Malumot topilmadi',
+                                  );
                                 },
                               ));
                         } else {
@@ -163,26 +210,45 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                   CustomTextField(
                     title: 'STIR',
                     hintText: "STIR kiriting",
+                    controller: controllerTin,
+                    isRequired: true,
+                    formatter: [Formatters.numberFormat],
+                    keyboardType: TextInputType.number,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: 'Kompaniya nomi',
                     hintText: "Kompaniya nomi kiriting",
+                    controller: controllerOrgName,
+                    isRequired: true,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    title: 'Telefon',
+                    title: AppLocalizations.of(context)!.phoneNumer,
                     hintText: "+998",
                     readOnly: true,
                     controller: controllerPhone,
+                    isRequired: true,
+                    onChanged: (value) {},
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    title: 'Номер колл-центра',
+                    hintText: "+998",
+                    formatter: [Formatters.phoneFormatter],
+                    keyboardType: TextInputType.phone,
+                    controller: controllerCallPhone,
+                    isRequired: true,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: 'Referal kod',
                     hintText: "Kodni kiriting",
+                    controller: controllerReferal,
+                    readOnly: controllerReferal.text.isNotEmpty,
                     onChanged: (value) {},
                   ),
                 ]
@@ -191,6 +257,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     title: AppLocalizations.of(context)!.firstName,
                     hintText: "Ismingizni kiriting",
                     controller: controllerName,
+                    isRequired: true,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
@@ -198,6 +265,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     title: AppLocalizations.of(context)!.lastName,
                     hintText: "Familiyangizni kiriting",
                     controller: controllerLastName,
+                    isRequired: true,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
@@ -206,12 +274,15 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     hintText: "+998",
                     controller: controllerPhone,
                     readOnly: true,
+                    isRequired: true,
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: 'Referal kod',
                     hintText: "Kodni kiriting",
+                    controller: controllerReferal,
+                    readOnly: controllerReferal.text.isNotEmpty,
                     onChanged: (value) {},
                   ),
                 ],

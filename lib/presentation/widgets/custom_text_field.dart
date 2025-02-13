@@ -40,7 +40,7 @@ class CustomTextField extends StatefulWidget {
   final TextStyle? style;
   final Color? textColor;
   final TextStyle? hintStyle;
-
+  final bool isRequired;
   const CustomTextField({
     super.key,
     this.onPressed,
@@ -80,6 +80,7 @@ class CustomTextField extends StatefulWidget {
     this.style,
     this.textColor,
     this.hintStyle,
+    this.isRequired = false,
   });
 
   @override
@@ -94,16 +95,39 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          widget.title.isNotEmpty
-              ? Text(
-                  widget.title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: darkText.withValues(alpha: .3),
+          widget.isRequired
+              ? RichText(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                    text: widget.title,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: darkText.withValues(alpha: .3),
+                    ),
+                    children: const [
+                      TextSpan(
+                        text: ' *',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: red,
+                        ),
+                      )
+                    ],
                   ),
                 )
-              : const SizedBox(),
+              : widget.title.isNotEmpty
+                  ? Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: darkText.withValues(alpha: .3),
+                      ),
+                    )
+                  : const SizedBox(),
           widget.title.isNotEmpty
               ? const SizedBox(height: 6)
               : const SizedBox(),

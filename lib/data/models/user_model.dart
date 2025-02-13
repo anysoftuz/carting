@@ -29,10 +29,16 @@ class UserModel {
   final String phoneNumber;
   @JsonKey(name: "type")
   final String type;
+  @JsonKey(name: "referred_by")
+  final String referredBy;
+  @JsonKey(name: "tin")
+  final int? tin;
   @JsonKey(name: "tg_link")
   final String tgLink;
   @JsonKey(name: "photo")
   final String photo;
+  @JsonKey(name: "call_phone")
+  final String callPhone;
   @JsonKey(name: "total_profit")
   final int totalProfit;
   @JsonKey(name: "earned_profit")
@@ -56,6 +62,9 @@ class UserModel {
     this.type = '',
     this.tgLink = '',
     this.photo = '',
+    this.referredBy = '',
+    this.tin,
+    this.callPhone = '',
     this.totalProfit = 0,
     this.earnedProfit = 0,
     this.withdrawnProfit = 0,

@@ -13,9 +13,6 @@ SendCodeModel _$SendCodeModelFromJson(Map<String, dynamic> json) =>
           ? const Headers()
           : Headers.fromJson(json['headers'] as Map<String, dynamic>),
       securityCode: json['security_code'] as String? ?? '',
-      validation: json['validation'] == null
-          ? const Validation()
-          : Validation.fromJson(json['validation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SendCodeModelToJson(SendCodeModel instance) =>
@@ -23,7 +20,6 @@ Map<String, dynamic> _$SendCodeModelToJson(SendCodeModel instance) =>
       'session_token': instance.sessionToken,
       'headers': instance.headers,
       'security_code': instance.securityCode,
-      'validation': instance.validation,
     };
 
 Headers _$HeadersFromJson(Map<String, dynamic> json) => Headers(
@@ -33,8 +29,3 @@ Headers _$HeadersFromJson(Map<String, dynamic> json) => Headers(
 Map<String, dynamic> _$HeadersToJson(Headers instance) => <String, dynamic>{
       'user_agent': instance.userAgent,
     };
-
-Validation _$ValidationFromJson(Map<String, dynamic> json) => Validation();
-
-Map<String, dynamic> _$ValidationToJson(Validation instance) =>
-    <String, dynamic>{};

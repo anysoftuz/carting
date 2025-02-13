@@ -20,14 +20,14 @@ class SendCodeModel {
   final Headers headers;
   @JsonKey(name: "security_code")
   final String securityCode;
-  @JsonKey(name: "validation")
-  final Validation validation;
+  // @JsonKey(name: "validation")
+  // final Validation validation;
 
   SendCodeModel({
     this.sessionToken = '',
     this.headers = const Headers(),
     this.securityCode = '',
-    this.validation = const Validation(),
+    // this.validation = const Validation(),
   });
 
   factory SendCodeModel.fromJson(Map<String, dynamic> json) =>
@@ -51,12 +51,12 @@ class Headers {
   Map<String, dynamic> toJson() => _$HeadersToJson(this);
 }
 
-@JsonSerializable()
-class Validation {
-  const Validation();
+// @JsonSerializable()
+// class Validation {
+//   const Validation();
 
-  factory Validation.fromJson(Map<String, dynamic> json) =>
-      _$ValidationFromJson(json);
+//   factory Validation.fromJson(Map<String, dynamic> json) =>
+//       _$ValidationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ValidationToJson(this);
-}
+//   Map<String, dynamic> toJson() => _$ValidationToJson(this);
+// }

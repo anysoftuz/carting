@@ -166,7 +166,7 @@ class MyFunction {
       return "+${phoneNumber.substring(0, 3)} (${phoneNumber.substring(3, 5)}) "
           "${phoneNumber.substring(5, 8)}-${phoneNumber.substring(8, 10)}-${phoneNumber.substring(10, 12)}";
     } else {
-      return 'Nomalum';
+      return '';
     }
   }
 

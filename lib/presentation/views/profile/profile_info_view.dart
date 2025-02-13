@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/presentation/views/auth/identity_choose_view.dart';
+import 'package:carting/presentation/views/profile/edit_phone_view.dart';
+import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/resize_image.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,11 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   late TextEditingController controllerPhone;
   late TextEditingController controllerTG;
   late TextEditingController controllerReferal;
+  late TextEditingController controllerOrgName;
+  late TextEditingController controllerCallPhone;
+  late TextEditingController controllerTin;
   File? images;
+  ValueNotifier<bool> isChange = ValueNotifier(false);
 
   void imagesFile() async {
     try {
@@ -69,7 +76,22 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
     controllerTG = TextEditingController(
       text: 't.me/${context.read<AuthBloc>().state.userModel.tgLink}',
     );
-    controllerReferal = TextEditingController();
+    controllerReferal = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.referredBy,
+    );
+    controllerOrgName = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.fullName,
+    );
+    controllerCallPhone = TextEditingController(
+      text: MyFunction.formatPhoneNumber(
+        context.read<AuthBloc>().state.userModel.callPhone,
+      ),
+    );
+    controllerTin = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.tin == null
+          ? ''
+          : context.read<AuthBloc>().state.userModel.tin.toString(),
+    );
     // controllerName = TextEditingController(text: context.read<AuthBloc>().state.userModel.lastName);
     super.initState();
   }
@@ -78,30 +100,41 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.personalInformation),
-      ),
+          title: Text(AppLocalizations.of(context)!.personalInformation)),
       bottomNavigationBar: SafeArea(
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return WButton(
-              margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              onTap: () async {
-                final text = await MyFunction.convertFileToBase64(images);
-                if (context.mounted) {
-                  context.read<AuthBloc>().add(UpdateUserEvent(
-                        name: controllerName.text,
-                        lastName: controllerLastName.text,
-                        phone: MyFunction.convertPhoneNumber(
-                          controllerPhone.text,
-                        ),
-                        images: text,
-                        tgName: controllerTG.text,
-                        onSucces: () {},
-                      ));
-                }
+            return ValueListenableBuilder(
+              valueListenable: isChange,
+              builder: (context, _, __) {
+                return WButton(
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  onTap: () async {
+                    final text = await MyFunction.convertFileToBase64(images);
+                    if (context.mounted) {
+                      context.read<AuthBloc>().add(UpdateUserEvent(
+                            name: controllerName.text,
+                            lastName: controllerLastName.text,
+                            phone: MyFunction.convertPhoneNumber(
+                              controllerPhone.text,
+                            ),
+                            images: text,
+                            tgName: controllerTG.text,
+                            onSucces: () {},
+                            onError: () {
+                              CustomSnackbar.show(
+                                context,
+                                'Malumot yuklanmadi',
+                              );
+                            },
+                          ));
+                    }
+                  },
+                  isDisabled: !isChange.value,
+                  isLoading: state.statusSms.isInProgress,
+                  text: AppLocalizations.of(context)!.save,
+                );
               },
-              isLoading: state.statusSms.isInProgress,
-              text: AppLocalizations.of(context)!.save,
             );
           },
         ),
@@ -150,16 +183,74 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ),
           const SizedBox(height: 24),
           CustomTextField(
-            title: "Ismingiz",
-            hintText: "Ismingiz",
-            controller: controllerName,
+            title: "Shaxsi",
+            hintText: "",
+            controller: TextEditingController(
+              text: context.read<AuthBloc>().state.userModel.type != 'PHYSICAL'
+                  ? "Jismoniy"
+                  : "Yuridik",
+            ),
+            suffixIcon: AppIcons.edit.svg(),
+            readOnly: true,
+            onsuffixIconPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => IdentityChooseView(
+                  isLegal: context.read<AuthBloc>().state.userModel.type ==
+                      'PHYSICAL',
+                ),
+              ));
+            },
           ),
-          const SizedBox(height: 16),
-          CustomTextField(
-            title: "Familyangiz",
-            hintText: "Familyangiz",
-            controller: controllerLastName,
-          ),
+          if (context.read<AuthBloc>().state.userModel.type == 'PHYSICAL') ...[
+            const SizedBox(height: 16),
+            CustomTextField(
+              title: "STIR",
+              hintText: "STIR",
+              controller: controllerTin,
+              onChanged: (value) {
+                isChange.value = true;
+              },
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              title: "Kompaniya nomi",
+              hintText: "Kompaniya nomi",
+              controller: controllerOrgName,
+              onChanged: (value) {
+                isChange.value = true;
+              },
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              title: "Номер колл-центра",
+              hintText: "+998 (__) ___-__-__",
+              controller: controllerCallPhone,
+              keyboardType: TextInputType.phone,
+              formatter: [Formatters.phoneFormatter],
+              onChanged: (value) {
+                isChange.value = true;
+              },
+            ),
+          ] else ...[
+            const SizedBox(height: 16),
+            CustomTextField(
+              title: "Ismingiz",
+              hintText: "Ismingiz",
+              controller: controllerName,
+              onChanged: (value) {
+                isChange.value = true;
+              },
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              title: "Familyangiz",
+              hintText: "Familyangiz",
+              controller: controllerLastName,
+              onChanged: (value) {
+                isChange.value = true;
+              },
+            ),
+          ],
           const SizedBox(height: 16),
           CustomTextField(
             title: "Telefon raqam",
@@ -170,7 +261,9 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             suffixIcon: AppIcons.edit.svg(),
             readOnly: true,
             onsuffixIconPressed: () {
-              Log.i('message');
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const EditPhoneView(),
+              ));
             },
           ),
           const SizedBox(height: 16),
@@ -178,13 +271,41 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             title: "Telegram",
             hintText: "t.me/",
             controller: controllerTG,
+            onChanged: (value) {
+              isChange.value = true;
+            },
           ),
           const SizedBox(height: 16),
+          if (context
+              .read<AuthBloc>()
+              .state
+              .userModel
+              .username
+              .contains('@')) ...[
+            CustomTextField(
+              title: "Email",
+              hintText: "Email",
+              readOnly: true,
+              controller: TextEditingController(
+                text: context
+                        .read<AuthBloc>()
+                        .state
+                        .userModel
+                        .username
+                        .contains('@')
+                    ? context.read<AuthBloc>().state.userModel.username
+                    : '',
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
           CustomTextField(
             title: 'Referal kod',
             hintText: "Kodni kiriting",
             controller: controllerReferal,
-            onChanged: (value) {},
+            onChanged: (value) {
+              isChange.value = true;
+            },
           ),
         ],
       ),

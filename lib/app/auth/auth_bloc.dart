@@ -54,6 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: event.phone,
         tgLink: AppConstants.tgLink,
         base64: AppConstants.image,
+        username: event.phone,
       ));
       if (result.isRight) {
         add(GetMeEvent());
@@ -69,13 +70,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ));
       final response = await _repository.userUpdate(
         UserUpdateModel(
-          firstName: event.name,
-          lastName: event.lastName,
-          userType:
-              state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type,
+          firstName: event.name ?? state.userModel.firstName,
+          lastName: event.lastName ?? state.userModel.lastName,
+          userType: event.userType ??
+              (state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type),
           phoneNumber: event.phone,
           tgLink: event.tgName ?? '/test',
-          base64: event.images,
+          base64: event.images ?? state.userModel.photo,
+          username: state.userModel.username,
+          securityCode: event.securityCode,
+          sessionToken: event.sessionToken,
+          smsType: event.securityCode != null ? 'phone' : null,
+          tin: event.tin != null ? int.tryParse(event.tin ?? '') : null,
+          callPhone: event.callPhone,
+          orgName: event.orgName ?? '',
+          referredBy: event.referredBy ?? state.userModel.referredBy,
         ),
       );
       if (response.isRight) {
@@ -87,6 +96,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           add(GetMeEvent());
         });
       } else {
+        event.onError();
         emit(state.copyWith(statusSms: FormzSubmissionStatus.failure));
       }
     });

@@ -242,6 +242,7 @@ class _ProfileViewState extends State<ProfileView> {
                               tag: "avatar",
                               child: CircleAvatar(
                                 radius: 56,
+                                backgroundColor: green.withValues(alpha: .1),
                                 backgroundImage: CachedNetworkImageProvider(
                                   'https://api.carting.uz/uploads/files/${state.userModel.photo}',
                                 ),
@@ -329,7 +330,39 @@ class _ProfileViewState extends State<ProfileView> {
                   title: AppLocalizations.of(context)!.logOut,
                   leading: AppIcons.turnOff.svg(height: 28, width: 28),
                   onTap: () {
-                    context.read<AuthBloc>().add(LogOutEvent());
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: const Text(
+                          "Rostan ham tizimdan chiqmoqchimisiz?",
+                        ),
+                        actions: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: WButton(
+                                  onTap: () {
+                                    context.read<AuthBloc>().add(LogOutEvent());
+                                    Navigator.pop(context);
+                                  },
+                                  text: 'Ha',
+                                  color: red,
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: WButton(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  text: "Yo'q",
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    );
                   },
                 ),
                 const SizedBox(height: 120),

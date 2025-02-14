@@ -11,8 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 class DeliverInfoView extends StatelessWidget {
-  const DeliverInfoView({super.key, required this.model});
+  const DeliverInfoView({super.key, required this.model, this.isMe = true});
   final AdvertisementModel model;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class DeliverInfoView extends StatelessWidget {
                   color: dark.withValues(alpha: .3),
                 ),
               ),
-              if (model.status == 'ACTIVE')
+              if (model.status == 'ACTIVE' && isMe)
                 BlocBuilder<AdvertisementBloc, AdvertisementState>(
                   builder: (context, state) {
                     return WButton(
@@ -69,7 +70,8 @@ class DeliverInfoView extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.cancelAnnouncement,
+                                      AppLocalizations.of(context)!
+                                          .cancelAnnouncement,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
@@ -84,7 +86,8 @@ class DeliverInfoView extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            text: AppLocalizations.of(context)!.no,
+                                            text: AppLocalizations.of(context)!
+                                                .no,
                                             textColor: darkText,
                                             color: const Color(0xFFF3F3F3),
                                           ),
@@ -98,7 +101,8 @@ class DeliverInfoView extends StatelessWidget {
                                                   DeactivetEvent(id: model.id));
                                               Navigator.pop(context);
                                             },
-                                            text: AppLocalizations.of(context)!.yes,
+                                            text: AppLocalizations.of(context)!
+                                                .yes,
                                             textColor: darkText,
                                             color: const Color(0xFFF3F3F3),
                                           ),
@@ -141,7 +145,7 @@ class DeliverInfoView extends StatelessWidget {
               child: model.status == 'ACTIVE'
                   ? Row(
                       children: [
-                         Expanded(
+                        Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.active,
                             textAlign: TextAlign.center,
@@ -171,7 +175,8 @@ class DeliverInfoView extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        model.fromLocation?.name ?? AppLocalizations.of(context)!.unknown,
+                        model.fromLocation?.name ??
+                            AppLocalizations.of(context)!.unknown,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -209,7 +214,8 @@ class DeliverInfoView extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        model.toLocation?.name ?? AppLocalizations.of(context)!.unknown,
+                        model.toLocation?.name ??
+                            AppLocalizations.of(context)!.unknown,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -366,7 +372,8 @@ class DeliverInfoView extends StatelessWidget {
                             AppIcons.calendar.svg(),
                             const SizedBox(width: 4),
                             Text(
-                              model.shipmentDate ?? AppLocalizations.of(context)!.unknown,
+                              model.shipmentDate ??
+                                  AppLocalizations.of(context)!.unknown,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -416,7 +423,8 @@ class DeliverInfoView extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(AppLocalizations.of(context)!.transportType),
-                subtitle: Text(model.transportName ?? AppLocalizations.of(context)!.unknown),
+                subtitle: Text(model.transportName ??
+                    AppLocalizations.of(context)!.unknown),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,

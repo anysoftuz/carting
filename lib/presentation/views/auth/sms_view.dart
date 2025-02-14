@@ -194,7 +194,7 @@ class _SmsViewState extends State<SmsView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Kod olmadingizmi? ",
+                    "${AppLocalizations.of(context)!.didNotReceiveCode} ",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -209,7 +209,7 @@ class _SmsViewState extends State<SmsView> {
                           resetAndStartTimer();
                         },
                         child: Text(
-                          value == 0 ? "Qayta yuborish" : timerText,
+                          value == 0 ? AppLocalizations.of(context)!.resend : timerText,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

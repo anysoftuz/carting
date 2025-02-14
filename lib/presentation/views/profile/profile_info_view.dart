@@ -74,7 +74,9 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           : '',
     );
     controllerTG = TextEditingController(
-      text: 't.me/${context.read<AuthBloc>().state.userModel.tgLink}',
+      text: context.read<AuthBloc>().state.userModel.tgLink.isEmpty
+          ? 't.me/'
+          : context.read<AuthBloc>().state.userModel.tgLink,
     );
     controllerReferal = TextEditingController(
       text: context.read<AuthBloc>().state.userModel.referredBy,
@@ -92,6 +94,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ? ''
           : context.read<AuthBloc>().state.userModel.tin.toString(),
     );
+    controllerFullName = TextEditingController(
+        text: context.read<AuthBloc>().state.userModel.fullName);
     // controllerName = TextEditingController(text: context.read<AuthBloc>().state.userModel.lastName);
     super.initState();
   }
@@ -118,8 +122,12 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                             phone: MyFunction.convertPhoneNumber(
                               controllerPhone.text,
                             ),
-                            images: text,
+                            images: images == null ? null : text,
                             tgName: controllerTG.text,
+                            tin: controllerTin.text,
+                            callPhone: controllerCallPhone.text,
+                            referredBy: controllerReferal.text,
+                            orgName: controllerOrgName.text,
                             onSucces: () {},
                             onError: () {
                               CustomSnackbar.show(
@@ -207,6 +215,8 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
               title: AppLocalizations.of(context)!.stir,
               hintText: AppLocalizations.of(context)!.stir,
               controller: controllerTin,
+              keyboardType: TextInputType.number,
+              formatter: [Formatters.innFormat],
               onChanged: (value) {
                 isChange.value = true;
               },
@@ -303,6 +313,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             title: AppLocalizations.of(context)!.referalCode,
             hintText: AppLocalizations.of(context)!.enterCode,
             controller: controllerReferal,
+            readOnly: controllerReferal.text.isNotEmpty,
             onChanged: (value) {
               isChange.value = true;
             },

@@ -84,9 +84,9 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Kodni kiriting!",
-                style: TextStyle(
+              Text(
+                "${AppLocalizations.of(context)!.enterCode}!",
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w600,
                 ),
@@ -177,7 +177,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Kod olmadingizmi? ",
+                    "${AppLocalizations.of(context)!.didNotReceiveCode} ",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -192,7 +192,9 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                           resetAndStartTimer();
                         },
                         child: Text(
-                          value == 0 ? "Qayta yuborish" : timerText,
+                          value == 0
+                              ? AppLocalizations.of(context)!.resend
+                              : timerText,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

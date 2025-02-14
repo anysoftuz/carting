@@ -185,7 +185,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith(status: AuthenticationStatus.authenticated));
         emit(state.copyWith(
           userModel: response.right.data,
-          statusSms: FormzSubmissionStatus.initial,
+          statusSms: FormzSubmissionStatus.success,
         ));
         Log.i("Salom Loginga kirdik holat ${state.status}");
       } else {

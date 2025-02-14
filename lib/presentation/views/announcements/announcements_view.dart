@@ -196,6 +196,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                                 value: bloc,
                                 child: DeliverInfoView(
                                   model: state.advertisement[index],
+                                  isMe: false,
                                 ),
                               ),
                             ));

@@ -36,6 +36,8 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
   late TextEditingController controllerTin;
   late TextEditingController controllerOrgName;
   late TextEditingController controllerCallPhone;
+
+  late TextEditingController controllerEmail;
   late TextEditingController controllerReferal;
   @override
   void initState() {
@@ -66,6 +68,11 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
     );
     controllerReferal = TextEditingController(
       text: context.read<AuthBloc>().state.userModel.referredBy,
+    );
+    controllerEmail = TextEditingController(
+      text: context.read<AuthBloc>().state.userModel.username.contains('@')
+          ? context.read<AuthBloc>().state.userModel.username
+          : "",
     );
     super.initState();
   }
@@ -179,7 +186,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                 onError: () {
                                   CustomSnackbar.show(
                                     context,
-                                   AppLocalizations.of(context)!.infoNotFound,
+                                    AppLocalizations.of(context)!.infoNotFound,
                                   );
                                 },
                               ));
@@ -212,8 +219,8 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     hintText: "STIR kiriting",
                     controller: controllerTin,
                     isRequired: true,
-                    formatter: [Formatters.numberFormat],
                     keyboardType: TextInputType.number,
+                    formatter: [Formatters.innFormat],
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
@@ -225,15 +232,17 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
-                  CustomTextField(
-                    title: AppLocalizations.of(context)!.phoneNumer,
-                    hintText: "+998",
-                    readOnly: true,
-                    controller: controllerPhone,
-                    isRequired: true,
-                    onChanged: (value) {},
-                  ),
-                  const SizedBox(height: 16),
+                  if (controllerPhone.text.isNotEmpty) ...[
+                    CustomTextField(
+                      title: AppLocalizations.of(context)!.phoneNumer,
+                      hintText: "+998",
+                      readOnly: true,
+                      controller: controllerPhone,
+                      isRequired: true,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   CustomTextField(
                     title: 'Номер колл-центра',
                     hintText: "+998",
@@ -244,9 +253,20 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
+                  if (controllerEmail.text.isNotEmpty) ...[
+                    CustomTextField(
+                      title: AppLocalizations.of(context)!.email,
+                      hintText: "",
+                      readOnly: true,
+                      controller: controllerEmail,
+                      isRequired: true,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   CustomTextField(
-                    title: 'Referal kod',
-                    hintText: "Kodni kiriting",
+                    title: AppLocalizations.of(context)!.referalCode,
+                    hintText: AppLocalizations.of(context)!.enterCode,
                     controller: controllerReferal,
                     readOnly: controllerReferal.text.isNotEmpty,
                     onChanged: (value) {},
@@ -278,9 +298,20 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                     onChanged: (value) {},
                   ),
                   const SizedBox(height: 16),
+                  if (controllerEmail.text.isNotEmpty) ...[
+                    CustomTextField(
+                      title: AppLocalizations.of(context)!.email,
+                      hintText: "",
+                      readOnly: true,
+                      controller: controllerEmail,
+                      isRequired: true,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   CustomTextField(
-                    title: 'Referal kod',
-                    hintText: "Kodni kiriting",
+                    title: AppLocalizations.of(context)!.referalCode,
+                    hintText: AppLocalizations.of(context)!.enterCode,
                     controller: controllerReferal,
                     readOnly: controllerReferal.text.isNotEmpty,
                     onChanged: (value) {},

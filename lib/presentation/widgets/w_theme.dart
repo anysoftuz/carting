@@ -1,6 +1,7 @@
 import 'package:carting/assets/assets/icons.dart';
 
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 class WTheme extends StatefulWidget {
@@ -11,22 +12,28 @@ class WTheme extends StatefulWidget {
 }
 
 class _WThemeState extends State<WTheme> {
-  List<InfoRowMod> list = [
-    InfoRowMod(
-      icon: AppIcons.moon.svg(height: 24),
-      title: "Dark",
-    ),
-    InfoRowMod(
-      icon: AppIcons.moon.svg(height: 24),
-      title: "Light",
-    ),
-    InfoRowMod(
-      icon: AppIcons.moon.svg(height: 24),
-      title: "System",
-    ),
-  ];
+  late List<InfoRowMod> list;
 
   ValueNotifier<int> selIndex = ValueNotifier(1);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = [
+      InfoRowMod(
+        icon: AppIcons.moon.svg(height: 24),
+        title: AppLocalizations.of(context)!.dark,
+      ),
+      InfoRowMod(
+        icon: AppIcons.moon.svg(height: 24),
+        title: AppLocalizations.of(context)!.light,
+      ),
+      InfoRowMod(
+        icon: AppIcons.moon.svg(height: 24),
+        title: AppLocalizations.of(context)!.system,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

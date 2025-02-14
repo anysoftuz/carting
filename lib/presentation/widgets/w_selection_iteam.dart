@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flex_dropdown/flex_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _WSelectionItamState extends State<WSelectionItam> {
             buttonBuilder: (context, onTap) {
               return DecoratedBox(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: ListTile(
@@ -56,12 +56,11 @@ class _WSelectionItamState extends State<WSelectionItam> {
                   titleTextStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                   subtitleTextStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: dark,
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -72,8 +71,7 @@ class _WSelectionItamState extends State<WSelectionItam> {
                         width: 86,
                         errorWidget: (context, url, error) => const SizedBox(),
                       ),
-                      AppIcons.arrowBottom
-                          .svg(color: dark.withValues(alpha: .3)),
+                      AppIcons.arrowBottom.svg(color: context.color.darkText),
                     ],
                   ),
                 ),
@@ -84,7 +82,7 @@ class _WSelectionItamState extends State<WSelectionItam> {
                 padding: const EdgeInsets.only(top: 4),
                 child: MenuWidget(
                   width: useButtonSize ? width : 300,
-                  transportationTypes:state.transportationTypes ,
+                  transportationTypes: state.transportationTypes,
                   onItemTap: (index) {
                     selIndex = index;
                     widget.onTap(selIndex);
@@ -121,7 +119,7 @@ class MenuWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       constraints: const BoxConstraints(maxHeight: 250),
       decoration: BoxDecoration(
-        color: white,
+        color: context.color.contColor,
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(

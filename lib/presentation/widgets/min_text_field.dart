@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,7 +19,7 @@ class MinTextField extends StatelessWidget {
     this.onprefixIconPressed,
     this.formatter,
     this.keyboardType = TextInputType.text,
-   this. readOnly= false, 
+    this.readOnly = false,
   });
   final String text;
   final String hintText;
@@ -39,7 +40,7 @@ class MinTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: white,
+        color: context.color.contColor,
         borderRadius: BorderRadius.circular(24),
       ),
       padding: const EdgeInsets.all(12),
@@ -51,7 +52,7 @@ class MinTextField extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: darkText.withValues(alpha: .3),
+              color: context.color.darkText,
             ),
           ),
           Row(
@@ -66,7 +67,7 @@ class MinTextField extends StatelessWidget {
                 child: TextField(
                   controller: controller,
                   onChanged: onChanged,
-                  readOnly:readOnly,
+                  readOnly: readOnly,
                   inputFormatters: formatter,
                   keyboardType: keyboardType,
                   decoration: InputDecoration(
@@ -76,10 +77,7 @@ class MinTextField extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,
                     hintText: hintText,
-                    hintStyle: hintStyle ??
-                        TextStyle(
-                          color: darkText.withValues(alpha: .3),
-                        ),
+                    hintStyle: hintStyle ?? TextStyle(),
                   ),
                   style: const TextStyle(fontSize: 16),
                 ),

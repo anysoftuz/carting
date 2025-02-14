@@ -1,3 +1,4 @@
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -163,7 +164,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                       },
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: context.color.contColor,
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: ListTile(
@@ -172,7 +173,7 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           subtitle: Row(
@@ -183,7 +184,6 @@ class _FuelDeliveryViewState extends State<FuelDeliveryView> {
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
-                                    color: dark,
                                   ),
                                 ),
                               ),

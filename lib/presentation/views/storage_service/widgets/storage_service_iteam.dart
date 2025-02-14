@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class StorageServiceIteam extends StatelessWidget {
       height: 336,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: white,
+        color: context.color.contColor,
         boxShadow: wboxShadow,
       ),
       child: Column(

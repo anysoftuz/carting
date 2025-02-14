@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class MastersIteam extends StatelessWidget {
       height: 312,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: white,
+        color: context.color.contColor,
         boxShadow: wboxShadow,
       ),
       child: Column(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -221,8 +222,9 @@ class _DeliveryViewState extends State<DeliveryView> {
                         selectedUnit,
                         style: const TextStyle(color: Colors.black),
                       ),
-                      AppIcons.arrowBottom
-                          .svg(color: dark.withValues(alpha: .3)),
+                      AppIcons.arrowBottom.svg(
+                        color: context.color.darkText,
+                      ),
                     ],
                   ),
                 ),
@@ -262,7 +264,7 @@ class _DeliveryViewState extends State<DeliveryView> {
             const SizedBox(height: 8),
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
@@ -289,12 +291,11 @@ class _DeliveryViewState extends State<DeliveryView> {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark,
                 ),
                 subtitle: Text(
                   "${AppLocalizations.of(context)!.cargoType}, rasmi, ${AppLocalizations.of(context)!.cargoLoadingService}, to‘lov",

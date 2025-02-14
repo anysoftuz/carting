@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class DeliverInfoView extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
               ),
               if (model.status == 'ACTIVE' && isMe)
@@ -64,7 +65,7 @@ class DeliverInfoView extends StatelessWidget {
                                 ),
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: white,
+                                  color: context.color.contColor,
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                                 child: Column(
@@ -75,7 +76,7 @@ class DeliverInfoView extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
-                                        color: dark.withValues(alpha: .3),
+                                        color: context.color.darkText,
                                       ),
                                     ),
                                     const SizedBox(height: 24),
@@ -159,7 +160,7 @@ class DeliverInfoView extends StatelessWidget {
             const SizedBox(height: 24),
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Column(
@@ -171,7 +172,7 @@ class DeliverInfoView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: dark.withValues(alpha: .3),
+                          color: context.color.darkText,
                         ),
                       ),
                       subtitle: Text(
@@ -182,7 +183,6 @@ class DeliverInfoView extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          color: dark,
                         ),
                       ),
                       trailing: Container(
@@ -210,7 +210,7 @@ class DeliverInfoView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: dark.withValues(alpha: .3),
+                          color: context.color.darkText,
                         ),
                       ),
                       subtitle: Text(
@@ -221,7 +221,6 @@ class DeliverInfoView extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          color: dark,
                         ),
                       ),
                       trailing: Container(
@@ -252,7 +251,7 @@ class DeliverInfoView extends StatelessWidget {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: white,
+                        color: context.color.contColor,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -263,7 +262,7 @@ class DeliverInfoView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           Text(
@@ -286,7 +285,7 @@ class DeliverInfoView extends StatelessWidget {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: white,
+                        color: context.color.contColor,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -297,7 +296,7 @@ class DeliverInfoView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           Text(
@@ -320,7 +319,7 @@ class DeliverInfoView extends StatelessWidget {
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: white,
+                        color: context.color.contColor,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -331,7 +330,7 @@ class DeliverInfoView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           Text(
@@ -353,7 +352,7 @@ class DeliverInfoView extends StatelessWidget {
                       horizontal: 16,
                     ),
                     decoration: BoxDecoration(
-                      color: white,
+                      color: context.color.contColor,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Column(
@@ -364,7 +363,7 @@ class DeliverInfoView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            color: dark.withValues(alpha: .3),
+                            color: context.color.darkText,
                           ),
                         ),
                         Row(
@@ -377,7 +376,6 @@ class DeliverInfoView extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: dark,
                               ),
                             ),
                           ],
@@ -391,7 +389,7 @@ class DeliverInfoView extends StatelessWidget {
             const SizedBox(height: 8),
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
@@ -400,7 +398,7 @@ class DeliverInfoView extends StatelessWidget {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
@@ -418,7 +416,7 @@ class DeliverInfoView extends StatelessWidget {
             const SizedBox(height: 8),
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
@@ -429,7 +427,7 @@ class DeliverInfoView extends StatelessWidget {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,

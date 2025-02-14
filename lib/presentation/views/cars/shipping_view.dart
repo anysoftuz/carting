@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class _ShippingViewState extends State<ShippingView> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: white,
+                  color: context.color.contColor,
                   boxShadow: wboxShadow,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -98,7 +99,7 @@ class _ShippingViewState extends State<ShippingView> {
                       state.transportationTypes[index].volume,
                       textAlign: TextAlign.center,
                       maxLines: 1,
-                      style: TextStyle(color: dark.withValues(alpha: .3)),
+                      style: TextStyle(color: context.color.darkText),
                     ),
                   ],
                 ),

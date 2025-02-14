@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,7 @@ class _TransportTransferViewState extends State<TransportTransferView> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: white,
+                  color: context.color.contColor,
                   boxShadow: wboxShadow,
                 ),
                 padding: const EdgeInsets.all(12),
@@ -113,7 +114,7 @@ class _TransportTransferViewState extends State<TransportTransferView> {
                       state.transportationTypes[index].volume,
                       textAlign: TextAlign.center,
                       maxLines: 1,
-                      style: TextStyle(color: dark.withValues(alpha: .3)),
+                      style: TextStyle(color: context.color.darkText),
                     ),
                   ],
                 ),

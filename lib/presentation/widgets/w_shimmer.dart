@@ -1,4 +1,4 @@
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shimmer/shimmer.dart';
@@ -25,7 +25,7 @@ class WShimmer extends StatelessWidget {
         width: width ?? double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 16),
-          color: white,
+          color: context.color.contBlue,
         ),
       ),
     );

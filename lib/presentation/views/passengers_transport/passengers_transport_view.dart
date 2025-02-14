@@ -5,6 +5,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/location_model.dart';
 import 'package:carting/data/models/passenger_transportation_create_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
 import 'package:carting/presentation/views/peregon_service/additional_information_view.dart';
@@ -172,7 +173,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
             const SizedBox(height: 8),
             Container(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(
@@ -195,7 +196,7 @@ class _PassengersTransportViewState extends State<PassengersTransportView> {
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,

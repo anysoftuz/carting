@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class WTabBar extends StatelessWidget {
@@ -7,7 +8,7 @@ class WTabBar extends StatelessWidget {
   final Function(int)? onTap;
   final bool? isScrollable;
   final EdgeInsetsGeometry? padding;
-  final Color color;
+  final Color? color;
   final Color? labelColor;
 
   const WTabBar({
@@ -17,7 +18,7 @@ class WTabBar extends StatelessWidget {
     this.onTap,
     this.padding,
     this.isScrollable,
-    this.color = const Color(0xFF1A1F23),
+    this.color,
     this.labelColor,
   });
 
@@ -26,7 +27,7 @@ class WTabBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: const Color(0xFFF3F3F3),
+        color: context.color.contGrey,
       ),
       child: TabBar(
         dividerColor: Colors.transparent,
@@ -55,7 +56,7 @@ class WTabBar extends StatelessWidget {
             side: BorderSide(color: black.withValues(alpha: 0.04)),
             borderRadius: BorderRadius.circular(16),
           ),
-          color: color,
+          color:color?? context.color.blackGrey,
         ),
         controller: tabController,
         indicatorSize: TabBarIndicatorSize.tab,

@@ -1,4 +1,5 @@
-import 'package:carting/assets/colors/colors.dart';
+
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _QuestViewState extends State<QuestView> {
           itemBuilder: (context, index) => Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: whiteSmoke,
+              color: context.color.contGrey,
             ),
             child: ExpansionTile(
               title: Text(list[index].title),

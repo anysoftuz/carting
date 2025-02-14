@@ -1,4 +1,4 @@
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class _WClaendarState extends State<WClaendar> {
             vertical: 24,
           ),
           decoration: BoxDecoration(
-            color: white,
+            color: context.color.contColor,
             borderRadius: BorderRadius.circular(24),
           ),
           child: Column(
@@ -44,7 +44,7 @@ class _WClaendarState extends State<WClaendar> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  color: const Color(0xFFF3F3F3),
+                  color: context.color.contGrey,
                 ),
                 padding: const EdgeInsets.all(16),
                 child: TableCalendar(
@@ -76,13 +76,19 @@ class _WClaendarState extends State<WClaendar> {
                     headerMargin: EdgeInsets.zero,
                     headerPadding: EdgeInsets.zero,
                     formatButtonPadding: EdgeInsets.zero,
-                    leftChevronIcon: const CircleAvatar(
-                      backgroundColor: white,
-                      child: Icon(Icons.chevron_left),
+                    leftChevronIcon: CircleAvatar(
+                      backgroundColor: context.color.contGrey,
+                      child: Icon(
+                        Icons.chevron_left,
+                        color: context.color.white,
+                      ),
                     ),
-                    rightChevronIcon: const CircleAvatar(
-                      backgroundColor: white,
-                      child: Icon(Icons.chevron_right),
+                    rightChevronIcon: CircleAvatar(
+                      backgroundColor: context.color.contGrey,
+                      child: Icon(
+                        Icons.chevron_right,
+                        color: context.color.white,
+                      ),
                     ),
                   ),
                   calendarStyle: CalendarStyle(
@@ -98,11 +104,11 @@ class _WClaendarState extends State<WClaendar> {
                     ),
                     defaultDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: white,
+                      color: context.color.contColor,
                     ),
                     weekendDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: white,
+                      color: context.color.contColor,
                     ),
                     outsideDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),

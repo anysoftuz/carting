@@ -1,4 +1,4 @@
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class WTitle extends StatelessWidget {
@@ -15,7 +15,7 @@ class WTitle extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: color ?? scaffoldSecondaryBackground,
+        color: color ?? context.color.contColor,
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -23,7 +23,7 @@ class WTitle extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 14,
-          color: black.withValues(alpha: .3),
+          color: context.color.darkText,
         ),
       ),
     );

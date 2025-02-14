@@ -1,5 +1,5 @@
 import 'package:carting/app/auth/auth_bloc.dart';
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/profile/edit_phone_verif_view.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
@@ -58,7 +58,7 @@ class _EditPhoneViewState extends State<EditPhoneView> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: dark.withValues(alpha: .3),
+                color: context.color.darkText,
               ),
               textAlign: TextAlign.center,
             ),

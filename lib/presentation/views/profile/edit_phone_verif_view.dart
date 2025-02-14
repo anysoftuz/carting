@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/send_code_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -97,7 +98,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -112,7 +113,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                     width: 64,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: white,
+                      color: context.color.contColor,
                     ),
                     padding: const EdgeInsets.all(8),
                   ),
@@ -181,7 +182,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: dark.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                   ),
                   ValueListenableBuilder(

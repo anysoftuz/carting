@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,8 @@ class _AnnouncementsTransportationOfPassengersViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(AppLocalizations.of(context)!.passengerTransport)),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context)!.passengerTransport)),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {
           if (state.statusTrTypes.isInProgress) {
@@ -73,7 +75,7 @@ class _AnnouncementsTransportationOfPassengersViewState
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: white,
+                  color: context.color.contColor,
                   boxShadow: wboxShadow,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -97,7 +99,7 @@ class _AnnouncementsTransportationOfPassengersViewState
                       state.transportationTypes[index].volume,
                       textAlign: TextAlign.center,
                       maxLines: 1,
-                      style: TextStyle(color: dark.withValues(alpha: .3)),
+                      style: TextStyle(color: context.color.darkText),
                     ),
                   ],
                 ),

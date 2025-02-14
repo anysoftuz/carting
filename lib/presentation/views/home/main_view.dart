@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
@@ -44,7 +44,7 @@ class _MainViewState extends State<MainView> {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: const Color(0xFF1A1F23),
+            color: context.color.white,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,12 +57,12 @@ class _MainViewState extends State<MainView> {
                 child: CircleAvatar(
                   radius: 20,
                   backgroundColor: widget.navigationShell.currentIndex == index
-                      ? white
-                      : const Color(0xFF1A1F23),
+                      ? context.color.backGroundColor
+                      : context.color.white,
                   child: list[index].svg(
                     color: widget.navigationShell.currentIndex == index
-                        ? dark
-                        : white,
+                        ? context.color.white
+                        : context.color.backGroundColor,
                   ),
                 ),
               ),

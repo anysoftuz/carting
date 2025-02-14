@@ -1,6 +1,9 @@
 import 'package:carting/assets/assets/icons.dart';
 
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/assets/constants/storage_keys.dart';
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
+import 'package:carting/infrastructure/repo/storage_repository.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +18,19 @@ class _WThemeState extends State<WTheme> {
   late List<InfoRowMod> list;
 
   ValueNotifier<int> selIndex = ValueNotifier(1);
+
+  @override
+  void initState() {
+    super.initState();
+    final theme = StorageRepository.getString(StorageKeys.MODE);
+    if (theme == 'light') {
+      selIndex.value = 1;
+    } else if (theme == 'dark') {
+      selIndex.value = 0;
+    } else {
+      selIndex.value = 2;
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -54,7 +70,7 @@ class _WThemeState extends State<WTheme> {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: white,
+            color: context.color.contColor,
             borderRadius: BorderRadius.circular(24),
           ),
           child: ValueListenableBuilder(
@@ -67,6 +83,22 @@ class _WThemeState extends State<WTheme> {
                     (index) => ListTile(
                       onTap: () {
                         selIndex.value = index;
+                        if (index == 0) {
+                          AppScope.update(
+                            context,
+                            const AppScope(themeMode: ThemeMode.dark),
+                          );
+                        } else if (index == 1) {
+                          AppScope.update(
+                            context,
+                            const AppScope(themeMode: ThemeMode.light),
+                          );
+                        } else {
+                          AppScope.update(
+                            context,
+                            const AppScope(themeMode: ThemeMode.system),
+                          );
+                        }
                         Navigator.pop(context);
                       },
                       leading: list[index].icon,

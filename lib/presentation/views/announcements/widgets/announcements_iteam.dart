@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class AnnouncementsIteam extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: white,
+        color: context.color.contColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,6 @@ class AnnouncementsIteam extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
-                            color: dark,
                           ),
                         );
                       }
@@ -96,7 +96,7 @@ class AnnouncementsIteam extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
+                        color: context.color.darkText,
                       ),
                     )
                   ],
@@ -129,7 +129,6 @@ class AnnouncementsIteam extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: dark,
                   ),
                 ),
               if (model.fromLocation != null)
@@ -153,7 +152,6 @@ class AnnouncementsIteam extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark,
                 ),
               ),
             ],
@@ -164,7 +162,7 @@ class AnnouncementsIteam extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: dark.withValues(alpha: .3),
+              color: context.color.darkText,
             ),
           )
         ],

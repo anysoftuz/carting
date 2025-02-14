@@ -1,5 +1,5 @@
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/auto_repair/auto_repair_view.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +103,7 @@ class _TypeOfServiceViewState extends State<TypeOfServiceView> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: white,
+              color: context.color.contColor,
             ),
             padding: EdgeInsets.symmetric(
               vertical: 12,

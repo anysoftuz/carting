@@ -1,10 +1,10 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,10 +29,10 @@ class _AnnouncementsTransportRentalViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: context.color.backGroundColor,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.carRental),
-        backgroundColor: white,
+        backgroundColor: context.color.backGroundColor,
       ),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {
@@ -56,7 +56,7 @@ class _AnnouncementsTransportRentalViewState
               itemBuilder: (context, index) => ListTile(
                 title: Text(state.carsModel[index].name),
                 subtitle: Text(state.carsModel[index].fuelType),
-                trailing: AppIcons.arrowForward.svg(),
+                trailing: AppIcons.arrowForward.svg(color: context.color.iron),
                 onTap: () {
                   final bloc = context.read<AdvertisementBloc>();
                   Navigator.of(context).push(MaterialPageRoute(

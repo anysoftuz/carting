@@ -1,5 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
@@ -86,7 +87,7 @@ class _CarsViewState extends State<CarsView> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: CustomTextField(
-              prefixIcon: AppIcons.searchNormal.svg(),
+              prefixIcon: AppIcons.searchNormal.svg(color: context.color.iron),
               hintText: AppLocalizations.of(context)!.searchTransport,
             ),
           ),
@@ -137,7 +138,7 @@ class _CarsViewState extends State<CarsView> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: white,
+                  color: context.color.contColor,
                   boxShadow: wboxShadow,
                 ),
                 padding: EdgeInsets.symmetric(

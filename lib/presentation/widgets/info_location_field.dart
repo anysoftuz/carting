@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/location_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
@@ -35,7 +36,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
               ),
               subtitle: Text(
@@ -85,7 +86,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
               ),
               subtitle: Text(

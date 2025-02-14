@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/views/common/map_point.dart';
@@ -62,7 +63,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              color: white,
+              color: context.color.contColor,
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +93,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                                   text: "25 ta izoh",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: dark.withValues(alpha: .3),
+                                    color: context.color.darkText,
                                   ),
                                 )
                               ],
@@ -116,7 +117,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -150,7 +151,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           subtitle: Text(
@@ -178,7 +179,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: dark.withValues(alpha: .3),
+                              color: context.color.darkText,
                             ),
                           ),
                           subtitle: Text(
@@ -210,7 +211,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                 style: TextStyle(
                   //                   fontSize: 12,
                   //                   fontWeight: FontWeight.w400,
-                  //                   color: dark.withValues(alpha: .3),
+                  //                   color: context.color.darkText,
                   //                 ),
                   //               ),
                   //               subtitle: const Text(
@@ -257,7 +258,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                 style: TextStyle(
                   //                   fontSize: 12,
                   //                   fontWeight: FontWeight.w400,
-                  //                   color: dark.withValues(alpha: .3),
+                  //                   color: context.color.darkText,
                   //                 ),
                   //               ),
                   //               subtitle: const Text(
@@ -313,7 +314,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                 style: TextStyle(
                   //                   fontSize: 12,
                   //                   fontWeight: FontWeight.w400,
-                  //                   color: dark.withValues(alpha: .3),
+                  //                   color: context.color.darkText,
                   //                 ),
                   //               ),
                   //               subtitle: const Text(
@@ -366,7 +367,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                       style: TextStyle(
                   //                         fontSize: 12,
                   //                         fontWeight: FontWeight.w400,
-                  //                         color: dark.withValues(alpha: .3),
+                  //                         color: context.color.darkText,
                   //                       ),
                   //                     ),
                   //                     subtitle: const Text(
@@ -398,7 +399,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                       style: TextStyle(
                   //                         fontSize: 12,
                   //                         fontWeight: FontWeight.w400,
-                  //                         color: dark.withValues(alpha: .3),
+                  //                         color: context.color.darkText,
                   //                       ),
                   //                     ),
                   //                     subtitle: const Text(
@@ -564,7 +565,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //             style: TextStyle(
                   //               fontSize: 12,
                   //               fontWeight: FontWeight.w400,
-                  //               color: dark.withValues(alpha: .3),
+                  //               color: context.color.darkText,
                   //             ),
                   //           ),
                   //           subtitle: const Text(
@@ -698,7 +699,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                   style: TextStyle(
                   //                     fontSize: 12,
                   //                     fontWeight: FontWeight.w400,
-                  //                     color: dark.withValues(alpha: .3),
+                  //                     color: context.color.darkText,
                   //                   ),
                   //                 ),
                   //                 RichText(
@@ -715,7 +716,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                         style: TextStyle(
                   //                           fontSize: 16,
                   //                           fontWeight: FontWeight.w400,
-                  //                           color: dark.withValues(alpha: .3),
+                  //                           color: context.color.darkText,
                   //                         ),
                   //                       )
                   //                     ],
@@ -736,7 +737,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                         style: TextStyle(
                   //                           fontSize: 16,
                   //                           fontWeight: FontWeight.w400,
-                  //                           color: dark.withValues(alpha: .3),
+                  //                           color: context.color.darkText,
                   //                         ),
                   //                       )
                   //                     ],
@@ -757,7 +758,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                         style: TextStyle(
                   //                           fontSize: 16,
                   //                           fontWeight: FontWeight.w400,
-                  //                           color: dark.withValues(alpha: .3),
+                  //                           color: context.color.darkText,
                   //                         ),
                   //                       )
                   //                     ],
@@ -778,7 +779,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   //                 style: TextStyle(
                   //                   fontSize: 12,
                   //                   fontWeight: FontWeight.w400,
-                  //                   color: dark.withValues(alpha: .3),
+                  //                   color: context.color.darkText,
                   //                 ),
                   //               ),
                   //               subtitle: const Text(
@@ -805,7 +806,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w300,
-                          color: dark.withValues(alpha: .3),
+                          color: context.color.darkText,
                         ),
                       ),
                     ),
@@ -841,7 +842,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                                     ),
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: white,
+                                      color: context.color.contColor,
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     child: Column(
@@ -851,7 +852,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withValues(alpha: .3),
+                                            color: context.color.darkText,
                                           ),
                                         ),
                                         const SizedBox(height: 24),

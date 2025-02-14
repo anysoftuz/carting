@@ -1,4 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -121,7 +122,7 @@ class _AnnouncementsTypeViewState extends State<AnnouncementsTypeView> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: white,
+              color: context.color.contColor,
               boxShadow: wboxShadow,
             ),
             padding: EdgeInsets.symmetric(

@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:carting/assets/constants/storage_keys.dart';
+import 'package:carting/assets/themes/theme.dart';
+import 'package:carting/assets/themes/theme_changer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +11,6 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 
 import 'package:carting/app/auth/auth_bloc.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/infrastructure/core/service_locator.dart';
 import 'package:carting/infrastructure/repo/auth_repo.dart';
 import 'package:carting/infrastructure/repo/storage_repository.dart';
@@ -28,7 +30,24 @@ void main() async {
   if (kDebugMode) {
     Bloc.observer = LogBlocObserver();
   }
-  runApp(const MyApp());
+
+  runApp(DependencyScope(
+    initialModel: AppScope(
+      themeMode: getTheme(StorageRepository.getString(StorageKeys.MODE)),
+    ),
+    child: const MyApp(),
+  ));
+}
+
+ThemeMode getTheme(String mode) {
+  switch (mode) {
+    case 'light':
+      return ThemeMode.light;
+    case 'dark':
+      return ThemeMode.dark;
+    default:
+      return ThemeMode.system;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -52,21 +71,9 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: AppLocalizations.supportedLocales,
             locale: Provider.of<LocaleProvider>(context).locale,
-            themeMode: ThemeMode.light,
-            theme: ThemeData(
-              fontFamily: 'Lufga',
-              scaffoldBackgroundColor: scaffoldSecondaryBackground,
-              colorSchemeSeed: green,
-              appBarTheme: const AppBarTheme(
-                backgroundColor: scaffoldSecondaryBackground,
-                shadowColor: scaffoldSecondaryBackground,
-                surfaceTintColor: scaffoldSecondaryBackground,
-                centerTitle: true,
-                elevation: 0,
-                scrolledUnderElevation: 0,
-              ),
-              dividerTheme: const DividerThemeData(color: Color(0xFFEAEEF2)),
-            ),
+            theme: AppTheme.lightTheme(),
+            darkTheme: AppTheme.darkTheme(),
+            themeMode: AppScope.of(context).themeMode,
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouts.router,
             builder: (context, child) => BlocListener<AuthBloc, AuthState>(

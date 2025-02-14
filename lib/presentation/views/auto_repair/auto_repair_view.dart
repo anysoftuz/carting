@@ -1,10 +1,10 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/announcements/announcement_create_view.dart';
 import 'package:carting/presentation/views/auto_repair/masters_type_view.dart';
 import 'package:carting/presentation/views/auto_repair/workshops_view.dart';
@@ -29,7 +29,7 @@ class AutoRepairView extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: white,
+                color: context.color.contColor,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListTile(
@@ -64,7 +64,7 @@ class AutoRepairView extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: white,
+                color: context.color.contColor,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListTile(

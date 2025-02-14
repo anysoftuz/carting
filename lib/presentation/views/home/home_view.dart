@@ -1,3 +1,5 @@
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/transport_rental/cars_type_view.dart';
 import 'package:carting/utils/my_function.dart';
@@ -104,7 +106,9 @@ class _HomeViewState extends State<HomeView> {
         title: SizedBox(
           height: 24,
           width: 128,
-          child: AppImages.logoTextDark.imgAsset(),
+          child: AppScope.of(context).themeMode == ThemeMode.dark
+              ? AppImages.logoText.imgAsset()
+              : AppImages.logoTextDark.imgAsset(),
         ),
         bottom: PreferredSize(
           preferredSize: const Size(double.infinity, 64),
@@ -161,32 +165,46 @@ class _HomeViewState extends State<HomeView> {
                     isFull: (index != 5 && index != 7 && index != 9),
                   );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: white,
-                    boxShadow: wboxShadow,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: MediaQuery.sizeOf(context).width / 8,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      list[index].icon,
-                      const SizedBox(height: 4),
-                      Text(
-                        list[index].text,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                      )
-                    ],
-                  ),
-                ),
+                child: ServisLocIteam(typeOfService: list[index]),
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class ServisLocIteam extends StatelessWidget {
+  const ServisLocIteam({
+    super.key,
+    required this.typeOfService,
+  });
+
+  final TypeOfService typeOfService;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: context.color.contColor,
+        boxShadow: wboxShadow,
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: MediaQuery.sizeOf(context).width / 8,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          typeOfService.icon,
+          const SizedBox(height: 4),
+          Text(
+            typeOfService.text,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+          )
         ],
       ),
     );

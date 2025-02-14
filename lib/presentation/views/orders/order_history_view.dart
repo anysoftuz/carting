@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
@@ -138,9 +139,9 @@ class OrderHistoryIteam extends StatelessWidget {
               color: gray,
             ),
           ),
-          trailing: Text(
+          trailing: const Text(
             "500 000 so’m",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: black,
@@ -151,7 +152,7 @@ class OrderHistoryIteam extends StatelessWidget {
         const SizedBox(height: 12),
         WButton(
           onTap: () {},
-          color: white,
+          color: context.color.contColor,
           textColor: isFinsh ? red : green,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           text: AppLocalizations.of(context)!.completed,

@@ -1,8 +1,10 @@
+import 'package:carting/assets/assets/images.dart';
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -27,7 +29,9 @@ class _SplashViewState extends State<SplashView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 48),
-                  child: AppIcons.logoCarting.svg(height: 24),
+                  child: AppScope.of(context).themeMode == ThemeMode.dark
+                      ? AppImages.logoText.imgAsset(height: 24)
+                      : AppIcons.logoCarting.svg(height: 24),
                 ),
                 const SizedBox(height: 100),
               ],
@@ -37,14 +41,14 @@ class _SplashViewState extends State<SplashView> {
             bottom: 56,
             child: Column(
               children: [
-                const SpinKitCircle(
+                SpinKitCircle(
                   size: 52,
-                  color: Color(0xFF030303),
+                  color: context.color.white,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   '© All rights reserved',
-                  style: TextStyle(color: dark.withValues(alpha: .3)),
+                  style: TextStyle(color: context.color.darkText),
                   textAlign: TextAlign.center,
                 )
               ],

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -221,8 +222,9 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                         selectedUnit,
                         style: const TextStyle(color: Colors.black),
                       ),
-                      AppIcons.arrowBottom
-                          .svg(color: dark.withValues(alpha: .3)),
+                      AppIcons.arrowBottom.svg(
+                        color: context.color.iron,
+                      ),
                     ],
                   ),
                 ),
@@ -283,19 +285,19 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                     ),
                   ));
                 },
-                title:  Text(AppLocalizations.of(context)!.additionalInfo),
+                title: Text(AppLocalizations.of(context)!.additionalInfo),
                 minVerticalPadding: 0,
                 titleTextStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 subtitleTextStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: dark,
                 ),
-                subtitle:  Text(
+                subtitle: Text(
                   "${AppLocalizations.of(context)!.cargoType}, rasmi, ${AppLocalizations.of(context)!.cargoLoadingService}, to‘lov",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

@@ -1,4 +1,4 @@
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -20,7 +20,7 @@ class _CallViewState extends State<CallView> {
         padding: const EdgeInsets.all(16),
         child: Container(
           decoration: BoxDecoration(
-            color: whiteSmoke,
+            color: context.color.contColor,
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.symmetric(vertical: 4),

@@ -1,3 +1,4 @@
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flex_dropdown/flex_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,7 @@ class _WSelectionFuelsState extends State<WSelectionFuels> {
             buttonBuilder: (context, onTap) {
               return DecoratedBox(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: ListTile(
@@ -57,7 +58,7 @@ class _WSelectionFuelsState extends State<WSelectionFuels> {
                   titleTextStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                   subtitleTextStyle: const TextStyle(
                     fontSize: 16,
@@ -65,7 +66,7 @@ class _WSelectionFuelsState extends State<WSelectionFuels> {
                     color: dark,
                   ),
                   trailing: AppIcons.arrowBottom.svg(
-                    color: dark.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                 ),
               );
@@ -112,7 +113,7 @@ class MenuWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       constraints: const BoxConstraints(maxHeight: 250),
       decoration: BoxDecoration(
-        color: white,
+        color: context.color.contBlue,
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(

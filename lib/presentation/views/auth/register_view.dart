@@ -1,3 +1,5 @@
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/w_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,9 @@ class _RegisterViewState extends State<RegisterView>
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: AppImages.logoTextDark.imgAsset(height: 24),
+          child: AppScope.of(context).themeMode == ThemeMode.dark
+              ? AppImages.logoText.imgAsset(height: 24)
+              : AppImages.logoTextDark.imgAsset(height: 24),
         ),
       ),
       body: SingleChildScrollView(
@@ -72,7 +76,7 @@ class _RegisterViewState extends State<RegisterView>
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: dark.withValues(alpha: .3),
+                color: context.color.darkText,
               ),
               textAlign: TextAlign.center,
             ),
@@ -182,7 +186,7 @@ class _RegisterViewState extends State<RegisterView>
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                 ),
                 GestureDetector(

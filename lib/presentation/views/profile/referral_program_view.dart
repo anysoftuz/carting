@@ -4,6 +4,7 @@ import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/user_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/profile/referal_edit_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -103,7 +104,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                   const EdgeInsets.fromLTRB(16, 16, 16, 24),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(24),
-                                color: white,
+                                color: context.color.contColor,
                               ),
                               width: double.infinity,
                               child: Column(
@@ -177,15 +178,18 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                     'https://api.carting.uz/uploads/files/${state.userModel.referralUsers[index].photo}',
                                   ),
                                 ),
-                                title: Text(state
-                                    .userModel.referralUsers[index].fullName),
+                                title: Text(
+                                  state.userModel.referralUsers[index].fullName,
+                                ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (state.userModel.referralUsers[index]
                                         .clientType.isNotEmpty)
-                                      Text(state.userModel.referralUsers[index]
-                                          .clientType),
+                                      Text(
+                                        state.userModel.referralUsers[index]
+                                            .clientType,
+                                      ),
                                     Text(
                                       MyFunction.formatPhoneNumber(
                                         state.userModel.referralUsers[index]
@@ -217,7 +221,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(24),
-                                color: white,
+                                color: context.color.contColor,
                               ),
                               child: Column(
                                 spacing: 16,
@@ -227,7 +231,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                         .totalProfit,
                                     subtitle:
                                         '\$${state.userModel.totalProfit}',
-                                    colorText: const Color(0xFF292D32),
+                                    colorText: context.color.white,
                                     fontSize: 24,
                                   ),
                                   Row(
@@ -263,7 +267,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                           padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(24),
-                            color: white,
+                            color: context.color.contColor,
                           ),
                           child: Row(
                             children: [
@@ -272,8 +276,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF292D32)
-                                      .withValues(alpha: .3),
+                                  color: context.color.darkText,
                                 ),
                               ),
                               BlocBuilder<AuthBloc, AuthState>(
@@ -284,8 +287,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                       text: TextSpan(
                                         text:
                                             '${state.userModel.referralCount}',
-                                        style: const TextStyle(
-                                          color: Color(0xFF292D32),
+                                        style: TextStyle(
+                                          color: context.color.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -295,8 +298,7 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                             style: TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w400,
-                                              color: const Color(0xFF292D32)
-                                                  .withValues(alpha: .3),
+                                              color: context.color.darkText,
                                             ),
                                           ),
                                         ],
@@ -337,7 +339,7 @@ class ReferalIteam extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: const Color(0xFFF3F3F3),
+                  color: context.color.backGroundColor,
                 ),
                 padding: const EdgeInsets.only(left: 16),
                 child: Row(
@@ -370,7 +372,7 @@ class ReferalIteam extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: const Color(0xFFF3F3F3),
+            color: context.color.backGroundColor,
           ),
           width: double.infinity,
           padding: const EdgeInsets.all(16),
@@ -404,7 +406,7 @@ class InfoColum extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
-            color: const Color(0xFF292D32).withValues(alpha: .3),
+            color: context.color.darkText,
           ),
         ),
         Text(

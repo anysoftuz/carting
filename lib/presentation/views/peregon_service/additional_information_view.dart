@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/type_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -89,10 +90,10 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: context.color.backGroundColor,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.additionalInfo),
-        backgroundColor: white,
+        backgroundColor: context.color.backGroundColor,
       ),
       bottomNavigationBar: SafeArea(
         child: WButton(
@@ -143,7 +144,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                       subtitleTextStyle: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
+                        color: context.color.darkText,
                       ),
                     ),
                     separatorBuilder: (context, index) =>
@@ -178,7 +179,7 @@ class _AdditionalInformationViewState extends State<AdditionalInformationView> {
                       subtitleTextStyle: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: dark.withValues(alpha: .3),
+                        color: context.color.darkText,
                       ),
                     ),
                     separatorBuilder: (context, index) =>

@@ -3,6 +3,7 @@ import 'package:carting/app/advertisement/advertisement_bloc.dart';
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/profile/call_view.dart';
@@ -59,7 +60,7 @@ class _ProfileViewState extends State<ProfileView> {
                 onPressed: () {
                   context.push(AppRouteName.notification);
                 },
-                icon: AppIcons.notifications.svg(),
+                icon: AppIcons.notifications.svg(color: context.color.iron),
               )
             ],
           ),
@@ -80,7 +81,7 @@ class _ProfileViewState extends State<ProfileView> {
                             padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(32),
-                              color: white,
+                              color: context.color.contColor,
                             ),
                             child: Column(
                               children: [
@@ -117,7 +118,8 @@ class _ProfileViewState extends State<ProfileView> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(24),
-                                            color: scaffoldSecondaryBackground,
+                                            color: context
+                                                .color.scaffoldBackground,
                                           ),
                                           padding: const EdgeInsets.all(12),
                                           child: Column(
@@ -155,7 +157,8 @@ class _ProfileViewState extends State<ProfileView> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(24),
-                                            color: scaffoldSecondaryBackground,
+                                            color: context
+                                                .color.scaffoldBackground,
                                           ),
                                           padding: const EdgeInsets.all(12),
                                           child: Column(
@@ -194,7 +197,8 @@ class _ProfileViewState extends State<ProfileView> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(24),
-                                            color: scaffoldSecondaryBackground,
+                                            color: context
+                                                .color.scaffoldBackground,
                                           ),
                                           padding: const EdgeInsets.all(12),
                                           child: Column(
@@ -257,7 +261,11 @@ class _ProfileViewState extends State<ProfileView> {
                 const SizedBox(height: 16),
                 WListTile(
                   title: AppLocalizations.of(context)!.settings,
-                  leading: AppIcons.setting.svg(height: 28, width: 28),
+                  leading: AppIcons.setting.svg(
+                    height: 28,
+                    width: 28,
+                    color: context.color.iron,
+                  ),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const QuestView(),
@@ -393,7 +401,7 @@ class WListTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: white,
+        color: context.color.contColor,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListTile(

@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/views/auth/register_info_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 
@@ -31,7 +32,9 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
-          child: AppImages.logoTextDark.imgAsset(height: 24),
+          child: AppScope.of(context).themeMode == ThemeMode.dark
+              ? AppImages.logoText.imgAsset(height: 24)
+              :  AppImages.logoTextDark.imgAsset(height: 24),
         ),
       ),
       body: SingleChildScrollView(
@@ -52,7 +55,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: dark.withValues(alpha: .3),
+                color: context.color.darkText,
               ),
               textAlign: TextAlign.center,
             ),
@@ -63,7 +66,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                 return DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: white,
+                    color: context.color.contColor,
                   ),
                   child: ListTile(
                     onTap: () {
@@ -71,7 +74,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                     },
                     title: const Text("Yuridik shaxs"),
                     titleTextStyle:
-                        TextStyle(color: dark.withValues(alpha: .3)),
+                        TextStyle(color: context.color.darkText),
                     trailing: value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -86,7 +89,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                 return DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: white,
+                    color: context.color.contColor,
                   ),
                   child: ListTile(
                     onTap: () {
@@ -94,7 +97,7 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                     },
                     title: const Text("Jismoniy shaxs"),
                     titleTextStyle:
-                        TextStyle(color: dark.withValues(alpha: .3)),
+                        TextStyle(color: context.color.darkText),
                     trailing: !value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),

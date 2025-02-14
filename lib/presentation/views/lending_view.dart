@@ -1,3 +1,5 @@
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +26,9 @@ class _LendingViewState extends State<LendingView> {
         title: SizedBox(
           height: 24,
           width: 128,
-          child: AppImages.logoTextDark.imgAsset(),
+          child: AppScope.of(context).themeMode == ThemeMode.dark
+              ? AppImages.logoText.imgAsset()
+              : AppImages.logoTextDark.imgAsset(),
         ),
         backgroundColor: scaffoldBackground,
         elevation: 0,
@@ -52,7 +56,7 @@ class _LendingViewState extends State<LendingView> {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: dark.withValues(alpha: .3),
+                color: context.color.darkText,
               ),
               textAlign: TextAlign.center,
             ),

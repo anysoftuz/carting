@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/utils/my_function.dart';
@@ -89,7 +90,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                                   "${widget.model.comments?.length ?? 0} ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
-                                color: dark.withValues(alpha: .3),
+                                color: context.color.darkText,
                               ),
                             )
                           ],
@@ -105,13 +106,13 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
               ),
               const SizedBox(height: 12),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 height: 24,
@@ -137,7 +138,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     widget.model.workshopCategories?.length ?? 0,
                     (index) => Container(
                       decoration: BoxDecoration(
-                        color: white,
+                        color: context.color.contColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -158,7 +159,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
               const SizedBox(height: 12),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 height: 24,
@@ -184,7 +185,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                     widget.model.workshopServices?.length ?? 0,
                     (index) => Container(
                       decoration: BoxDecoration(
-                        color: white,
+                        color: context.color.contColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -205,7 +206,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
               const SizedBox(height: 32),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -226,7 +227,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: white,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(

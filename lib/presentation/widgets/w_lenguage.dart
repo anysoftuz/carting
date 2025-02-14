@@ -1,6 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
-import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/src/settings/local_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +73,7 @@ class _WLenguageState extends State<WLenguage> {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: white,
+            color: context.color.contColor,
             borderRadius: BorderRadius.circular(24),
           ),
           child: ValueListenableBuilder(

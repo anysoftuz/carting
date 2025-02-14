@@ -1,5 +1,6 @@
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class _FilterViewState extends State<FilterView> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: white,
+                color: context.color.contColor,
               ),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
@@ -55,7 +56,7 @@ class _FilterViewState extends State<FilterView> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -99,7 +100,7 @@ class _FilterViewState extends State<FilterView> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: white,
+                color: context.color.contColor,
               ),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
@@ -114,7 +115,7 @@ class _FilterViewState extends State<FilterView> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: dark.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                   ),
                   const SizedBox(height: 12),

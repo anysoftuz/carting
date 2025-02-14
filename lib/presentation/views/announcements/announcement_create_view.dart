@@ -10,6 +10,7 @@ import 'package:carting/data/models/special_equipment_create_model.dart';
 import 'package:carting/data/models/transport_transfer_model.dart';
 import 'package:carting/data/models/warehouse_model.dart';
 import 'package:carting/data/models/workshop_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
@@ -359,7 +360,10 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
               },
             ),
             const SizedBox(height: 24),
-            const WTitle(title: "Rasmlari (10 tagacha)", color: white),
+            WTitle(
+              title: "Rasmlari (10 tagacha)",
+              color: context.color.contColor,
+            ),
             const SizedBox(height: 12),
             GridView.builder(
               itemCount: images.length + 1,
@@ -405,9 +409,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                   case TypeOfServiceEnum.transportRental:
                     return Column(
                       children: [
-                        const WTitle(
+                        WTitle(
                           title: "Texnik xarakteristikalar",
-                          color: white,
+                          color: context.color.contGrey,
                         ),
                         const SizedBox(height: 16),
                         WTextField(
@@ -476,9 +480,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                           onChanged: (value) {},
                         ),
                         const SizedBox(height: 24),
-                        const WTitle(
+                        WTitle(
                           title: "Ta’riflar",
-                          color: white,
+                          color: context.color.contColor,
                         ),
                         const SizedBox(height: 16),
                         WTextField(
@@ -668,7 +672,8 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                               color: Colors.black),
                                         ),
                                         AppIcons.arrowBottom.svg(
-                                            color: dark.withValues(alpha: .3)),
+                                          color: context.color.iron,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -715,7 +720,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(24),
-                                      color: white,
+                                      color: context.color.contColor,
                                     ),
                                     width: double.infinity,
                                     padding: const EdgeInsets.symmetric(
@@ -731,7 +736,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withValues(alpha: .3),
+                                            color: context.color.darkText,
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -785,7 +790,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(24),
-                                      color: white,
+                                      color: context.color.contColor,
                                     ),
                                     width: double.infinity,
                                     padding: const EdgeInsets.symmetric(
@@ -801,7 +806,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withValues(alpha: .3),
+                                            color: context.color.darkText,
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -865,7 +870,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(24),
-                                      color: white,
+                                      color: context.color.contColor,
                                     ),
                                     width: double.infinity,
                                     padding: const EdgeInsets.symmetric(
@@ -881,7 +886,7 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: dark.withValues(alpha: .3),
+                                            color: context.color.darkText,
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -950,9 +955,9 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                     onChanged: (value) {},
                                   ),
                                   const SizedBox(height: 24),
-                                  const WTitle(
+                                  WTitle(
                                     title: 'Yoqilg‘i turi va narxlari',
-                                    color: white,
+                                    color: context.color.contColor,
                                   ),
                                   const SizedBox(height: 16),
                                   ListView.separated(

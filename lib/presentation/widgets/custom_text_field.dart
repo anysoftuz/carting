@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -178,31 +179,31 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         icon: widget.prefixIcon!,
                         onPressed: widget.onprefixIconPressed ?? () {})
                     : null,
-                focusColor: white,
-                fillColor: widget.fillColor ?? const Color(0xFFF3F3F3),
-                hoverColor: white,
+                focusColor: context.color.contGrey,
+                fillColor: widget.fillColor ?? context.color.contGrey,
+                hoverColor: context.color.contGrey,
                 filled: true,
                 border: widget.border ??
                     OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: whiteSmoke),
+                      borderSide: BorderSide(color: context.color.contGrey),
                     ),
                 enabledBorder: widget.border ??
                     OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(widget.borderRadius ?? 20),
-                      borderSide: const BorderSide(color: whiteSmoke),
+                      borderSide: BorderSide(color: context.color.contGrey),
                     ),
                 focusedBorder: widget.border ??
                     OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(widget.borderRadius ?? 20),
-                      borderSide: const BorderSide(color: whiteSmoke),
+                      borderSide: BorderSide(color: context.color.contGrey),
                     ),
                 hintText: widget.hintText,
                 hintStyle: widget.hintStyle ??
                     TextStyle(
-                      color: darkText.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                 // hintStyle: fonts.subtitle1.copyWith(
                 //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),

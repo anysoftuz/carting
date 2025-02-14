@@ -3,6 +3,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/comments_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -87,7 +88,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                                   "${widget.model.comments?.length ?? 0} ta izoh",
                               style: TextStyle(
                                 fontSize: 12,
-                                color: dark.withValues(alpha: .3),
+                                color: context.color.darkText,
                               ),
                             )
                           ],
@@ -110,7 +111,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
               ),
               const SizedBox(height: 16),
@@ -120,7 +121,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                   children: [
                     TextSpan(

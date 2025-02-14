@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,7 +88,9 @@ class _SmsViewState extends State<SmsView> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
-          child: AppImages.logoTextDark.imgAsset(height: 24),
+          child: AppScope.of(context).themeMode == ThemeMode.dark
+              ? AppImages.logoText.imgAsset(height: 24)
+              : AppImages.logoTextDark.imgAsset(height: 24),
         ),
       ),
       body: Form(
@@ -112,7 +116,7 @@ class _SmsViewState extends State<SmsView> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark.withValues(alpha: .3),
+                  color: context.color.darkText,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -127,7 +131,7 @@ class _SmsViewState extends State<SmsView> {
                     width: 64,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: white,
+                      color: context.color.contColor,
                     ),
                     padding: const EdgeInsets.all(8),
                   ),
@@ -170,7 +174,7 @@ class _SmsViewState extends State<SmsView> {
                               onError: () {
                                 CustomSnackbar.show(
                                   context,
-                                 AppLocalizations.of(context)!.infoNotFound,
+                                  AppLocalizations.of(context)!.infoNotFound,
                                 );
                               },
                               onSucces: () {},
@@ -198,7 +202,7 @@ class _SmsViewState extends State<SmsView> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: dark.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                   ),
                   ValueListenableBuilder(
@@ -209,7 +213,9 @@ class _SmsViewState extends State<SmsView> {
                           resetAndStartTimer();
                         },
                         child: Text(
-                          value == 0 ? AppLocalizations.of(context)!.resend : timerText,
+                          value == 0
+                              ? AppLocalizations.of(context)!.resend
+                              : timerText,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

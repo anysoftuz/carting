@@ -3,6 +3,7 @@ import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/data/models/user_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -42,7 +43,7 @@ class _ReferalEditViewState extends State<ReferalEditView> {
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: white,
+            color: context.color.contColor,
           ),
           width: double.infinity,
           child: Column(

@@ -1,4 +1,5 @@
 import 'package:carting/app/auth/auth_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/create_info_view.dart';
@@ -62,7 +63,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
               builder: (context) => const FilterView(),
             ));
           },
-          icon: AppIcons.filter.svg(),
+          icon: AppIcons.filter.svg(color: context.color.iron),
         ),
         title: Text(AppLocalizations.of(context)!.announcements),
         bottom: PreferredSize(
@@ -70,7 +71,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
             child: CustomTextField(
-              prefixIcon: AppIcons.searchNormal.svg(),
+              prefixIcon: AppIcons.searchNormal.svg(color: context.color.iron),
               hintText: AppLocalizations.of(context)!.searchAnnouncement,
             ),
           ),

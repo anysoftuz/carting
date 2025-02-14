@@ -18,9 +18,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settings => 'Настройки';
 
   @override
-  String get statistics => 'Статистика';
-
-  @override
   String get logOut => 'Выйти';
 
   @override
@@ -52,9 +49,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get phoneNumer => 'Номер телефона';
-
-  @override
-  String get description => 'Описание';
 
   @override
   String get birthDate => 'Дата рождения';
@@ -282,9 +276,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get main => 'Главная';
 
   @override
-  String get announcements => 'Объявления';
-
-  @override
   String get transport => 'Транспорт';
 
   @override
@@ -390,12 +381,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get message => 'Сообщение';
 
   @override
-  String get call => 'Позвонить';
-
-  @override
-  String get edit => 'Редактировать';
-
-  @override
   String get orderReceived => 'Вы получили заказ!';
 
   @override
@@ -445,9 +430,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dimensions => '2 х 3 х 2 м²';
-
-  @override
-  String get price => 'Цена';
 
   @override
   String get personal => 'Личное';
@@ -513,13 +495,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get verificationCodeSent => 'Код подтверждения отправлен на ';
 
   @override
-  String get unknown => 'Неизвестно';
-
-  @override
   String get referalCode => 'Реферальный код';
-
-  @override
-  String get contactViaTelegram => 'Связаться через Telegram';
 
   @override
   String get comments => 'Комментарии';
@@ -594,6 +570,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get services => 'Услуги';
 
   @override
+  String get announcements => 'Объявления';
+
+  @override
   String get searchAnnouncement => 'Ищите нужное объявление';
 
   @override
@@ -612,6 +591,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get serviceType => 'Тип услуги';
 
   @override
+  String get description => 'Описание';
+
+  @override
   String get leaveOrderComment => 'Оставьте комментарий к заказу!';
 
   @override
@@ -621,16 +603,34 @@ class AppLocalizationsRu extends AppLocalizations {
   String get card => 'Карта';
 
   @override
+  String get price => 'Цена';
+
+  @override
   String get enterPrice => 'Введите цену';
 
   @override
   String get queueRegistration => 'Запись в очередь';
 
   @override
+  String get unknown => 'Неизвестно';
+
+  @override
+  String get call => 'Позвонить';
+
+  @override
+  String get contactViaTelegram => 'Связаться через Telegram';
+
+  @override
   String get referralProgram => 'Реферальная программа';
 
   @override
   String get invite => 'Пригласить';
+
+  @override
+  String get statistics => 'Статистика';
+
+  @override
+  String get edit => 'Редактировать';
 
   @override
   String get add => 'Добавить';

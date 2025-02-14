@@ -117,12 +117,6 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
-  /// No description provided for @statistics.
-  ///
-  /// In en, this message translates to:
-  /// **'Statistics'**
-  String get statistics;
-
   /// No description provided for @logOut.
   ///
   /// In en, this message translates to:
@@ -188,12 +182,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone numer'**
   String get phoneNumer;
-
-  /// No description provided for @description.
-  ///
-  /// In en, this message translates to:
-  /// **'Description'**
-  String get description;
 
   /// No description provided for @birthDate.
   ///
@@ -645,12 +633,6 @@ abstract class AppLocalizations {
   /// **'Main'**
   String get main;
 
-  /// No description provided for @announcements.
-  ///
-  /// In en, this message translates to:
-  /// **'Announcements'**
-  String get announcements;
-
   /// No description provided for @transport.
   ///
   /// In en, this message translates to:
@@ -861,18 +843,6 @@ abstract class AppLocalizations {
   /// **'Message'**
   String get message;
 
-  /// No description provided for @call.
-  ///
-  /// In en, this message translates to:
-  /// **'Call'**
-  String get call;
-
-  /// No description provided for @edit.
-  ///
-  /// In en, this message translates to:
-  /// **'Edit'**
-  String get edit;
-
   /// No description provided for @orderReceived.
   ///
   /// In en, this message translates to:
@@ -974,12 +944,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'2 х 3 х 2 m²'**
   String get dimensions;
-
-  /// No description provided for @price.
-  ///
-  /// In en, this message translates to:
-  /// **'Price'**
-  String get price;
 
   /// No description provided for @personal.
   ///
@@ -1107,23 +1071,11 @@ abstract class AppLocalizations {
   /// **'Verification code sent to '**
   String get verificationCodeSent;
 
-  /// No description provided for @unknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get unknown;
-
   /// No description provided for @referalCode.
   ///
   /// In en, this message translates to:
   /// **'Referral Code'**
   String get referalCode;
-
-  /// No description provided for @contactViaTelegram.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact via Telegram'**
-  String get contactViaTelegram;
 
   /// No description provided for @comments.
   ///
@@ -1269,6 +1221,12 @@ abstract class AppLocalizations {
   /// **'Services'**
   String get services;
 
+  /// No description provided for @announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcements;
+
   /// No description provided for @searchAnnouncement.
   ///
   /// In en, this message translates to:
@@ -1305,6 +1263,12 @@ abstract class AppLocalizations {
   /// **'Service Type'**
   String get serviceType;
 
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
   /// No description provided for @leaveOrderComment.
   ///
   /// In en, this message translates to:
@@ -1323,6 +1287,12 @@ abstract class AppLocalizations {
   /// **'Card'**
   String get card;
 
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
+
   /// No description provided for @enterPrice.
   ///
   /// In en, this message translates to:
@@ -1335,6 +1305,24 @@ abstract class AppLocalizations {
   /// **'Queue Registration'**
   String get queueRegistration;
 
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @call.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get call;
+
+  /// No description provided for @contactViaTelegram.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact via Telegram'**
+  String get contactViaTelegram;
+
   /// No description provided for @referralProgram.
   ///
   /// In en, this message translates to:
@@ -1346,6 +1334,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite'**
   String get invite;
+
+  /// No description provided for @statistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statistics;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 
   /// No description provided for @add.
   ///

@@ -18,9 +18,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
-  String get statistics => 'Statistics';
-
-  @override
   String get logOut => 'Log out';
 
   @override
@@ -52,9 +49,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phoneNumer => 'Phone numer';
-
-  @override
-  String get description => 'Description';
 
   @override
   String get birthDate => 'Birth date';
@@ -282,9 +276,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get main => 'Main';
 
   @override
-  String get announcements => 'Announcements';
-
-  @override
   String get transport => 'Transport';
 
   @override
@@ -390,12 +381,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get message => 'Message';
 
   @override
-  String get call => 'Call';
-
-  @override
-  String get edit => 'Edit';
-
-  @override
   String get orderReceived => 'You have received the order!';
 
   @override
@@ -445,9 +430,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dimensions => '2 х 3 х 2 m²';
-
-  @override
-  String get price => 'Price';
 
   @override
   String get personal => 'Personal';
@@ -513,13 +495,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationCodeSent => 'Verification code sent to ';
 
   @override
-  String get unknown => 'Unknown';
-
-  @override
   String get referalCode => 'Referral Code';
-
-  @override
-  String get contactViaTelegram => 'Contact via Telegram';
 
   @override
   String get comments => 'Comments';
@@ -594,6 +570,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get services => 'Services';
 
   @override
+  String get announcements => 'Announcements';
+
+  @override
   String get searchAnnouncement => 'Search for the necessary announcement';
 
   @override
@@ -612,6 +591,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serviceType => 'Service Type';
 
   @override
+  String get description => 'Description';
+
+  @override
   String get leaveOrderComment => 'Leave a comment about the order!';
 
   @override
@@ -621,16 +603,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get card => 'Card';
 
   @override
+  String get price => 'Price';
+
+  @override
   String get enterPrice => 'Enter price';
 
   @override
   String get queueRegistration => 'Queue Registration';
 
   @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get call => 'Call';
+
+  @override
+  String get contactViaTelegram => 'Contact via Telegram';
+
+  @override
   String get referralProgram => 'Referral Program';
 
   @override
   String get invite => 'Invite';
+
+  @override
+  String get statistics => 'Statistics';
+
+  @override
+  String get edit => 'Edit';
 
   @override
   String get add => 'Add';

@@ -18,9 +18,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settings => 'Sozlamalar';
 
   @override
-  String get statistics => 'Statistika';
-
-  @override
   String get logOut => 'Chiqish';
 
   @override
@@ -52,9 +49,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get phoneNumer => 'Telefon raqami';
-
-  @override
-  String get description => 'Izoh';
 
   @override
   String get birthDate => 'Tug\'ilgan sana';
@@ -282,9 +276,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get main => 'Asosiy';
 
   @override
-  String get announcements => 'E’lonlar';
-
-  @override
   String get transport => 'Transport';
 
   @override
@@ -390,12 +381,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get message => 'Xabar';
 
   @override
-  String get call => 'Qo‘ng‘iroq qilish';
-
-  @override
-  String get edit => 'Tahrirlash';
-
-  @override
   String get orderReceived => 'Buyurtmani qabul qildingiz!';
 
   @override
@@ -445,9 +430,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get dimensions => '2 х 3 х 2 m²';
-
-  @override
-  String get price => 'Narx';
 
   @override
   String get personal => 'Shaxsi';
@@ -513,13 +495,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get verificationCodeSent => 'Tasdiqlash kodini ';
 
   @override
-  String get unknown => 'Nomalum';
-
-  @override
   String get referalCode => 'Referal kodi';
-
-  @override
-  String get contactViaTelegram => 'Telegram orqali bog‘lanish';
 
   @override
   String get comments => 'Izohlar';
@@ -594,6 +570,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get services => 'Xizmatlar';
 
   @override
+  String get announcements => 'E’lonlar';
+
+  @override
   String get searchAnnouncement => 'Kerakli e’lonni qidiring';
 
   @override
@@ -612,6 +591,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get serviceType => 'Xizmat turi';
 
   @override
+  String get description => 'Izoh';
+
+  @override
   String get leaveOrderComment => 'Buyurtma haqida izoh qoldiring!';
 
   @override
@@ -621,16 +603,34 @@ class AppLocalizationsUz extends AppLocalizations {
   String get card => 'Karta';
 
   @override
+  String get price => 'Narx';
+
+  @override
   String get enterPrice => 'Narxni kiriting';
 
   @override
   String get queueRegistration => 'Navbatga yozilish';
 
   @override
+  String get unknown => 'Nomalum';
+
+  @override
+  String get call => 'Qo‘ng‘iroq qilish';
+
+  @override
+  String get contactViaTelegram => 'Telegram orqali bog‘lanish';
+
+  @override
   String get referralProgram => 'Referal dastur';
 
   @override
   String get invite => 'Taklif qilish';
+
+  @override
+  String get statistics => 'Statistika';
+
+  @override
+  String get edit => 'Tahrirlash';
 
   @override
   String get add => 'Qo‘shish';

@@ -18,9 +18,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get settings => 'Созламалар';
 
   @override
-  String get statistics => 'Статистика';
-
-  @override
   String get logOut => 'Чиқиш';
 
   @override
@@ -52,9 +49,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get phoneNumer => 'Телефон рақами';
-
-  @override
-  String get description => 'Изоҳ';
 
   @override
   String get birthDate => 'Туғилган сана';
@@ -282,9 +276,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get main => 'Асосий';
 
   @override
-  String get announcements => 'Эълонлар';
-
-  @override
   String get transport => 'Транспорт';
 
   @override
@@ -390,12 +381,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get message => 'Хабар';
 
   @override
-  String get call => 'Қўнғироқ қилиш';
-
-  @override
-  String get edit => 'Таҳрирлаш';
-
-  @override
   String get orderReceived => 'Буюртмани қабул қилдингиз!';
 
   @override
@@ -445,9 +430,6 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get dimensions => '2 х 3 х 2 m²';
-
-  @override
-  String get price => 'Нарх';
 
   @override
   String get personal => 'Personal';
@@ -513,13 +495,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get verificationCodeSent => 'Verification code sent to ';
 
   @override
-  String get unknown => 'Номаълум';
-
-  @override
   String get referalCode => 'Referral Code';
-
-  @override
-  String get contactViaTelegram => 'Telegram орқали боғланиш';
 
   @override
   String get comments => 'Comments';
@@ -594,6 +570,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get services => 'Хизматлар';
 
   @override
+  String get announcements => 'Эълонлар';
+
+  @override
   String get searchAnnouncement => 'Керакли эълонни қидиринг';
 
   @override
@@ -612,6 +591,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get serviceType => 'Хизмат тури';
 
   @override
+  String get description => 'Изоҳ';
+
+  @override
   String get leaveOrderComment => 'Буюртма ҳақида изоҳ қолдиринг!';
 
   @override
@@ -621,16 +603,34 @@ class AppLocalizationsKk extends AppLocalizations {
   String get card => 'Карта';
 
   @override
+  String get price => 'Нарх';
+
+  @override
   String get enterPrice => 'Нархни киритинг';
 
   @override
   String get queueRegistration => 'Навбатга ёзиш';
 
   @override
+  String get unknown => 'Номаълум';
+
+  @override
+  String get call => 'Қўнғироқ қилиш';
+
+  @override
+  String get contactViaTelegram => 'Telegram орқали боғланиш';
+
+  @override
   String get referralProgram => 'Реферал дастури';
 
   @override
   String get invite => 'Таклиф қилиш';
+
+  @override
+  String get statistics => 'Статистика';
+
+  @override
+  String get edit => 'Таҳрирлаш';
 
   @override
   String get add => 'Қўшиш';

@@ -74,10 +74,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           lastName: event.lastName ?? state.userModel.lastName,
           userType: event.userType ??
               (state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type),
-          phoneNumber: event.phone,
+          phoneNumber: event.phone ?? state.userModel.phoneNumber,
           tgLink: event.tgName ?? '/test',
           base64: event.images ?? state.userModel.photo,
-          username: state.userModel.username,
+          username: event.email ?? state.userModel.username,
           securityCode: event.securityCode,
           sessionToken: event.sessionToken,
           smsType: event.securityCode != null ? 'phone' : null,
@@ -93,7 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             statusSms: FormzSubmissionStatus.inProgress,
             status: AuthenticationStatus.loading,
           ));
-          add(GetMeEvent());
+          add(GetMeEvent(isNotAuth: event.sessionToken?.isEmpty ?? true));
         });
       } else {
         event.onError();
@@ -108,6 +108,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         add(GetMeEvent());
       }
     });
+
     on<SendCodeEvent>((event, emit) async {
       emit(state.copyWith(
         statusSms: FormzSubmissionStatus.inProgress,
@@ -181,8 +182,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.getMe();
       if (response.isRight) {
-        Log.i("Salom Loginga kirdik");
-        emit(state.copyWith(status: AuthenticationStatus.authenticated));
+        if (!event.isNotAuth) {
+          Log.i("Salom Loginga kirdik");
+          emit(state.copyWith(status: AuthenticationStatus.authenticated));
+        }
         emit(state.copyWith(
           userModel: response.right.data,
           statusSms: FormzSubmissionStatus.success,

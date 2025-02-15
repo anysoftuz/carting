@@ -1,9 +1,9 @@
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/app_lat_long.dart';
 import 'package:carting/presentation/views/common/clusterized_icon_painter.dart';
@@ -177,9 +177,9 @@ class _LocationViewState extends State<LocationView> {
     return Scaffold(
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(12),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
+        decoration: BoxDecoration(
+          color: context.color.contColor,
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               offset: Offset(0, -2),
@@ -206,7 +206,7 @@ class _LocationViewState extends State<LocationView> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: scaffoldSecondaryBackground,
+                color: context.color.scaffoldBackground,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Column(
@@ -257,9 +257,9 @@ class _LocationViewState extends State<LocationView> {
           await _initLocationLayer();
           await _fetchCurrentLocation();
         },
-        backgroundColor: white,
+        backgroundColor: context.color.contColor,
         shape: const CircleBorder(),
-        child: AppIcons.gps.svg(),
+        child: AppIcons.gps.svg(color: context.color.white),
       ),
       body: Stack(
         children: <Widget>[
@@ -352,7 +352,7 @@ class _LocationViewState extends State<LocationView> {
           // Location marker in the center
           Center(
             child: CircleAvatar(
-              backgroundColor: white,
+              backgroundColor: context.color.contColor,
               child: Padding(
                 padding: const EdgeInsets.all(4),
                 child: AppIcons.mapPin.svg(),
@@ -363,12 +363,15 @@ class _LocationViewState extends State<LocationView> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: CircleAvatar(
-                backgroundColor: white,
+                backgroundColor: context.color.contColor,
                 child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: context.color.white,
+                  ),
                 ),
               ),
             ),

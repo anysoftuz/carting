@@ -13,7 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 class EditPhoneView extends StatefulWidget {
-  const EditPhoneView({super.key});
+  const EditPhoneView({super.key, this.isEmail = false});
+  final bool isEmail;
 
   @override
   State<EditPhoneView> createState() => _EditPhoneViewState();
@@ -63,19 +64,32 @@ class _EditPhoneViewState extends State<EditPhoneView> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            CustomTextField(
-              title: AppLocalizations.of(context)!.phone,
-              hintText: "+998",
-              controller: controller,
-              formatter: [Formatters.phoneFormatter],
-              keyboardType: TextInputType.phone,
-              onChanged: (value) {
-                Log.i(value.length);
-                if (value.length >= 18) {
-                  setState(() {});
-                }
-              },
-            ),
+            widget.isEmail
+                ? CustomTextField(
+                    title: AppLocalizations.of(context)!.email,
+                    hintText: AppLocalizations.of(context)!.email,
+                    controller: controller,
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      Log.i(value.length);
+                      if (value.length >= 8) {
+                        setState(() {});
+                      }
+                    },
+                  )
+                : CustomTextField(
+                    title: AppLocalizations.of(context)!.phone,
+                    hintText: "+998",
+                    controller: controller,
+                    formatter: [Formatters.phoneFormatter],
+                    keyboardType: TextInputType.phone,
+                    onChanged: (value) {
+                      Log.i(value.length);
+                      if (value.length >= 18) {
+                        setState(() {});
+                      }
+                    },
+                  ),
             const SizedBox(height: 32),
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
@@ -83,29 +97,34 @@ class _EditPhoneViewState extends State<EditPhoneView> {
                   isLoading: state.statusSms.isInProgress,
                   onTap: () {
                     context.read<AuthBloc>().add(SendCodeEvent(
-                          phone: MyFunction.convertPhoneNumber(controller.text),
-                          isPhone: true,
+                          phone: !widget.isEmail
+                              ? MyFunction.convertPhoneNumber(controller.text)
+                              : controller.text,
+                          isPhone: !widget.isEmail,
                           onError: () {
                             CustomSnackbar.show(
                               context,
-                           AppLocalizations.of(context)!.infoNotFound,
+                              AppLocalizations.of(context)!.infoNotFound,
                             );
                           },
                           onSucces: (model) {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => EditPhoneVerifView(
-                                phone: MyFunction.convertPhoneNumber(
-                                  controller.text,
-                                ),
+                                phone: !widget.isEmail
+                                    ? MyFunction.convertPhoneNumber(
+                                        controller.text,
+                                      )
+                                    : controller.text,
                                 model: model,
+                                isEmail: widget.isEmail,
                               ),
                             ));
                           },
                           isLogin: true,
                         ));
                   },
-                  isDisabled:
-                      controller.text.isEmpty || controller.text.length < 19,
+                  isDisabled: controller.text.isEmpty ||
+                      controller.text.length < (widget.isEmail ? 10 : 19),
                   text: AppLocalizations.of(context)!.enter,
                 );
               },

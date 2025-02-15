@@ -1,4 +1,5 @@
 import 'package:carting/assets/colors/colors.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -100,7 +101,7 @@ class _WTextFieldState extends State<WTextField> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: darkText.withValues(alpha: .3),
+                    color: context.color.darkText,
                   ),
                 )
               : const SizedBox(),
@@ -185,9 +186,7 @@ class _WTextFieldState extends State<WTextField> {
                     ),
                 hintText: widget.hintText,
                 hintStyle: widget.hintStyle ??
-                    TextStyle(
-                      color: darkText.withValues(alpha: .3),
-                    ),
+                    TextStyle(color: context.color.darkText),
                 // hintStyle: fonts.subtitle1.copyWith(
                 //     color: colors.customBlack.withValues(alpha:0.5), fontSize: 14.sp),
                 // errorText: widget.error,

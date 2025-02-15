@@ -63,6 +63,7 @@ class _QuestViewState extends State<QuestView> {
             ),
             child: ExpansionTile(
               title: Text(list[index].title),
+            
               children: [
                 const Divider(color: Color(0xFFEAEEF2), height: 1),
                 Padding(

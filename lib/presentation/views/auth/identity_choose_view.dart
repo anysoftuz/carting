@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
-import 'package:carting/presentation/views/auth/register_info_view.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 
 class IdentityChooseView extends StatefulWidget {
@@ -32,9 +31,9 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset(height: 24)
-              :  AppImages.logoTextDark.imgAsset(height: 24),
+              : AppImages.logoTextDark.imgAsset(height: 24),
         ),
       ),
       body: SingleChildScrollView(
@@ -72,9 +71,9 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                     onTap: () {
                       isLegal.value = true;
                     },
+                    splashColor: Colors.transparent,
                     title: const Text("Yuridik shaxs"),
-                    titleTextStyle:
-                        TextStyle(color: context.color.darkText),
+                    titleTextStyle: TextStyle(color: context.color.darkText),
                     trailing: value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -95,9 +94,9 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
                     onTap: () {
                       isLegal.value = false;
                     },
+                    splashColor: Colors.transparent,
                     title: const Text("Jismoniy shaxs"),
-                    titleTextStyle:
-                        TextStyle(color: context.color.darkText),
+                    titleTextStyle: TextStyle(color: context.color.darkText),
                     trailing: !value
                         ? AppIcons.checkboxRadio.svg()
                         : AppIcons.checkboxRadioDis.svg(),
@@ -108,10 +107,11 @@ class _IdentityChooseViewState extends State<IdentityChooseView> {
             const SizedBox(height: 32),
             WButton(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      RegisterInfoView(isLegal: isLegal.value),
-                ));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) =>
+                //       RegisterInfoView(isLegal: isLegal.value),
+                // ));
+                Navigator.of(context).pop(isLegal.value);
               },
               text: "Davom etish",
             ),

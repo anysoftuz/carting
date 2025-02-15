@@ -703,11 +703,11 @@ class _AnnouncementCreateViewState extends State<AnnouncementCreateView> {
                                 text: "Maydon",
                                 hintText: "0",
                                 keyboardType: TextInputType.number,
-                                suffixIcon: const Text(
+                                suffixIcon: Text(
                                   "m2",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: dark,
+                                    color: context.color.white,
                                   ),
                                 ),
                                 controller: controllerCount,
@@ -1073,7 +1073,7 @@ class ServisIteam extends StatelessWidget {
         borderRadius: BorderRadius.circular(
           20,
         ),
-        color: isActive ? green : scaffoldSecondaryBackground,
+        color: isActive ? green : context.color.scaffoldBackground,
         boxShadow: isActive
             ? [
                 BoxShadow(

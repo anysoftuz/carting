@@ -52,7 +52,7 @@ class _RegisterViewState extends State<RegisterView>
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset(height: 24)
               : AppImages.logoTextDark.imgAsset(height: 24),
         ),

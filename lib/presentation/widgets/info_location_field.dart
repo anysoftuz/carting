@@ -24,7 +24,7 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: scaffoldSecondaryBackground,
+        color: context.color.scaffoldBackground,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -41,10 +41,10 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
               ),
               subtitle: Text(
                 widget.point1?.name ?? AppLocalizations.of(context)!.unknown,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark,
+                  color: context.color.white,
                 ),
               ),
               trailing: GestureDetector(
@@ -91,10 +91,10 @@ class _InfoLocationFieldState extends State<InfoLocationField> {
               ),
               subtitle: Text(
                 widget.point2?.name ?? AppLocalizations.of(context)!.unknown,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: dark,
+                  color: context.color.white,
                 ),
               ),
               trailing: GestureDetector(

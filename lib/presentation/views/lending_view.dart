@@ -26,7 +26,7 @@ class _LendingViewState extends State<LendingView> {
         title: SizedBox(
           height: 24,
           width: 128,
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset()
               : AppImages.logoTextDark.imgAsset(),
         ),

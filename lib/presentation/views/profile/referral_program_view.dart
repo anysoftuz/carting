@@ -123,10 +123,8 @@ class _ReferralProgramViewState extends State<ReferralProgramView> {
                                           .add(PostRefCodeEvent(
                                             note: 'Test',
                                             onSucces: () {
-                                              context
-                                                  .read<AuthBloc>()
-                                                  .add(GetMeEvent());
-                                              Navigator.pop(context);
+                                              context.read<AuthBloc>().add(
+                                                  GetMeEvent(isNotAuth: true));
                                             },
                                           ));
                                     },
@@ -339,7 +337,7 @@ class ReferalIteam extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: context.color.backGroundColor,
+                  color: context.color.contGrey,
                 ),
                 padding: const EdgeInsets.only(left: 16),
                 child: Row(
@@ -347,16 +345,16 @@ class ReferalIteam extends StatelessWidget {
                     Expanded(
                       child: Text(
                         model.code,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF292D32),
+                          color: context.color.darkText,
                         ),
                       ),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: AppIcons.copy.svg(),
+                      icon: AppIcons.copy.svg(color: context.color.iron),
                     ),
                   ],
                 ),
@@ -372,7 +370,7 @@ class ReferalIteam extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: context.color.backGroundColor,
+            color: context.color.contGrey,
           ),
           width: double.infinity,
           padding: const EdgeInsets.all(16),

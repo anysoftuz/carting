@@ -178,7 +178,7 @@ class _AnnouncementsCreateInfoViewState
                                 case TypeOfServiceEnum.storageInWarehouse:
                                   return DecoratedBox(
                                     decoration: BoxDecoration(
-                                      color: scaffoldSecondaryBackground,
+                                      color: context.color.scaffoldBackground,
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     child: ListTile(

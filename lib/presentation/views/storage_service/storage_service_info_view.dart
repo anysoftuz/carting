@@ -22,7 +22,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: context.color.backGroundColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -78,9 +78,9 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                         text: TextSpan(
                           text:
                               "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: dark,
+                            color: context.color.white,
                           ),
                           children: [
                             TextSpan(
@@ -127,10 +127,10 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                     TextSpan(
                       text:
                           "${widget.model.details?.area ?? AppLocalizations.of(context)!.unknown} m2",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
-                        color: dark,
+                        color: context.color.white,
                       ),
                     )
                   ],
@@ -139,7 +139,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
               const SizedBox(height: 32),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -159,7 +159,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -170,7 +170,7 @@ class _StorageServiceInfoViewState extends State<StorageServiceInfoView> {
                       ),
                     ));
                   },
-                  leading: AppIcons.message.svg(),
+                  leading: AppIcons.message.svg(color: context.color.iron),
                   title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),

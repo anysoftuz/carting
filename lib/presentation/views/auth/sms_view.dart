@@ -88,7 +88,7 @@ class _SmsViewState extends State<SmsView> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset(height: 24)
               : AppImages.logoTextDark.imgAsset(height: 24),
         ),

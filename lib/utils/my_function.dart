@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:carting/app/auth/auth_bloc.dart';
 import 'package:carting/data/models/advertisement_model.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
 import 'package:carting/utils/log_service.dart';
@@ -23,6 +24,7 @@ class MyFunction {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: context.color.contColor,
           content: const Text(
             "Bu hizmatdan foydalanish uchun tizimga kirishingiz kerak",
           ),
@@ -41,6 +43,7 @@ class MyFunction {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: context.color.contColor,
           content: const Text(
             "Bu hizmatdan foydalanish uchun malumotni to'liq kirgaizshingiz kerak",
           ),

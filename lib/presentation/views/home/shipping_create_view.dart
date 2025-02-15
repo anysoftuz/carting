@@ -220,7 +220,9 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                     children: [
                       Text(
                         selectedUnit,
-                        style: const TextStyle(color: Colors.black),
+                        style: TextStyle(
+                          color: context.color.white,
+                        ),
                       ),
                       AppIcons.arrowBottom.svg(
                         color: context.color.iron,
@@ -263,7 +265,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
             const SizedBox(height: 8),
             DecoratedBox(
               decoration: BoxDecoration(
-                color: white,
+                color: context.color.contColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: ListTile(

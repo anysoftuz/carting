@@ -106,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
         title: SizedBox(
           height: 24,
           width: 128,
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset()
               : AppImages.logoTextDark.imgAsset(),
         ),
@@ -115,7 +115,7 @@ class _HomeViewState extends State<HomeView> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: CustomTextField(
-              prefixIcon: AppIcons.searchNormal.svg(),
+              prefixIcon: AppIcons.searchNormal.svg(color: context.color.iron),
               hintText: AppLocalizations.of(context)!.searchTransport,
             ),
           ),

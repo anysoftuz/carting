@@ -27,6 +27,7 @@ abstract class AppTheme {
           collapsedTextColor: Colors.black,
           collapsedIconColor: Colors.black,
         ),
+        splashColor: Colors.transparent,
         iconTheme: const IconThemeData(color: dark),
         // Set the default text color to black for the light theme
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -57,7 +58,7 @@ abstract class AppTheme {
           surfaceTintColor: Color(0xFF141414),
           centerTitle: true,
           elevation: 0,
-          iconTheme: IconThemeData(color: Color(0xFF4C4C4C)),
+          iconTheme: IconThemeData(color: Color(0xFFBFC0C2)),
           scrolledUnderElevation: 0,
           titleTextStyle: TextStyle(
             fontSize: 20,
@@ -72,6 +73,7 @@ abstract class AppTheme {
           textColor: Colors.white,
           iconColor: Colors.white,
         ),
+        splashColor: Colors.transparent,
         expansionTileTheme: const ExpansionTileThemeData(
           textColor: Colors.white,
           iconColor: Colors.white,

@@ -2,7 +2,11 @@ part of 'auth_bloc.dart';
 
 sealed class AuthEvent {}
 
-class GetMeEvent extends AuthEvent {}
+class GetMeEvent extends AuthEvent {
+  final bool isNotAuth;
+
+  GetMeEvent({this.isNotAuth = false});
+}
 
 class UpdateCode extends AuthEvent {
   final String code;
@@ -35,7 +39,8 @@ class RegisterUserEvent extends AuthEvent {
 class UpdateUserEvent extends AuthEvent {
   final String? name;
   final String? lastName;
-  final String phone;
+  final String? phone;
+  final String? email;
   final String? images;
   final String? tgName;
   final String? smsType;
@@ -52,7 +57,8 @@ class UpdateUserEvent extends AuthEvent {
   UpdateUserEvent({
     this.name,
     this.lastName,
-    required this.phone,
+    this.phone,
+    this.email,
     required this.onSucces,
     required this.onError,
     this.images,

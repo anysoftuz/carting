@@ -341,6 +341,7 @@ class _ProfileViewState extends State<ProfileView> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
+                        backgroundColor: context.color.contColor,
                         content: const Text(
                           "Rostan ham tizimdan chiqmoqchimisiz?",
                         ),

@@ -2,6 +2,7 @@ import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/assets/themes/theme_changer.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
@@ -31,7 +32,7 @@ class _OrderViewState extends State<OrderView> {
         title: SizedBox(
           height: 24,
           width: 128,
-          child: AppScope.of(context).themeMode == ThemeMode.dark
+          child: AppScope.of(context).themeMode != ThemeMode.light
               ? AppImages.logoText.imgAsset()
               : AppImages.logoTextDark.imgAsset(),
         ),
@@ -55,7 +56,7 @@ class _OrderViewState extends State<OrderView> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: CustomTextField(
-              prefixIcon: AppIcons.searchNormal.svg(),
+              prefixIcon: AppIcons.searchNormal.svg(color: context.color.iron),
               hintText: "Kerakli e’lonni qidiring",
             ),
           ),

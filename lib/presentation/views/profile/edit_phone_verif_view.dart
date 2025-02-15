@@ -18,9 +18,11 @@ class EditPhoneVerifView extends StatefulWidget {
     super.key,
     required this.phone,
     required this.model,
+    required this.isEmail,
   });
   final String phone;
   final SendCodeModel model;
+  final bool isEmail;
 
   @override
   State<EditPhoneVerifView> createState() => _EditPhoneVerifViewState();
@@ -94,7 +96,9 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
               ),
               const SizedBox(height: 8),
               Text(
-                "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting.",
+                !widget.isEmail
+                    ? "Tasdiqlash kodini ${MyFunction.maskPhoneNumber(widget.phone)} raqamigayubordik. Quyidagi maydonga mobil kodingizni kiriting."
+                    : "Tasdiqlash kodini ${MyFunction.maskEmail(widget.phone)} ga yubordik. Quyidagi maydonga email kodingizni kiriting.",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -151,7 +155,8 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(UpdateUserEvent(
-                              phone: widget.phone,
+                              phone: widget.isEmail ? null : widget.phone,
+                              email: widget.isEmail ? widget.phone : null,
                               onError: () {
                                 CustomSnackbar.show(
                                   context,

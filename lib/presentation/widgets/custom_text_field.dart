@@ -105,7 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: darkText.withValues(alpha: .3),
+                      color: context.color.darkText,
                     ),
                     children: const [
                       TextSpan(
@@ -125,7 +125,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: darkText.withValues(alpha: .3),
+                        color: context.color.darkText,
                       ),
                     )
                   : const SizedBox(),

@@ -84,9 +84,9 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                           RichText(
                             text: TextSpan(
                               text: "4.5, ",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 14,
-                                color: dark,
+                                color: context.color.white,
                               ),
                               children: [
                                 TextSpan(
@@ -105,10 +105,10 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   ),
                   Text(
                     "${MyFunction.priceFormat(widget.model.price ?? 0)} UZS",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: dark,
+                      color: context.color.white,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -142,7 +142,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                       padding: const EdgeInsets.only(top: 16),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: scaffoldSecondaryBackground,
+                          color: context.color.scaffoldBackground,
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: ListTile(
@@ -156,10 +156,10 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                           ),
                           subtitle: Text(
                             "${widget.model.details?.area ?? AppLocalizations.of(context)!.unknown} m2",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: dark,
+                              color: context.color.white,
                             ),
                           ),
                         ),
@@ -170,7 +170,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                       padding: const EdgeInsets.only(top: 16),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: scaffoldSecondaryBackground,
+                          color: context.color.scaffoldBackground,
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: ListTile(
@@ -186,10 +186,10 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                             MyFunction.priceFormat(
                               widget.model.details?.transportCount ?? 0,
                             ),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: dark,
+                              color: context.color.white,
                             ),
                           ),
                         ),
@@ -610,7 +610,7 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                   const SizedBox(height: 16),
                   Container(
                     decoration: BoxDecoration(
-                      color: scaffoldSecondaryBackground,
+                      color: context.color.scaffoldBackground,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: ListTile(
@@ -621,12 +621,14 @@ class _CreateInfoViewState extends State<CreateInfoView> {
                           ),
                         ));
                       },
-                      leading: AppIcons.message.svg(),
+                      leading: AppIcons.message.svg(color: context.color.iron),
                       title: Row(
                         children: [
                           Expanded(
-                              child:
-                                  Text(AppLocalizations.of(context)!.comments)),
+                            child: Text(
+                              AppLocalizations.of(context)!.comments,
+                            ),
+                          ),
                           const SizedBox(
                             width: 72,
                             height: 24,

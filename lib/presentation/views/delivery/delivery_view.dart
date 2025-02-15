@@ -218,10 +218,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                   },
                   child: Row(
                     children: [
-                      Text(
-                        selectedUnit,
-                        style: const TextStyle(color: Colors.black),
-                      ),
+                      Text(selectedUnit),
                       AppIcons.arrowBottom.svg(
                         color: context.color.darkText,
                       ),

@@ -3,7 +3,6 @@ import 'package:carting/assets/assets/images.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/assets/themes/theme_changer.dart';
 import 'package:carting/infrastructure/core/context_extension.dart';
-import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/type_of_service_view.dart';
 import 'package:carting/presentation/widgets/custom_text_field.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
@@ -21,14 +20,14 @@ class _OrderViewState extends State<OrderView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const FilterView(),
-            ));
-          },
-          icon: AppIcons.filter.svg(),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.of(context).push(MaterialPageRoute(
+        //       builder: (context) => const FilterView(),
+        //     ));
+        //   },
+        //   icon: AppIcons.filter.svg(color: context.color.iron),
+        // ),
         title: SizedBox(
           height: 24,
           width: 128,

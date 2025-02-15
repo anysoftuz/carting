@@ -67,10 +67,10 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
   @override
   void initState() {
     isActive = ValueNotifier(
-      context.read<AuthBloc>().state.userModel.username.isNotEmpty,
+      context.read<AuthBloc>().state.userModel.type.isNotEmpty,
     );
     isLegal = ValueNotifier(
-      context.read<AuthBloc>().state.userModel.type == 'PHYSICAL',
+      context.read<AuthBloc>().state.userModel.type == 'LEGAL',
     );
     controllerName = TextEditingController(
       text: context.read<AuthBloc>().state.userModel.firstName,
@@ -215,7 +215,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                                     controllerCallPhone.text,
                                   ),
                                   userType:
-                                      isLegal.value ? 'PHYSICAL' : 'CLIENT',
+                                      isLegal.value ? 'LEGAL' : 'PHYSICAL',
                                   images: images == null ? null : text,
                                   tgName: controllerTG.text,
                                   tin: controllerTin.text,
@@ -309,9 +309,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(
                     builder: (context) => IdentityChooseView(
-                      isLegal: context.read<AuthBloc>().state.userModel.type ==
-                              'PHYSICAL' &&
-                          isLegal.value,
+                      isLegal: isLegal.value,
                     ),
                   ))
                       .then((value) {
@@ -328,9 +326,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             valueListenable: isLegal,
             builder: (context, value, child) => Column(
               children: [
-                if (context.read<AuthBloc>().state.userModel.type ==
-                        'PHYSICAL' &&
-                    value) ...[
+                if (value) ...[
                   const SizedBox(height: 16),
                   CustomTextField(
                     title: AppLocalizations.of(context)!.stir,

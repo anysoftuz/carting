@@ -1,10 +1,10 @@
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/assets/colors/colors.dart';
 import 'package:carting/presentation/widgets/w_button.dart';
-
 
 class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
@@ -26,7 +26,7 @@ class _NotificationViewState extends State<NotificationView> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: whiteSmoke,
+              color: context.color.contGrey,
             ),
             child: Text(AppLocalizations.of(context)!.yourCargoIsOnTheWay),
           ),
@@ -35,7 +35,7 @@ class _NotificationViewState extends State<NotificationView> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: whiteSmoke,
+              color: context.color.contGrey,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,

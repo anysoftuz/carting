@@ -50,7 +50,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final result = await _repository.registerPost(UserUpdateModel(
         firstName: event.name,
         lastName: event.lastName,
-        userType: event.isUser ? 'PHYSICAL' : 'CLIENT',
+        userType: event.isUser ? 'LEGAL' : 'PHYSICAL',
         phoneNumber: event.phone,
         tgLink: AppConstants.tgLink,
         base64: AppConstants.image,
@@ -73,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           firstName: event.name ?? state.userModel.firstName,
           lastName: event.lastName ?? state.userModel.lastName,
           userType: event.userType ??
-              (state.userModel.type.isEmpty ? "CLIENT" : state.userModel.type),
+              (state.userModel.type.isEmpty ? "PHYSICAL" : state.userModel.type),
           phoneNumber: event.phone ?? state.userModel.phoneNumber,
           tgLink: event.tgName ?? '/test',
           base64: event.images ?? state.userModel.photo,

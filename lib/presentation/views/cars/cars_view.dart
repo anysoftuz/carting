@@ -95,7 +95,7 @@ class _CarsViewState extends State<CarsView> {
       ),
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
-          if (state.status == AuthenticationStatus.unauthenticated) {
+          if (state.status == AuthenticationStatus.unauthenticated ) {
             return Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

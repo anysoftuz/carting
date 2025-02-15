@@ -3,6 +3,7 @@ import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/announcements/create_info_view.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:carting/utils/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class AnnouncementsView extends StatefulWidget {
 
 class _AnnouncementsViewState extends State<AnnouncementsView>
     with SingleTickerProviderStateMixin {
+  List<bool> active = [true, true, true, true, true];
   String selectedUnit = 'Barchasi';
   String selectedUnit2 = 'Barchasi';
 
@@ -60,7 +62,10 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
         leading: IconButton(
           onPressed: () {
             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => const FilterView(),
+              builder: (context) => FilterView(
+                filterType: FilterType.services,
+                list: active,
+              ),
             ));
           },
           icon: AppIcons.filter.svg(color: context.color.iron),
@@ -179,6 +184,16 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                         itemCount: 12,
                       );
                     }
+                    if (state.advertisement.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppIcons.emptyFile.svg(),
+                          const SizedBox(height: 100)
+                        ],
+                      );
+                    }
                     return RefreshIndicator.adaptive(
                       onRefresh: () async {
                         context
@@ -228,6 +243,16 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                         itemCount: 12,
                       );
                     }
+                    if (state.advertisementRECEIVE.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppIcons.emptyFile.svg(),
+                          const SizedBox(height: 100)
+                        ],
+                      );
+                    }
                     return RefreshIndicator.adaptive(
                       onRefresh: () async {
                         context
@@ -273,6 +298,16 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 16),
                         itemCount: 12,
+                      );
+                    }
+                    if (state.advertisementPROVIDE.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppIcons.emptyFile.svg(),
+                          const SizedBox(height: 100)
+                        ],
                       );
                     }
                     return RefreshIndicator.adaptive(

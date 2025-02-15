@@ -79,10 +79,10 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                       RichText(
                         text: TextSpan(
                           text:
-                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
-                          style: const TextStyle(
+                              " ${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
+                          style: TextStyle(
                             fontSize: 14,
-                            color: dark,
+                            color: context.color.white,
                           ),
                           children: [
                             TextSpan(
@@ -124,7 +124,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .4),
+                    color: context.color.darkText,
                   ),
                 ),
               ),
@@ -171,7 +171,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: dark.withValues(alpha: .4),
+                    color: context.color.darkText,
                   ),
                 ),
               ),
@@ -238,7 +238,7 @@ class _WorkshopsInfoViewState extends State<WorkshopsInfoView> {
                       ),
                     ));
                   },
-                  leading: AppIcons.message.svg(),
+                  leading: AppIcons.message.svg(color: context.color.iron),
                   title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),

@@ -24,19 +24,22 @@ class _MasterInfoViewState extends State<MasterInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: context.color.backGroundColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundColor: white,
+                backgroundColor: context.color.backGroundColor,
                 child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: context.color.white,
+                  ),
                 ),
               ),
             ),
@@ -80,10 +83,10 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                       RichText(
                         text: TextSpan(
                           text:
-                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
-                          style: const TextStyle(
+                              " ${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
+                          style: TextStyle(
                             fontSize: 14,
-                            color: dark,
+                            color: context.color.white,
                           ),
                           children: [
                             TextSpan(
@@ -125,7 +128,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                           widget.model.workshopServices!.length,
                           (index) => Container(
                             decoration: BoxDecoration(
-                              color: scaffoldSecondaryBackground,
+                              color: context.color.contGrey,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             padding: const EdgeInsets.symmetric(
@@ -148,7 +151,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
               const SizedBox(height: 32),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -168,7 +171,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
               const SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -179,7 +182,7 @@ class _MasterInfoViewState extends State<MasterInfoView> {
                       ),
                     ));
                   },
-                  leading: AppIcons.message.svg(),
+                  leading: AppIcons.message.svg(color: context.color.iron),
                   title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),

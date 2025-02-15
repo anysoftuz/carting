@@ -1,6 +1,8 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
+import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
+import 'package:carting/utils/enum_filtr.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carting/assets/assets/icons.dart';
@@ -20,6 +22,7 @@ class MastersListView extends StatefulWidget {
 }
 
 class _MastersListViewState extends State<MastersListView> {
+  List<bool> active = [true, true, true, true, true];
   @override
   void initState() {
     context.read<AdvertisementBloc>().add(GetAdvertisementsFilterEvent(
@@ -38,10 +41,13 @@ class _MastersListViewState extends State<MastersListView> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const FilterView(),
+                builder: (context) => FilterView(
+                  filterType: FilterType.workshopServices,
+                  list: active,
+                ),
               ));
             },
-            icon: AppIcons.filter.svg(),
+            icon: AppIcons.filter.svg(color: context.color.iron),
           ),
         ],
       ),

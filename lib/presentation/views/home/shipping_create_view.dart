@@ -218,12 +218,7 @@ class _ShippingCreateViewState extends State<ShippingCreateView> {
                   },
                   child: Row(
                     children: [
-                      Text(
-                        selectedUnit,
-                        style: TextStyle(
-                          color: context.color.white,
-                        ),
-                      ),
+                      Text(selectedUnit),
                       AppIcons.arrowBottom.svg(
                         color: context.color.iron,
                       ),

@@ -1,9 +1,6 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
-import 'package:carting/assets/assets/icons.dart';
-import 'package:carting/infrastructure/core/context_extension.dart';
 import 'package:carting/l10n/localizations.dart';
 import 'package:carting/presentation/views/common/empty_screen.dart';
-import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/storage_service/storage_service_info_view.dart';
 import 'package:carting/presentation/views/storage_service/widgets/storage_service_iteam.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
@@ -32,16 +29,16 @@ class _StorageServiceViewState extends State<StorageServiceView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.warehouseStorage),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const FilterView(),
-              ));
-            },
-            icon: AppIcons.filter.svg(color: context.color.iron),
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //         builder: (context) => const FilterView(),
+        //       ));
+        //     },
+        //     icon: AppIcons.filter.svg(color: context.color.iron),
+        //   )
+        // ],
       ),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {

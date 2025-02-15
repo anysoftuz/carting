@@ -1,7 +1,5 @@
 import 'package:carting/app/advertisement/advertisement_bloc.dart';
-import 'package:carting/assets/assets/icons.dart';
 import 'package:carting/data/models/transportation_types_model.dart';
-import 'package:carting/presentation/views/common/filter_view.dart';
 import 'package:carting/presentation/views/orders/order_detail_view.dart';
 import 'package:carting/presentation/views/orders/widgets/orders_iteam.dart';
 import 'package:carting/presentation/widgets/w_shimmer.dart';
@@ -40,16 +38,16 @@ class _OrdersFilterViewState extends State<OrdersFilterView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.model.name),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const FilterView(),
-              ));
-            },
-            icon: AppIcons.filter.svg(),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //         builder: (context) => const FilterView(),
+        //       ));
+        //     },
+        //     icon: AppIcons.filter.svg(color: context.color.iron),
+        //   ),
+        // ],
       ),
       body: BlocBuilder<AdvertisementBloc, AdvertisementState>(
         builder: (context, state) {

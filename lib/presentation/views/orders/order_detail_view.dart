@@ -51,12 +51,15 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: CircleAvatar(
-                        backgroundColor: white,
+                        backgroundColor: context.color.contColor,
                         child: IconButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: const Icon(Icons.arrow_back),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: context.color.white,
+                          ),
                         ),
                       ),
                     ),
@@ -83,7 +86,8 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.model.transportName ?? AppLocalizations.of(context)!.unknown,
+                      widget.model.transportName ??
+                          AppLocalizations.of(context)!.unknown,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
@@ -96,9 +100,9 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                           text: TextSpan(
                             text:
                                 "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
-                              color: dark,
+                              color: context.color.white,
                             ),
                             children: [
                               TextSpan(
@@ -128,7 +132,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                 const SizedBox(height: 24),
                 Container(
                   decoration: BoxDecoration(
-                    color: scaffoldSecondaryBackground,
+                    color: context.color.scaffoldBackground,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: ListTile(
@@ -138,7 +142,8 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                       width: 24,
                     ),
                     title: Text(
-                      widget.model.fromLocation?.name ?? AppLocalizations.of(context)!.unknown,
+                      widget.model.fromLocation?.name ??
+                          AppLocalizations.of(context)!.unknown,
                       maxLines: 1,
                     ),
                     trailing: AppIcons.arrowCircle.svg(),
@@ -147,7 +152,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                 const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: scaffoldSecondaryBackground,
+                    color: context.color.scaffoldBackground,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: ListTile(
@@ -158,7 +163,7 @@ class _OrderDetailViewState extends State<OrderDetailView> {
                         ),
                       ));
                     },
-                    leading: AppIcons.message.svg(),
+                    leading: AppIcons.message.svg(color: context.color.iron),
                     title: Text(AppLocalizations.of(context)!.comments),
                     trailing: AppIcons.arrowCircle.svg(),
                   ),

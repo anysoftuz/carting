@@ -181,7 +181,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                   controllerCallPhone.text,
                                 ),
                                 userType:
-                                    widget.isLegal ? 'PHYSICAL' : 'CLIENT',
+                                    widget.isLegal ? 'LEGAL' : 'PHYSICAL',
                                 onSucces: () {},
                                 onError: () {
                                   CustomSnackbar.show(

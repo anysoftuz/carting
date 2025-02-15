@@ -32,19 +32,22 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: context.color.backGroundColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundColor: white,
+                backgroundColor: context.color.backGroundColor,
                 child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: context.color.white,
+                  ),
                 ),
               ),
             ),
@@ -86,10 +89,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       RichText(
                         text: TextSpan(
                           text:
-                              "${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
-                          style: const TextStyle(
+                              " ${MyFunction.calculateAverageRating(widget.model.comments ?? [])}, ",
+                          style: TextStyle(
                             fontSize: 14,
-                            color: dark,
+                            color: context.color.white,
                           ),
                           children: [
                             TextSpan(
@@ -133,7 +136,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                     itemBuilder: (context, index) => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: scaffoldSecondaryBackground,
+                        color: context.color.contGrey,
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -168,7 +171,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
               const SizedBox(height: 24),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -230,10 +233,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       TextSpan(
                         text:
                             "${widget.model.details?.characteristics?.engineCapacity ?? 0} MPI",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -257,10 +260,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                                 true
                             ? "Bor"
                             : "Yo'q",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -277,13 +280,13 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: context.color.darkText,
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
                         text: "Mexanika",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -307,10 +310,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                                 true
                             ? "OSAGO"
                             : "Yo'q",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -327,13 +330,13 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       fontWeight: FontWeight.w400,
                       color: context.color.darkText,
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
                         text: "316 litr",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -354,10 +357,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       TextSpan(
                         text:
                             "${widget.model.details?.characteristics?.passengerCount ?? 0} ta",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -378,10 +381,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       TextSpan(
                         text:
                             "${widget.model.details?.characteristics?.dailyDistanceLimit ?? 0} km",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -402,10 +405,10 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       TextSpan(
                         text:
                             "${MyFunction.priceFormat(widget.model.details?.characteristics?.depositAmount ?? 0)} so‘m",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: dark,
+                          color: context.color.white,
                         ),
                       )
                     ],
@@ -415,7 +418,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
               const SizedBox(height: 16),
               Container(
                 decoration: BoxDecoration(
-                  color: scaffoldSecondaryBackground,
+                  color: context.color.contGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListTile(
@@ -426,7 +429,7 @@ class _CarsRenatlDitealsViewState extends State<CarsRenatlDitealsView> {
                       ),
                     ));
                   },
-                  leading: AppIcons.message.svg(),
+                  leading: AppIcons.message.svg(color: context.color.iron),
                   title: Text(AppLocalizations.of(context)!.comments),
                   trailing: AppIcons.arrowCircle.svg(),
                 ),

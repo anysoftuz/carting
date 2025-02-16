@@ -42,6 +42,7 @@ class CustomTextField extends StatefulWidget {
   final Color? textColor;
   final TextStyle? hintStyle;
   final bool isRequired;
+  final bool isCap;
   const CustomTextField({
     super.key,
     this.onPressed,
@@ -82,6 +83,7 @@ class CustomTextField extends StatefulWidget {
     this.textColor,
     this.hintStyle,
     this.isRequired = false,
+    this.isCap = false,
   });
 
   @override
@@ -163,6 +165,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: widget.textColor,
                       ),
+              textCapitalization: widget.isCap
+                  ? TextCapitalization.words
+                  : TextCapitalization.none,
               obscureText: widget.obscureText,
               keyboardType: widget.keyboardType,
               validator: widget.validator,

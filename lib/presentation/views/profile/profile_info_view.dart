@@ -83,7 +83,11 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ? MyFunction.formatPhoneNumber(
               context.read<AuthBloc>().state.userModel.phoneNumber,
             )
-          : '',
+          : context.read<AuthBloc>().state.userModel.username.contains('@')
+              ? ""
+              : MyFunction.formatPhoneNumber(
+                  context.read<AuthBloc>().state.userModel.username,
+                ),
     );
     controllerTG = TextEditingController(
       text: context.read<AuthBloc>().state.userModel.tgLink.isEmpty
@@ -343,17 +347,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                     title: AppLocalizations.of(context)!.companyName,
                     hintText: AppLocalizations.of(context)!.companyName,
                     controller: controllerOrgName,
-                    onChanged: (value) {
-                      isChange.value = true;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
-                    title: AppLocalizations.of(context)!.callCenterNumber,
-                    hintText: "+998 (__) ___-__-__",
-                    controller: controllerCallPhone,
-                    keyboardType: TextInputType.phone,
-                    formatter: [Formatters.phoneFormatter],
+                    isCap: true,
                     onChanged: (value) {
                       isChange.value = true;
                     },
@@ -364,6 +358,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                     title: AppLocalizations.of(context)!.yourName,
                     hintText: AppLocalizations.of(context)!.yourName,
                     controller: controllerName,
+                    isCap: true,
                     onChanged: (value) {
                       isChange.value = true;
                     },
@@ -373,6 +368,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                     title: AppLocalizations.of(context)!.yourSurname,
                     hintText: AppLocalizations.of(context)!.yourSurname,
                     controller: controllerLastName,
+                    isCap: true,
                     onChanged: (value) {
                       isChange.value = true;
                     },
@@ -394,6 +390,29 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const EditPhoneView(),
               ));
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: isLegal,
+            builder: (context, value, child) {
+              if (!value) {
+                return const SizedBox();
+              }
+              return Column(
+                children: [
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    title: AppLocalizations.of(context)!.callCenterNumber,
+                    hintText: "+998 (__) ___-__-__",
+                    controller: controllerCallPhone,
+                    keyboardType: TextInputType.phone,
+                    formatter: [Formatters.phoneFormatter],
+                    onChanged: (value) {
+                      isChange.value = true;
+                    },
+                  ),
+                ],
+              );
             },
           ),
           const SizedBox(height: 16),

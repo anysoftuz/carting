@@ -157,6 +157,7 @@ class _EditPhoneVerifViewState extends State<EditPhoneVerifView> {
                         context.read<AuthBloc>().add(UpdateUserEvent(
                               phone: widget.isEmail ? null : widget.phone,
                               email: widget.isEmail ? widget.phone : null,
+                              isEmail: true,
                               onError: () {
                                 CustomSnackbar.show(
                                   context,

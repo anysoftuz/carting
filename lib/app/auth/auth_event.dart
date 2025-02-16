@@ -51,6 +51,7 @@ class UpdateUserEvent extends AuthEvent {
   final String? referredBy;
   final String? tin;
   final String? userType;
+  final bool isEmail;
   final VoidCallback onSucces;
   final VoidCallback onError;
 
@@ -71,6 +72,7 @@ class UpdateUserEvent extends AuthEvent {
     this.callPhone,
     this.referredBy,
     this.tin,
+    this.isEmail =false,
   });
 }
 

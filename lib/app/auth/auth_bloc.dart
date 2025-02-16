@@ -73,14 +73,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           firstName: event.name ?? state.userModel.firstName,
           lastName: event.lastName ?? state.userModel.lastName,
           userType: event.userType ??
-              (state.userModel.type.isEmpty ? "PHYSICAL" : state.userModel.type),
+              (state.userModel.type.isEmpty
+                  ? "PHYSICAL"
+                  : state.userModel.type),
           phoneNumber: event.phone ?? state.userModel.phoneNumber,
           tgLink: event.tgName ?? '/test',
-          base64: event.images ?? state.userModel.photo,
+          base64: event.images,
           username: event.email ?? state.userModel.username,
           securityCode: event.securityCode,
           sessionToken: event.sessionToken,
-          smsType: event.securityCode != null ? 'phone' : null,
+          smsType: event.isEmail ? 'mail' : 'phone',
           tin: event.tin != null ? int.tryParse(event.tin ?? '') : null,
           callPhone: event.callPhone,
           orgName: event.orgName ?? '',
@@ -184,11 +186,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (response.isRight) {
         if (!event.isNotAuth) {
           Log.i("Salom Loginga kirdik");
-          emit(state.copyWith(status: AuthenticationStatus.authenticated));
+          emit(state.copyWith(
+            status: AuthenticationStatus.authenticated,
+            isState: !state.isState,
+          ));
         }
         emit(state.copyWith(
           userModel: response.right.data,
           statusSms: FormzSubmissionStatus.success,
+          isState: !state.isState,
         ));
         Log.i("Salom Loginga kirdik holat ${state.status}");
       } else {

@@ -45,17 +45,21 @@ class _EditPhoneViewState extends State<EditPhoneView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Raqamni\nalmashtirish",
+            Text(
+              widget.isEmail
+                  ? "Emailni\nalmashtirish"
+                  : "Raqamni\nalmashtirish",
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              "Yangi telefon raqamingizni kiriting!",
+              widget.isEmail
+                  ? "Yangi email manzilingizni kiriting!"
+                  : "Yangi telefon raqamingizni kiriting!",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,

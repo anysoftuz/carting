@@ -1,4 +1,4 @@
-package uz.anysoft.carting
+package uz.realsoft.carting
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity

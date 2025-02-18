@@ -16,7 +16,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 rename setAppName --targets ios,android --value "CARTING"  
-rename setBundleId --targets ios,android --value "uz.anysoft.carting"
+rename setBundleId --targets ios,android --value "uz.realsoft.carting"
 
 build apk with low size:
 flutter build apk --split-per-abi

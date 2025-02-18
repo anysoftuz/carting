@@ -30,7 +30,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if (state.status != AuthenticationStatus.authenticated) {
+        if (state.status == AuthenticationStatus.unauthenticated) {
           return Scaffold(
             body: Center(
               child: Padding(

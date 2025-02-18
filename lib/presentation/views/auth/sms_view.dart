@@ -135,11 +135,6 @@ class _SmsViewState extends State<SmsView> {
                     ),
                     padding: const EdgeInsets.all(8),
                   ),
-                  validator: (value) {
-                    return value == widget.model.securityCode
-                        ? null
-                        : 'Kod hato kiritildi';
-                  },
                   hapticFeedbackType: HapticFeedbackType.lightImpact,
                   onCompleted: (pin) {
                     debugPrint('onCompleted: $pin');

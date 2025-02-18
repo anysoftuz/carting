@@ -82,7 +82,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           username: event.email ?? state.userModel.username,
           securityCode: event.securityCode,
           sessionToken: event.sessionToken,
-          smsType: event.isEmail ? 'mail' : 'phone',
+          smsType: event.securityCode != null
+              ? event.isEmail
+                  ? 'mail'
+                  : 'phone'
+              : null,
           tin: event.tin != null ? int.tryParse(event.tin ?? '') : null,
           callPhone: event.callPhone,
           orgName: event.orgName ?? '',
@@ -184,17 +188,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.getMe();
       if (response.isRight) {
-        if (!event.isNotAuth) {
-          Log.i("Salom Loginga kirdik");
-          emit(state.copyWith(
-            status: AuthenticationStatus.authenticated,
-            isState: !state.isState,
-          ));
-        }
         emit(state.copyWith(
           userModel: response.right.data,
           statusSms: FormzSubmissionStatus.success,
-          isState: !state.isState,
+          status: event.isNotAuth
+              ? state.status
+              : AuthenticationStatus.authenticated,
+          isState: event.isNotAuth ? state.isState : !state.isState,
         ));
         Log.i("Salom Loginga kirdik holat ${state.status}");
       } else {
@@ -212,6 +212,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(
         statusSms: FormzSubmissionStatus.success,
         status: AuthenticationStatus.unauthenticated,
+        userModel: const UserModel(),
       ));
     });
   }

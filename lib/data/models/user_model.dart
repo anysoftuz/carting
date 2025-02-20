@@ -17,8 +17,8 @@ String userModelToJson(UserModel data) => json.encode(data.toJson());
 class UserModel {
   @JsonKey(name: "id")
   final int id;
-  @JsonKey(name: "username")
-  final String username;
+  @JsonKey(name: "mail")
+  final String mail;
   @JsonKey(name: "full_name")
   final String fullName;
   @JsonKey(name: "first_name")
@@ -54,7 +54,7 @@ class UserModel {
 
   const UserModel({
     this.id = 0,
-    this.username = '',
+    this.mail = '',
     this.fullName = '',
     this.firstName = '',
     this.lastName = '',
@@ -80,7 +80,7 @@ class UserModel {
 
   UserModel copyWith({
     int? id,
-    String? username,
+    String? mail,
     String? fullName,
     String? firstName,
     String? lastName,
@@ -97,7 +97,7 @@ class UserModel {
   }) {
     return UserModel(
       id: id ?? this.id,
-      username: username ?? this.username,
+      mail: mail ?? this.mail,
       fullName: fullName ?? this.fullName,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,

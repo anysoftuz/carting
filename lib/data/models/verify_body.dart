@@ -14,8 +14,10 @@ String verifyBodyToJson(VerifyBody data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class VerifyBody {
-  @JsonKey(name: "username")
-  final String username;
+  @JsonKey(name: "mail", includeIfNull: false)
+  final String? mail;
+  @JsonKey(name: "phone_number", includeIfNull: false)
+  final String? phoneNumber;
   @JsonKey(name: "sms_type")
   final String smsType;
   @JsonKey(name: "session_token")
@@ -24,7 +26,8 @@ class VerifyBody {
   final String securityCode;
 
   VerifyBody({
-    required this.username,
+    this.mail,
+    this.phoneNumber,
     required this.smsType,
     required this.sessionToken,
     required this.securityCode,

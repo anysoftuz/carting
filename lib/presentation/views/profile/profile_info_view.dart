@@ -56,6 +56,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
       images = compressedFile;
       Log.i('Siqilgan fayl: ${await MyFunction.convertFileToBase64(images)}');
       Log.i('Yangi hajmi: ${compressedFile.lengthSync()} bayt');
+      isChange.value = true;
       setState(() {});
     } on PlatformException catch (e) {
       debugPrint(e.toString());
@@ -83,11 +84,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
           ? MyFunction.formatPhoneNumber(
               context.read<AuthBloc>().state.userModel.phoneNumber,
             )
-          : context.read<AuthBloc>().state.userModel.username.contains('@')
-              ? ""
-              : MyFunction.formatPhoneNumber(
-                  context.read<AuthBloc>().state.userModel.username,
-                ),
+          : '',
     );
     controllerTG = TextEditingController(
       text: context.read<AuthBloc>().state.userModel.tgLink.isEmpty
@@ -114,9 +111,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
       text: context.read<AuthBloc>().state.userModel.fullName,
     );
     controllerEmail = TextEditingController(
-      text: context.read<AuthBloc>().state.userModel.username.contains('@')
-          ? context.read<AuthBloc>().state.userModel.username
-          : '',
+      text: context.read<AuthBloc>().state.userModel.mail,
     );
     // controllerName = TextEditingController(text: context.read<AuthBloc>().state.userModel.lastName);
     super.initState();
@@ -218,6 +213,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                                   callPhone: MyFunction.convertPhoneNumber(
                                     controllerCallPhone.text,
                                   ),
+                                  email: controllerEmail.text,
                                   userType:
                                       isLegal.value ? 'LEGAL' : 'PHYSICAL',
                                   images: images == null ? null : text,

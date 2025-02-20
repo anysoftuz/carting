@@ -39,8 +39,8 @@ class UserUpdateModel {
   final String orgName;
   @JsonKey(name: "call_phone", includeIfNull: false)
   final String? callPhone;
-  @JsonKey(name: "username")
-  final String username;
+  @JsonKey(name: "mail")
+  final String mail;
   @JsonKey(name: "referred_by", includeIfNull: false)
   final String? referredBy;
 
@@ -58,7 +58,7 @@ class UserUpdateModel {
     this.orgName = '',
     this.callPhone,
     this.referredBy = '',
-    required this.username,
+    required this.mail,
   });
 
   factory UserUpdateModel.fromJson(Map<String, dynamic> json) =>

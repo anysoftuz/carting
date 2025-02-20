@@ -70,9 +70,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
       text: context.read<AuthBloc>().state.userModel.referredBy,
     );
     controllerEmail = TextEditingController(
-      text: context.read<AuthBloc>().state.userModel.username.contains('@')
-          ? context.read<AuthBloc>().state.userModel.username
-          : "",
+      text: context.read<AuthBloc>().state.userModel.mail,
     );
     super.initState();
   }
@@ -180,8 +178,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                 callPhone: MyFunction.convertPhoneNumber(
                                   controllerCallPhone.text,
                                 ),
-                                userType:
-                                    widget.isLegal ? 'LEGAL' : 'PHYSICAL',
+                                userType: widget.isLegal ? 'LEGAL' : 'PHYSICAL',
                                 onSucces: () {},
                                 onError: () {
                                   CustomSnackbar.show(

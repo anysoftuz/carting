@@ -54,7 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: event.phone,
         tgLink: AppConstants.tgLink,
         base64: AppConstants.image,
-        username: event.phone,
+        mail: event.phone,
       ));
       if (result.isRight) {
         add(GetMeEvent());
@@ -79,7 +79,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           phoneNumber: event.phone ?? state.userModel.phoneNumber,
           tgLink: event.tgName ?? '/test',
           base64: event.images,
-          username: event.email ?? state.userModel.username,
+          mail: event.email ?? state.userModel.mail,
           securityCode: event.securityCode,
           sessionToken: event.sessionToken,
           smsType: event.securityCode != null
@@ -122,7 +122,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ));
       final response = await _repository.sendCode(
         SendCodeBody(
-          username: event.phone,
+          mail: event.isPhone ? null : event.phone,
+          phoneNumber: event.isPhone ? event.phone : null,
           smsType: event.isPhone ? "phone" : "mail",
           type: event.isLogin ? 1 : 2,
         ),
@@ -146,7 +147,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(state.copyWith(statusSms: FormzSubmissionStatus.inProgress));
       final response = await _repository.verifyPost(
         VerifyBody(
-          username: event.phone,
+          mail: event.isPhone ? null : event.phone,
+          phoneNumber: event.isPhone ? event.phone : null,
           smsType: event.isPhone ? "phone" : "mail",
           sessionToken: event.sessionToken,
           securityCode: event.securityCode,

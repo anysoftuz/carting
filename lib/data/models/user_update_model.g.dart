@@ -21,7 +21,7 @@ UserUpdateModel _$UserUpdateModelFromJson(Map<String, dynamic> json) =>
       orgName: json['org_name'] as String? ?? '',
       callPhone: json['call_phone'] as String?,
       referredBy: json['referred_by'] as String? ?? '',
-      username: json['username'] as String,
+      mail: json['mail'] as String,
     );
 
 Map<String, dynamic> _$UserUpdateModelToJson(UserUpdateModel instance) =>
@@ -38,6 +38,6 @@ Map<String, dynamic> _$UserUpdateModelToJson(UserUpdateModel instance) =>
       if (instance.base64 case final value?) 'base64': value,
       'org_name': instance.orgName,
       if (instance.callPhone case final value?) 'call_phone': value,
-      'username': instance.username,
+      'mail': instance.mail,
       if (instance.referredBy case final value?) 'referred_by': value,
     };

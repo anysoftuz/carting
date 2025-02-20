@@ -29,7 +29,7 @@ class _SplashViewState extends State<SplashView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 48),
-                  child: AppScope.of(context).themeMode != ThemeMode.light
+                  child: AppScope.of(context).themeMode == ThemeMode.dark
                       ? AppImages.logoText.imgAsset(height: 24)
                       : AppIcons.logoCarting.svg(height: 24),
                 ),

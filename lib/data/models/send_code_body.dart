@@ -14,15 +14,18 @@ String sendCodeBodyToJson(SendCodeBody data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class SendCodeBody {
-  @JsonKey(name: "username")
-  final String username;
+  @JsonKey(name: "mail", includeIfNull: false)
+  final String? mail;
+  @JsonKey(name: "phone_number", includeIfNull: false)
+  final String? phoneNumber;
   @JsonKey(name: "sms_type")
   final String smsType;
   @JsonKey(name: "type")
   final int type;
 
   SendCodeBody({
-    required this.username,
+    this.mail,
+    this.phoneNumber,
     required this.smsType,
     required this.type,
   });

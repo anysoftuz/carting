@@ -153,6 +153,48 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.personalInformation),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  backgroundColor: context.color.contColor,
+                  content: Text(
+                    AppLocalizations.of(context)!.confirm_delete_account,
+                  ),
+                  actions: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: WButton(
+                            onTap: () {
+                              Navigator.pop(context);
+                              context.read<AuthBloc>().add(LogOutEvent());
+                              Navigator.pop(context);
+                            },
+                            text: AppLocalizations.of(context)!.yes,
+                            color: red,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: WButton(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            text: AppLocalizations.of(context)!.no,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+            icon: AppIcons.trash.svg(),
+          )
+        ],
       ),
       bottomNavigationBar: SafeArea(
         child: Column(

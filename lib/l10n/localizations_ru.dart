@@ -646,4 +646,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get withdrawnProfit => 'Выведенная прибыль';
+
+  @override
+  String get confirm_delete_account => 'Вы действительно хотите удалить аккаунт?';
 }

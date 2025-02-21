@@ -594,25 +594,25 @@ abstract class AppLocalizations {
   /// No description provided for @from.
   ///
   /// In en, this message translates to:
-  /// **'Qayerdan'**
+  /// **'From'**
   String get from;
 
   /// No description provided for @to.
   ///
   /// In en, this message translates to:
-  /// **'Qayerga'**
+  /// **'To'**
   String get to;
 
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Xush kelibsiz'**
+  /// **'Welcome'**
   String get welcome;
 
   /// No description provided for @transportServices.
   ///
   /// In en, this message translates to:
-  /// **'Barcha transport xizmatlari bitta ilovada tez, qulay, arzon!'**
+  /// **'Fast, convenient, affordable in all transport services in one app!'**
   String get transportServices;
 
   /// No description provided for @start.
@@ -1272,7 +1272,7 @@ abstract class AppLocalizations {
   /// No description provided for @leaveOrderComment.
   ///
   /// In en, this message translates to:
-  /// **'Leave a comment about the order!'**
+  /// **'Leave a comment about order!'**
   String get leaveOrderComment;
 
   /// No description provided for @cash.
@@ -1376,6 +1376,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Withdrawn Profit'**
   String get withdrawnProfit;
+
+  /// No description provided for @confirm_delete_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get confirm_delete_account;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -354,7 +354,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     context.read<AuthBloc>().add(LogOutEvent());
                                     Navigator.pop(context);
                                   },
-                                  text: 'Ha',
+                                text: AppLocalizations.of(context)!.yes,
                                   color: red,
                                 ),
                               ),
@@ -364,7 +364,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
-                                  text: "Yo'q",
+                              text: AppLocalizations.of(context)!.no,
                                 ),
                               )
                             ],

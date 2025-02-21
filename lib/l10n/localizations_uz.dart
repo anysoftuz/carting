@@ -646,4 +646,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get withdrawnProfit => 'Chiqarib olingan foyda';
+
+  @override
+  String get confirm_delete_account => 'Rostdan ham akkauntni o‘chirmoqchimisiz?';
 }

@@ -176,5 +176,6 @@
   "invitedUsers": "Таклиф қилинганлар",
   "totalProfit": "Умумий фойда",
   "earnedProfit": "Топилган фойда",
-  "withdrawnProfit": "Чиқариб олинган фойда"
+  "withdrawnProfit": "Чиқариб олинган фойда",
+  "confirm_delete_account": "Ростдан ҳам аккаунтни ўчирмоқчимисиз?"
 }

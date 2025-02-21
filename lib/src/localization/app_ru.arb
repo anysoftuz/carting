@@ -211,5 +211,6 @@
   "invitedUsers": "Приглашенные пользователи",
   "totalProfit": "Общий доход",
   "earnedProfit": "Полученная прибыль",
-  "withdrawnProfit": "Выведенная прибыль"
+  "withdrawnProfit": "Выведенная прибыль",
+  "confirm_delete_account": "Вы действительно хотите удалить аккаунт?"
 }

@@ -89,10 +89,10 @@ class Comment {
   final String createdBy;
 
   Comment({
-    required this.rating,
-    required this.commentText,
-    required this.createdAt,
-    required this.createdBy,
+    this.rating = 0,
+    this.commentText = '',
+    this.createdAt = '',
+    this.createdBy = '',
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) =>

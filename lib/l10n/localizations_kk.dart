@@ -646,4 +646,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get withdrawnProfit => 'Чиқариб олинган фойда';
+
+  @override
+  String get confirm_delete_account => 'Ростдан ҳам аккаунтни ўчирмоқчимисиз?';
 }

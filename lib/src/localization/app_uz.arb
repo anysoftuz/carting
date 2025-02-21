@@ -202,5 +202,6 @@
   "invitedUsers": "Taklif qilinganlar",
   "totalProfit": "Umumiy foyda",
   "earnedProfit": "Topilgan foyda",
-  "withdrawnProfit": "Chiqarib olingan foyda"
+  "withdrawnProfit": "Chiqarib olingan foyda",
+  "confirm_delete_account": "Rostdan ham akkauntni o‘chirmoqchimisiz?"
 }

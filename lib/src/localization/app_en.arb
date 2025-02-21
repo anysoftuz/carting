@@ -81,10 +81,10 @@
   "seconds": "seconds",
   "support": "Support",
   "frequentlyAskedQuestions": "Frequently Asked Questions",
-  "from": "Qayerdan",
-  "to": "Qayerga",
-  "welcome": "Xush kelibsiz",
-  "transportServices": "Barcha transport xizmatlari bitta ilovada tez, qulay, arzon!",
+  "from": "From",
+  "to": "To",
+  "welcome": "Welcome",
+  "transportServices": "Fast, convenient, affordable in all transport services in one app!",
   "start": "Start",
   "whatHappened": "What happened",
   "main": "Main",
@@ -194,7 +194,7 @@
   "transportAnnouncements": "Transport Announcements",
   "serviceType": "Service Type",
   "description": "Description",
-  "leaveOrderComment": "Leave a comment about the order!",
+  "leaveOrderComment": "Leave a comment about order!",
   "cash": "Cash",
   "card": "Card",
   "price": "Price",
@@ -211,5 +211,6 @@
   "invitedUsers": "Invited Users",
   "totalProfit": "Total Profit",
   "earnedProfit": "Earned Profit",
-  "withdrawnProfit": "Withdrawn Profit"
+  "withdrawnProfit": "Withdrawn Profit",
+  "confirm_delete_account": "Are you sure you want to delete your account?"
 }

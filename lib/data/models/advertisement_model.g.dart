@@ -70,10 +70,10 @@ Map<String, dynamic> _$AdvertisementModelToJson(AdvertisementModel instance) =>
     };
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
-      rating: (json['rating'] as num).toInt(),
-      commentText: json['comment_text'] as String,
-      createdAt: json['created_at'] as String,
-      createdBy: json['created_by'] as String,
+      rating: (json['rating'] as num?)?.toInt() ?? 0,
+      commentText: json['comment_text'] as String? ?? '',
+      createdAt: json['created_at'] as String? ?? '',
+      createdBy: json['created_by'] as String? ?? '',
     );
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{

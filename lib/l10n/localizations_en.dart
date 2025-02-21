@@ -255,16 +255,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get frequentlyAskedQuestions => 'Frequently Asked Questions';
 
   @override
-  String get from => 'Qayerdan';
+  String get from => 'From';
 
   @override
-  String get to => 'Qayerga';
+  String get to => 'To';
 
   @override
-  String get welcome => 'Xush kelibsiz';
+  String get welcome => 'Welcome';
 
   @override
-  String get transportServices => 'Barcha transport xizmatlari bitta ilovada tez, qulay, arzon!';
+  String get transportServices => 'Fast, convenient, affordable in all transport services in one app!';
 
   @override
   String get start => 'Start';
@@ -594,7 +594,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get description => 'Description';
 
   @override
-  String get leaveOrderComment => 'Leave a comment about the order!';
+  String get leaveOrderComment => 'Leave a comment about order!';
 
   @override
   String get cash => 'Cash';
@@ -646,4 +646,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get withdrawnProfit => 'Withdrawn Profit';
+
+  @override
+  String get confirm_delete_account => 'Are you sure you want to delete your account?';
 }

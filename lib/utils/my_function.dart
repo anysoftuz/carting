@@ -31,14 +31,14 @@ class MyFunction {
           actions: [
             WButton(
               onTap: () {
-                context.go(AppRouteName.auth, extra: isFull);
+                context.pushReplacement(AppRouteName.auth, extra: isFull);
               },
               text: "Tizimga kirish",
             )
           ],
         ),
       );
-    } else if (context.read<AuthBloc>().state.userModel.phoneNumber.isEmpty &&
+    } else if (context.read<AuthBloc>().state.userModel.type.isEmpty &&
         isFull) {
       showDialog(
         context: context,

@@ -82,10 +82,10 @@ class MyApp extends StatelessWidget {
                 switch (state.status) {
                   case AuthenticationStatus.unauthenticated:
                     // AppRouts.router.pushReplacement(AppRouteName.auth);
-                    AppRouts.router.go(AppRouteName.home);
+                    AppRouts.router.pushReplacement(AppRouteName.home);
                     break;
                   case AuthenticationStatus.authenticated:
-                    AppRouts.router.pushReplacement(AppRouteName.home);
+                    AppRouts.router.go(AppRouteName.home);
                     break;
                   case AuthenticationStatus.loading:
                   case AuthenticationStatus.cancelLoading:

@@ -13,4 +13,6 @@ abstract class AppRouteName {
   static const auth = '/auth';
   static const register = '/register';
   static const notification = '/notification';
+  static const editPhone = '/editPhone';
+  static const editPhoneVerif = '/editPhoneVerif';
 }

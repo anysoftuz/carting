@@ -1,3 +1,4 @@
+import 'package:carting/presentation/views/profile/edit_phone_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -40,6 +41,12 @@ sealed class AppRouts {
       GoRoute(
         path: AppRouteName.splash,
         builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
+        path: AppRouteName.editPhone,
+        builder: (context, state) => EditPhoneView(
+          isEmail: (state.extra as bool),
+        ),
       ),
       GoRoute(
         path: AppRouteName.auth,

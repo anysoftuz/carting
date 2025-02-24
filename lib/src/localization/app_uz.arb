@@ -203,5 +203,20 @@
   "totalProfit": "Umumiy foyda",
   "earnedProfit": "Topilgan foyda",
   "withdrawnProfit": "Chiqarib olingan foyda",
-  "confirm_delete_account": "Rostdan ham akkauntni o‘chirmoqchimisiz?"
+  "confirm_delete_account": "Rostdan ham akkauntni o‘chirmoqchimisiz?",
+  "faq_how_it_works_title": "Carting xizmati qanday ishlaydi?",
+  "faq_how_it_works_desc": "Siz buyurtma berasiz, biz eng yaqin haydovchini aniqlaymiz va yuklaringizni belgilangan manzilga yetkazib beramiz.",
+  "faq_payment_methods_title": "Qanday to'lov usullari mavjud?",
+  "faq_payment_methods_desc": "Biz naqd pul, bank kartasi va onlayn to'lov tizimlarini qabul qilamiz.",
+  "faq_pricing_title": "Yuk tashish narxlari qanday hisoblanadi?",
+  "faq_pricing_desc": "Narxlar masofa, yuk og'irligi va hajmiga qarab hisoblanadi. Aniq narxni buyurtma berishda bilib olishingiz mumkin.",
+  "faq_referral_title": "Foydalanuvchini jalb qilgani uchun qancha miqdorda mukofot oladi?",
+  "faq_referral_desc": "Agar mavjud foydalanuvchi ehtimoliy mijozga referal havolani yuborgan bo‘lsa va ushbu mijoz shu havola orqali ro‘yxatdan o‘tib, xizmatdan foydalangan bo‘lsa, xizmat haqining 0,15 foizini mukofot sifatida oladi.",
+  "faq_login_title": "Ilovaga kirish uchun nimalar kerak bo‘ladi?",
+  "faq_login_desc": "Carting ilovasiga kirish juda oson. Telefon raqami yoki elektron pochtasi bo‘lsa yetarli. Kodni SMS yoki elektron pochta orqali olish mumkin.",
+  "about_us_title": "Carting – Sizning ishonchli transport hamkoringiz!",
+  "about_us_desc": "Carting – yuk tashish va transport xizmatlarini oson, tez va ishonchli tarzda boshqarish imkonini beruvchi zamonaviy platforma. Biz mijozlarimizga har qanday hajmdagi yuklarni xavfsiz yetkazib berish, tezkor buyurtma berish va mos haydovchini topish imkoniyatini taqdim etamiz.",
+  "about_us_why_title": "Nega aynan Carting?",
+  "about_us_why_points": "✅ Tez va qulay buyurtma berish – ilova orqali bir necha bosqichda yuk tashish xizmati buyurtma qilishingiz mumkin.\n✅ Ishonchli haydovchilar – tajribali va tekshirilgan haydovchilar tarmog‘imiz orqali yuklaringiz xavfsiz yetkaziladi.\n✅ Adolatli narxlar – shaffof tariflar va hech qanday yashirin to‘lovlarsiz xizmatlardan foydalaning.\n✅ Har doim yordamga tayyor – mijozlarni qo‘llab-quvvatlash xizmati har qanday savollaringizga javob beradi.",
+  "about_us_slogan": "Siz istalgan joyga – biz yetkazib beramiz!"
 }

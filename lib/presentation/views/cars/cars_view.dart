@@ -106,7 +106,7 @@ class _CarsViewState extends State<CarsView> {
                   Text(AppLocalizations.of(context)!.register),
                   WButton(
                     onTap: () {
-                      context.go(AppRouteName.auth);
+                      context.pushReplacement(AppRouteName.auth);
                     },
                     text: AppLocalizations.of(context)!.enter,
                   ),

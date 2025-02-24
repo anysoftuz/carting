@@ -480,9 +480,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whatCanIDo => 'What can I do?';
 
   @override
-  String get faq => 'Frequently Asked Questions';
-
-  @override
   String get yesYouCan => 'Yes, you can. You will be notified when new clients arrive.';
 
   @override
@@ -649,4 +646,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirm_delete_account => 'Are you sure you want to delete your account?';
+
+  @override
+  String get faq_how_it_works_title => 'How does the Carting service work?';
+
+  @override
+  String get faq_how_it_works_desc => 'You place an order, we find the nearest driver, and deliver your cargo to the specified location.';
+
+  @override
+  String get faq_payment_methods_title => 'What payment methods are available?';
+
+  @override
+  String get faq_payment_methods_desc => 'We accept cash, bank cards, and online payment systems.';
+
+  @override
+  String get faq_pricing_title => 'How are shipping costs calculated?';
+
+  @override
+  String get faq_pricing_desc => 'Prices are calculated based on distance, cargo weight, and volume. You can find out the exact price when placing an order.';
+
+  @override
+  String get faq_referral_title => 'How much reward can a user get for inviting others?';
+
+  @override
+  String get faq_referral_desc => 'If an existing user sends a referral link to a potential customer, and that customer registers through the link and makes a payment for a service, the user receives 0.15% of the service cost as a reward.';
+
+  @override
+  String get faq_login_title => 'What do you need to log in to the app?';
+
+  @override
+  String get faq_login_desc => 'Logging into the Carting app is very simple. A phone number or email address is enough. The verification code can be received via SMS or email.';
+
+  @override
+  String get about_us_title => 'Carting – Your Reliable Transport Partner!';
+
+  @override
+  String get about_us_desc => 'Carting is a modern platform that makes managing transportation and cargo delivery easy, fast, and reliable. We provide our customers with a secure way to transport goods, place quick orders, and find the right driver.';
+
+  @override
+  String get about_us_why_title => 'Why Choose Carting?';
+
+  @override
+  String get about_us_why_points => '✅ Fast and convenient booking – order cargo transportation in just a few steps through the app.\n✅ Trusted drivers – experienced and verified drivers ensure the safe delivery of your cargo.\n✅ Fair pricing – transparent rates with no hidden fees.\n✅ Always ready to help – our customer support service is available for any inquiries.';
+
+  @override
+  String get about_us_slogan => 'Wherever you need – we deliver!';
 }

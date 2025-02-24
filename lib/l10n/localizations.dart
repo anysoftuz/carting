@@ -1041,12 +1041,6 @@ abstract class AppLocalizations {
   /// **'What can I do?'**
   String get whatCanIDo;
 
-  /// No description provided for @faq.
-  ///
-  /// In en, this message translates to:
-  /// **'Frequently Asked Questions'**
-  String get faq;
-
   /// No description provided for @yesYouCan.
   ///
   /// In en, this message translates to:
@@ -1382,6 +1376,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete your account?'**
   String get confirm_delete_account;
+
+  /// No description provided for @faq_how_it_works_title.
+  ///
+  /// In en, this message translates to:
+  /// **'How does the Carting service work?'**
+  String get faq_how_it_works_title;
+
+  /// No description provided for @faq_how_it_works_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'You place an order, we find the nearest driver, and deliver your cargo to the specified location.'**
+  String get faq_how_it_works_desc;
+
+  /// No description provided for @faq_payment_methods_title.
+  ///
+  /// In en, this message translates to:
+  /// **'What payment methods are available?'**
+  String get faq_payment_methods_title;
+
+  /// No description provided for @faq_payment_methods_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'We accept cash, bank cards, and online payment systems.'**
+  String get faq_payment_methods_desc;
+
+  /// No description provided for @faq_pricing_title.
+  ///
+  /// In en, this message translates to:
+  /// **'How are shipping costs calculated?'**
+  String get faq_pricing_title;
+
+  /// No description provided for @faq_pricing_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices are calculated based on distance, cargo weight, and volume. You can find out the exact price when placing an order.'**
+  String get faq_pricing_desc;
+
+  /// No description provided for @faq_referral_title.
+  ///
+  /// In en, this message translates to:
+  /// **'How much reward can a user get for inviting others?'**
+  String get faq_referral_title;
+
+  /// No description provided for @faq_referral_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'If an existing user sends a referral link to a potential customer, and that customer registers through the link and makes a payment for a service, the user receives 0.15% of the service cost as a reward.'**
+  String get faq_referral_desc;
+
+  /// No description provided for @faq_login_title.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you need to log in to the app?'**
+  String get faq_login_title;
+
+  /// No description provided for @faq_login_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging into the Carting app is very simple. A phone number or email address is enough. The verification code can be received via SMS or email.'**
+  String get faq_login_desc;
+
+  /// No description provided for @about_us_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Carting – Your Reliable Transport Partner!'**
+  String get about_us_title;
+
+  /// No description provided for @about_us_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Carting is a modern platform that makes managing transportation and cargo delivery easy, fast, and reliable. We provide our customers with a secure way to transport goods, place quick orders, and find the right driver.'**
+  String get about_us_desc;
+
+  /// No description provided for @about_us_why_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Why Choose Carting?'**
+  String get about_us_why_title;
+
+  /// No description provided for @about_us_why_points.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Fast and convenient booking – order cargo transportation in just a few steps through the app.\n✅ Trusted drivers – experienced and verified drivers ensure the safe delivery of your cargo.\n✅ Fair pricing – transparent rates with no hidden fees.\n✅ Always ready to help – our customer support service is available for any inquiries.'**
+  String get about_us_why_points;
+
+  /// No description provided for @about_us_slogan.
+  ///
+  /// In en, this message translates to:
+  /// **'Wherever you need – we deliver!'**
+  String get about_us_slogan;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

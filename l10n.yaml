@@ -4,3 +4,4 @@ output-localization-file: localizations.dart
 # Other config...
 synthetic-package: false
 output-dir: lib/l10n
+untranslated-messages-file: untranslated.json

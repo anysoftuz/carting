@@ -480,9 +480,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get whatCanIDo => 'Что я могу сделать?';
 
   @override
-  String get faq => 'Часто задаваемые вопросы';
-
-  @override
   String get yesYouCan => 'Да, можете. Вы будете уведомлены о новых клиентах.';
 
   @override
@@ -649,4 +646,49 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get confirm_delete_account => 'Вы действительно хотите удалить аккаунт?';
+
+  @override
+  String get faq_how_it_works_title => 'Как работает сервис Carting?';
+
+  @override
+  String get faq_how_it_works_desc => 'Вы оформляете заказ, мы находим ближайшего водителя и доставляем ваш груз в указанное место.';
+
+  @override
+  String get faq_payment_methods_title => 'Какие способы оплаты доступны?';
+
+  @override
+  String get faq_payment_methods_desc => 'Мы принимаем наличные, банковские карты и онлайн-платежные системы.';
+
+  @override
+  String get faq_pricing_title => 'Как рассчитывается стоимость перевозки?';
+
+  @override
+  String get faq_pricing_desc => 'Стоимость рассчитывается на основе расстояния, веса и объема груза. Точную цену можно узнать при оформлении заказа.';
+
+  @override
+  String get faq_referral_title => 'Какое вознаграждение можно получить за привлечение пользователя?';
+
+  @override
+  String get faq_referral_desc => 'Если существующий пользователь отправил реферальную ссылку потенциальному клиенту, и этот клиент зарегистрировался по этой ссылке и совершил оплату за услугу через приложение, пользователь получает 0,15% от стоимости услуги в качестве вознаграждения.';
+
+  @override
+  String get faq_login_title => 'Что необходимо для входа в приложение?';
+
+  @override
+  String get faq_login_desc => 'Вход в приложение Carting очень простой. Достаточно иметь номер телефона или адрес электронной почты. Код можно получить через SMS или email.';
+
+  @override
+  String get about_us_title => 'Carting – ваш надежный транспортный партнер!';
+
+  @override
+  String get about_us_desc => 'Carting – это современная платформа, которая позволяет легко, быстро и надежно управлять грузоперевозками и транспортными услугами. Мы предоставляем клиентам возможность безопасной доставки грузов, оперативного оформления заказа и подбора подходящего водителя.';
+
+  @override
+  String get about_us_why_title => 'Почему именно Carting?';
+
+  @override
+  String get about_us_why_points => '✅ Быстрое и удобное оформление заказов – всего в несколько шагов через приложение.\n✅ Надежные водители – опытные и проверенные водители обеспечивают безопасную перевозку ваших грузов.\n✅ Честные цены – прозрачные тарифы без скрытых платежей.\n✅ Всегда готовы помочь – наша служба поддержки ответит на любые вопросы.';
+
+  @override
+  String get about_us_slogan => 'Куда бы вы ни отправились – мы доставим ваш груз!';
 }

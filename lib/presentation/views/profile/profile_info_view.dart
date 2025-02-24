@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carting/infrastructure/core/context_extension.dart';
+import 'package:carting/presentation/routes/route_name.dart';
 import 'package:carting/presentation/views/auth/identity_choose_view.dart';
-import 'package:carting/presentation/views/profile/edit_phone_view.dart';
 import 'package:carting/presentation/widgets/custom_snackbar.dart';
 import 'package:carting/utils/log_service.dart';
 import 'package:carting/utils/resize_image.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:carting/app/auth/auth_bloc.dart';
@@ -267,8 +268,10 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
                                   onError: () {
                                     CustomSnackbar.show(
                                       context,
-                                      AppLocalizations.of(context)!
-                                          .infoNotFound,
+                                      controllerPhone.text.isEmpty
+                                          ? "Telefon raqam majburiy"
+                                          : AppLocalizations.of(context)!
+                                              .infoNotFound,
                                     );
                                   },
                                 ));
@@ -425,9 +428,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             suffixIcon: AppIcons.edit.svg(color: context.color.iron),
             readOnly: true,
             onsuffixIconPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const EditPhoneView(),
-              ));
+              context.push(AppRouteName.editPhone, extra: false);
             },
           ),
           ValueListenableBuilder(
@@ -470,9 +471,7 @@ class _ProfileInfoViewState extends State<ProfileInfoView> {
             controller: controllerEmail,
             suffixIcon: AppIcons.edit.svg(color: context.color.iron),
             onsuffixIconPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const EditPhoneView(isEmail: true),
-              ));
+              context.push(AppRouteName.editPhone, extra: true);
             },
           ),
           const SizedBox(height: 16),

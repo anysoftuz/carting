@@ -43,7 +43,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Text(AppLocalizations.of(context)!.register),
                     WButton(
                       onTap: () {
-                        context.go(AppRouteName.auth);
+                        context.pushReplacement(AppRouteName.auth);
                       },
                       text: AppLocalizations.of(context)!.enter,
                     ),
@@ -354,7 +354,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     context.read<AuthBloc>().add(LogOutEvent());
                                     Navigator.pop(context);
                                   },
-                                text: AppLocalizations.of(context)!.yes,
+                                  text: AppLocalizations.of(context)!.yes,
                                   color: red,
                                 ),
                               ),
@@ -364,7 +364,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
-                              text: AppLocalizations.of(context)!.no,
+                                  text: AppLocalizations.of(context)!.no,
                                 ),
                               )
                             ],

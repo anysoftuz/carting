@@ -480,9 +480,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get whatCanIDo => 'What can I do?';
 
   @override
-  String get faq => 'Frequently Asked Questions';
-
-  @override
   String get yesYouCan => 'Yes, you can. You will be notified when new clients arrive.';
 
   @override
@@ -649,4 +646,49 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get confirm_delete_account => 'Ростдан ҳам аккаунтни ўчирмоқчимисиз?';
+
+  @override
+  String get faq_how_it_works_title => 'Carting хизмати қандай ишлайди?';
+
+  @override
+  String get faq_how_it_works_desc => 'Сиз буюртма берасиз, биз энг яқин ҳайдовчини аниқлаймиз ва юкларингизни белгиланган манзилга етказиб берамиз.';
+
+  @override
+  String get faq_payment_methods_title => 'Қандай тўлов усуллари мавжуд?';
+
+  @override
+  String get faq_payment_methods_desc => 'Биз нақд пул, банк картаси ва онлайн тўлов тизимларини қабул қиламиз.';
+
+  @override
+  String get faq_pricing_title => 'Юк ташиш нархлари қандай ҳисобланади?';
+
+  @override
+  String get faq_pricing_desc => 'Нархлар масофа, юк оғирлиги ва ҳажмига қараб ҳисобланади. Аниқ нархни буюртма беришда билиб олишингиз мумкин.';
+
+  @override
+  String get faq_referral_title => 'Фойдаланувчини жалб қилгани учун қанча миқдорда мукофот олади?';
+
+  @override
+  String get faq_referral_desc => 'Агар мавжуд фойдаланувчи эҳтимолий мижозга реферал ҳаволани юборган бўлса ва ушбу мижоз шу ҳавола орқали рўйхатдан ўтиб, хизматдан фойдаланган бўлса, хизмат ҳақининг 0,15 фоизини мукофот сифатида олади.';
+
+  @override
+  String get faq_login_title => 'Иловага кириш учун нималар керак бўлади?';
+
+  @override
+  String get faq_login_desc => 'Carting иловасига кириш жуда осон. Телефон рақами ёки электрон почтаси бўлса етарли. Кодни SMS ёки электрон почта орқали олиш мумкин.';
+
+  @override
+  String get about_us_title => 'Carting – Сизнинг ишончли транспорт ҳамкорингиз!';
+
+  @override
+  String get about_us_desc => 'Carting – юк ташиш ва транспорт хизматларини осон, тез ва ишончли тарзда бошқариш имконини берувчи замонавий платформа. Биз мижозларимизга ҳар қандай ҳажмдаги юкларни хавфсиз етказиб бериш, тезкор буюртма бериш ва мос ҳайдовчини топиш имконини тақдим этамиз.';
+
+  @override
+  String get about_us_why_title => 'Нега айнан Carting?';
+
+  @override
+  String get about_us_why_points => '✅ Тез ва қулай буюртма бериш – илова орқали бир неча босқичда юк ташиш хизмати буюртма қилиниш мумкин.\n✅ Ишончли ҳайдовчилар – тажрибали ва текширилган ҳайдовчилар тармоғимиз орқали юкларингиз хавфсиз етказилади.\n✅ Адолатли нархлар – шаффоф тарифлар ва ҳеч қандай яширин тўловларсиз хизматлардан фойдаланинг.\n✅ Ҳар доим ёрдамга тайёр – мижозларни қўллаб-қувватлаш хизмати ҳар қандай саволларингизга жавоб беради.';
+
+  @override
+  String get about_us_slogan => 'Сиз исталган жойга – биз етказиб берамиз!';
 }

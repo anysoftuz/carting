@@ -480,9 +480,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get whatCanIDo => 'What can I do?';
 
   @override
-  String get faq => 'Frequently Asked Questions';
-
-  @override
   String get yesYouCan => 'Yes, you can. You will be notified when new clients arrive.';
 
   @override
@@ -649,4 +646,49 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get confirm_delete_account => 'Rostdan ham akkauntni o‘chirmoqchimisiz?';
+
+  @override
+  String get faq_how_it_works_title => 'Carting xizmati qanday ishlaydi?';
+
+  @override
+  String get faq_how_it_works_desc => 'Siz buyurtma berasiz, biz eng yaqin haydovchini aniqlaymiz va yuklaringizni belgilangan manzilga yetkazib beramiz.';
+
+  @override
+  String get faq_payment_methods_title => 'Qanday to\'lov usullari mavjud?';
+
+  @override
+  String get faq_payment_methods_desc => 'Biz naqd pul, bank kartasi va onlayn to\'lov tizimlarini qabul qilamiz.';
+
+  @override
+  String get faq_pricing_title => 'Yuk tashish narxlari qanday hisoblanadi?';
+
+  @override
+  String get faq_pricing_desc => 'Narxlar masofa, yuk og\'irligi va hajmiga qarab hisoblanadi. Aniq narxni buyurtma berishda bilib olishingiz mumkin.';
+
+  @override
+  String get faq_referral_title => 'Foydalanuvchini jalb qilgani uchun qancha miqdorda mukofot oladi?';
+
+  @override
+  String get faq_referral_desc => 'Agar mavjud foydalanuvchi ehtimoliy mijozga referal havolani yuborgan bo‘lsa va ushbu mijoz shu havola orqali ro‘yxatdan o‘tib, xizmatdan foydalangan bo‘lsa, xizmat haqining 0,15 foizini mukofot sifatida oladi.';
+
+  @override
+  String get faq_login_title => 'Ilovaga kirish uchun nimalar kerak bo‘ladi?';
+
+  @override
+  String get faq_login_desc => 'Carting ilovasiga kirish juda oson. Telefon raqami yoki elektron pochtasi bo‘lsa yetarli. Kodni SMS yoki elektron pochta orqali olish mumkin.';
+
+  @override
+  String get about_us_title => 'Carting – Sizning ishonchli transport hamkoringiz!';
+
+  @override
+  String get about_us_desc => 'Carting – yuk tashish va transport xizmatlarini oson, tez va ishonchli tarzda boshqarish imkonini beruvchi zamonaviy platforma. Biz mijozlarimizga har qanday hajmdagi yuklarni xavfsiz yetkazib berish, tezkor buyurtma berish va mos haydovchini topish imkoniyatini taqdim etamiz.';
+
+  @override
+  String get about_us_why_title => 'Nega aynan Carting?';
+
+  @override
+  String get about_us_why_points => '✅ Tez va qulay buyurtma berish – ilova orqali bir necha bosqichda yuk tashish xizmati buyurtma qilishingiz mumkin.\n✅ Ishonchli haydovchilar – tajribali va tekshirilgan haydovchilar tarmog‘imiz orqali yuklaringiz xavfsiz yetkaziladi.\n✅ Adolatli narxlar – shaffof tariflar va hech qanday yashirin to‘lovlarsiz xizmatlardan foydalaning.\n✅ Har doim yordamga tayyor – mijozlarni qo‘llab-quvvatlash xizmati har qanday savollaringizga javob beradi.';
+
+  @override
+  String get about_us_slogan => 'Siz istalgan joyga – biz yetkazib beramiz!';
 }

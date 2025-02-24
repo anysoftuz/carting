@@ -158,7 +158,7 @@ class _AnnouncementsViewState extends State<AnnouncementsView>
                     Text(AppLocalizations.of(context)!.register),
                     WButton(
                       onTap: () {
-                        context.go(AppRouteName.auth);
+                        context.pushReplacement(AppRouteName.auth);
                       },
                       text: AppLocalizations.of(context)!.enter,
                     ),

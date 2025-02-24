@@ -79,7 +79,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           phoneNumber: event.phone ?? state.userModel.phoneNumber,
           tgLink: event.tgName ?? '/test',
           base64: event.images,
-          mail: event.email ?? state.userModel.mail,
+          mail: event.email == null
+              ? (state.userModel.mail.isEmpty ? null : state.userModel.mail)
+              : null,
           securityCode: event.securityCode,
           sessionToken: event.sessionToken,
           smsType: event.securityCode != null
@@ -100,6 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             status: AuthenticationStatus.loading,
           ));
           add(GetMeEvent(isNotAuth: event.sessionToken?.isEmpty ?? true));
+          // event.onSucces();
         });
       } else {
         event.onError();
